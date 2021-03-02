@@ -8,6 +8,9 @@ import {
 } from '@material-ui/core/styles'
 
 
+import Header from './components/Header'
+
+
 const styles = theme => ({
   '@global': {
     body: {
@@ -26,6 +29,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <Header />
     </ThemeProvider>
   )
 }
