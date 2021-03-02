@@ -1,7 +1,11 @@
 import React from 'react'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { ThemeProvider, withStyles } from '@material-ui/core/styles'
+import {
+  createMuiTheme,
+  ThemeProvider,
+  withStyles,
+} from '@material-ui/core/styles'
 
 
 const styles = theme => ({
@@ -16,14 +20,14 @@ const styles = theme => ({
 })
 
 
-class App extends React.Component {
-  render() {
-    return (
-      <ThemeProvider>
-        <CssBaseline />
-      </ThemeProvider>
-    )
-  }
+const App = () => {
+  const theme = createMuiTheme()
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+    </ThemeProvider>
+  )
 }
 
 
