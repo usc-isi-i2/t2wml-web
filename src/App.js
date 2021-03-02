@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { withStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import { ThemeProvider, withStyles } from '@material-ui/core/styles'
 
 
 const styles = theme => ({
@@ -19,9 +19,9 @@ const styles = theme => ({
 class App extends React.Component {
   render() {
     return (
-      <React.Fragment>
+      <ThemeProvider>
         <CssBaseline />
-      </React.Fragment>
+      </ThemeProvider>
     )
   }
 }
