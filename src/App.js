@@ -9,6 +9,7 @@ import {
 
 
 import Header from './components/Header'
+import Content from './components/Content'
 
 
 const styles = theme => ({
@@ -39,6 +40,7 @@ const App = () => {
       <Header
         darkTheme={darkTheme}
         switchTheme={() => setDarkTheme(!darkTheme)} />
+      <Content />
     </ThemeProvider>
   )
 }
