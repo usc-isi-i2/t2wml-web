@@ -31,7 +31,9 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header />
+      <Header
+        darkTheme={darkTheme}
+        switchTheme={() => setDarkTheme(!darkTheme)} />
     </ThemeProvider>
   )
 }

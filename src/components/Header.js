@@ -2,12 +2,13 @@ import React from 'react'
 
 import {
   AppBar,
-  Button,
   IconButton,
   Toolbar,
   Typography,
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
+import Brightness4Icon from '@material-ui/icons/Brightness4'
+import Brightness7Icon from '@material-ui/icons/Brightness7'
 import { makeStyles } from '@material-ui/core/styles'
 
 
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const Header = () => {
+const Header = (props) => {
   const classes = useStyles()
 
   return (
@@ -40,7 +41,13 @@ const Header = () => {
         <Typography variant="h6" className={classes.title}>
           T2WML
         </Typography>
-        <Button color="inherit">Login</Button>
+        <IconButton
+          edge="end"
+          color="inherit"
+          onClick={() => props.switchTheme()}
+          aria-label="account of current user">
+          {props.darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
+        </IconButton>
       </Toolbar>
     </AppBar>
   )
