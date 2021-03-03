@@ -24,9 +24,14 @@ const styles = theme => ({
 
 
 const App = () => {
-  const theme = createMuiTheme()
 
   const [darkTheme, setDarkTheme] = useState(false)
+
+  const theme = createMuiTheme({
+    palette: {
+      type: darkTheme ? 'dark' : 'light',
+    },
+  })
 
   return (
     <ThemeProvider theme={theme}>
