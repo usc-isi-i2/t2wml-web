@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import {
@@ -25,6 +25,8 @@ const styles = theme => ({
 
 const App = () => {
   const theme = createMuiTheme()
+
+  const [darkTheme, setDarkTheme] = useState(false)
 
   return (
     <ThemeProvider theme={theme}>
