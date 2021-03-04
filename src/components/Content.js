@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Paper } from '@material-ui/core/'
+import { Grid, Paper } from '@material-ui/core/'
 
 import FileDrop from './FileDrop'
 
@@ -8,9 +8,9 @@ import FileDrop from './FileDrop'
 const Content = () => {
 
   return (
-    <Paper>
+    <Grid container spacing={2} direction="column">
       <FileDrop />
-    </Paper>
+    </Grid>
   )
 }
 
