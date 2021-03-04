@@ -28,7 +28,11 @@ const FileDrop = () => {
     setFiles(prevFiles => [...prevFiles, ...acceptedFiles])
   }, [])
 
-  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({
+    onDrop,
+    accept: ['.csv'],
+    maxSize: 1000 * 1024, // 1MB
+  })
 
   function onUpload(file) {
     console.log(file)
