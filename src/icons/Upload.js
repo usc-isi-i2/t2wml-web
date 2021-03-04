@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const UploadIcon = ({title, width, height}) => {
+const UploadIcon = ({title='Upload', width='512', height='512'}) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       className='icon'
