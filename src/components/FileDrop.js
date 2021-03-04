@@ -24,8 +24,20 @@ const FileDrop = () => {
 
   const [files, setFiles] = useState([])
 
-  const onDrop = useCallback(acceptedFiles => {
+  const [errors, setErrors] = useState([])
+
+  const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     setFiles(prevFiles => [...prevFiles, ...acceptedFiles])
+
+    if ( !!rejectedFiles ) {
+      const errors = []
+      rejectedFiles.forEach(rejectedFile => {
+        rejectedFile.errors.forEach(error => {
+          errors.push(`${rejectedFile.file.name}: ${error.message}`)
+        })
+      })
+      setErrors(prevErrors => [...prevErrors, ...errors])
+    }
   }, [])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({
