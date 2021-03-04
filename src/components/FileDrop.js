@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const FileDrop = () => {
+const FileDrop = ({onSuccess}) => {
 
   const classes = useStyles()
 
@@ -73,7 +73,7 @@ const FileDrop = () => {
   })
 
   function onUpload(file) {
-    console.log(file)
+    onSuccess()
   }
 
   function onDelete(file) {
