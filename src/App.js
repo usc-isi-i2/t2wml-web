@@ -36,9 +36,12 @@ const App = () => {
         contrastText: '#fefefe',
       },
       secondary: {
-        main: '#4D4D4D',
-        contrastText: '#fefefe',
+        main: '#fefefe',
+        contrastText: '#4D4D4D',
       },
+    },
+    shape: {
+      borderRadius: 'none',
     },
   })
 
