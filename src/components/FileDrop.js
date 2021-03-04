@@ -20,12 +20,16 @@ const useStyles = makeStyles((theme) => ({
     outlineColor: 'rgba(0, 0, 0, 0.25)',
     outlineOffset: '-2em',
     transition: 'all 500ms ease',
+    '&> svg': {
+      opacity: '0.25',
+    },
     '&.active': {
       outlineColor: 'chartreuse',
       outlineOffset: '-3em',
       outlineWidth: '0.6em',
     },
     '&.active > svg': {
+      opacity: '0.75',
       fill: 'chartreuse',
       transition: 'all 500ms ease',
     },
