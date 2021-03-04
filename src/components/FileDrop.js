@@ -23,7 +23,7 @@ const FileDrop = () => {
   const [files, setFiles] = useState([])
 
   const onDrop = useCallback(acceptedFiles => {
-    setFiles(prev => [...prev, acceptedFiles])
+    setFiles(prevFiles => [...prevFiles, ...acceptedFiles])
   }, [])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
