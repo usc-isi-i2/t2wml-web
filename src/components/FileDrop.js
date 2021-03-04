@@ -5,6 +5,7 @@ import { Grid, makeStyles } from '@material-ui/core'
 import {useDropzone} from 'react-dropzone'
 
 import FileUpload from './FileUpload'
+import UploadIcon from '../icons/Upload'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -80,7 +81,7 @@ const FileDrop = () => {
           {
             isDragActive ?
               <p>Drop the files here ...</p> :
-              <p>Drag 'n' drop some files here, or click to select files</p>
+              <UploadIcon width='256' height='256' />
           }
         </div>
       </Grid>
