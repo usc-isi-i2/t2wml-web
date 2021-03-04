@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react'
 
+import Alert from '@material-ui/lab/Alert'
 import { Grid, makeStyles } from '@material-ui/core'
 import {useDropzone} from 'react-dropzone'
 
@@ -56,6 +57,13 @@ const FileDrop = () => {
 
   return (
     <React.Fragment>
+      {errors.map((error, index) => (
+        <Grid item key={index}>
+          <Alert variant="outlined" severity="error">
+            {error}
+          </Alert>
+        </Grid>
+      ))}
       <Grid item>
         <div {...getRootProps({ className: classes.dropzone })}>
           <input {...getInputProps()} />
