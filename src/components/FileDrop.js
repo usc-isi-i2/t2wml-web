@@ -9,12 +9,16 @@ import FileUpload from './FileUpload'
 
 const useStyles = makeStyles((theme) => ({
   dropzone: {
-    border: `5px dashed ${theme.palette.secondary.main}`,
     display: 'flex',
-    alignItems: 'center',
+    flexGrow: '1',
+    height: '50vh',
     justifyContent: 'center',
-    margin: theme.spacing(15),
-    outline: 'none',
+    alignItems: 'center',
+    outlineWidth: '0.5em',
+    outlineStyle: 'dashed',
+    outlineColor: 'rgba(0, 0, 0, 0.25)',
+    outlineOffset: '-2em',
+    transition: 'all 250ms ease-out',
   },
 }))
 
