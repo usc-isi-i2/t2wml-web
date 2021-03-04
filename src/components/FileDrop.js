@@ -34,7 +34,13 @@ const FileDrop = () => {
       const errors = []
       rejectedFiles.forEach(rejectedFile => {
         rejectedFile.errors.forEach(error => {
-          errors.push(`${rejectedFile.file.name}: ${error.message}`)
+          const message = `${rejectedFile.file.name}: ${error.message}`
+          errors.push(message)
+          setTimeout(() => {
+            setErrors(prevErrors =>
+              prevErrors.filter(error => error !== message)
+            )
+          }, 3000)
         })
       })
       setErrors(prevErrors => [...prevErrors, ...errors])
