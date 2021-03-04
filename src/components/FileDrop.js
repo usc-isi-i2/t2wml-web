@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react'
 
 import Alert from '@material-ui/lab/Alert'
-import { Grid, makeStyles } from '@material-ui/core'
-import {useDropzone} from 'react-dropzone'
+import { Grid } from '@material-ui/core'
+import { makeStyles } from '@material-ui/styles'
+import { useDropzone } from 'react-dropzone'
 
 import FileUpload from './FileUpload'
 import UploadIcon from '../icons/Upload'
