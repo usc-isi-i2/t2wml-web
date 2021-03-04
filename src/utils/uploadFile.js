@@ -6,8 +6,12 @@ export default function uploadFile(file, onProgress) {
     xhr.open('POST', url)
 
     xhr.onload = () => {
-      const response = JSON.parse(xhr.responseText)
-      resolve(response)
+      try {
+        const response = JSON.parse(xhr.responseText)
+        resolve(response)
+      } catch (error) {
+        reject(error)
+      }
     }
 
     xhr.onerror = (event) => reject(event)
