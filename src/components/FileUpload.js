@@ -13,6 +13,8 @@ const FileUpload = ({file, onUpload, onDelete}) => {
   useEffect(() => {
     uploadFile(file, setProgress).then(() => {
       onUpload(file)
+    }).catch(() => {
+      onUpload(file)
     })
   }, [file, onUpload])
 
