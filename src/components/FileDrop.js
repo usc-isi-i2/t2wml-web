@@ -19,7 +19,16 @@ const useStyles = makeStyles((theme) => ({
     outlineStyle: 'dashed',
     outlineColor: 'rgba(0, 0, 0, 0.25)',
     outlineOffset: '-2em',
-    transition: 'all 250ms ease-out',
+    transition: 'all 500ms ease',
+    '&.active': {
+      outlineColor: 'chartreuse',
+      outlineOffset: '-3em',
+      outlineWidth: '0.6em',
+    },
+    '&.active > svg': {
+      fill: 'chartreuse',
+      transition: 'all 500ms ease',
+    },
   },
 }))
 
@@ -76,13 +85,9 @@ const FileDrop = () => {
         </Grid>
       ))}
       <Grid item>
-        <div {...getRootProps({ className: classes.dropzone })}>
+        <div {...getRootProps({ className: `${classes.dropzone} ${isDragActive ? 'active' : ''}` })}>
           <input {...getInputProps()} />
-          {
-            isDragActive ?
-              <p>Drop the files here ...</p> :
-              <UploadIcon width='256' height='256' />
-          }
+          <UploadIcon width='256' height='256' />
         </div>
       </Grid>
       {files.map((file, index) => (
