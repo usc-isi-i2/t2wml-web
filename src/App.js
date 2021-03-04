@@ -31,6 +31,14 @@ const App = () => {
   const theme = createMuiTheme({
     palette: {
       type: darkTheme ? 'dark' : 'light',
+      primary: {
+        main: '#4D4D4D',
+        contrastText: '#fefefe',
+      },
+      secondary: {
+        main: '#4D4D4D',
+        contrastText: '#fefefe',
+      },
     },
   })
 
