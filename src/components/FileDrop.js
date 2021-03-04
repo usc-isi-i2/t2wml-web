@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     outlineStyle: 'dashed',
     outlineColor: 'rgba(0, 0, 0, 0.25)',
     outlineOffset: '-2em',
+    cursor: 'pointer',
     transition: 'all 500ms ease',
     '&> svg': {
       opacity: '0.25',
