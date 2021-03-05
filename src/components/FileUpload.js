@@ -4,6 +4,7 @@ import { Grid, LinearProgress } from '@material-ui/core'
 
 import FileHeader from './FileHeader'
 import uploadFile from '../utils/uploadFile'
+import readFile from '../utils/readFile'
 
 
 const FileUpload = ({file, onUpload, onDelete}) => {
@@ -11,10 +12,12 @@ const FileUpload = ({file, onUpload, onDelete}) => {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    uploadFile(file, setProgress).then(() => {
-      onUpload(file)
+    uploadFile(file, setProgress).then((data) => {
+      onUpload(data)
     }).catch(() => {
-      onUpload(file)
+      readFile(file).then(data => {
+        onUpload(data)
+      })
     })
   }, [file, onUpload])
 

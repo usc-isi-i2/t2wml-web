@@ -73,8 +73,8 @@ const FileDrop = ({onSuccess}) => {
     maxSize: 1000 * 1024, // 1MB
   })
 
-  function onUpload(file) {
-    onSuccess()
+  function onUpload(data) {
+    onSuccess(data)
   }
 
   function onDelete(file) {
