@@ -1,4 +1,5 @@
 import React from 'react'
+import { Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
 
@@ -125,29 +126,31 @@ const Table = ({
   const CHARACTERS = [...Array(26)].map((a, i) => String.fromCharCode(97 + i).toUpperCase());
 
   return (
-    <div className={classes.tableWrapper}>
-      <table ref={setTableReference}
-        onMouseUp={(event) => (onMouseUp ? onMouseUp(event) : null)}
-        onMouseDown={(event) => (onMouseDown ? onMouseDown(event) : null)}
-        onMouseMove={(event) => (onMouseMove ? onMouseMove(event) : null)}>
-        <thead>
-          <tr>
-            <th></th>
-            {CHARACTERS.map(c => <th key={c}><div>{c}</div></th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {[...Array(MIN_NUM_ROWS)].map((e, i) => (
-            <tr key={`row-${i}`}>
-              <td>{i + 1}</td>
-              {CHARACTERS.map((c, j) => (
-                <td key={`cell-${j}`}></td>
-              ))}
+    <Paper>
+      <div className={classes.tableWrapper}>
+        <table ref={setTableReference}
+          onMouseUp={(event) => (onMouseUp ? onMouseUp(event) : null)}
+          onMouseDown={(event) => (onMouseDown ? onMouseDown(event) : null)}
+          onMouseMove={(event) => (onMouseMove ? onMouseMove(event) : null)}>
+          <thead>
+            <tr>
+              <th></th>
+              {CHARACTERS.map(c => <th key={c}><div>{c}</div></th>)}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {[...Array(MIN_NUM_ROWS)].map((e, i) => (
+              <tr key={`row-${i}`}>
+                <td>{i + 1}</td>
+                {CHARACTERS.map((c, j) => (
+                  <td key={`cell-${j}`}></td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Paper>
   )
 }
 
