@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.type === 'dark' ? '#fefefe' : '#777',
         minWidth: '1em',
         position: 'sticky',
-        color: '#777',
         zIndex: '5',
         left: '-1px',
         top: '-1px',
