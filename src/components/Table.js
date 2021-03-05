@@ -2,6 +2,7 @@ import React from 'react'
 import { Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
+import * as utils from '../utils/table'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -119,6 +120,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Table = ({
+  data,
   onMouseUp,
   onMouseDown,
   onMouseMove,
@@ -128,7 +130,9 @@ const Table = ({
   const classes = useStyles()
 
   const MIN_NUM_ROWS = 100;
-  const CHARACTERS = [...Array(26)].map((a, i) => String.fromCharCode(97 + i).toUpperCase());
+
+  const rows = [...Array(Math.max(data.length, MIN_NUM_ROWS))];
+  const cols = [...Array(Math.max(data[0].length, 26))];
 
   return (
     <Paper>
@@ -140,7 +144,11 @@ const Table = ({
           <thead>
             <tr>
               <th></th>
-              {CHARACTERS.map(c => <th key={c}><div>{c}</div></th>)}
+              {cols.map((r, i) => (
+                <th key={i}>
+                  {utils.columnToLetter(i + 1)}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
