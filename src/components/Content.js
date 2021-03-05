@@ -8,11 +8,15 @@ import Table from './Table'
 
 const Content = () => {
 
-  const [inputMode, setInputMode] = useState(true)
+  const [data, setData] = useState()
 
   return (
     <Grid>
-      {inputMode ? <FileDrop onSuccess={() => setInputMode(false)} /> : <Table />}
+      {data ? (
+        <Table data={data} />
+      ) : (
+        <FileDrop onSuccess={(data) => setData(data)} />
+      )}
     </Grid>
   )
 }
