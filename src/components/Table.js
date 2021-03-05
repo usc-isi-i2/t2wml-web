@@ -155,9 +155,13 @@ const Table = ({
             {[...Array(MIN_NUM_ROWS)].map((e, i) => (
               <tr key={`row-${i}`}>
                 <td>{i + 1}</td>
-                {CHARACTERS.map((c, j) => (
-                  <td key={`cell-${j}`}></td>
-                ))}
+                {cols.map((r, j) => {
+                  if ( i < data.length && j < data[i].length && data[i][j] ) {
+                    return <td key={`cell-${j}`}>{data[i][j]}</td>
+                  } else {
+                    return <td key={`cell-${j}`} />
+                  }
+                })}
               </tr>
             ))}
           </tbody>
