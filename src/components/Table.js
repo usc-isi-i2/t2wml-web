@@ -124,12 +124,11 @@ const Table = ({
   onMouseUp,
   onMouseDown,
   onMouseMove,
-  setTableReference,
 }) => {
 
   const classes = useStyles()
 
-  const MIN_NUM_ROWS = 100;
+  let tableReference = null
 
   const rows = [...Array(Math.max(data.length, MIN_NUM_ROWS))];
   const cols = [...Array(Math.max(data[0].length, 26))];
@@ -137,7 +136,7 @@ const Table = ({
   return (
     <Paper>
       <div className={classes.tableWrapper}>
-        <table ref={setTableReference}
+        <table ref={(reference) => tableReference = reference}
           onMouseUp={(event) => (onMouseUp ? onMouseUp(event) : null)}
           onMouseDown={(event) => (onMouseDown ? onMouseDown(event) : null)}
           onMouseMove={(event) => (onMouseMove ? onMouseMove(event) : null)}>
