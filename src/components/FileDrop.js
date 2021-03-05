@@ -18,12 +18,18 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     outlineWidth: '0.5em',
     outlineStyle: 'dashed',
-    outlineColor: 'rgba(0, 0, 0, 0.25)',
+    outlineColor: theme.palette.type === 'dark' ? (
+      'rgba(255, 255, 255, 0.25)'
+    ) : (
+      'rgba(0, 0, 0, 0.25)'
+    ),
     outlineOffset: '-2em',
     cursor: 'pointer',
     transition: 'all 500ms ease',
     '&> svg': {
       opacity: '0.25',
+      fill: theme.palette.type === 'dark' ? '#fff' : '#000',
+      transition: 'all 500ms ease',
     },
     '&.active': {
       outlineColor: 'chartreuse',
@@ -33,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
     '&.active > svg': {
       opacity: '0.75',
       fill: 'chartreuse',
-      transition: 'all 500ms ease',
     },
   },
 }))
