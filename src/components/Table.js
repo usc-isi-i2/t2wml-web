@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
       '& th:nth-child(1)': {
         padding: '0.15em 0.5em',
         textAlign: 'center',
-        background: '#f9f9f9',
+        background: theme.palette.type === 'dark' ? '#333' : '#f9f9f9',
+        color: theme.palette.type === 'dark' ? '#fefefe' : '#777',
         minWidth: '1em',
         position: 'sticky',
         color: '#777',
@@ -37,7 +38,11 @@ const useStyles = makeStyles((theme) => ({
           width: '0',
           height: '0',
           borderLeft: '1.25em solid transparent',
-          borderRight: '1.25em solid #ddd',
+          borderRight: theme.palette.type === 'dark' ? (
+            '1.25em solid #fefefe'
+          ) : (
+            '1.25em solid #ddd'
+          ),
           borderTop: '1.25em solid transparent',
           pointerEvents: 'none',
         },
@@ -47,9 +52,9 @@ const useStyles = makeStyles((theme) => ({
         whiteSpace: 'nowrap',
         minWidth: '75px',
         textAlign: 'center',
-        background: '#f9f9f9',
+        background: theme.palette.type === 'dark' ? '#333' : '#f9f9f9',
+        color: theme.palette.type === 'dark' ? '#fefefe' : '#777',
         position: 'sticky',
-        color: '#777',
         zIndex: '3',
         width: '75px',
         top: '-1px',
@@ -75,11 +80,11 @@ const useStyles = makeStyles((theme) => ({
       },
       '& tr td:nth-child(1)': {
         textAlign: 'center',
-        background: '#f9f9f9',
+        background: theme.palette.type === 'dark' ? '#333' : '#f9f9f9',
+        color: theme.palette.type === 'dark' ? '#fefefe' : '#777',
         padding: '0.15em 0.5em',
         minWidth: '1em',
         position: 'sticky',
-        color: '#777',
         zIndex: '3',
         left: '-1px',
         pointerEvents: 'none',
@@ -96,6 +101,7 @@ const useStyles = makeStyles((theme) => ({
         pointerEvents: 'none',
       },
       '& tr td': {
+        color: theme.palette.type === 'dark' ? '#fefefe' : '#777',
         border: '1px solid #c7c7c7',
         padding: '0.15em 0.5em',
         lineHeight: '1.25em',
