@@ -11,7 +11,7 @@ const Content = () => {
   const [inputMode, setInputMode] = useState(true)
 
   return (
-    <Grid container spacing={2} direction="column">
+    <Grid>
       {inputMode ? <FileDrop onSuccess={() => setInputMode(false)} /> : <Table />}
     </Grid>
   )
