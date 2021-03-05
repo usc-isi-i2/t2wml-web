@@ -101,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
         pointerEvents: 'none',
       },
       '& tr td': {
-        color: theme.palette.type === 'dark' ? '#fefefe' : '#777',
+        color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
         border: '1px solid #c7c7c7',
         padding: '0.15em 0.5em',
         lineHeight: '1.25em',
