@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    userSelect: 'none',
   },
 }))
 
