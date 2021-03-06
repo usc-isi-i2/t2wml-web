@@ -11,6 +11,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'scroll',
     height: '100vh',
     '& table': {
+      tableLayout: 'fixed',
+      transform:'rotateX(0deg)',
       border: '1px solid #c7c7c7',
       borderCollapse: 'collapse',
       borderSpacing: '0',
