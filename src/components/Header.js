@@ -31,7 +31,7 @@ const Header = (props) => {
 
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar variant="dense">
         <IconButton
           edge="start"
           color="inherit"
