@@ -128,10 +128,9 @@ const Table = ({
 
   const classes = useStyles()
 
-  const MIN_NUM_ROWS = 100
-
   let tableReference = null
 
+  const MIN_NUM_ROWS = 100
   const rows = [...Array(Math.max(data.length, MIN_NUM_ROWS))]
   const cols = [...Array(Math.max(data[0].length, 26))]
 
@@ -172,7 +171,7 @@ const Table = ({
             </tr>
           </thead>
           <tbody>
-            {[...Array(MIN_NUM_ROWS)].map((e, i) => (
+            {rows.map((e, i) => (
               <tr key={`row-${i}`}>
                 <td>{i + 1}</td>
                 {cols.map((r, j) => {
