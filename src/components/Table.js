@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
   tableWrapper: {
     position: 'relative',
     overflow: 'scroll',
+    width: '100vw',
     height: '100vh',
     '& table': {
       tableLayout: 'fixed',
