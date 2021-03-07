@@ -65,3 +65,47 @@ export function checkOverlaps(selection, blocks) {
   // no collisions detected
   return false;
 }
+
+
+export function checkSelectedAnnotationBlocks(selection, blocks) {
+  // checks if a given selection is part of an annotation block
+  // if so, returns the annotation block
+
+  const { x1, x2, y1, y2 } = selection;
+  for (const block of blocks) {
+    if (block.selection['y1'] <= block.selection['y2']) {
+      if (block.selection['x1'] <= block.selection['x2']) {
+        if (x1 >= block.selection['x1'] &&
+          x2 <= block.selection['x2'] &&
+          y1 >= block.selection['y1'] &&
+          y2 <= block.selection['y2']) {
+          return block;
+        }
+      } else {
+        if (x1 <= block.selection['x1'] &&
+          x2 >= block.selection['x2'] &&
+          y1 >= block.selection['y1'] &&
+          y2 <= block.selection['y2']) {
+          return block;
+        }
+      }
+    } else {
+      if (block.selection['x1'] <= block.selection['x2']) {
+        if (x1 >= block.selection['x1'] &&
+          x2 <= block.selection['x2'] &&
+          y1 <= block.selection['y1'] &&
+          y2 >= block.selection['y2']) {
+          return block;
+        }
+      } else {
+        if (x1 <= block.selection['x1'] &&
+          x2 >= block.selection['x2'] &&
+          y1 <= block.selection['y1'] &&
+          y2 >= block.selection['y2']) {
+          return block;
+        }
+      }
+    }
+  }
+  return null;
+}
