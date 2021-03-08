@@ -184,12 +184,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const Table = ({
-  data,
-  onMouseUp,
-  onMouseDown,
-  onMouseMove,
-}) => {
+const Table = ({ data }) => {
 
   const classes = useStyles()
 
