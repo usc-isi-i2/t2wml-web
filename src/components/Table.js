@@ -412,7 +412,6 @@ const Table = ({ data }) => {
 
         setUserSelection(selectedBlock.selection)
         setSelectedAnnotationBlock(selectedBlock)
-        updateSelections(selectedBlock)
       }
 
       return
@@ -472,26 +471,20 @@ const Table = ({ data }) => {
     if ( userSelecting && !event.shiftKey ) {
       if ( !userSelection ) { return }
 
-      // Update the last x coordinate of the selection
+      // Update the last x and y coordinates of the selection
       const newCellIndex = element.cellIndex
-      setUserSelection({...userSelection, x2: newCellIndex})
-
-      // Update the last y coordinate of the selection
       const newRowIndex = element.parentElement.rowIndex
-      setUserSelection({...userSelection, y2: newRowIndex})
+      setUserSelection({...userSelection, x2: newCellIndex, y2: newRowIndex})
 
       if ( prevElement.nodeName === 'TD' ) {
-        const oldCellIndex = prevElement.cellIndex
-        const oldRowIndex = prevElement.parentElement.rowIndex
         if ( selectedAnnotationBlock ) {
+          const oldCellIndex = prevElement.cellIndex
+          const oldRowIndex = prevElement.parentElement.rowIndex
           if ( newCellIndex <= oldCellIndex || newRowIndex <= oldRowIndex ) {
             resetEmptyCells(oldCellIndex, newCellIndex, oldRowIndex, newRowIndex)
           }
         }
       }
-
-      // Update selections
-      updateSelections()
 
       // Update reference to the previous element
       setPrevElement(element)
@@ -500,7 +493,6 @@ const Table = ({ data }) => {
       setShowAnnotationMenu(true)
     }
   }
-
 
   const closeAnnotationMenu = () => {
     setShowAnnotationMenu(false)
