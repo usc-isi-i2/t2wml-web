@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
@@ -282,6 +282,10 @@ const Table = ({ data }) => {
       rowIndex = rowIndex - 1
     }
   }
+
+  useEffect(() => {
+    updateSelections()
+  }, [userSelection])
 
   const updateSelections = (selectedBlock) => {
     if ( !selectedBlock ) {
