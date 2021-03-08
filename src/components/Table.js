@@ -424,25 +424,29 @@ const Table = ({ data }) => {
     // Extend the previous selection if user is holding down Shift key
     if ( event.shiftKey && userSelection ) {
 
+      // initialize the updated selection object
+      const newUserSelection = {}
+
       // Extend the previous selection left or right
       if ( x1 !== userSelection['x1'] ) {
         if ( x1 < userSelection['x1'] ) {
-          userSelection['x1'] = x1
+          newUserSelection['x1'] = x1
         } else {
-          userSelection['x2'] = x1
+          newUserSelection['x2'] = x1
         }
       }
 
       // Extend the previous selection up or down
       if ( y1 !== userSelection['y1'] ) {
         if ( y1 < userSelection['y1'] ) {
-          userSelection['y1'] = y1
+          newUserSelection['y1'] = y1
         } else {
-          userSelection['y2'] = y1
+          newUserSelection['y2'] = y1
         }
       }
 
-      updateSelections()
+      // Update user selection with the new coordinates
+      setUserSelection({...userSelection, ...newUserSelection})
     } else {
 
       // Reset annotation menu
