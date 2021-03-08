@@ -188,11 +188,10 @@ const Table = ({ data }) => {
 
   const classes = useStyles()
 
-  let selection = null
-  let selecting = false
-  let prevElement = null
-  let tableReference = null
-
+  const [prevElement, setPrevElement] = useState(null)
+  const [userSelection, setUserSelection] = useState(null)
+  const [userSelecting, setUserSelecting] = useState(false)
+  const [tableReference, setTableReference] = useState(null)
   const [showAnnotationMenu, setShowAnnotationMenu] = useState(false)
   const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
 
@@ -237,13 +236,13 @@ const Table = ({ data }) => {
   }
 
   const resetEmptyCells = (x1, x2, y1, y2) => {
-    if ( !selection ) { return }
+    if ( !userSelection ) { return }
 
-    const table = this.tableReference
+    const table = tableReference
     const rows = table.querySelectorAll('tr')
     rows.forEach((row, index) => {
-      if ( selection.y1 < selection.y2 ) {
-        if ( index >= selection.y1 && index <= selection.y2 ) {
+      if ( userSelection.y1 < userSelection.y2 ) {
+        if ( index >= userSelection.y1 && index <= userSelection.y2 ) {
           // reset cell class names on the vertical axes
           let colIndex = x1
           while ( colIndex > x2 ) {
@@ -252,7 +251,7 @@ const Table = ({ data }) => {
           }
         }
       } else {
-        if ( index >= selection.y2 && index <= selection.y1 ) {
+        if ( index >= userSelection.y2 && index <= userSelection.y1 ) {
           // reset cell class names on the vertical axes
           let colIndex = x1
           while ( colIndex > x2 ) {
@@ -267,15 +266,15 @@ const Table = ({ data }) => {
     let rowIndex = y1
     while ( rowIndex > y2 ) {
       const row = rows[rowIndex]
-      if ( selection.x1 < selection.x2 ) {
-        let colIndex = selection.x1
-        while ( colIndex <= selection.x2 ) {
+      if ( userSelection.x1 < userSelection.x2 ) {
+        let colIndex = userSelection.x1
+        while ( colIndex <= userSelection.x2 ) {
           row.children[colIndex].className = ''
           colIndex = colIndex + 1
         }
       } else {
-        let colIndex = selection.x2
-        while ( colIndex <= selection.x1 ) {
+        let colIndex = userSelection.x2
+        while ( colIndex <= userSelection.x1 ) {
           row.children[colIndex].className = ''
           colIndex = colIndex + 1
         }
@@ -289,7 +288,7 @@ const Table = ({ data }) => {
       selectedBlock = selectedAnnotationBlock
     }
 
-    if ( !selection ) { return }
+    if ( !userSelection ) { return }
 
     const table = tableReference
     if ( !table ) { return }
@@ -307,7 +306,7 @@ const Table = ({ data }) => {
     }
 
     const rows = table.querySelectorAll('tr')
-    const { x1, x2, y1, y2 } = selection
+    const { x1, x2, y1, y2 } = userSelection
     const leftCol = Math.min(x1, x2)
     const rightCol = Math.max(x1, x2)
     const topRow = Math.min(y1, y2)
@@ -375,15 +374,15 @@ const Table = ({ data }) => {
   }
 
   const handleOnMouseUp = () => {
-    if ( selection ) {
-      selection = utils.standardizeSelection(selection)
-      if ( !selectedAnnotationBlock && selecting && utils.checkOverlaps(selection, []) ) {
+    if ( userSelection ) {
+      setUserSelection(utils.standardizeSelection(userSelection))
+      if ( !selectedAnnotationBlock && userSelecting && utils.checkOverlaps(userSelection, []) ) {
         closeAnnotationMenu()
       } else {
         setShowAnnotationMenu(true)
       }
     }
-    selecting = false
+    setUserSelecting(false)
   }
 
   const handleOnMouseDown = (event) => {
@@ -391,8 +390,8 @@ const Table = ({ data }) => {
 
     // Allow users to select the resize-corner of the cell
     if ( element.className === 'cell-resize-corner' ) {
-      prevElement = element.parentElement
-      selecting = true
+      setPrevElement(element.parentElement)
+      setUserSelecting(true)
       return
     } else if ( element.nodeName !== 'TD' ) { return }
 
@@ -411,7 +410,7 @@ const Table = ({ data }) => {
       if ( selectedBlock !== selectedAnnotationBlock ) {
         closeAnnotationMenu()
 
-        selection = selectedBlock.selection
+        setUserSelection(selectedBlock.selection)
         setSelectedAnnotationBlock(selectedBlock)
         updateSelections(selectedBlock)
       }
@@ -420,26 +419,26 @@ const Table = ({ data }) => {
     }
 
     // Activate the selection mode
-    selecting = true
+    setUserSelecting(true)
 
     // Extend the previous selection if user is holding down Shift key
-    if ( event.shiftKey && selection ) {
+    if ( event.shiftKey && userSelection ) {
 
       // Extend the previous selection left or right
-      if ( x1 !== selection['x1'] ) {
-        if ( x1 < selection['x1'] ) {
-          selection['x1'] = x1
+      if ( x1 !== userSelection['x1'] ) {
+        if ( x1 < userSelection['x1'] ) {
+          userSelection['x1'] = x1
         } else {
-          selection['x2'] = x1
+          userSelection['x2'] = x1
         }
       }
 
       // Extend the previous selection up or down
-      if ( y1 !== selection['y1'] ) {
-        if ( y1 < selection['y1'] ) {
-          selection['y1'] = y1
+      if ( y1 !== userSelection['y1'] ) {
+        if ( y1 < userSelection['y1'] ) {
+          userSelection['y1'] = y1
         } else {
-          selection['y2'] = y1
+          userSelection['y2'] = y1
         }
       }
 
@@ -452,11 +451,11 @@ const Table = ({ data }) => {
 
       // Activate the element on click
       selectCell(element, y1, x1, y1, x1, x1, y1, ['active'])
-      selection = { x1, x2, y1, y2 }
+      setUserSelection({ x1, x2, y1, y2 })
     }
 
     // Initialize the previous element with the one selected
-    prevElement = element
+    setPrevElement(element)
   }
 
   const handleOnMouseMove = (event) => {
@@ -466,16 +465,16 @@ const Table = ({ data }) => {
     // Don't allow out-of-bounds resizing
     if ( element.nodeName !== 'TD' ) { return }
 
-    if ( selecting && !event.shiftKey ) {
-      if ( !selection ) { return }
+    if ( userSelecting && !event.shiftKey ) {
+      if ( !userSelection ) { return }
 
       // Update the last x coordinate of the selection
       const newCellIndex = element.cellIndex
-      selection.x2 = newCellIndex
+      setUserSelection({...userSelection, x2: newCellIndex})
 
       // Update the last y coordinate of the selection
       const newRowIndex = element.parentElement.rowIndex
-      selection.y2 = newRowIndex
+      setUserSelection({...userSelection, y2: newRowIndex})
 
       if ( prevElement.nodeName === 'TD' ) {
         const oldCellIndex = prevElement.cellIndex
@@ -491,7 +490,7 @@ const Table = ({ data }) => {
       updateSelections()
 
       // Update reference to the previous element
-      prevElement = element
+      setPrevElement(element)
 
       // Trigger a render of the annotation menu
       setShowAnnotationMenu(true)
@@ -503,14 +502,14 @@ const Table = ({ data }) => {
     setShowAnnotationMenu(false)
     setSelectedAnnotationBlock(undefined)
     resetSelection()
-    //this.selection = undefined
+    setUserSelection(null)
     //this.updateAnnotationBlocks()
   }
 
   return (
     <Paper>
       <div className={classes.tableWrapper}>
-        <table ref={reference => tableReference = reference}
+        <table ref={reference => setTableReference(reference)}
           onMouseUp={() => handleOnMouseUp()}
           onMouseDown={event => handleOnMouseDown(event)}
           onMouseMove={event => handleOnMouseMove(event)}>
