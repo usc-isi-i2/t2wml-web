@@ -285,13 +285,9 @@ const Table = ({ data }) => {
 
   useEffect(() => {
     updateSelections()
-  }, [userSelection])
+  }, [selectedAnnotationBlock, userSelection])
 
-  const updateSelections = (selectedBlock) => {
-    if ( !selectedBlock ) {
-      selectedBlock = selectedAnnotationBlock
-    }
-
+  const updateSelections = () => {
     if ( !userSelection ) { return }
 
     const table = tableReference
@@ -302,8 +298,8 @@ const Table = ({ data }) => {
     table.classList.add('active')
 
     const classNames = ['active']
-    if ( selectedBlock ) {
-      const { role } = selectedBlock
+    if ( selectedAnnotationBlock ) {
+      const { role } = selectedAnnotationBlock
       if ( role ) {
         classNames.push(`role-${role}`)
       }
