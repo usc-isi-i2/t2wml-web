@@ -172,6 +172,18 @@ const useStyles = makeStyles((theme) => ({
         '&.active div.cell-border-bottom': {
           height: '2px',
         },
+        '& div.cell-resize-corner': {
+          display: 'block',
+          position: 'absolute',
+          right: '-2px',
+          bottom: '-2px',
+          width: '9px',
+          height: '9px',
+          cursor: 'pointer',
+          background: theme.palette.type === 'dark' ? '#fefefe' : '#555',
+          border: theme.palette.type === 'dark' ? '1px solid #555' : '1px solid #fefefe',
+          zIndex: '25',
+        },
       },
       '&.active tr td': {
         opacity: '0.5',
