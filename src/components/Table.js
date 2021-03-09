@@ -401,14 +401,15 @@ const Table = ({ data }) => {
 
   const handleOnMouseUp = () => {
     if ( userSelection ) {
-      setUserSelection(utils.standardizeSelection(userSelection))
-      if ( !selectedAnnotationBlock && userSelecting && utils.checkOverlaps(userSelection, []) ) {
+      //setUserSelection(utils.standardizeSelection(userSelection))
+      if ( !selectedAnnotationBlock && utils.checkOverlaps(userSelection, []) ) {
         closeAnnotationMenu()
       } else {
         setShowAnnotationMenu(true)
       }
     }
     setUserSelecting(false)
+    setShowAnnotationMenu(true)
   }
 
   const handleOnMouseDown = (event) => {
@@ -476,7 +477,6 @@ const Table = ({ data }) => {
 
       // Reset annotation menu
       closeAnnotationMenu()
-      resetSelection()
 
       // Activate the element on click
       selectCell(element, y1, x1, y1, x1, x1, y1, ['active'])
@@ -514,17 +514,14 @@ const Table = ({ data }) => {
 
       // Update reference to the previous element
       setPrevElement(element)
-
-      // Trigger a render of the annotation menu
-      setShowAnnotationMenu(true)
     }
   }
 
   const closeAnnotationMenu = () => {
     setShowAnnotationMenu(false)
     setSelectedAnnotationBlock(undefined)
-    resetSelection()
     setUserSelection(null)
+    resetSelection()
     //this.updateAnnotationBlocks()
   }
 
