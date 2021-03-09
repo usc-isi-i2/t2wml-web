@@ -216,6 +216,16 @@ const Table = ({ data }) => {
     }, 100)
   }
 
+  useEffect(() => {
+    // component did mount
+    document.addEventListener('mouseup', handleOnMouseUp)
+
+    // component will unmount
+    return () => {
+      document.removeEventListener('mouseup', handleOnMouseUp)
+    }
+  }, [])
+
   const resetSelection = () => {
     const table = tableReference
     if ( table ) {
@@ -506,7 +516,6 @@ const Table = ({ data }) => {
     <Paper>
       <div className={classes.tableWrapper}>
         <table ref={reference => setTableReference(reference)}
-          onMouseUp={() => handleOnMouseUp()}
           onMouseDown={event => handleOnMouseDown(event)}
           onMouseMove={event => handleOnMouseMove(event)}>
           <thead>
