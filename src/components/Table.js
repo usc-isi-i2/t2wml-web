@@ -3,6 +3,7 @@ import { Button, Paper } from '@material-ui/core'
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
+import Draggable from 'react-draggable'
 import * as utils from '../utils/table'
 
 
@@ -570,8 +571,14 @@ const Table = ({ data }) => {
     return (
       <Dialog
         open={showAnnotationMenu}
-        onClose={closeAnnotationMenu}>
-        <DialogTitle>{'Annotation Menu'}</DialogTitle>
+        onClose={closeAnnotationMenu}
+        aria-labelledby='dialog-modal-title'
+        PaperProps={{ tabIndex: -1 }}
+        TransitionComponent={Draggable}
+        TransitionProps={{ handle: '.draggable-handle' }}>
+        <DialogTitle classes={{ root: 'draggable-handle' }}>
+          Annotation Menu
+        </DialogTitle>
         <DialogContent>
         </DialogContent>
         <DialogActions>
