@@ -107,3 +107,21 @@ export const checkSelectedAnnotationBlocks = (selection, blocks) => {
   }
   return null
 }
+
+
+export const humanReadableSelection = (selection) => {
+  const { x1, y1, x2, y2 } = selection
+  let text = ''
+  if ( x1 === x2 && y1 === y2 ) {
+    text += `${columnToLetter(x1)}${y1}`
+  } else {
+    if ( x1 <= x2 ) {
+      text += `${columnToLetter(x1)}${y1 <= y2 ? y1 : y2}`
+      text += `:${columnToLetter(x2)}${y1 <= y2 ? y2 : y1}`
+    } else {
+      text += ` ${columnToLetter(x2)}${y2 <= y1 ? y2 : y1}`
+      text += `:${columnToLetter(x1)}${y2 <= y1 ? y1 : y2}`
+    }
+  }
+  return text;
+}
