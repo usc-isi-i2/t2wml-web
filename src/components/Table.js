@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Paper } from '@material-ui/core'
+import { Button, Paper } from '@material-ui/core'
+import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
 import * as utils from '../utils/table'
@@ -565,9 +566,27 @@ const Table = ({ data }) => {
     )
   }
 
+  const renderDialog = () => {
+    return (
+      <Dialog
+        open={showAnnotationMenu}
+        onClose={closeAnnotationMenu}>
+        <DialogTitle>{'Annotation Menu'}</DialogTitle>
+        <DialogContent>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeAnnotationMenu} color="primary" autoFocus>
+            Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
+    )
+  }
+
   return (
     <React.Fragment>
       {renderTable()}
+      {renderDialog()}
     </React.Fragment>
   )
 }
