@@ -218,13 +218,23 @@ const Table = ({ data }) => {
 
   useEffect(() => {
     // component did mount
+    document.addEventListener('keydown', handleOnKeyDown)
     document.addEventListener('mouseup', handleOnMouseUp)
 
     // component will unmount
     return () => {
+      document.removeEventListener('keydown', handleOnKeyDown)
       document.removeEventListener('mouseup', handleOnMouseUp)
     }
   }, [])
+
+  const handleOnKeyDown = (event) => {
+
+    // Close annotation menu with ESC key
+    if ( event.code === 'Escape' ) {
+      closeAnnotationMenu()
+    }
+  }
 
   const resetSelection = () => {
     const table = tableReference
