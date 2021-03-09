@@ -104,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
         pointerEvents: 'none',
       },
       '& tr td': {
-        color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
+        color: theme.palette.type === 'dark' ? '#ddd' : '#111',
         border: '1px solid #c7c7c7',
         padding: '0.15em 0.5em',
         lineHeight: '1.25em',
@@ -124,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
           right: '0',
           height: '1px',
           pointerEvents: 'none',
-          background: '#555',
+          background: theme.palette.type === 'dark' ? '#fefefe' : '#555',
           zIndex: '5',
         },
         '&.active div.cell-border-top': {
@@ -138,7 +138,7 @@ const useStyles = makeStyles((theme) => ({
           bottom: '0',
           width: '1px',
           pointerEvents: 'none',
-          background: '#555',
+          background: theme.palette.type === 'dark' ? '#fefefe' : '#555',
           zIndex: '5',
         },
         '&.active div.cell-border-left': {
@@ -152,7 +152,7 @@ const useStyles = makeStyles((theme) => ({
           bottom: '0',
           width: '1px',
           pointerEvents: 'none',
-          background: '#555',
+          background: theme.palette.type === 'dark' ? '#fefefe' : '#555',
           zIndex: '5',
         },
         '&.active div.cell-border-right': {
@@ -166,7 +166,7 @@ const useStyles = makeStyles((theme) => ({
           bottom: '0',
           height: '1px',
           pointerEvents: 'none',
-          background: '#555',
+          background: theme.palette.type === 'dark' ? '#fefefe' : '#555',
           zIndex: '5',
         },
         '&.active div.cell-border-bottom': {
