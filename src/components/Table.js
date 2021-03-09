@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
@@ -188,10 +188,10 @@ const Table = ({ data }) => {
 
   const classes = useStyles()
 
+  const tableElement = useRef(null)
   const [prevElement, setPrevElement] = useState(null)
   const [userSelection, setUserSelection] = useState(null)
   const [userSelecting, setUserSelecting] = useState(false)
-  const [tableReference, setTableReference] = useState(null)
   const [showAnnotationMenu, setShowAnnotationMenu] = useState(false)
   const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
 
@@ -204,8 +204,7 @@ const Table = ({ data }) => {
     element.setAttribute('style', 'width: 100%')
     element.parentElement.setAttribute('style', 'max-width: 1%')
 
-    const table = tableReference
-    const rows = table.querySelectorAll('tr')
+    const rows = tableElement.current.querySelectorAll('tr')
     const index = element.parentElement.cellIndex
     rows.forEach((row) => {
       row.children[index].setAttribute('style', 'max-width: 1%')
@@ -237,29 +236,25 @@ const Table = ({ data }) => {
   }
 
   const resetSelection = () => {
-    const table = tableReference
-    if ( table ) {
-      table.classList.remove('active')
-      table.querySelectorAll('td[class*="active"]').forEach(e => {
-        e.classList.forEach(className => {
-          if (className.startsWith('active')) {
-            e.classList.remove(className)
-          }
-        })
+    tableElement.current.classList.remove('active')
+    tableElement.current.querySelectorAll('td[class*="active"]').forEach(e => {
+      e.classList.forEach(className => {
+        if (className.startsWith('active')) {
+          e.classList.remove(className)
+        }
       })
-      table.querySelectorAll('.cell-border-top').forEach(e => e.remove())
-      table.querySelectorAll('.cell-border-left').forEach(e => e.remove())
-      table.querySelectorAll('.cell-border-right').forEach(e => e.remove())
-      table.querySelectorAll('.cell-border-bottom').forEach(e => e.remove())
-      table.querySelectorAll('.cell-resize-corner').forEach(e => e.remove())
-    }
+    })
+    tableElement.current.querySelectorAll('.cell-border-top').forEach(e => e.remove())
+    tableElement.current.querySelectorAll('.cell-border-left').forEach(e => e.remove())
+    tableElement.current.querySelectorAll('.cell-border-right').forEach(e => e.remove())
+    tableElement.current.querySelectorAll('.cell-border-bottom').forEach(e => e.remove())
+    tableElement.current.querySelectorAll('.cell-resize-corner').forEach(e => e.remove())
   }
 
   const resetEmptyCells = (x1, x2, y1, y2) => {
     if ( !userSelection ) { return }
 
-    const table = tableReference
-    const rows = table.querySelectorAll('tr')
+    const rows = tableElement.current.querySelectorAll('tr')
     rows.forEach((row, index) => {
       if ( userSelection.y1 < userSelection.y2 ) {
         if ( index >= userSelection.y1 && index <= userSelection.y2 ) {
@@ -310,12 +305,9 @@ const Table = ({ data }) => {
   const updateSelections = () => {
     if ( !userSelection ) { return }
 
-    const table = tableReference
-    if ( !table ) { return }
-
     // Reset selections before update
     resetSelection()
-    table.classList.add('active')
+    tableElement.current.classList.add('active')
 
     const classNames = ['active']
     if ( selectedAnnotationBlock ) {
@@ -325,7 +317,7 @@ const Table = ({ data }) => {
       }
     }
 
-    const rows = table.querySelectorAll('tr')
+    const rows = tableElement.current.querySelectorAll('tr')
     const { x1, x2, y1, y2 } = userSelection
     const leftCol = Math.min(x1, x2)
     const rightCol = Math.max(x1, x2)
@@ -525,7 +517,7 @@ const Table = ({ data }) => {
   return (
     <Paper>
       <div className={classes.tableWrapper}>
-        <table ref={reference => setTableReference(reference)}
+        <table ref={element => tableElement.current = element}
           onMouseDown={event => handleOnMouseDown(event)}
           onMouseMove={event => handleOnMouseMove(event)}>
           <thead>
