@@ -568,6 +568,7 @@ const Table = ({ data }) => {
   }
 
   const renderDialog = () => {
+    if ( !userSelection ) { return }
     return (
       <Dialog
         open={showAnnotationMenu}
@@ -577,7 +578,7 @@ const Table = ({ data }) => {
         TransitionComponent={Draggable}
         TransitionProps={{ handle: '.draggable-handle' }}>
         <DialogTitle classes={{ root: 'draggable-handle' }}>
-          Annotation Menu
+          Annotate selected area {utils.humanReadableSelection(userSelection)}
         </DialogTitle>
         <DialogContent>
         </DialogContent>
