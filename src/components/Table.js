@@ -526,41 +526,49 @@ const Table = ({ data }) => {
     //this.updateAnnotationBlocks()
   }
 
-  return (
-    <Paper>
-      <div className={classes.tableWrapper}>
-        <table ref={element => tableElement.current = element}
-          onMouseDown={event => handleOnMouseDown(event)}
-          onMouseMove={event => handleOnMouseMove(event)}>
-          <thead>
-            <tr>
-              <th></th>
-              {cols.map((r, i) => (
-                <th key={i}>
-                  <div onDoubleClick={(event) => handleOnClickHeader(event)}>
-                    {utils.columnToLetter(i + 1)}
-                  </div>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((e, i) => (
-              <tr key={`row-${i}`}>
-                <td>{i + 1}</td>
-                {cols.map((r, j) => {
-                  if ( i < data.length && j < data[i].length && data[i][j] ) {
-                    return <td key={`cell-${j}`}>{data[i][j]}</td>
-                  } else {
-                    return <td key={`cell-${j}`} />
-                  }
-                })}
+  const renderTable = () => {
+    return (
+      <Paper>
+        <div className={classes.tableWrapper}>
+          <table ref={element => tableElement.current = element}
+            onMouseDown={event => handleOnMouseDown(event)}
+            onMouseMove={event => handleOnMouseMove(event)}>
+            <thead>
+              <tr>
+                <th></th>
+                {cols.map((r, i) => (
+                  <th key={i}>
+                    <div onDoubleClick={(event) => handleOnClickHeader(event)}>
+                      {utils.columnToLetter(i + 1)}
+                    </div>
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </Paper>
+            </thead>
+            <tbody>
+              {rows.map((e, i) => (
+                <tr key={`row-${i}`}>
+                  <td>{i + 1}</td>
+                  {cols.map((r, j) => {
+                    if ( i < data.length && j < data[i].length && data[i][j] ) {
+                      return <td key={`cell-${j}`}>{data[i][j]}</td>
+                    } else {
+                      return <td key={`cell-${j}`} />
+                    }
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Paper>
+    )
+  }
+
+  return (
+    <React.Fragment>
+      {renderTable()}
+    </React.Fragment>
   )
 }
 
