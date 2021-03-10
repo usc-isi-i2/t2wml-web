@@ -201,7 +201,9 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
     '& .MuiDialog-container .MuiPaper-root': {
+      border: theme.palette.type === 'dark' ? '1px solid #fefefe' : '1px solid #777',
       pointerEvents: 'all',
+      outline: 'none',
       '& .MuiDialogTitle-root': {
         cursor: 'pointer',
       },
