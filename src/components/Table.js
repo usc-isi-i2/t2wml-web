@@ -195,6 +195,12 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  dialog: {
+    pointerEvents: 'none',
+    '& .MuiBackdrop-root': {
+      display: 'none',
+    },
+  },
 }))
 
 
@@ -568,6 +574,7 @@ const Table = ({ data }) => {
     if ( !selection.current ) { return }
     return (
       <Dialog
+        classes={{ root: classes.dialog }}
         open={showAnnotationMenu}
         onClose={closeAnnotationMenu}
         aria-labelledby='dialog-modal-title'
