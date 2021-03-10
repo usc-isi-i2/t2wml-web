@@ -202,6 +202,9 @@ const useStyles = makeStyles((theme) => ({
     },
     '& .MuiDialog-container .MuiPaper-root': {
       pointerEvents: 'all',
+      '& .MuiDialogTitle-root': {
+        cursor: 'pointer',
+      },
     },
   },
 }))
