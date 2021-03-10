@@ -195,27 +195,6 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  dialog: {
-    pointerEvents: 'none',
-    '& .MuiBackdrop-root': {
-      display: 'none',
-    },
-    '& .MuiDialog-container .MuiPaper-root': {
-      border: theme.palette.type === 'dark' ? '1px solid #fefefe' : '1px solid #777',
-      pointerEvents: 'all',
-      outline: 'none',
-      '& .MuiDialogTitle-root': {
-        cursor: 'pointer',
-      },
-      '& .MuiDialogActions-root': {
-        justifyContent: 'flex-start',
-      },
-    },
-  },
-  button: {
-    float: 'left',
-    background: theme.palette.type === 'dark' ? '#777' : '#555',
-  },
 }))
 
 
@@ -589,7 +568,6 @@ const Table = ({ data }) => {
     if ( !selection.current ) { return }
     return (
       <Dialog
-        classes={{ root: classes.dialog }}
         open={showAnnotationMenu}
         onClose={closeAnnotationMenu}
         aria-labelledby='dialog-modal-title'
@@ -606,7 +584,6 @@ const Table = ({ data }) => {
             autoFocus
             color="primary"
             variant="contained"
-            className={classes.button}
             onClick={closeAnnotationMenu}>
             Submit
           </Button>

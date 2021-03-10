@@ -43,6 +43,36 @@ const App = () => {
     shape: {
       borderRadius: 'none',
     },
+    overrides: {
+      MuiButton: {
+        root: {
+          background: darkTheme ? '#777' : '#555',
+        },
+      },
+      MuiDialog: {
+        root: {
+          pointerEvents: 'none',
+          '& .MuiDialog-container .MuiPaper-root': {
+            border: darkTheme ? '1px solid #fefefe' : '1px solid #777',
+            pointerEvents: 'all',
+            outline: 'none',
+            '& .MuiDialogTitle-root': {
+              cursor: 'pointer',
+            },
+          },
+        },
+      },
+      MuiBackdrop: {
+        root: {
+          display: 'none',
+        },
+      },
+      MuiDialogActions: {
+        root: {
+          justifyContent: 'flex-start',
+        },
+      },
+    },
     props: {
       MuiButton: {
         disableRipple: true,
