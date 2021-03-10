@@ -45,8 +45,13 @@ const App = () => {
     },
     overrides: {
       MuiButton: {
-        root: {
-          background: darkTheme ? '#777' : '#555',
+        containedPrimary: {
+          color: darkTheme ? '#4D4D4D' : '#fefefe',
+          backgroundColor: darkTheme ? '#fefefe' : '#4D4D4D',
+          '&:hover': {
+            color: darkTheme ? '#fefefe' : '#4d4d4d',
+            backgroundColor: darkTheme ? '#7f7f7f' : '#ddd',
+          },
         },
       },
       MuiDialog: {
