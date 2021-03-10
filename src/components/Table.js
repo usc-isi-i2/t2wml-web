@@ -212,6 +212,10 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  button: {
+    float: 'left',
+    background: theme.palette.type === 'dark' ? '#777' : '#555',
+  },
 }))
 
 
@@ -598,7 +602,12 @@ const Table = ({ data }) => {
         <DialogContent>
         </DialogContent>
         <DialogActions>
-          <Button onClick={closeAnnotationMenu} color="primary" autoFocus>
+          <Button
+            autoFocus
+            color="primary"
+            variant="contained"
+            className={classes.button}
+            onClick={closeAnnotationMenu}>
             Submit
           </Button>
         </DialogActions>
