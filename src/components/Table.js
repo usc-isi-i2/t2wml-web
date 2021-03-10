@@ -207,6 +207,9 @@ const useStyles = makeStyles((theme) => ({
       '& .MuiDialogTitle-root': {
         cursor: 'pointer',
       },
+      '& .MuiDialogActions-root': {
+        justifyContent: 'flex-start',
+      },
     },
   },
 }))
