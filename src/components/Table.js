@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, Paper } from '@material-ui/core'
-import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core'
+
+import { Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
-import Draggable from 'react-draggable'
+import AnnotationMenu from './AnnotationMenu'
 import * as utils from '../utils/table'
 
 
@@ -564,38 +564,20 @@ const Table = ({ data }) => {
     )
   }
 
-  const renderDialog = () => {
+  const renderAnnotationMenu = () => {
     if ( !selection.current ) { return }
     return (
-      <Dialog
-        open={showAnnotationMenu}
-        onClose={closeAnnotationMenu}
-        aria-labelledby='dialog-modal-title'
-        PaperProps={{ tabIndex: -1 }}
-        TransitionComponent={Draggable}
-        TransitionProps={{ handle: '.draggable-handle' }}>
-        <DialogTitle classes={{ root: 'draggable-handle' }}>
-          Selected {utils.humanReadableSelection(selection.current)}
-        </DialogTitle>
-        <DialogContent>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            autoFocus
-            color="primary"
-            variant="contained"
-            onClick={closeAnnotationMenu}>
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <AnnotationMenu
+        selection={selection.current}
+        openMenu={showAnnotationMenu}
+        hideMenu={hideAnnotationMenu} />
     )
   }
 
   return (
     <React.Fragment>
       {renderTable()}
-      {renderDialog()}
+      {renderAnnotationMenu()}
     </React.Fragment>
   )
 }
