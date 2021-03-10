@@ -245,7 +245,7 @@ const Table = ({ data }) => {
 
     // Close annotation menu with ESC key
     if ( event.code === 'Escape' ) {
-      closeAnnotationMenu()
+      hideAnnotationMenu()
     }
   }
 
@@ -403,7 +403,7 @@ const Table = ({ data }) => {
     if ( selection.current ) {
       selection.current = utils.standardizeSelection(selection.current)
       if ( !selectedAnnotationBlock && utils.checkOverlaps(selection.current, []) ) {
-        closeAnnotationMenu()
+        hideAnnotationMenu()
       } else {
         setShowAnnotationMenu(true)
       }
@@ -435,7 +435,7 @@ const Table = ({ data }) => {
 
       // Reset annotation menu
       if ( selectedBlock !== selectedAnnotationBlock ) {
-        closeAnnotationMenu()
+        hideAnnotationMenu()
 
         selection.current = selectedBlock.selection
         setSelectedAnnotationBlock(selectedBlock)
@@ -476,7 +476,7 @@ const Table = ({ data }) => {
     } else {
 
       // Reset annotation menu
-      closeAnnotationMenu()
+      hideAnnotationMenu()
 
       // Activate the element on click
       selectCell(element, y1, x1, y1, x1, x1, y1, ['active'])
@@ -517,7 +517,7 @@ const Table = ({ data }) => {
     }
   }
 
-  const closeAnnotationMenu = () => {
+  const hideAnnotationMenu = () => {
     setShowAnnotationMenu(false)
     setSelectedAnnotationBlock(undefined)
     selection.current = null
