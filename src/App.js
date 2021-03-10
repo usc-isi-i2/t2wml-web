@@ -47,6 +47,9 @@ const App = () => {
       MuiButton: {
         disableRipple: true,
       },
+      MuiCheckbox: {
+        disableRipple: true,
+      },
     },
   })
 
