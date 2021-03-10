@@ -200,6 +200,9 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiBackdrop-root': {
       display: 'none',
     },
+    '& .MuiDialog-container .MuiPaper-root': {
+      pointerEvents: 'all',
+    },
   },
 }))
 
