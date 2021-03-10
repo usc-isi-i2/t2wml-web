@@ -43,6 +43,11 @@ const App = () => {
     shape: {
       borderRadius: 'none',
     },
+    props: {
+      MuiButton: {
+        disableRipple: true,
+      },
+    },
   })
 
   return (
