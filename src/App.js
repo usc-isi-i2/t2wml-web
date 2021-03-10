@@ -41,7 +41,7 @@ const App = () => {
       },
     },
     shape: {
-      borderRadius: 'none',
+      borderRadius: '0',
     },
     overrides: {
       MuiButton: {
@@ -60,6 +60,8 @@ const App = () => {
           '& .MuiDialog-container .MuiPaper-root': {
             border: darkTheme ? '1px solid #fefefe' : '1px solid #777',
             pointerEvents: 'all',
+            height: '300px',
+            width: '500px',
             outline: 'none',
             '& .MuiDialogTitle-root': {
               cursor: 'pointer',
@@ -75,6 +77,7 @@ const App = () => {
       MuiDialogActions: {
         root: {
           justifyContent: 'flex-start',
+          padding: '16px 24px',
         },
       },
     },
