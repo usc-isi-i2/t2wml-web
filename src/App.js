@@ -96,6 +96,15 @@ const App = () => {
           display: 'none',
         },
       },
+      MuiDialogTitle: {
+        root: {
+          '& .MuiIconButton-root': {
+            position: 'absolute',
+            top: '8px',
+            right: '8px',
+          },
+        },
+      },
       MuiDialogActions: {
         root: {
           justifyContent: 'flex-start',
