@@ -86,6 +86,9 @@ const App = () => {
       MuiButton: {
         disableRipple: true,
       },
+      MuiIconButton: {
+        disableRipple: true,
+      },
       MuiCheckbox: {
         disableRipple: true,
       },
