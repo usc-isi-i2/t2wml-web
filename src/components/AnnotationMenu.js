@@ -35,6 +35,7 @@ const AnnotationMenu = ({
   const classes = useStyles()
 
   const [selectedArea, setSelectedArea] = useState(null)
+  const [selectedRole, setSelectedRole] = useState(null)
 
   const handleOnSubmit = (event) => {
     event.preventDefault()
@@ -81,12 +82,25 @@ const AnnotationMenu = ({
     )
   }
 
+  const renderRoleInput = () => {
+    return (
+      <TextField
+        fullWidth
+        label="Role"
+        id="role-input"
+        variant="outlined"
+        defaultValue={'Role'}
+        value={selectedRole} />
+    )
+  }
+
   const renderForm = () => {
     return (
       <form noValidate autoComplete="off"
         className={classes.form}
         onSubmit={handleOnSubmit}>
         {renderSelectionInput()}
+        {renderRoleInput()}
       </form>
     )
   }
