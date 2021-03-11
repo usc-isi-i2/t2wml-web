@@ -75,6 +75,9 @@ const App = () => {
           '&.Mui-focused fieldset': {
             borderColor: darkTheme ? '#fefefe !important' : '#4d4d4d !important',
           },
+          '&.Mui-error fieldset': {
+            borderColor: '#f44336 !important',
+          },
         },
       },
       MuiDialog: {
