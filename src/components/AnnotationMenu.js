@@ -40,6 +40,7 @@ const AnnotationMenu = ({
   const [formState, setFormState] = React.useState({
     selectedArea: null,
     selectedRole: null,
+    selectedType: null,
   })
 
   const handleOnSubmit = (event) => {
@@ -118,6 +119,29 @@ const AnnotationMenu = ({
     )
   }
 
+  const renderSelectedTypeInput = () => {
+    return (
+      <Grid item xs={12}>
+        <TextField
+          select
+          fullWidth
+          label="Type"
+          id="selectedType"
+          name="selectedType"
+          variant="outlined"
+          defaultValue={'Type'}
+          value={formState.selectedType}
+          onChange={handleOnChange}>
+          {ROLES.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+      </Grid>
+    )
+  }
+
   const renderForm = () => {
     return (
       <form noValidate autoComplete="off"
@@ -126,6 +150,7 @@ const AnnotationMenu = ({
         <Grid container spacing={3}>
           {renderSelectedAreaInput()}
           {renderSelectedRoleInput()}
+          {renderSelectedTypeInput()}
         </Grid>
       </form>
     )
