@@ -9,12 +9,14 @@ import {
   DialogActions,
   IconButton,
   TextField,
+  MenuItem,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import CloseIcon from '@material-ui/icons/Close'
 
 import Draggable from 'react-draggable'
 
+import { ROLES } from '../content/annotation-options'
 import * as utils from '../utils/table'
 
 
@@ -89,12 +91,19 @@ const AnnotationMenu = ({
     return (
       <Grid item xs={12}>
         <TextField
+          select
           fullWidth
           label="Role"
           id="role-input"
           variant="outlined"
           defaultValue={'Role'}
-          value={selectedRole} />
+          value={selectedRole}>
+          {ROLES.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
       </Grid>
     )
   }
