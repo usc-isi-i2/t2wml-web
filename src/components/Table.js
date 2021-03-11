@@ -564,11 +564,17 @@ const Table = ({ data }) => {
     )
   }
 
+  const handleOnSelectionChange = (newSelection) => {
+    selection.current = {...newSelection}
+    updateSelections()
+  }
+
   const renderAnnotationMenu = () => {
     if ( !selection.current ) { return }
     return (
       <AnnotationMenu
         selection={selection.current}
+        onSelectionChange={handleOnSelectionChange}
         openMenu={showAnnotationMenu}
         hideMenu={hideAnnotationMenu} />
     )
