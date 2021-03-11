@@ -110,7 +110,10 @@ const App = () => {
       MuiDialogActions: {
         root: {
           justifyContent: 'flex-start',
-          padding: `${defaultTheme.spacing(2)}px ${defaultTheme.spacing(3)}px`,
+          paddingTop: defaultTheme.spacing(2),
+          paddingLeft: defaultTheme.spacing(3),
+          paddingRight: defaultTheme.spacing(3),
+          paddingBottom: defaultTheme.spacing(2),
         },
       },
     },
