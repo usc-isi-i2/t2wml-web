@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
   Button,
@@ -27,18 +27,43 @@ const AnnotationMenu = ({
   selection,
   openMenu,
   hideMenu,
+  onSelectionChange,
 }) => {
 
   const classes = useStyles()
+
+  const [selectedArea, setSelectedArea] = useState(null)
 
   const handleOnSubmit = (event) => {
     event.preventDefault()
     hideMenu()
   }
 
+  const handleOnChange = (event) => {
+    const value = event.target.value
+    setSelectedArea(value)
+    const regex = /^.?([a-z]+)([0-9]+):([a-z]+)([0-9]+).?$/gmi
+    const groups = regex.exec(value)
+    if ( groups && groups[1] && groups[2] && groups[3] && groups[4] ) {
+      const newSelection = {
+        x1: utils.letterToColumn(groups[1]),
+        x2: utils.letterToColumn(groups[3]),
+        y1: parseInt(groups[2]),
+        y2: parseInt(groups[4]),
+      }
+      onSelectionChange(newSelection)
+    }
+  }
+
   const renderSelectionInput = () => {
+    const defaultValue = utils.humanReadableSelection(selection)
     return (
-      <TextField id="selection" label="Selected area" variant="filled" />
+      <TextField
+        id="selected-area"
+        label="Selected area"
+        variant="outlined"
+        value={selectedArea || defaultValue}
+        onChange={handleOnChange} />
     )
   }
 
