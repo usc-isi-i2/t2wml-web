@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import {
+  Grid,
   Button,
   Dialog,
   DialogTitle,
@@ -68,29 +69,33 @@ const AnnotationMenu = ({
     const defaultValue = utils.humanReadableSelection(selection)
     const parsedCorrectly = parseSelectedAreaInput(selectedArea)
     return (
-      <TextField
-        id="selected-area"
-        label="Selected area"
-        variant="outlined"
-        defaultValue={defaultValue}
-        value={selectedArea}
-        onChange={handleOnChange}
-        error={selectedArea && !parsedCorrectly}
-        helperText={selectedArea && !parsedCorrectly ? (
-          'accepted format: [col][row]:[col][row]'
-        ) : ''} />
+      <Grid item xs={6}>
+        <TextField
+          id="selected-area"
+          label="Selected area"
+          variant="outlined"
+          defaultValue={defaultValue}
+          value={selectedArea}
+          onChange={handleOnChange}
+          error={selectedArea && !parsedCorrectly}
+          helperText={selectedArea && !parsedCorrectly ? (
+            'accepted format: [col][row]:[col][row]'
+          ) : ''} />
+      </Grid>
     )
   }
 
   const renderRoleInput = () => {
     return (
-      <TextField
-        fullWidth
-        label="Role"
-        id="role-input"
-        variant="outlined"
-        defaultValue={'Role'}
-        value={selectedRole} />
+      <Grid item xs={12}>
+        <TextField
+          fullWidth
+          label="Role"
+          id="role-input"
+          variant="outlined"
+          defaultValue={'Role'}
+          value={selectedRole} />
+      </Grid>
     )
   }
 
@@ -99,8 +104,10 @@ const AnnotationMenu = ({
       <form noValidate autoComplete="off"
         className={classes.form}
         onSubmit={handleOnSubmit}>
-        {renderSelectionInput()}
-        {renderRoleInput()}
+        <Grid container spacing={3}>
+          {renderSelectionInput()}
+          {renderRoleInput()}
+        </Grid>
       </form>
     )
   }
