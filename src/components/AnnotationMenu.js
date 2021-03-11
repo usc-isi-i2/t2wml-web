@@ -6,9 +6,11 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  IconButton,
   TextField,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
+import CloseIcon from '@material-ui/icons/Close'
 
 import Draggable from 'react-draggable'
 
@@ -99,6 +101,9 @@ const AnnotationMenu = ({
       TransitionProps={{ handle: '.draggable-handle' }}>
       <DialogTitle classes={{ root: 'draggable-handle' }}>
         Selected {utils.humanReadableSelection(selection)}
+        <IconButton aria-label="close" onClick={hideMenu}>
+          <CloseIcon />
+        </IconButton>
       </DialogTitle>
       <DialogContent>
         {renderForm()}
