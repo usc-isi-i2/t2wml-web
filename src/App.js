@@ -48,11 +48,11 @@ const App = () => {
     overrides: {
       MuiButton: {
         containedPrimary: {
-          color: darkTheme ? '#4D4D4D' : '#fefefe',
-          backgroundColor: darkTheme ? '#fefefe' : '#4D4D4D',
+          color: darkTheme ? '#fefefe' : '#4D4D4D',
+          backgroundColor: darkTheme ? '#4d4d4d' : '#fefefe',
           '&:hover': {
-            color: darkTheme ? '#fefefe' : '#4d4d4d',
-            backgroundColor: darkTheme ? '#7f7f7f' : '#ddd',
+            color: darkTheme ? '#333' : '#fff',
+            backgroundColor: darkTheme ? '#ddd' : '#7f7f7f',
           },
         },
       },
