@@ -37,8 +37,10 @@ const AnnotationMenu = ({
 
   const classes = useStyles()
 
-  const [selectedArea, setSelectedArea] = useState(null)
-  const [selectedRole, setSelectedRole] = useState(null)
+  const [formState, setFormState] = React.useState({
+    selectedArea: null,
+    selectedRole: null,
+  })
 
   const handleOnSubmit = (event) => {
     event.preventDefault()
@@ -60,27 +62,33 @@ const AnnotationMenu = ({
 
   const handleOnChange = (event) => {
     const value = event.target.value
-    setSelectedArea(value)
-    const newSelection = parseSelectedAreaInput(value)
-    if ( newSelection ) {
-      onSelectionChange(newSelection)
+    setFormState({
+      ...formState,
+      [event.target.name]: value,
+    })
+    if ( event.target.name === 'selectedArea' ) {
+      const newSelection = parseSelectedAreaInput(value)
+      if ( newSelection ) {
+        onSelectionChange(newSelection)
+      }
     }
   }
 
   const renderSelectionInput = () => {
     const defaultValue = utils.humanReadableSelection(selection)
-    const parsedCorrectly = parseSelectedAreaInput(selectedArea)
+    const parsedCorrectly = parseSelectedAreaInput(formState.selectedArea)
     return (
       <Grid item xs={6}>
         <TextField
-          id="selected-area"
+          id="selectedArea"
+          name="selectedArea"
           label="Selected area"
           variant="outlined"
-          defaultValue={defaultValue}
-          value={selectedArea}
           onChange={handleOnChange}
-          error={selectedArea && !parsedCorrectly}
-          helperText={selectedArea && !parsedCorrectly ? (
+          defaultValue={defaultValue}
+          value={formState.selectedArea}
+          error={formState.selectedArea && !parsedCorrectly}
+          helperText={formState.selectedArea && !parsedCorrectly ? (
             'accepted format: [col][row]:[col][row]'
           ) : ''} />
       </Grid>
@@ -94,10 +102,12 @@ const AnnotationMenu = ({
           select
           fullWidth
           label="Role"
-          id="role-input"
+          id="selectedRole"
+          name="selectedRole"
           variant="outlined"
           defaultValue={'Role'}
-          value={selectedRole}>
+          value={formState.selectedRole}
+          onChange={handleOnChange}>
           {ROLES.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
