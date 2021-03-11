@@ -28,6 +28,8 @@ const App = () => {
 
   const [darkTheme, setDarkTheme] = useState(true)
 
+  const defaultTheme = createMuiTheme()
+
   const theme = createMuiTheme({
     palette: {
       type: darkTheme ? 'dark' : 'light',
@@ -100,15 +102,15 @@ const App = () => {
         root: {
           '& .MuiIconButton-root': {
             position: 'absolute',
-            top: '8px',
-            right: '8px',
+            top: defaultTheme.spacing(1),
+            right: defaultTheme.spacing(1),
           },
         },
       },
       MuiDialogActions: {
         root: {
           justifyContent: 'flex-start',
-          padding: '16px 24px',
+          padding: `${defaultTheme.spacing(2)} ${defaultTheme.spacing(3)}`,
         },
       },
     },
