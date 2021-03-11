@@ -9,6 +9,18 @@ export const columnToLetter = (column) => {
 }
 
 
+export const letterToColumn = (letter) => {
+  let column = 0
+  const length = letter.length
+  let counter = 0
+  while ( counter < length ) {
+    column += (letter.charCodeAt(counter) - 64) * Math.pow(26, length - counter - 1)
+    counter += 1
+  }
+  return column
+}
+
+
 export const standardizeSelection = (selection) => {
   let temp
   if ( selection.x2 < selection.x1 ) {
