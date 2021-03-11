@@ -74,7 +74,7 @@ const AnnotationMenu = ({
     }
   }
 
-  const renderSelectionInput = () => {
+  const renderSelectedAreaInput = () => {
     const defaultValue = utils.humanReadableSelection(selection)
     const parsedCorrectly = parseSelectedAreaInput(formState.selectedArea)
     return (
@@ -95,7 +95,7 @@ const AnnotationMenu = ({
     )
   }
 
-  const renderRoleInput = () => {
+  const renderSelectedRoleInput = () => {
     return (
       <Grid item xs={12}>
         <TextField
@@ -124,8 +124,8 @@ const AnnotationMenu = ({
         className={classes.form}
         onSubmit={handleOnSubmit}>
         <Grid container spacing={3}>
-          {renderSelectionInput()}
-          {renderRoleInput()}
+          {renderSelectedAreaInput()}
+          {renderSelectedRoleInput()}
         </Grid>
       </form>
     )
