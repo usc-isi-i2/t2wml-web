@@ -39,18 +39,24 @@ const AnnotationMenu = ({
     hideMenu()
   }
 
-  const handleOnChange = (event) => {
-    const value = event.target.value
-    setSelectedArea(value)
+  const parseSelectedAreaInput = value => {
     const regex = /^.?([a-z]+)([0-9]+):([a-z]+)([0-9]+).?$/gmi
     const groups = regex.exec(value)
     if ( groups && groups[1] && groups[2] && groups[3] && groups[4] ) {
-      const newSelection = {
+      return {
         x1: utils.letterToColumn(groups[1]),
         x2: utils.letterToColumn(groups[3]),
         y1: parseInt(groups[2]),
         y2: parseInt(groups[4]),
       }
+    }
+  }
+
+  const handleOnChange = (event) => {
+    const value = event.target.value
+    setSelectedArea(value)
+    const newSelection = parseSelectedAreaInput(value)
+    if ( newSelection ) {
       onSelectionChange(newSelection)
     }
   }
