@@ -63,13 +63,19 @@ const AnnotationMenu = ({
 
   const renderSelectionInput = () => {
     const defaultValue = utils.humanReadableSelection(selection)
+    const parsedCorrectly = parseSelectedAreaInput(selectedArea)
     return (
       <TextField
         id="selected-area"
         label="Selected area"
         variant="outlined"
-        value={selectedArea || defaultValue}
-        onChange={handleOnChange} />
+        defaultValue={defaultValue}
+        value={selectedArea}
+        onChange={handleOnChange}
+        error={selectedArea && !parsedCorrectly}
+        helperText={selectedArea && !parsedCorrectly ? (
+          'accepted format: [col][row]:[col][row]'
+        ) : ''} />
     )
   }
 
