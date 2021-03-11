@@ -54,6 +54,27 @@ const App = () => {
           },
         },
       },
+      MuiFormLabel: {
+        root: {
+          color: darkTheme ? '#d8d8d8' : '#737373',
+          '&.Mui-focused': {
+            color: darkTheme ? '#fefefe' : '#4d4d4d',
+          },
+        },
+      },
+      MuiOutlinedInput: {
+        root: {
+          '& fieldset': {
+            borderColor: darkTheme ? '#d8d8d8' : '#737373',
+          },
+          '&:hover fieldset': {
+            borderColor: darkTheme ? '#fefefe' : '#4d4d4d',
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: darkTheme ? '#fefefe !important' : '#4d4d4d !important',
+          },
+        },
+      },
       MuiDialog: {
         root: {
           userSelect: 'none',
