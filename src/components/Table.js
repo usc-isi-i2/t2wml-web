@@ -293,6 +293,9 @@ const Table = ({ data }) => {
         const nextElement = rows[y1].children[x1 + 1]
         prevElement.current = nextElement
       }
+
+      // Update Selections
+      updateSelections()
     }
   }
 
