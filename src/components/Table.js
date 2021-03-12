@@ -239,6 +239,7 @@ const Table = ({ data }) => {
       document.removeEventListener('keydown', handleOnKeyDown)
       document.removeEventListener('mouseup', handleOnMouseUp)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleOnKeyDown = event => {
@@ -314,6 +315,7 @@ const Table = ({ data }) => {
 
   useEffect(() => {
     updateSelections()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedAnnotationBlock, selection.current])
 
   const updateSelections = () => {
