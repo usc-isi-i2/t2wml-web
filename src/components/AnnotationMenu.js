@@ -118,25 +118,32 @@ const AnnotationMenu = ({
   }
 
   const renderSelectedTypeInput = () => {
-    return (
-      <Grid item xs={12}>
-        <TextField
-          select
-          fullWidth
-          label="Type"
-          id="selectedType"
-          name="selectedType"
-          variant="outlined"
-          value={formState.selectedType}
-          onChange={handleOnChange}>
-          {ROLES.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-      </Grid>
-    )
+    if ( formState.selectedRole ) {
+      const ROLE = ROLES.find(option => (
+        option.value === formState.selectedRole
+      ))
+      if ( !ROLE || !ROLE.children ) { return }
+      return (
+        <Grid item xs={12}>
+          <TextField
+            select
+            fullWidth
+            label="Type"
+            id="selectedType"
+            name="selectedType"
+            variant="outlined"
+            value={formState.selectedType}
+            disabled={!ROLE.children.length}
+            onChange={handleOnChange}>
+            {ROLE.children.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+      )
+    }
   }
 
   const renderForm = () => {
