@@ -16,7 +16,7 @@ import CloseIcon from '@material-ui/icons/Close'
 
 import Draggable from 'react-draggable'
 
-import { ROLES } from '../content/annotation-options'
+import { ROLES, TYPES } from '../content/annotation-options'
 import * as utils from '../utils/table'
 
 
@@ -146,6 +146,27 @@ const AnnotationMenu = ({
     }
   }
 
+  const renderSelectedTypeChildren = () => {
+    if ( formState.selectedType ) {
+      const TYPE = TYPES.find(option => (
+        option.value === formState.selectedType
+      ))
+      if ( !TYPE || !TYPE.children ) { return }
+      return TYPE.children.map((option) => (
+        <Grid item xs={12} key={option.value}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            label={option.label}
+            id={`selected${option.label}`}
+            name={`selected${option.label}`}
+            value={formState[`selected${option.label}`]}
+            onChange={handleOnChange} />
+        </Grid>
+      ))
+    }
+  }
+
   const renderForm = () => {
     return (
       <form noValidate autoComplete="off"
@@ -155,6 +176,7 @@ const AnnotationMenu = ({
           {renderSelectedAreaInput()}
           {renderSelectedRoleInput()}
           {renderSelectedTypeInput()}
+          {renderSelectedTypeChildren()}
         </Grid>
       </form>
     )
