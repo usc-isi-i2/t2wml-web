@@ -41,6 +41,12 @@ const AnnotationMenu = ({
     selectedArea: '',
     selectedRole: '',
     selectedType: '',
+    selectedProperty: '',
+    selectedLanguage: '',
+    selectedPrecision: '',
+    selectedCalendar: '',
+    selectedFormat: '',
+    selectedUnit: '',
   })
 
   const handleOnSubmit = (event) => {
