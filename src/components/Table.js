@@ -7,7 +7,7 @@ import AnnotationMenu from './AnnotationMenu'
 import * as utils from '../utils/table'
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   tableWrapper: {
     position: 'relative',
     overflow: 'scroll',
@@ -213,14 +213,14 @@ const Table = ({ data }) => {
   const rows = [...Array(Math.max(data.length, MIN_NUM_ROWS))]
   const cols = [...Array(Math.max(data[0].length, 26))]
 
-  const handleOnClickHeader = (event) => {
+  const handleOnClickHeader = event => {
     const element = event.target
     element.setAttribute('style', 'width: 100%')
     element.parentElement.setAttribute('style', 'max-width: 1%')
 
     const rows = tableElement.current.querySelectorAll('tr')
     const index = element.parentElement.cellIndex
-    rows.forEach((row) => {
+    rows.forEach(row => {
       row.children[index].setAttribute('style', 'max-width: 1%')
     })
 
@@ -241,7 +241,7 @@ const Table = ({ data }) => {
     }
   }, [])
 
-  const handleOnKeyDown = (event) => {
+  const handleOnKeyDown = event => {
 
     // Close annotation menu with ESC key
     if ( event.code === 'Escape' ) {
@@ -359,7 +359,7 @@ const Table = ({ data }) => {
 
   const selectCell = (cell, rowIndex, colIndex, topRow, leftCol, rightCol, bottomRow, classNames = []) => {
     // Apply class names to the selected cell
-    classNames.map(className => cell.classList.add(className));
+    classNames.map(className => cell.classList.add(className))
 
     // Add a top border to the cells at the top of the selection
     if ( rowIndex === topRow ) {
@@ -412,7 +412,7 @@ const Table = ({ data }) => {
     setShowAnnotationMenu(true)
   }
 
-  const handleOnMouseDown = (event) => {
+  const handleOnMouseDown = event => {
     const element = event.target
 
     // Allow users to select the resize-corner of the cell
@@ -487,7 +487,7 @@ const Table = ({ data }) => {
     setPrevElement(element)
   }
 
-  const handleOnMouseMove = (event) => {
+  const handleOnMouseMove = event => {
     const element = event.target
     if ( element === prevElement ) { return }
 
@@ -537,7 +537,7 @@ const Table = ({ data }) => {
                 <th></th>
                 {cols.map((r, i) => (
                   <th key={i}>
-                    <div onDoubleClick={(event) => handleOnClickHeader(event)}>
+                    <div onDoubleClick={event => handleOnClickHeader(event)}>
                       {utils.columnToLetter(i + 1)}
                     </div>
                   </th>
@@ -564,7 +564,7 @@ const Table = ({ data }) => {
     )
   }
 
-  const handleOnSelectionChange = (newSelection) => {
+  const handleOnSelectionChange = newSelection => {
     selection.current = {...newSelection}
     updateSelections()
   }

@@ -1,4 +1,4 @@
-export const columnToLetter = (column) => {
+export const columnToLetter = column => {
   let temp, letter = ''
   while ( column > 0 ) {
     temp = ( column - 1 ) % 26
@@ -9,7 +9,7 @@ export const columnToLetter = (column) => {
 }
 
 
-export const letterToColumn = (letter) => {
+export const letterToColumn = letter => {
   let column = 0
   const length = letter.length
   let counter = 0
@@ -21,7 +21,7 @@ export const letterToColumn = (letter) => {
 }
 
 
-export const standardizeSelection = (selection) => {
+export const standardizeSelection = selection => {
   let temp
   if ( selection.x2 < selection.x1 ) {
     temp = selection.x1
@@ -121,7 +121,7 @@ export const checkSelectedAnnotationBlocks = (selection, blocks) => {
 }
 
 
-export const humanReadableSelection = (selection) => {
+export const humanReadableSelection = selection => {
   const { x1, y1, x2, y2 } = selection
   let text = ''
   if ( x1 === x2 && y1 === y2 ) {
@@ -135,5 +135,5 @@ export const humanReadableSelection = (selection) => {
       text += `:${columnToLetter(x1)}${y2 <= y1 ? y1 : y2}`
     }
   }
-  return text;
+  return text
 }

@@ -12,7 +12,7 @@ import Brightness7Icon from '@material-ui/icons/Brightness7'
 import { makeStyles } from '@material-ui/core/styles'
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const Header = (props) => {
+const Header = props => {
   const classes = useStyles()
 
   return (

@@ -1,4 +1,4 @@
-export default function uploadFile(file, onProgress) {
+const uploadFile = (file, onProgress) => {
   const url = ''
 
   return new Promise((resolve, reject) => {
@@ -14,9 +14,9 @@ export default function uploadFile(file, onProgress) {
       }
     }
 
-    xhr.onerror = (event) => reject(event)
+    xhr.onerror = event => reject(event)
 
-    xhr.upload.onprogress = (event) => {
+    xhr.upload.onprogress = event => {
       if ( event.lengthComputable ) {
         const percentage = (event.loaded / event.total) * 100
         onProgress(Math.round(percentage))
@@ -28,3 +28,6 @@ export default function uploadFile(file, onProgress) {
     xhr.send(formData)
   })
 }
+
+
+export default uploadFile

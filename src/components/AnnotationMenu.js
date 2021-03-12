@@ -20,7 +20,7 @@ import { ROLES, TYPES } from '../content/annotation-options'
 import * as utils from '../utils/table'
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   form: {
     width: '100%',
     marginTop: theme.spacing(1),
@@ -49,7 +49,7 @@ const AnnotationMenu = ({
     selectedUnit: '',
   })
 
-  const handleOnSubmit = (event) => {
+  const handleOnSubmit = event => {
     event.preventDefault()
     hideMenu()
   }
@@ -67,7 +67,7 @@ const AnnotationMenu = ({
     }
   }
 
-  const handleOnChange = (event) => {
+  const handleOnChange = event => {
     const value = event.target.value
     setFormState({
       ...formState,
@@ -113,7 +113,7 @@ const AnnotationMenu = ({
           variant="outlined"
           value={formState.selectedRole}
           onChange={handleOnChange}>
-          {ROLES.map((option) => (
+          {ROLES.map(option => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
             </MenuItem>
@@ -141,7 +141,7 @@ const AnnotationMenu = ({
             value={formState.selectedType}
             disabled={!ROLE.children.length}
             onChange={handleOnChange}>
-            {ROLE.children.map((option) => (
+            {ROLE.children.map(option => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
@@ -158,7 +158,7 @@ const AnnotationMenu = ({
         option.value === formState.selectedType
       ))
       if ( !TYPE || !TYPE.children ) { return }
-      return TYPE.children.map((option) => (
+      return TYPE.children.map(option => (
         <Grid item xs={12} key={option.value}>
           <TextField
             fullWidth

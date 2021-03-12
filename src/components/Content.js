@@ -15,7 +15,7 @@ const Content = () => {
       {data ? (
         <Table data={data} />
       ) : (
-        <FileDrop onSuccess={(data) => setData(data)} />
+        <FileDrop onSuccess={data => setData(data)} />
       )}
     </Grid>
   )

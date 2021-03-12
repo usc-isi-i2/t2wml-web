@@ -9,7 +9,7 @@ import FileUpload from './FileUpload'
 import UploadIcon from '../icons/Upload'
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   dropzone: {
     display: 'flex',
     flexGrow: '1',

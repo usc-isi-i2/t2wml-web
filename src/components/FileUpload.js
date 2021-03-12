@@ -12,7 +12,7 @@ const FileUpload = ({file, onUpload, onDelete}) => {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    uploadFile(file, setProgress).then((data) => {
+    uploadFile(file, setProgress).then(data => {
       onUpload(data)
     }).catch(() => {
       readFile(file).then(data => {

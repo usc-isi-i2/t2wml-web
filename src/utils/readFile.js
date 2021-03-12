@@ -1,4 +1,4 @@
-export default function readFile(file) {
+const readFile = file => {
 
   const reader = new FileReader()
 
@@ -7,7 +7,7 @@ export default function readFile(file) {
       reject(reader.error)
     }
 
-    reader.onload = (file) => {
+    reader.onload = file => {
       const data = []
       const rows = file.target.result.split(/[\r\n|\n]+/)
       rows.forEach(row => data.push(row.split(',')))
@@ -17,3 +17,6 @@ export default function readFile(file) {
     reader.readAsBinaryString(file)
   })
 }
+
+
+export default readFile
