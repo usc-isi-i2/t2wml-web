@@ -38,9 +38,9 @@ const AnnotationMenu = ({
   const classes = useStyles()
 
   const [formState, setFormState] = React.useState({
-    selectedArea: null,
-    selectedRole: null,
-    selectedType: null,
+    selectedArea: '',
+    selectedRole: '',
+    selectedType: '',
   })
 
   const handleOnSubmit = (event) => {
