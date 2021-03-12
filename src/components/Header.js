@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
   AppBar,
   IconButton,
+  Popover,
   Toolbar,
   Typography,
 } from '@material-ui/core'
@@ -23,11 +24,27 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     userSelect: 'none',
   },
+  popover: {
+    pointerEvents: 'none',
+  },
+  paper: {
+    padding: theme.spacing(1),
+  },
 }))
 
 
 const Header = props => {
   const classes = useStyles()
+
+  const [anchorElement, setAnchorElement] = useState(null)
+
+  const handlePopoverOpen = event => {
+    setAnchorElement(event.currentTarget)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorElement(null)
+  }
 
   return (
     <AppBar position="static">
@@ -46,9 +63,31 @@ const Header = props => {
           edge="end"
           color="inherit"
           onClick={() => props.switchTheme()}
+          onMouseEnter={handlePopoverOpen}
+          onMouseLeave={handlePopoverClose}
           aria-label="account of current user">
           {props.darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
+        <Popover
+          id="mouse-over-popover"
+          className={classes.popover}
+          classes={{
+            paper: classes.paper,
+          }}
+          open={!!anchorElement}
+          anchorEl={anchorElement}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: -10,
+            horizontal: 'center',
+          }}
+          onClose={handlePopoverClose}
+          disableRestoreFocus>
+          <Typography variant="body2">toggle light/dark theme</Typography>
+        </Popover>
       </Toolbar>
     </AppBar>
   )
