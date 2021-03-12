@@ -565,6 +565,9 @@ const Table = ({ data }) => {
 
       // Update reference to the previous element
       prevElement.current = element
+
+      // Update selections
+      updateSelections()
     }
   }
 
