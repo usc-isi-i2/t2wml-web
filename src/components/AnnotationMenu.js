@@ -86,9 +86,8 @@ const AnnotationMenu = ({
           label="Selected area"
           variant="outlined"
           onChange={handleOnChange}
-          defaultValue={defaultValue}
-          value={formState.selectedArea}
-          error={formState.selectedArea && !parsedCorrectly}
+          value={formState.selectedArea || defaultValue}
+          error={!!formState.selectedArea && !parsedCorrectly}
           helperText={formState.selectedArea && !parsedCorrectly ? (
             'accepted format: [col][row]:[col][row]'
           ) : ''} />
@@ -106,7 +105,6 @@ const AnnotationMenu = ({
           id="selectedRole"
           name="selectedRole"
           variant="outlined"
-          defaultValue={'Role'}
           value={formState.selectedRole}
           onChange={handleOnChange}>
           {ROLES.map((option) => (
@@ -129,7 +127,6 @@ const AnnotationMenu = ({
           id="selectedType"
           name="selectedType"
           variant="outlined"
-          defaultValue={'Type'}
           value={formState.selectedType}
           onChange={handleOnChange}>
           {ROLES.map((option) => (
