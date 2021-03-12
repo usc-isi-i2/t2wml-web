@@ -87,7 +87,7 @@ const App = () => {
           '& .MuiDialog-container .MuiPaper-root': {
             border: darkTheme ? '1px solid #fefefe' : '1px solid #777',
             pointerEvents: 'all',
-            height: '300px',
+            maxHeight: '750px',
             width: '500px',
             outline: 'none',
             '& .MuiDialogTitle-root': {
