@@ -24,12 +24,6 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     userSelect: 'none',
   },
-  popover: {
-    pointerEvents: 'none',
-  },
-  paper: {
-    padding: theme.spacing(1),
-  },
 }))
 
 
@@ -70,10 +64,6 @@ const Header = props => {
         </IconButton>
         <Popover
           id="mouse-over-popover"
-          className={classes.popover}
-          classes={{
-            paper: classes.paper,
-          }}
           open={!!anchorElement}
           anchorEl={anchorElement}
           anchorOrigin={{

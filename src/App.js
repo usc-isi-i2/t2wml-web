@@ -118,6 +118,14 @@ const App = () => {
           paddingBottom: defaultTheme.spacing(2),
         },
       },
+      MuiPopover: {
+        root: {
+          pointerEvents: 'none',
+        },
+        paper: {
+          padding: defaultTheme.spacing(1),
+        },
+      },
     },
     props: {
       MuiButton: {
