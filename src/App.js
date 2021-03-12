@@ -25,7 +25,7 @@ const styles = theme => ({
 
 const App = () => {
 
-  const [darkTheme, setDarkTheme] = useState(true)
+  const [darkTheme, setDarkTheme] = useState(false)
 
   const defaultTheme = createMuiTheme()
 
