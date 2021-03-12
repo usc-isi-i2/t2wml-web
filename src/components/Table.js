@@ -203,8 +203,8 @@ const Table = ({ data }) => {
   const classes = useStyles()
 
   const selection = useRef(null)
+  const prevElement = useRef(null)
   const tableElement = useRef(null)
-  const [prevElement, setPrevElement] = useState(null)
   const [userSelecting, setUserSelecting] = useState(false)
   const [showAnnotationMenu, setShowAnnotationMenu] = useState(false)
   const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
@@ -270,28 +270,28 @@ const Table = ({ data }) => {
       if ( event.code === 'ArrowUp' && y1 > 1 ) {
         selection.current = {'x1': x1, 'x2': x1, 'y1': y1 - 1, 'y2': y1 - 1}
         const nextElement = rows[y1 - 1].children[x1]
-        setPrevElement(nextElement)
+        prevElement.current = nextElement
       }
 
       // arrow down
       if ( event.code === 'ArrowDown' && y1 < rows.length - 1 ) {
         selection.current = {'x1': x1, 'x2': x1, 'y1': y1 + 1, 'y2': y1 + 1}
         const nextElement = rows[y1 + 1].children[x1]
-        setPrevElement(nextElement)
+        prevElement.current = nextElement
       }
 
       // arrow left
       if ( event.code === 'ArrowLeft' && x1 > 1 ) {
         selection.current = {'x1': x1 - 1, 'x2': x1 - 1, 'y1': y1, 'y2': y1}
         const nextElement = rows[y1].children[x1 - 1]
-        setPrevElement(nextElement)
+        prevElement.current = nextElement
       }
 
       // arrow right
       if (event.code === 'ArrowRight' && x1 < rows[y1].children.length - 1) {
         selection.current = {'x1': x1 + 1, 'x2': x1 + 1, 'y1': y1, 'y2': y1}
         const nextElement = rows[y1].children[x1 + 1]
-        setPrevElement(nextElement)
+        prevElement.current = nextElement
       }
     }
   }
@@ -465,7 +465,7 @@ const Table = ({ data }) => {
 
     // Allow users to select the resize-corner of the cell
     if ( element.className === 'cell-resize-corner' ) {
-      setPrevElement(element.parentElement)
+      prevElement.current = element.parentElement
       setUserSelecting(true)
       return
     } else if ( element.nodeName !== 'TD' ) { return }
@@ -532,12 +532,12 @@ const Table = ({ data }) => {
     }
 
     // Initialize the previous element with the one selected
-    setPrevElement(element)
+    prevElement.current = element
   }
 
   const handleOnMouseMove = event => {
     const element = event.target
-    if ( element === prevElement ) { return }
+    if ( element === prevElement.current ) { return }
 
     // Don't allow out-of-bounds resizing
     if ( element.nodeName !== 'TD' ) { return }
@@ -550,10 +550,10 @@ const Table = ({ data }) => {
       const newRowIndex = element.parentElement.rowIndex
       selection.current = {...selection.current, x2: newCellIndex, y2: newRowIndex}
 
-      if ( prevElement.nodeName === 'TD' ) {
+      if ( prevElement.current.nodeName === 'TD' ) {
         if ( selectedAnnotationBlock ) {
-          const oldCellIndex = prevElement.cellIndex
-          const oldRowIndex = prevElement.parentElement.rowIndex
+          const oldCellIndex = prevElement.current.cellIndex
+          const oldRowIndex = prevElement.current.parentElement.rowIndex
           if ( newCellIndex <= oldCellIndex || newRowIndex <= oldRowIndex ) {
             resetEmptyCells(oldCellIndex, newCellIndex, oldRowIndex, newRowIndex)
           }
@@ -561,7 +561,7 @@ const Table = ({ data }) => {
       }
 
       // Update reference to the previous element
-      setPrevElement(element)
+      prevElement.current = element
     }
   }
 
