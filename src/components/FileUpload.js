@@ -12,13 +12,21 @@ const FileUpload = ({file, onUpload, onDelete}) => {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
+    let isMounted = true
     uploadFile(file, setProgress).then(data => {
-      onUpload(data)
-    }).catch(() => {
-      readFile(file).then(data => {
+      if ( isMounted ) {
         onUpload(data)
-      })
+      }
+    }).catch(() => {
+      if ( isMounted ) {
+        readFile(file).then(data => {
+          onUpload(data)
+        })
+      }
     })
+    return () => {
+      isMounted = false
+    }
   }, [file, onUpload])
 
   return (
