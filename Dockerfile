@@ -12,9 +12,10 @@ COPY package.json /app
 COPY package-lock.json /app
 RUN npm install --silent
 RUN npm install react-scripts@3.4.1 -g --silent
+RUN npm install serve@11.3.2 -g --silent
 
 # add app
 COPY . ./
 
-# start app
-CMD ["npm", "start"]
+# build app
+CMD ["npm", "run", "build"]
