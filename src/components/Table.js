@@ -248,6 +248,52 @@ const Table = ({ data }) => {
     if ( event.code === 'Escape' ) {
       hideAnnotationMenu()
     }
+
+    const arrowKeyCodes = [
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight',
+    ]
+    if ( arrowKeyCodes.includes(event.code) && selection.current ) {
+
+      // Don't allow moving around when users are typing
+      if ( (event.target).nodeName === 'INPUT' ) { return }
+
+      // Prevent scroll with arrow keys
+      event.preventDefault()
+
+      const { x1, x2, y1, y2 } = selection.current
+      const rows = tableElement.current.querySelectorAll('tr')
+
+      // arrow up
+      if ( event.code === 'ArrowUp' && y1 > 1 ) {
+        selection.current = {'x1': x1, 'x2': x1, 'y1': y1 - 1, 'y2': y1 - 1}
+        const nextElement = rows[y1 - 1].children[x1]
+        setPrevElement(nextElement)
+      }
+
+      // arrow down
+      if ( event.code === 'ArrowDown' && y1 < rows.length - 1 ) {
+        selection.current = {'x1': x1, 'x2': x1, 'y1': y1 + 1, 'y2': y1 + 1}
+        const nextElement = rows[y1 + 1].children[x1]
+        setPrevElement(nextElement)
+      }
+
+      // arrow left
+      if ( event.code === 'ArrowLeft' && x1 > 1 ) {
+        selection.current = {'x1': x1 - 1, 'x2': x1 - 1, 'y1': y1, 'y2': y1}
+        const nextElement = rows[y1].children[x1 - 1]
+        setPrevElement(nextElement)
+      }
+
+      // arrow right
+      if (event.code === 'ArrowRight' && x1 < rows[y1].children.length - 1) {
+        selection.current = {'x1': x1 + 1, 'x2': x1 + 1, 'y1': y1, 'y2': y1}
+        const nextElement = rows[y1].children[x1 + 1]
+        setPrevElement(nextElement)
+      }
+    }
   }
 
   const resetSelection = () => {
