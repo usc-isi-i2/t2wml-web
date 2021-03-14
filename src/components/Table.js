@@ -203,6 +203,7 @@ const Table = ({ data }) => {
   const classes = useStyles()
 
   const selection = useRef(null)
+  const timeoutID = useRef(null)
   const prevElement = useRef(null)
   const tableElement = useRef(null)
   const prevDirection = useRef(null)
@@ -233,11 +234,13 @@ const Table = ({ data }) => {
   useEffect(() => {
     // component did mount
     document.addEventListener('keydown', handleOnKeyDown)
+    document.addEventListener('keyup', handleOnKeyUp)
     document.addEventListener('mouseup', handleOnMouseUp)
 
     // component will unmount
     return () => {
       document.removeEventListener('keydown', handleOnKeyDown)
+      document.removeEventListener('keyup', handleOnKeyUp)
       document.removeEventListener('mouseup', handleOnMouseUp)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -359,6 +362,13 @@ const Table = ({ data }) => {
       // Update Selections
       updateSelections()
     }
+  }
+
+  const handleOnKeyUp = () => {
+    clearTimeout(timeoutID.current)
+    timeoutID.current = setTimeout(() => {
+      setShowAnnotationMenu(true)
+    }, 350)
   }
 
   const resetSelection = () => {
