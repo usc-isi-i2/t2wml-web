@@ -528,6 +528,7 @@ const Table = ({ data }) => {
     // Allow users to select the resize-corner of the cell
     if ( element.className === 'cell-resize-corner' ) {
       prevElement.current = element.parentElement
+      setShowAnnotationMenu(false)
       setUserSelecting(true)
       return
     } else if ( element.nodeName !== 'TD' ) { return }
