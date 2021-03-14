@@ -264,6 +264,9 @@ const Table = ({ data }) => {
       // Prevent scroll with arrow keys
       event.preventDefault()
 
+      // Hide annotation menu when moving
+      setShowAnnotationMenu(false)
+
       const { x1, x2, y1, y2 } = selection.current
       const rows = tableElement.current.querySelectorAll('tr')
 
