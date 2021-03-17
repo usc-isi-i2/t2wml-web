@@ -17,6 +17,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import Draggable from 'react-draggable'
 
 import { ROLES, TYPES } from '../content/annotation-options'
+import uploadAnnotation from '../utils/uploadAnnotation'
 import * as utils from '../utils/table'
 
 
@@ -29,6 +30,8 @@ const useStyles = makeStyles(theme => ({
 
 
 const AnnotationMenu = ({
+  file,
+  sheet,
   selection,
   openMenu,
   hideMenu,
@@ -51,7 +54,26 @@ const AnnotationMenu = ({
 
   const handleOnSubmit = event => {
     event.preventDefault()
-    hideMenu()
+
+    const annotation = {
+      selection: {...selection},
+      role: formState.selectedRole,
+      type: formState.selectedType,
+      property: formState.selectedProperty,
+      language: formState.selectedLanguage,
+      precision: formState.selectedPrecision,
+      calendar: formState.selectedCalendar,
+      format: formState.selectedFormat,
+      unit: formState.selectedUnit,
+    }
+
+    uploadAnnotation(file, sheet, annotation, () => {}).then(data => {
+      console.log('annotation upload done', data)
+      hideMenu()
+    }).catch(error => {
+      console.log('error sending annotation', error)
+      hideMenu()
+    })
   }
 
   const parseSelectedAreaInput = value => {
