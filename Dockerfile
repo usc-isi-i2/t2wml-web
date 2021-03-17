@@ -1,8 +1,12 @@
 # pull official base image
 FROM node:13.12.0-alpine
 
-# copy everything over
-COPY . ./app
+# create app directory
+RUN mkdir /app
+
+# copy the source over
+ADD src /app/src
+ADD public /app/public
 
 # set working directory
 WORKDIR /app
