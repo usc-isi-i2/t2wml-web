@@ -63,7 +63,7 @@ const Header = props => {
           {props.darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
         <Popover
-          id="mouse-over-popover"
+          className="tooltip"
           open={!!anchorElement}
           anchorEl={anchorElement}
           anchorOrigin={{
