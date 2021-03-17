@@ -27,7 +27,8 @@ const FileUpload = ({file, onUpload, onDelete}) => {
     return () => {
       isMounted = false
     }
-  }, [file, onUpload])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [file])
 
   return (
     <Grid item>
