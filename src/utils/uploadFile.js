@@ -1,5 +1,5 @@
 const uploadFile = (file, onProgress) => {
-  const url = ''
+  const url = '/api/upload/data?project_folder=/proj'
 
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
