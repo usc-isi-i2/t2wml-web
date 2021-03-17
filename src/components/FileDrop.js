@@ -80,6 +80,7 @@ const FileDrop = ({onSuccess}) => {
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     ],
     maxSize: 5000 * 1024, // 5MB
+    maxFiles: 1,
   })
 
   function onUpload(data) {
