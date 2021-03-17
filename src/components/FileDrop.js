@@ -89,7 +89,7 @@ const FileDrop = ({onSuccess}) => {
   return (
     <React.Fragment>
       {errors.map((error, index) => (
-        <Grid item key={index}>
+        <Grid key={index} style={{ margin: 20 }}>
           <Alert variant="outlined" severity="error">
             {error}
           </Alert>
