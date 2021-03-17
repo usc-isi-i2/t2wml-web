@@ -74,7 +74,11 @@ const FileDrop = ({onSuccess}) => {
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({
     onDrop,
-    accept: ['.csv'],
+    accept: [
+      '.csv',
+      'application/vnd.ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    ],
     maxSize: 5000 * 1024, // 5MB
   })
 
