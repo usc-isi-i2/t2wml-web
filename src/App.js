@@ -45,6 +45,11 @@ const App = () => {
       borderRadius: '0',
     },
     overrides: {
+      MuiAlert: {
+        message: {
+          color: '#f44336',
+        },
+      },
       MuiButton: {
         containedPrimary: {
           color: darkTheme ? '#fefefe' : '#4D4D4D',
