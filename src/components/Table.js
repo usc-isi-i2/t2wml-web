@@ -198,7 +198,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const Table = ({ data }) => {
+const Table = ({ file, sheet, data }) => {
 
   const classes = useStyles()
 
@@ -700,6 +700,8 @@ const Table = ({ data }) => {
     if ( !selection.current ) { return }
     return (
       <AnnotationMenu
+        file={file}
+        sheet={sheet}
         selection={selection.current}
         onSelectionChange={handleOnSelectionChange}
         openMenu={showAnnotationMenu}

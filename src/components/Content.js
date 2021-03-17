@@ -13,7 +13,10 @@ const Content = () => {
   return (
     <Grid>
       {data ? (
-        <Table data={data} />
+        <Table
+          file={data.filepath}
+          sheet={data.sheetName}
+          data={data.table.cells} />
       ) : (
         <FileDrop onSuccess={data => setData(data)} />
       )}
