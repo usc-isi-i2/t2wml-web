@@ -670,7 +670,6 @@ const Table = ({ file, sheet, data }) => {
       if ( selectedBlock !== selectedAnnotationBlock ) {
         setSelectedAnnotationBlock(selectedBlock)
         selection.current = selectedBlock.selection
-        updateSelections()
       }
 
       return
