@@ -732,8 +732,16 @@ const Table = ({ file, sheet, data }) => {
       // Update the last x and y coordinates of the selection
       const newCellIndex = element.cellIndex
       const newRowIndex = element.parentElement.rowIndex
-      selection.current = {...selection.current, x2: newCellIndex, y2: newRowIndex}
+      selection.current = {
+        ...selection.current,
+        x2: newCellIndex,
+        y2: newRowIndex,
+      }
 
+      // Update Selections
+      updateSelections()
+
+      // Update selected annotation block area when resizing
       if ( prevElement.current.nodeName === 'TD' ) {
         if ( selectedAnnotationBlock ) {
           const oldCellIndex = prevElement.current.cellIndex
@@ -746,9 +754,6 @@ const Table = ({ file, sheet, data }) => {
 
       // Update reference to the previous element
       prevElement.current = element
-
-      // Update selections
-      updateSelections()
     }
   }
 
