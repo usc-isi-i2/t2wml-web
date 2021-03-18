@@ -32,13 +32,13 @@ const useStyles = makeStyles(theme => ({
       transition: 'all 500ms ease',
     },
     '&.active': {
-      outlineColor: 'chartreuse',
+      outlineColor: 'limegreen',
       outlineOffset: '-3em',
       outlineWidth: '0.6em',
     },
     '&.active > svg': {
       opacity: '0.75',
-      fill: 'chartreuse',
+      fill: 'limegreen',
     },
   },
 }))
