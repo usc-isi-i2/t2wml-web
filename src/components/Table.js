@@ -120,6 +120,7 @@ const useStyles = makeStyles(theme => ({
         zIndex: '1',
         '&.role-mainSubject': {
           background: '#D9EAF2',
+          color: '#006699',
         },
         '&.role-dependentVar': {
           background:'#D9F2E6',
