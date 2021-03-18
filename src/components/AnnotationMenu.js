@@ -68,10 +68,8 @@ const AnnotationMenu = ({
     }
 
     uploadAnnotation(file, sheet, annotation, () => {}).then(data => {
-      console.log('annotation upload done', data)
-      hideMenu()
+      hideMenu(data.annotations)
     }).catch(error => {
-      console.log('error sending annotation', error)
       hideMenu()
     })
   }
