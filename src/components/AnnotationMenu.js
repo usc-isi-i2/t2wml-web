@@ -272,6 +272,7 @@ const AnnotationMenu = ({
           autoFocus
           color="primary"
           variant="contained"
+          disabled={(!formState.selectedRole && !selectedAnnotation) || (!!selectedAnnotation && !selectedAnnotation.role)}
           onClick={handleOnSubmit}>
           Submit
         </Button>
