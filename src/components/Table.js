@@ -124,18 +124,23 @@ const useStyles = makeStyles(theme => ({
         },
         '&.role-dependentVar': {
           background:'#D9F2E6',
+          color: '#111',
         },
         '&.role-qualifier': {
           background:'#DDD9F2',
+          color: '#111',
         },
         '&.role-property': {
           background: '#fbe5ce',
+          color: '#111',
         },
         '&.role-metadata': {
           background: '#d8dfe7',
+          color: '#111',
         },
         '&.role-unit': {
           background: '#fff2ce',
+          color: '#111',
         },
         '& div.cell-border-top': {
           display: 'block',
