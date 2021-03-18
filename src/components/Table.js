@@ -482,6 +482,11 @@ const Table = ({ file, sheet, data }) => {
 
   const resetSelection = () => {
     tableElement.current.classList.remove('active')
+    tableElement.current.querySelectorAll('.active .cell-border-top').forEach(e => e.remove())
+    tableElement.current.querySelectorAll('.active .cell-border-left').forEach(e => e.remove())
+    tableElement.current.querySelectorAll('.active .cell-border-right').forEach(e => e.remove())
+    tableElement.current.querySelectorAll('.active .cell-border-bottom').forEach(e => e.remove())
+    tableElement.current.querySelectorAll('.active .cell-resize-corner').forEach(e => e.remove())
     tableElement.current.querySelectorAll('td[class*="active"]').forEach(e => {
       e.classList.forEach(className => {
         if (className.startsWith('active')) {
@@ -489,11 +494,6 @@ const Table = ({ file, sheet, data }) => {
         }
       })
     })
-    tableElement.current.querySelectorAll('.cell-border-top').forEach(e => e.remove())
-    tableElement.current.querySelectorAll('.cell-border-left').forEach(e => e.remove())
-    tableElement.current.querySelectorAll('.cell-border-right').forEach(e => e.remove())
-    tableElement.current.querySelectorAll('.cell-border-bottom').forEach(e => e.remove())
-    tableElement.current.querySelectorAll('.cell-resize-corner').forEach(e => e.remove())
   }
 
   const resetEmptyCells = (x1, x2, y1, y2) => {
