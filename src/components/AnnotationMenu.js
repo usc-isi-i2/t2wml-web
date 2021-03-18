@@ -34,6 +34,7 @@ const AnnotationMenu = ({
   sheet,
   selection,
   annotations,
+  selectedAnnotation,
   openMenu,
   hideMenu,
   onSelectionChange,
@@ -56,7 +57,10 @@ const AnnotationMenu = ({
   const handleOnSubmit = event => {
     event.preventDefault()
 
-    annotations.push({
+    const filteredAnnotations = annotations.filter(
+      annotation => annotation !== selectedAnnotation
+    )
+    filteredAnnotations.push({
       selection: {...selection},
       role: formState.selectedRole,
       type: formState.selectedType,
@@ -68,7 +72,7 @@ const AnnotationMenu = ({
       unit: formState.selectedUnit,
     })
 
-    uploadAnnotations(file, sheet, annotations, () => {}).then(data => {
+    uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
       hideMenu(data.annotations)
     }).catch(error => {
       hideMenu()

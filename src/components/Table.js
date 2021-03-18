@@ -864,6 +864,7 @@ const Table = ({ file, sheet, data }) => {
         sheet={sheet}
         selection={selection.current}
         annotations={annotationBlocks}
+        selectedAnnotation={selectedAnnotationBlock}
         onSelectionChange={handleOnSelectionChange}
         openMenu={showAnnotationMenu}
         hideMenu={hideAnnotationMenu} />
