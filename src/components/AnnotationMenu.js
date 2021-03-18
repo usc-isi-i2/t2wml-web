@@ -57,6 +57,8 @@ const AnnotationMenu = ({
   const handleOnSubmit = event => {
     event.preventDefault()
 
+    if ( ( !formState.selectedRole && !selectedAnnotation ) || ( !!selectedAnnotation && !selectedAnnotation.role ) ) { return }
+
     const filteredAnnotations = annotations.filter(
       annotation => annotation !== selectedAnnotation
     )
