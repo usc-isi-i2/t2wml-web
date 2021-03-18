@@ -118,6 +118,24 @@ const useStyles = makeStyles(theme => ({
         maxWidth: '75px',
         width: '75px',
         zIndex: '1',
+        '&.role-mainSubject': {
+          background: '#D9EAF2',
+        },
+        '&.role-dependentVar': {
+          background:'#D9F2E6',
+        },
+        '&.role-qualifier': {
+          background:'#DDD9F2',
+        },
+        '&.role-property': {
+          background: '#fbe5ce',
+        },
+        '&.role-metadata': {
+          background: '#d8dfe7',
+        },
+        '&.role-unit': {
+          background: '#fff2ce',
+        },
         '& div.cell-border-top': {
           display: 'block',
           position: 'absolute',
@@ -131,6 +149,24 @@ const useStyles = makeStyles(theme => ({
         },
         '&.active div.cell-border-top': {
           height: '2px',
+        },
+        '&.role-mainSubject div.cell-border-top': {
+          background:'#499bc1',
+        },
+        '&.role-dependentVar div.cell-border-top': {
+          background:'#3bab75',
+        },
+        '&.role-qualifier div.cell-border-top': {
+          background:'#8867cb',
+        },
+        '&.role-property div.cell-border-top': {
+          background:'#f1a655',
+        },
+        '&.role-metadata div.cell-border-top': {
+          background:'#556e8b',
+        },
+        '&.role-unit div.cell-border-top': {
+          background:'#ffca38',
         },
         '& div.cell-border-left': {
           display: 'block',
@@ -146,6 +182,24 @@ const useStyles = makeStyles(theme => ({
         '&.active div.cell-border-left': {
           width: '2px',
         },
+        '&.role-mainSubject div.cell-border-left': {
+          background:'#499bc1',
+        },
+        '&.role-dependentVar div.cell-border-left': {
+          background:'#3bab75',
+        },
+        '&.role-qualifier div.cell-border-left': {
+          background:'#8867cb',
+        },
+        '&.role-property div.cell-border-left': {
+          background:'#f1a655',
+        },
+        '&.role-metadata div.cell-border-left': {
+          background:'#556e8b',
+        },
+        '&.role-unit div.cell-border-left': {
+          background:'#ffca38',
+        },
         '& div.cell-border-right': {
           display: 'block',
           position: 'absolute',
@@ -159,6 +213,24 @@ const useStyles = makeStyles(theme => ({
         },
         '&.active div.cell-border-right': {
           width: '2px',
+        },
+        '&.role-mainSubject div.cell-border-right': {
+          background:'#499bc1',
+        },
+        '&.role-dependentVar div.cell-border-right': {
+          background:'#3bab75',
+        },
+        '&.role-qualifier div.cell-border-right': {
+          background:'#8867cb',
+        },
+        '&.role-property div.cell-border-right': {
+          background:'#f1a655',
+        },
+        '&.role-metadata div.cell-border-right': {
+          background:'#556e8b',
+        },
+        '&.role-unit div.cell-border-right': {
+          background:'#ffca38',
         },
         '& div.cell-border-bottom': {
           display: 'block',
@@ -174,6 +246,24 @@ const useStyles = makeStyles(theme => ({
         '&.active div.cell-border-bottom': {
           height: '2px',
         },
+        '&.role-mainSubject div.cell-border-bottom': {
+          background:'#499bc1',
+        },
+        '&.role-dependentVar div.cell-border-bottom': {
+          background:'#3bab75',
+        },
+        '&.role-qualifier div.cell-border-bottom': {
+          background:'#8867cb',
+        },
+        '&.role-property div.cell-border-bottom': {
+          background:'#f1a655',
+        },
+        '&.role-metadata div.cell-border-bottom': {
+          background:'#556e8b',
+        },
+        '&.role-unit div.cell-border-bottom': {
+          background:'#ffca38',
+        },
         '& div.cell-resize-corner': {
           display: 'block',
           position: 'absolute',
@@ -185,6 +275,24 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#fefefe' : '#555',
           border: theme.palette.type === 'dark' ? '1px solid #555' : '1px solid #fefefe',
           zIndex: '25',
+        },
+        '&.role-mainSubject div.cell-resize-corner': {
+          background:'#499bc1',
+        },
+        '&.role-dependentVar div.cell-resize-corner': {
+          background:'#3bab75',
+        },
+        '&.role-qualifier div.cell-resize-corner': {
+          background:'#8867cb',
+        },
+        '&.role-property div.cell-resize-corner': {
+          background:'#f1a655',
+        },
+        '&.role-metadata div.cell-resize-corner': {
+          background:'#556e8b',
+        },
+        '&.role-unit div.cell-resize-corner': {
+          background:'#ffca38',
         },
       },
       '&.active tr td': {
