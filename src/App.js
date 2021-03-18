@@ -58,6 +58,10 @@ const App = () => {
             color: darkTheme ? '#333' : '#fff',
             backgroundColor: darkTheme ? '#ddd' : '#7f7f7f',
           },
+          '&.Mui-disabled': {
+            pointerEvents: 'all',
+            cursor: 'not-allowed',
+          },
         },
       },
       MuiFormLabel: {
