@@ -17,7 +17,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import Draggable from 'react-draggable'
 
 import { ROLES, TYPES } from '../content/annotation-options'
-import uploadAnnotation from '../utils/uploadAnnotation'
+import uploadAnnotations from '../utils/uploadAnnotations'
 import * as utils from '../utils/table'
 
 
@@ -33,6 +33,7 @@ const AnnotationMenu = ({
   file,
   sheet,
   selection,
+  annotations,
   openMenu,
   hideMenu,
   onSelectionChange,
@@ -55,7 +56,7 @@ const AnnotationMenu = ({
   const handleOnSubmit = event => {
     event.preventDefault()
 
-    const annotation = {
+    annotations.push({
       selection: {...selection},
       role: formState.selectedRole,
       type: formState.selectedType,
@@ -65,9 +66,9 @@ const AnnotationMenu = ({
       calendar: formState.selectedCalendar,
       format: formState.selectedFormat,
       unit: formState.selectedUnit,
-    }
+    })
 
-    uploadAnnotation(file, sheet, annotation, () => {}).then(data => {
+    uploadAnnotations(file, sheet, annotations, () => {}).then(data => {
       hideMenu(data.annotations)
     }).catch(error => {
       hideMenu()
