@@ -1,4 +1,4 @@
-const uploadAnnotation = (file, sheet, annotation, onProgress) => {
+const uploadAnnotations = (file, sheet, annotation, onProgress) => {
   let url = '/api/annotation?project_folder=/proj'
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
@@ -36,4 +36,4 @@ const uploadAnnotation = (file, sheet, annotation, onProgress) => {
 }
 
 
-export default uploadAnnotation
+export default uploadAnnotations
