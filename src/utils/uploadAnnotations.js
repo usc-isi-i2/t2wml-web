@@ -1,4 +1,4 @@
-const uploadAnnotations = (file, sheet, annotation, onProgress) => {
+const uploadAnnotations = (file, sheet, annotations, onProgress) => {
   let url = '/api/annotation?project_folder=/proj'
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
@@ -30,7 +30,7 @@ const uploadAnnotations = (file, sheet, annotation, onProgress) => {
 
     xhr.send(JSON.stringify({
       'title': 'web.annotation',
-      'annotations': [annotation],
+      'annotations': annotations,
     }))
   })
 }
