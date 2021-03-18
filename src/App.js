@@ -68,6 +68,14 @@ const App = () => {
           },
         },
       },
+      MuiLinearProgress: {
+        colorPrimary: {
+          backgroundColor: 'limegreen',
+        },
+        bar1Determinate: {
+          backgroundColor: 'darkgreen',
+        },
+      },
       MuiOutlinedInput: {
         root: {
           '& fieldset': {
