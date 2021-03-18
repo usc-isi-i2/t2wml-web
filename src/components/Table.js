@@ -645,6 +645,51 @@ const Table = ({ file, sheet, data }) => {
     }
   }
 
+  useEffect(() => {
+    updateAnnotationBlocks()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [annotationBlocks])
+
+  const updateAnnotationBlocks = () => {
+    for ( const block of annotationBlocks ) {
+      const { role, type, selection } = block
+
+      const classNames = []
+      if ( role ) {
+        classNames.push(`role-${role}`)
+      }
+      if ( type ) {
+        classNames.push(`type-${type}`)
+      }
+
+      const rows = tableElement.current.querySelectorAll('tr')
+      const { x1, y1, x2, y2 } = selection
+      const leftCol = Math.min(x1, x2)
+      const rightCol = Math.max(x1, x2)
+      const topRow = Math.min(y1, y2)
+      const bottomRow = Math.max(y1, y2)
+      let rowIndex = topRow
+      while ( rowIndex <= bottomRow ) {
+        let colIndex = leftCol
+        const row = rows[rowIndex]
+        while ( row && colIndex <= rightCol ) {
+          selectCell(
+            row.children[colIndex],
+            rowIndex,
+            colIndex,
+            topRow,
+            leftCol,
+            rightCol,
+            bottomRow,
+            classNames,
+          )
+          colIndex += 1
+        }
+        rowIndex += 1
+      }
+    }
+  }
+
   const hideAnnotationMenu = (annotations) => {
     if ( annotations ) {
       setAnnotationBlocks(annotations)
