@@ -691,14 +691,14 @@ const Table = ({ file, sheet, data }) => {
   }
 
   const hideAnnotationMenu = (annotations) => {
-    if ( annotations ) {
-      setAnnotationBlocks(annotations)
-    }
-
     setShowAnnotationMenu(false)
     setSelectedAnnotationBlock(undefined)
     selection.current = null
     resetSelection()
+
+    if ( annotations && annotations instanceof Array ) {
+      setAnnotationBlocks(annotations)
+    }
   }
 
   const renderTable = () => {
