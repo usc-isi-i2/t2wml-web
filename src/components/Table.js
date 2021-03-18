@@ -208,6 +208,7 @@ const Table = ({ file, sheet, data }) => {
   const tableElement = useRef(null)
   const prevDirection = useRef(null)
   const [userSelecting, setUserSelecting] = useState(false)
+  const [annotationBlocks, setAnnotationBlocks] = useState([])
   const [showAnnotationMenu, setShowAnnotationMenu] = useState(false)
   const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
 
@@ -644,12 +645,15 @@ const Table = ({ file, sheet, data }) => {
     }
   }
 
-  const hideAnnotationMenu = () => {
+  const hideAnnotationMenu = (annotations) => {
+    if ( annotations ) {
+      setAnnotationBlocks(annotations)
+    }
+
     setShowAnnotationMenu(false)
     setSelectedAnnotationBlock(undefined)
     selection.current = null
     resetSelection()
-    //this.updateAnnotationBlocks()
   }
 
   const renderTable = () => {
