@@ -170,8 +170,18 @@ const Table = ({ file, sheet, data }) => {
         }
       }
 
-      // Update Selections
-      updateSelections()
+      // check if the user is selecting an annotation block
+      const selectedBlock = utils.checkSelectedAnnotationBlocks(selection.current, annotationBlocks)
+      if ( selectedBlock ) {
+
+        // Reset annotation menu
+        if ( selectedBlock !== selectedAnnotationBlock ) {
+          setSelectedAnnotationBlock(selectedBlock)
+          selection.current = selectedBlock.selection
+        }
+      } else {
+        updateSelections()
+      }
     }
   }
 
