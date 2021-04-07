@@ -11,22 +11,14 @@ import {
   TextField,
   MenuItem,
 } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
 import CloseIcon from '@material-ui/icons/Close'
 
 import Draggable from 'react-draggable'
 
 import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
+import useStyles from '../styles/annotationMenu'
 import * as utils from '../utils/table'
-
-
-const useStyles = makeStyles(theme => ({
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(1),
-  },
-}))
 
 
 const AnnotationMenu = ({
