@@ -41,7 +41,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://0.0.0.0:13000/",
-  "host": "0.0.0.0",
-  "port": 3000
+  "proxy": "http://0.0.0.0:13000/"
 }
