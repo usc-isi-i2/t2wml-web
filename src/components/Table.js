@@ -17,6 +17,7 @@ const Table = ({ file, sheet, data }) => {
   const prevElement = useRef(null)
   const tableElement = useRef(null)
   const prevDirection = useRef(null)
+
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
   const [showAnnotationMenu, setShowAnnotationMenu] = useState(false)
