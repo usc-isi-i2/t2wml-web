@@ -248,6 +248,7 @@ const AnnotationMenu = ({
     <Dialog
       open={openMenu}
       onClose={hideMenu}
+      classes={{ paper: classes.menu }}
       aria-labelledby='dialog-modal-title'
       PaperProps={{ tabIndex: -1 }}
       TransitionComponent={Draggable}
