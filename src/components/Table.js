@@ -180,6 +180,7 @@ const Table = ({ file, sheet, data }) => {
             selection.current = selectedBlock.selection
           }
         } else {
+          setSelectedAnnotationBlock(undefined)
           updateSelections()
         }
         return annotationBlocks
