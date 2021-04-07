@@ -1,14 +1,7 @@
 import React from 'react'
 import { Button, Grid, Paper } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
 
-
-const useStyles = makeStyles(theme => ({
-  fileHeader: {
-    padding: theme.spacing(3),
-    background: 'rgba(0,0,0,0)',
-  },
-}))
+import useStyles from '../styles/fileHeader'
 
 
 const FileHeader = ({file, onDelete}) => {
