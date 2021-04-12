@@ -70,12 +70,14 @@ const useStyles = makeStyles(theme => ({
       },
       '& thead tr th > div': {
         padding: '0.15em 0.5em',
+        marginRight: '1px',
         width: '75px',
         minWidth: '75px',
         height: '1.25em',
-        resize: 'horizontal',
         overflow: 'hidden',
-        display: 'inline-table',
+        resize: 'horizontal',
+        display: 'inline-block',
+        cursor: 'col-resize',
       },
       '& tr td:nth-child(1)': {
         textAlign: 'center',
