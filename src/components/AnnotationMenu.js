@@ -261,7 +261,7 @@ const AnnotationMenu = ({
           </Button>
         </Grid>
         <Grid item>
-          <Button color="secondary">
+          <Button className={classes.deleteButton} color="secondary">
             DELETE
           </Button>
         </Grid>

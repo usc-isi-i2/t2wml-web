@@ -11,6 +11,12 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     marginTop: theme.spacing(1),
   },
+  deleteButton: {
+    '&:hover': {
+      color: 'red',
+      transition: 'color 300ms ease',
+    },
+  },
 }))
 
 
