@@ -81,7 +81,7 @@ const AnnotationMenu = ({
     )
 
     uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
-      hideMenu(data.annotations)
+      hideMenu(data.annotations, selectedAnnotation)
     }).catch(error => {
       hideMenu()
     })

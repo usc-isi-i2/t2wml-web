@@ -477,6 +477,29 @@ const Table = ({ file, sheet, data }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [annotationBlocks])
 
+  const removeAnnotationBlock = (annotationBlock) => {
+    const rows = tableElement.current.querySelectorAll('tr')
+    const { x1, x2, y1, y2 } = annotationBlock.selection
+    const leftCol = Math.min(x1, x2)
+    const rightCol = Math.max(x1, x2)
+    const topRow = Math.min(y1, y2)
+    const bottomRow = Math.max(y1, y2)
+    let rowIndex = topRow
+    while ( rowIndex <= bottomRow ) {
+      let colIndex = leftCol
+      while ( colIndex <= rightCol ) {
+        const element = rows[rowIndex].children[colIndex]
+        element.classList.forEach(className => {
+          if ( className.startsWith('role-') || className.startsWith('type-') ) {
+            element.classList.remove(className)
+          }
+        })
+        colIndex += 1
+      }
+      rowIndex += 1
+    }
+  }
+
   const removeAnnotationBlocks = () => {
     tableElement.current.querySelectorAll('td[class*="role-"], td[class*="type-"]').forEach(e => {
       e.querySelectorAll(':scope > .cell-border-top').forEach(e => e.remove())
@@ -536,14 +559,20 @@ const Table = ({ file, sheet, data }) => {
     }
   }
 
-  const hideAnnotationMenu = (annotations) => {
+  const hideAnnotationMenu = (annotations, deletedAnnotationBlock=null) => {
+
     setShowAnnotationMenu(false)
     setSelectedAnnotationBlock(undefined)
     selection.current = null
     resetSelection()
 
     if ( annotations && annotations instanceof Array ) {
-      setAnnotationBlocks(annotations)
+      setAnnotationBlocks(annotationBlocks => {
+        if ( deletedAnnotationBlock ) {
+          removeAnnotationBlock(deletedAnnotationBlock)
+        }
+        return annotations
+      })
     }
   }
 
