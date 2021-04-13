@@ -45,12 +45,12 @@ export const TYPES = [{
 
 
 export const ROLES = [{
+  'label': 'Main Subject',
+  'value': 'mainSubject',
+}, {
   'label': 'Dependent Variable',
   'value': 'dependentVar',
   'children': TYPES,
-}, {
-  'label': 'Main Subject',
-  'value': 'mainSubject',
 }, {
   'label': 'Property',
   'value': 'property',
