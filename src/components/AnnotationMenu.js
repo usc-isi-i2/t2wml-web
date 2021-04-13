@@ -261,9 +261,13 @@ const AnnotationMenu = ({
           </Button>
         </Grid>
         <Grid item>
-          <Button className={classes.deleteButton} color="secondary">
-            DELETE
-          </Button>
+          {!!selectedAnnotation && (
+            <Button
+              color="secondary"
+              className={classes.deleteButton}>
+              DELETE
+            </Button>
+          )}
         </Grid>
       </Grid>
     )
