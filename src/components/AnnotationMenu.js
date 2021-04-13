@@ -73,6 +73,20 @@ const AnnotationMenu = ({
     })
   }
 
+  const handleOnDelete = () => {
+    if ( ( !formState.selectedRole && !selectedAnnotation ) || ( !!selectedAnnotation && !selectedAnnotation.role ) ) { return }
+
+    const filteredAnnotations = annotations.filter(
+      annotation => annotation !== selectedAnnotation
+    )
+
+    uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
+      hideMenu(data.annotations)
+    }).catch(error => {
+      hideMenu()
+    })
+  }
+
   const parseSelectedAreaInput = value => {
     const regex = /^.?([a-z]+)([0-9]+):([a-z]+)([0-9]+).?$/gmi
     const groups = regex.exec(value)
@@ -264,6 +278,7 @@ const AnnotationMenu = ({
           {!!selectedAnnotation && (
             <Button
               color="secondary"
+              onClick={handleOnDelete}
               className={classes.deleteButton}>
               DELETE
             </Button>
