@@ -246,17 +246,26 @@ const AnnotationMenu = ({
 
   const renderButtons = () => {
     return (
-      <Button
-        autoFocus
-        color="primary"
-        variant="contained"
-        disabled={
-          (!formState.selectedRole && !selectedAnnotation) ||
-          (!!selectedAnnotation && !selectedAnnotation.role)
-        }
-        onClick={handleOnSubmit}>
-        Submit
-      </Button>
+      <Grid container spacing={3} justify="space-between">
+        <Grid item>
+          <Button
+            autoFocus
+            color="primary"
+            variant="contained"
+            disabled={
+              (!formState.selectedRole && !selectedAnnotation) ||
+              (!!selectedAnnotation && !selectedAnnotation.role)
+            }
+            onClick={handleOnSubmit}>
+            Submit
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button color="secondary">
+            DELETE
+          </Button>
+        </Grid>
+      </Grid>
     )
   }
 
