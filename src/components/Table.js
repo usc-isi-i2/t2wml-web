@@ -478,7 +478,7 @@ const Table = ({ file, sheet, data }) => {
   }, [annotationBlocks])
 
   const removeAnnotationBlocks = () => {
-    tableElement.current.querySelectorAll('td[class*="role-"]').forEach(e => {
+    tableElement.current.querySelectorAll('td[class*="role-"], td[class*="type-"]').forEach(e => {
       e.querySelectorAll(':scope > .cell-border-top').forEach(e => e.remove())
       e.querySelectorAll(':scope > .cell-border-left').forEach(e => e.remove())
       e.querySelectorAll(':scope > .cell-border-right').forEach(e => e.remove())
