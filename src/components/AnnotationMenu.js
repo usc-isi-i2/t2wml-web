@@ -277,7 +277,6 @@ const AnnotationMenu = ({
         <Grid item>
           {!!selectedAnnotation && (
             <Button
-              color="secondary"
               onClick={handleOnDelete}
               className={classes.deleteButton}>
               DELETE
