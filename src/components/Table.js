@@ -289,16 +289,19 @@ const Table = ({ file, sheet, data }) => {
     while ( rowIndex <= bottomRow ) {
       let colIndex = leftCol
       while ( colIndex <= rightCol ) {
-        selectCell(
-          rows[rowIndex].children[colIndex],
-          rowIndex,
-          colIndex,
-          topRow,
-          leftCol,
-          rightCol,
-          bottomRow,
-          classNames,
-        )
+        const cell = rows[rowIndex].children[colIndex]
+        if ( !!cell ) {
+          selectCell(
+            rows[rowIndex].children[colIndex],
+            rowIndex,
+            colIndex,
+            topRow,
+            leftCol,
+            rightCol,
+            bottomRow,
+            classNames,
+          )
+        }
         colIndex += 1
       }
       rowIndex += 1
