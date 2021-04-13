@@ -500,26 +500,7 @@ const Table = ({ file, sheet, data }) => {
     }
   }
 
-  const removeAnnotationBlocks = () => {
-    tableElement.current.querySelectorAll('td[class*="role-"], td[class*="type-"]').forEach(e => {
-      e.querySelectorAll(':scope > .cell-border-top').forEach(e => e.remove())
-      e.querySelectorAll(':scope > .cell-border-left').forEach(e => e.remove())
-      e.querySelectorAll(':scope > .cell-border-right').forEach(e => e.remove())
-      e.querySelectorAll(':scope > .cell-border-bottom').forEach(e => e.remove())
-      e.querySelectorAll(':scope > .cell-resize-corner').forEach(e => e.remove())
-      e.classList.forEach(className => {
-        if ( className.startsWith('role-') || className.startsWith('type-') ) {
-          e.classList.remove(className)
-        }
-      })
-    })
-  }
-
   const updateAnnotationBlocks = () => {
-
-    // remove all annotation blocks prior to updating them
-    removeAnnotationBlocks()
-
     for ( const block of annotationBlocks ) {
       const { role, type, selection } = block
 
