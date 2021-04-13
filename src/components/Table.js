@@ -602,6 +602,9 @@ const Table = ({ file, sheet, data }) => {
   const handleOnSelectionChange = newSelection => {
     selection.current = {...newSelection}
     updateSelections()
+
+    // trigger a re-render of the annotation menu with the updated selection
+    setAnnotationBlocks(annotationBlocks => ([...annotationBlocks]))
   }
 
   const renderAnnotationMenu = () => {
