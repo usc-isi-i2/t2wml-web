@@ -477,9 +477,7 @@ const Table = ({ file, sheet, data }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [annotationBlocks])
 
-  const updateAnnotationBlocks = () => {
-
-    // remove all annotation blocks prior to updating them
+  const removeAnnotationBlocks = () => {
     tableElement.current.querySelectorAll('td[class*="role-"]').forEach(e => {
       e.querySelectorAll(':scope > .cell-border-top').forEach(e => e.remove())
       e.querySelectorAll(':scope > .cell-border-left').forEach(e => e.remove())
@@ -492,6 +490,12 @@ const Table = ({ file, sheet, data }) => {
         }
       })
     })
+  }
+
+  const updateAnnotationBlocks = () => {
+
+    // remove all annotation blocks prior to updating them
+    removeAnnotationBlocks()
 
     for ( const block of annotationBlocks ) {
       const { role, type, selection } = block
