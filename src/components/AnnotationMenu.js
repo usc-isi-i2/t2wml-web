@@ -244,6 +244,22 @@ const AnnotationMenu = ({
     )
   }
 
+  const renderButtons = () => {
+    return (
+      <Button
+        autoFocus
+        color="primary"
+        variant="contained"
+        disabled={
+          (!formState.selectedRole && !selectedAnnotation) ||
+          (!!selectedAnnotation && !selectedAnnotation.role)
+        }
+        onClick={handleOnSubmit}>
+        Submit
+      </Button>
+    )
+  }
+
   return (
     <Dialog
       open={openMenu}
@@ -263,14 +279,7 @@ const AnnotationMenu = ({
         {renderForm()}
       </DialogContent>
       <DialogActions>
-        <Button
-          autoFocus
-          color="primary"
-          variant="contained"
-          disabled={(!formState.selectedRole && !selectedAnnotation) || (!!selectedAnnotation && !selectedAnnotation.role)}
-          onClick={handleOnSubmit}>
-          Submit
-        </Button>
+        {renderButtons()}
       </DialogActions>
     </Dialog>
   )
