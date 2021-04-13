@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   deleteButton: {
     '&:hover': {
       color: 'red',
-      transition: 'color 300ms ease',
+      transition: 'color 150ms ease',
     },
   },
 }))
