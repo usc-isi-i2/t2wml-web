@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/styles'
 
 const useStyles = makeStyles(theme => ({
   tableWrapper: {
-    position: 'relative',
     width: '100%',
-    height: '100%',
+    height: '95vh',
     overflow: 'scroll',
+    position: 'relative',
     '& table': {
       tableLayout: 'fixed',
       transform:'rotateX(0deg)',
