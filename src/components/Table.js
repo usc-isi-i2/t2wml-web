@@ -569,9 +569,9 @@ const Table = ({ file, sheet, data }) => {
             onMouseMove={event => handleOnMouseMove(event)}>
             <thead>
               <tr>
-                <th></th>
+                <th scope="col"></th>
                 {cols.map((r, i) => (
-                  <th key={i}>
+                  <th scope="col" key={i}>
                     <div onDoubleClick={event => handleOnClickHeader(event)}>
                       {utils.columnToLetter(i + 1)}
                     </div>
