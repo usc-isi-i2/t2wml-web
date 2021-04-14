@@ -57,7 +57,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
           </Grid>
           <Grid item xs={4}>
             {!!outputData && (
-              <pre>{JSON.stringify(outputData.data)}</pre>
+              <div style={{padding: '1em'}}>
+                <pre>{outputData.data}</pre>
+              </div>
             )}
           </Grid>
         </Grid>
