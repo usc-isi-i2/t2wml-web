@@ -7,7 +7,7 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu'
+import HomeIcon from '@material-ui/icons/Home';
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 
@@ -27,6 +27,10 @@ const Header = props => {
     setAnchorElement(null)
   }
 
+  const refresh = () => {
+    window.location.reload()
+  }
+
   return (
     <AppBar position="static">
       <Toolbar variant="dense">
@@ -35,7 +39,7 @@ const Header = props => {
           color="inherit"
           aria-label="menu"
           className={classes.menuButton}>
-          <MenuIcon />
+          <HomeIcon onClick={refresh} />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
           T2WML
