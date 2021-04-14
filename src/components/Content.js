@@ -42,16 +42,25 @@ const Content = ({darkTheme, setDarkTheme}) => {
   }, [data])
 
   return (
-    <Grid>
+    <Grid className={classes.content}>
       <Header
         filename={data ? data.filepath : ''}
         darkTheme={darkTheme}
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {data ? (
-        <Table
-          file={data.filepath}
-          sheet={data.sheetName}
-          data={data.table.cells} />
+        <Grid container>
+          <Grid item xs={8}>
+            <Table
+              file={data.filepath}
+              sheet={data.sheetName}
+              data={data.table.cells} />
+          </Grid>
+          <Grid item xs={4}>
+            {!!outputData && (
+              <pre>{JSON.stringify(outputData.data)}</pre>
+            )}
+          </Grid>
+        </Grid>
       ) : (
         <FileDrop onSuccess={data => setData(data)} />
       )}
