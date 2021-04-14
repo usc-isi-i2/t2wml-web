@@ -34,7 +34,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
   useEffect(() => {
     if ( !data ) { return }
     fetchOutput(data.filepath, data.sheetName)
-      .then(data => console.log(data))
+      .then(data => setOutputData(data))
       .catch(error => console.log(error))
   }, [data])
 
