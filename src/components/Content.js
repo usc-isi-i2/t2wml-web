@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Grid } from '@material-ui/core/'
 
 import fetchOutput from '../utils/fetchOutput'
+import useStyles from '../styles/content'
 
 import FileDrop from './FileDrop'
 import Header from './Header'
@@ -10,6 +11,8 @@ import Table from './Table'
 
 
 const Content = ({darkTheme, setDarkTheme}) => {
+
+  const classes = useStyles()
 
   const [data, setData] = useState()
 
