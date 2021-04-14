@@ -14,6 +14,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
   return (
     <Grid>
       <Header
+        filename={data ? data.filepath : ''}
         darkTheme={darkTheme}
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {data ? (

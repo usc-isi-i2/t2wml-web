@@ -14,7 +14,7 @@ import Brightness7Icon from '@material-ui/icons/Brightness7'
 import useStyles from '../styles/header'
 
 
-const Header = props => {
+const Header = ({filename, darkTheme, switchTheme}) => {
   const classes = useStyles()
 
   const [anchorElement, setAnchorElement] = useState(null)
@@ -42,16 +42,16 @@ const Header = props => {
           <HomeIcon onClick={refresh} />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
-          T2WML
+          {filename ? filename : 'T2WML'}
         </Typography>
         <IconButton
           edge="end"
           color="inherit"
-          onClick={() => props.switchTheme()}
+          onClick={() => switchTheme()}
           onMouseEnter={handlePopoverOpen}
           onMouseLeave={handlePopoverClose}
           aria-label="account of current user">
-          {props.darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
+          {darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
         <Popover
           className="tooltip"
