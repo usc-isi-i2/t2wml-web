@@ -34,11 +34,15 @@ const Content = ({darkTheme, setDarkTheme}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    if ( !data ) { return }
+  const updateOutputData = () => {
     fetchOutput(data.filepath, data.sheetName)
       .then(data => setOutputData(data))
       .catch(error => console.log(error))
+  }
+
+  useEffect(() => {
+    if ( !data ) { return }
+    updateOutputData()
   }, [data])
 
   return (
@@ -53,7 +57,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
             <Table
               file={data.filepath}
               sheet={data.sheetName}
-              data={data.table.cells} />
+              data={data.table.cells}
+              updateOutputData={updateOutputData} />
           </Grid>
           <Grid item xs={4}>
             {!!outputData && (

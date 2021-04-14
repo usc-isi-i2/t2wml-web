@@ -8,7 +8,7 @@ import useStyles from '../styles/table'
 import * as utils from '../utils/table'
 
 
-const Table = ({ file, sheet, data }) => {
+const Table = ({ file, sheet, data, updateOutputData }) => {
 
   const classes = useStyles()
 
@@ -555,6 +555,10 @@ const Table = ({ file, sheet, data }) => {
         if ( deletedAnnotationBlock ) {
           removeAnnotationBlock(deletedAnnotationBlock)
         }
+
+        // fetch updated output
+        updateOutputData()
+
         return annotations
       })
     }
