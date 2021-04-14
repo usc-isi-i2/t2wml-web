@@ -15,6 +15,7 @@ import useStyles from '../styles/header'
 
 
 const Header = ({filename, darkTheme, switchTheme}) => {
+
   const classes = useStyles()
 
   const [anchorElement, setAnchorElement] = useState(null)

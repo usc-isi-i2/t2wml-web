@@ -27,4 +27,5 @@ const sendToGoogleAnalytics = ({name, delta, value, id}) => {
   })
 }
 
+
 reportWebVitals(sendToGoogleAnalytics)
