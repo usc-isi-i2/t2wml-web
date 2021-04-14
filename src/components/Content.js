@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Grid } from '@material-ui/core/'
 
@@ -10,6 +10,22 @@ import Table from './Table'
 const Content = ({darkTheme, setDarkTheme}) => {
 
   const [data, setData] = useState()
+
+  const handleOnUnload = event => {
+    event.preventDefault()
+    event.returnValue = ''
+  }
+
+  useEffect(() => {
+    // component did mount
+    window.addEventListener('beforeunload', handleOnUnload)
+
+    // component will unmount
+    return () => {
+      window.removeEventListener('beforeunload', handleOnUnload)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Grid>
