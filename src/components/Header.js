@@ -38,8 +38,9 @@ const Header = ({filename, darkTheme, switchTheme}) => {
           edge="start"
           color="inherit"
           aria-label="menu"
+          onClick={refresh}
           className={classes.menuButton}>
-          <HomeIcon onClick={refresh} />
+          <HomeIcon />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
           {filename ? filename : 'T2WML'}
