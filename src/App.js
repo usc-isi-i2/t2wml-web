@@ -7,7 +7,6 @@ import {
   withStyles,
 } from '@material-ui/core/styles'
 
-import Header from './components/Header'
 import Content from './components/Content'
 
 
@@ -162,10 +161,9 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header
+      <Content
         darkTheme={darkTheme}
-        switchTheme={() => setDarkTheme(!darkTheme)} />
-      <Content />
+        setDarkTheme={setDarkTheme} />
     </ThemeProvider>
   )
 }

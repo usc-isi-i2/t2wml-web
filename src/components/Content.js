@@ -3,15 +3,19 @@ import React, { useState } from 'react'
 import { Grid } from '@material-ui/core/'
 
 import FileDrop from './FileDrop'
+import Header from './Header'
 import Table from './Table'
 
 
-const Content = () => {
+const Content = ({darkTheme, setDarkTheme}) => {
 
   const [data, setData] = useState()
 
   return (
     <Grid>
+      <Header
+        darkTheme={darkTheme}
+        switchTheme={() => setDarkTheme(!darkTheme)} />
       {data ? (
         <Table
           file={data.filepath}
