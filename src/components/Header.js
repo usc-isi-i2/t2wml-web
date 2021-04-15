@@ -56,7 +56,7 @@ const Header = ({filename, darkTheme, switchTheme}) => {
           {darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
         <Popover
-          className="tooltip"
+          className={classes.tooltip}
           open={!!anchorElement}
           anchorEl={anchorElement}
           anchorOrigin={{

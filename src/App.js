@@ -135,11 +135,6 @@ const App = () => {
         },
       },
       MuiPopover: {
-        root: {
-          '&.tooltip': {
-            pointerEvents: 'none',
-          },
-        },
         paper: {
           padding: defaultTheme.spacing(1),
         },

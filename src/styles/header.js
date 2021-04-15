@@ -12,6 +12,10 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     userSelect: 'none',
   },
+  tooltip: {
+    pointerEvents: 'none',
+    userSelect: 'none',
+  },
 }))
 
 
