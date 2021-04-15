@@ -43,6 +43,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
   useEffect(() => {
     if ( !data ) { return }
     updateOutputData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   return (
