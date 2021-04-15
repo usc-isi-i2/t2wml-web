@@ -64,6 +64,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
               data={data.table.cells}
               updateOutputData={updateOutputData} />
           </Grid>
+          <div className={classes.divider}></div>
           <Grid item xs={12 - colWidth}>
             {!!outputData && (
               <Output data={outputData.data} />
