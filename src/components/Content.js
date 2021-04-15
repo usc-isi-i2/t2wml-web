@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Grid } from '@material-ui/core/'
+import Grid from '@material-ui/core/Grid'
 
 import fetchOutput from '../utils/fetchOutput'
 import useStyles from '../styles/content'
