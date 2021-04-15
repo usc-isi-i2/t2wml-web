@@ -6,6 +6,7 @@ import fetchOutput from '../utils/fetchOutput'
 import useStyles from '../styles/content'
 
 import FileDrop from './FileDrop'
+import Divider from './Divider'
 import Header from './Header'
 import Output from './Output'
 import Table from './Table'
@@ -64,7 +65,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
               data={data.table.cells}
               updateOutputData={updateOutputData} />
           </Grid>
-          <div className={classes.divider}></div>
+          <Divider />
           <Grid item xs={12 - colWidth}>
             {!!outputData && (
               <Output data={outputData.data} />
