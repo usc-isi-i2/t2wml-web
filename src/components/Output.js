@@ -1,10 +1,14 @@
 import React from 'react'
 
+import useStyles from '../styles/output'
+
 
 const Output = ({ data }) => {
 
+  const classes = useStyles()
+
   return (
-    <div style={{padding: '1em'}}>
+    <div className={classes.wrapper}>
       <pre>{data}</pre>
     </div>
   )
