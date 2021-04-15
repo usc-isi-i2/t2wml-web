@@ -19,6 +19,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const [outputData, setOutputData] = useState()
 
+  const [colWidth, setColWidth] = useState(8)
+
   const handleOnUnload = event => {
     event.preventDefault()
     event.returnValue = ''
@@ -55,14 +57,14 @@ const Content = ({darkTheme, setDarkTheme}) => {
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {data ? (
         <Grid container>
-          <Grid item xs={8}>
+          <Grid item xs={colWidth}>
             <Table
               file={data.filepath}
               sheet={data.sheetName}
               data={data.table.cells}
               updateOutputData={updateOutputData} />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12 - colWidth}>
             {!!outputData && (
               <Output data={outputData.data} />
             )}
