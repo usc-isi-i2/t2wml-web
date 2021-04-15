@@ -7,6 +7,7 @@ import useStyles from '../styles/content'
 
 import FileDrop from './FileDrop'
 import Header from './Header'
+import Output from './Output'
 import Table from './Table'
 
 
@@ -63,9 +64,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
           </Grid>
           <Grid item xs={4}>
             {!!outputData && (
-              <div style={{padding: '1em'}}>
-                <pre>{outputData.data}</pre>
-              </div>
+              <Output data={outputData.data} />
             )}
           </Grid>
         </Grid>
