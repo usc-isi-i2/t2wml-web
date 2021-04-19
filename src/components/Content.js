@@ -20,7 +20,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const [outputData, setOutputData] = useState()
 
-  const [colWidth, setColWidth] = useState(8)
+  const [colWidth, setColWidth] = useState(window.innerWidth / 2)
 
   const handleOnUnload = event => {
     event.preventDefault()
@@ -57,21 +57,22 @@ const Content = ({darkTheme, setDarkTheme}) => {
         darkTheme={darkTheme}
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {data ? (
-        <Grid container>
-          <Grid item xs={colWidth}>
+        <React.Fragment>
+          <div className={classes.wrapper}
+            style={{ display: 'inline-block', width: `${colWidth}px` }}>
             <Table
               file={data.filepath}
               sheet={data.sheetName}
               data={data.table.cells}
               updateOutputData={updateOutputData} />
-          </Grid>
+          </div>
           <Divider setColWidth={setColWidth} />
-          <Grid item xs={12 - colWidth}>
+          <div className={classes.wrapper}>
             {!!outputData && (
               <Output data={outputData.data} />
             )}
-          </Grid>
-        </Grid>
+          </div>
+        </React.Fragment>
       ) : (
         <FileDrop onSuccess={data => setData(data)} />
       )}
