@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
+
+import Draggable from 'react-draggable'
 
 
 const useStyles = makeStyles(theme => ({
@@ -20,7 +22,9 @@ const Divider = () => {
   const classes = useStyles()
 
   return (
-    <div className={classes.divider}></div>
+    <Draggable axis="x">
+      <div className={classes.divider} />
+    </Draggable>
   )
 }
 
