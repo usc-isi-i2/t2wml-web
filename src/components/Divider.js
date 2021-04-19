@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -9,7 +9,9 @@ const useStyles = makeStyles(theme => ({
   divider: {
     width: '5px',
     height: '100vh',
-    marginRight: '-5px',
+    position: 'absolute',
+    left: '50vw',
+    top: theme.spacing(6),
     cursor: 'ew-resize',
     background: '#c7c7c7',
     zIndex: '5',
@@ -17,14 +19,13 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const Divider = () => {
+const Divider = ({ setColWidth }) => {
 
   const classes = useStyles()
 
-  const [delta, setDelta] = useState(0)
-
-  const handleOnDrag = (event, drag) => {
-    setDelta(prevDelta => prevDelta + drag.deltaX)
+  const handleOnDrag = event => {
+    event.preventDefault()
+    setColWidth(event.clientX)
   }
 
   return (
