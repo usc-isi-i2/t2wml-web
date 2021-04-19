@@ -21,8 +21,14 @@ const Divider = () => {
 
   const classes = useStyles()
 
+  const [delta, setDelta] = useState(0)
+
+  const handleOnDrag = (event, drag) => {
+    setDelta(prevDelta => prevDelta + drag.deltaX)
+  }
+
   return (
-    <Draggable axis="x">
+    <Draggable axis="x" onDrag={handleOnDrag}>
       <div className={classes.divider} />
     </Draggable>
   )
