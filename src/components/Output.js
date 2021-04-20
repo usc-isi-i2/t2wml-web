@@ -31,17 +31,33 @@ const Output = ({ outputData, filename }) => {
     setCols([...Array(Math.max(newData[0].length, MIN_NUM_COLS))])
   }, [outputData])
 
+  const handleOnClickHeader = event => {
+    const element = event.target
+    element.setAttribute('style', 'width: 100%')
+    element.parentElement.setAttribute('style', 'max-width: 1%')
+
+    const rows = tableElement.current.querySelectorAll('tr')
+    const index = element.parentElement.cellIndex
+    rows.forEach(row => {
+      row.children[index].setAttribute('style', 'max-width: 1%')
+    })
+
+    setTimeout(() => {
+      element.setAttribute('style', `min-width: ${element.clientWidth}px`)
+    }, 100)
+  }
+
   const renderTable = () => {
     return (
       <Paper>
         <div className={classes.tableWrapper}>
-          <table ref={element => tableElement.current = element}
+          <table ref={element => tableElement.current = element}>
             <thead>
               <tr>
                 <th scope="col"></th>
                 {cols.map((r, i) => (
                   <th scope="col" key={i}>
-                    <div>
+                    <div onDoubleClick={handleOnClickHeader}>
                       {utils.columnToLetter(i + 1)}
                     </div>
                   </th>
