@@ -353,7 +353,10 @@ const Table = ({ file, sheet, data, updateOutputData }) => {
   const handleOnMouseUp = () => {
     if ( selection.current ) {
       selection.current = utils.standardizeSelection(selection.current)
-      if ( !selectedAnnotationBlock && utils.checkOverlaps(selection.current, []) ) {
+      if ( !selectedAnnotationBlock && utils.checkOverlaps(
+        selection.current,
+        annotationBlocks.map(block => block.selection),
+      ) ) {
         hideAnnotationMenu()
       } else {
         setShowAnnotationMenu(true)
