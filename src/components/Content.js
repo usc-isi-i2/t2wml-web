@@ -70,7 +70,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
           <div className={classes.wrapper}
             style={{ width: `${window.innerWidth - colWidth}px` }}>
             {!!outputData && (
-              <Output outputData={outputData.data} />
+              <Output
+                filename={data.filepath}
+                outputData={outputData.data} />
             )}
           </div>
         </React.Fragment>

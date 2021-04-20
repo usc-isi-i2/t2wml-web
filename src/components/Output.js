@@ -8,7 +8,7 @@ import * as utils from '../utils/table'
 import Download from './Download'
 
 
-const Output = ({ outputData }) => {
+const Output = ({ outputData, filename }) => {
 
   const classes = useStyles()
 
@@ -68,7 +68,9 @@ const Output = ({ outputData }) => {
 
   const renderButton = () => {
     return (
-      <Download />
+      <Download
+        filename={filename}
+        data={outputData} />
     )
   }
 
