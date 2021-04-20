@@ -32,7 +32,7 @@ const Download = ({ data, filename }) => {
     <Fab variant="extended"
       onClick={handleOnClick}
       className={classes.button}>
-      <GetAppIcon fontSize="medium" />
+      <GetAppIcon fontSize="default" />
       Download
     </Fab>
   )
