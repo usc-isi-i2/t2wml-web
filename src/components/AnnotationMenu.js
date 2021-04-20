@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   Grid,
@@ -46,6 +46,17 @@ const AnnotationMenu = ({
     selectedFormat: '',
     selectedUnit: '',
   })
+
+  useEffect(() => {
+
+    setFormState({
+      ...formState,
+      selectedRole: !!suggestions && suggestions['roles'].length ? suggestions['roles'][0] : '',
+      selectedType: !!suggestions && suggestions['types'].length ? suggestions['types'][0] : '',
+    })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [suggestions])
 
   const handleOnSubmit = event => {
     event.preventDefault()
