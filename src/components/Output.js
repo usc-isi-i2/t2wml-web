@@ -5,6 +5,8 @@ import Paper from '@material-ui/core/Paper'
 import useStyles from '../styles/output'
 import * as utils from '../utils/table'
 
+import Download from './Download'
+
 
 const Output = ({ outputData }) => {
 
@@ -64,10 +66,16 @@ const Output = ({ outputData }) => {
     )
   }
 
+  const renderButton = () => {
+    return (
+      <Download />
+    )
+  }
 
   return (
     <React.Fragment>
       {renderTable()}
+      {renderButton()}
     </React.Fragment>
   )
 }
