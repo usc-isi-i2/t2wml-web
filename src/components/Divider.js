@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -23,9 +23,14 @@ const Divider = ({ setColWidth }) => {
 
   const classes = useStyles()
 
+  const timeoutID = useRef(null)
+
   const handleOnDrag = event => {
     event.preventDefault()
-    setColWidth(event.clientX)
+    clearTimeout(timeoutID.current)
+    timeoutID.current = setTimeout(() => {
+      setColWidth(event.clientX)
+    }, 1)
   }
 
   return (
