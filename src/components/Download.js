@@ -11,6 +11,9 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     right: theme.spacing(3),
     bottom: theme.spacing(3),
+    '& svg': {
+      marginRight: theme.spacing(1),
+    },
   },
 }))
 
@@ -21,8 +24,8 @@ const Download = () => {
 
   return (
     <Fab variant="extended" className={classes.button}>
-      <GetAppIcon fontSize="large" />
-      Download CSV
+      <GetAppIcon fontSize="medium" />
+      Download
     </Fab>
   )
 }
