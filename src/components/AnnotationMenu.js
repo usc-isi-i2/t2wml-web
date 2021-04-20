@@ -25,6 +25,7 @@ const AnnotationMenu = ({
   file,
   sheet,
   selection,
+  suggestions,
   annotations,
   selectedAnnotation,
   openMenu,
@@ -138,6 +139,10 @@ const AnnotationMenu = ({
     let defaultValue = ''
     if ( selectedAnnotation ) {
       defaultValue = selectedAnnotation.role
+    } else {
+      if ( !!suggestions['roles'].length ) {
+        defaultValue = suggestions['roles'][0]
+      }
     }
     return (
       <Grid item xs={12}>

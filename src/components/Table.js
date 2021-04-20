@@ -635,6 +635,7 @@ const Table = ({ file, sheet, data, updateOutputData }) => {
         file={file}
         sheet={sheet}
         selection={selection.current}
+        suggestions={suggestions}
         annotations={annotationBlocks}
         selectedAnnotation={selectedAnnotationBlock}
         onSelectionChange={handleOnSelectionChange}
