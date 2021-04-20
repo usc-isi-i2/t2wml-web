@@ -4,6 +4,7 @@ import { Paper } from '@material-ui/core'
 
 import AnnotationMenu from './AnnotationMenu'
 
+import fetchSuggestions from '../utils/fetchSuggestions'
 import useStyles from '../styles/table'
 import * as utils from '../utils/table'
 
@@ -18,6 +19,7 @@ const Table = ({ file, sheet, data, updateOutputData }) => {
   const tableElement = useRef(null)
   const prevDirection = useRef(null)
 
+  const [suggestions, setSuggestions] = useState({})
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
   const [showAnnotationMenu, setShowAnnotationMenu] = useState(false)
@@ -349,6 +351,17 @@ const Table = ({ file, sheet, data, updateOutputData }) => {
       }
     }
   }
+
+  useEffect(() => {
+    // user is opening the annotation menu with a selection
+    if ( selection.current && showAnnotationMenu && !selectedAnnotationBlock ) {
+
+      // call the annotation suggestion endpoint
+      fetchSuggestions(file, sheet, selection.current, annotationBlocks)
+        .then(data => setSuggestions(data))
+        .catch(error => console.log(error))
+    }
+  }, [showAnnotationMenu])
 
   const handleOnMouseUp = () => {
     if ( selection.current ) {
