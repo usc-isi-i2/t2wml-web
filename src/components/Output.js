@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import Paper from '@material-ui/core/Paper'
 
@@ -11,6 +11,8 @@ import Download from './Download'
 const Output = ({ outputData, filename }) => {
 
   const classes = useStyles()
+
+  const tableElement = useRef(null)
 
   const [data, setData] = useState([])
   const [rows, setRows] = useState([])
@@ -33,7 +35,7 @@ const Output = ({ outputData, filename }) => {
     return (
       <Paper>
         <div className={classes.tableWrapper}>
-          <table>
+          <table ref={element => tableElement.current = element}
             <thead>
               <tr>
                 <th scope="col"></th>
