@@ -360,7 +360,6 @@ const Table = ({ file, sheet, data, updateOutputData }) => {
       }
     }
     setUserSelecting(false)
-    setShowAnnotationMenu(true)
   }
 
   const handleOnMouseDown = event => {
