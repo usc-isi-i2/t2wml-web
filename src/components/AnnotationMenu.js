@@ -49,12 +49,14 @@ const AnnotationMenu = ({
 
   useEffect(() => {
 
-    setFormState({
-      ...formState,
-      selectedRole: !!suggestions && suggestions['roles'].length ? suggestions['roles'][0] : '',
-      selectedType: !!suggestions && suggestions['types'].length ? suggestions['types'][0] : '',
-      selectedProperty: !!suggestions && 'property' in suggestions['children'] ? suggestions['children']['property'] : '',
-    })
+    if ( !selectedAnnotation ) {
+      setFormState({
+        ...formState,
+        selectedRole: !!suggestions['roles'].length ? suggestions['roles'][0] : '',
+        selectedType: !!suggestions['types'].length ? suggestions['types'][0] : '',
+        selectedProperty: 'property' in suggestions['children'] ? suggestions['children']['property'] : '',
+      })
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [suggestions])
