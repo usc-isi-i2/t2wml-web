@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Fab from '@material-ui/core/Fab'
+import Slide from '@material-ui/core/Slide'
 import GetAppIcon from '@material-ui/icons/GetApp'
 
 import { makeStyles } from '@material-ui/styles'
@@ -29,12 +30,16 @@ const Download = ({ data, filename }) => {
   }
 
   return (
-    <Fab variant="extended"
-      onClick={handleOnClick}
-      className={classes.button}>
-      <GetAppIcon fontSize="default" />
-      Download
-    </Fab>
+    <Slide direction="up"
+      in={data && data.length > 29}
+      mountOnEnter unmountOnExit>
+      <Fab variant="extended"
+        onClick={handleOnClick}
+        className={classes.button}>
+        <GetAppIcon fontSize="default" />
+        Download
+      </Fab>
+    </Slide>
   )
 }
 
