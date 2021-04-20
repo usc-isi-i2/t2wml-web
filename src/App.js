@@ -63,6 +63,18 @@ const App = () => {
           },
         },
       },
+      MuiFab: {
+        root: {
+          color: darkTheme ? '#fefefe' : '#4D4D4D',
+          backgroundColor: darkTheme ? '#4d4d4d' : '#fefefe',
+          border: darkTheme ? '1px solid #fefefe' : '1px solid #4d4d4d',
+          '&:hover': {
+            color: darkTheme ? '#333' : '#fefefe',
+            backgroundColor: darkTheme ? '#ddd' : '#7f7f7f',
+            border: darkTheme ? '1px solid #333' : '1px solid #fefefe',
+          },
+        },
+      },
       MuiFormLabel: {
         root: {
           color: darkTheme ? '#d8d8d8' : '#737373',
