@@ -164,10 +164,6 @@ const AnnotationMenu = ({
     let defaultValue = ''
     if ( selectedAnnotation ) {
       defaultValue = selectedAnnotation.role
-    } else {
-      if ( !!suggestions['roles'].length ) {
-        defaultValue = suggestions['roles'][0]
-      }
     }
     return (
       <Grid item xs={12}>
@@ -202,12 +198,6 @@ const AnnotationMenu = ({
     if ( selectedAnnotation && selectedAnnotation.role ) {
       ROLE = ROLES.find(option => (
         option.value === selectedAnnotation.role
-      ))
-    }
-
-    if ( !!suggestions['roles'].length ) {
-      ROLE = ROLES.find(option => (
-        option.value === suggestions['roles'][0]
       ))
     }
 
