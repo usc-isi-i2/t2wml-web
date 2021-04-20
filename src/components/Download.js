@@ -5,6 +5,8 @@ import GetAppIcon from '@material-ui/icons/GetApp'
 
 import { makeStyles } from '@material-ui/styles'
 
+import downloadFile from '../utils/downloadFile'
+
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -18,12 +20,18 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const Download = () => {
+const Download = ({ data, filename }) => {
 
   const classes = useStyles()
 
+  const handleOnClick = () => {
+    downloadFile(data, filename)
+  }
+
   return (
-    <Fab variant="extended" className={classes.button}>
+    <Fab variant="extended"
+      onClick={handleOnClick}
+      className={classes.button}>
       <GetAppIcon fontSize="medium" />
       Download
     </Fab>
