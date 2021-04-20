@@ -19,7 +19,9 @@ const Table = ({ file, sheet, data, updateOutputData }) => {
   const tableElement = useRef(null)
   const prevDirection = useRef(null)
 
-  const [suggestions, setSuggestions] = useState({})
+  const [suggestions, setSuggestions] = useState({
+    roles: [], types: [], children: {},
+  })
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
   const [showAnnotationMenu, setShowAnnotationMenu] = useState(false)
