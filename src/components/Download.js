@@ -14,9 +14,6 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     right: theme.spacing(3),
     bottom: theme.spacing(3),
-    '& svg': {
-      marginRight: theme.spacing(1),
-    },
   },
 }))
 
@@ -33,11 +30,10 @@ const Download = ({ data, filename }) => {
     <Slide direction="up"
       in={data && data.length > 29}
       mountOnEnter unmountOnExit>
-      <Fab variant="extended"
+      <Fab
         onClick={handleOnClick}
         className={classes.button}>
         <GetAppIcon fontSize="default" />
-        Download
       </Fab>
     </Slide>
   )
