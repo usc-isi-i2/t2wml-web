@@ -25,8 +25,6 @@ const Output = ({ outputData }) => {
     setData(newData)
     setRows([...Array(Math.max(newData.length, MIN_NUM_ROWS))])
     setCols([...Array(Math.max(newData[0].length, MIN_NUM_COLS))])
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [outputData])
 
   const renderTable = () => {
