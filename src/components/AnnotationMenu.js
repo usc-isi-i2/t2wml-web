@@ -50,16 +50,27 @@ const AnnotationMenu = ({
   useEffect(() => {
 
     if ( !selectedAnnotation ) {
+
+      // update form state with suggested type, role and property values
       setFormState({
         ...formState,
         selectedRole: !!suggestions['roles'].length ? suggestions['roles'][0] : '',
         selectedType: !!suggestions['types'].length ? suggestions['types'][0] : '',
         selectedProperty: 'property' in suggestions['children'] ? suggestions['children']['property'] : '',
       })
+    } else {
+
+      // reset the form state to all defaults
+      setFormState({
+        ...formState,
+        selectedRole: '',
+        selectedType: '',
+        selectedProperty: '',
+      })
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [suggestions])
+  }, [selectedAnnotation, suggestions])
 
   const handleOnSubmit = event => {
     event.preventDefault()
