@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -25,6 +25,8 @@ const Divider = ({ setColWidth }) => {
 
   const timeoutID = useRef(null)
 
+  const [active, setActive] = useState(false)
+
   const handleOnDrag = event => {
     event.preventDefault()
     clearTimeout(timeoutID.current)
@@ -33,8 +35,19 @@ const Divider = ({ setColWidth }) => {
     }, 1)
   }
 
+  const handleOnStart = event => {
+    setActive(true)
+  }
+
+  const handleOnStop = event => {
+    setActive(false)
+  }
+
   return (
-    <Draggable axis="x" onDrag={handleOnDrag}>
+    <Draggable axis="x"
+      onDrag={handleOnDrag}
+      onStart={handleOnStart}
+      onStop={handleOnStop}>
       <div className={classes.divider} />
     </Draggable>
   )
