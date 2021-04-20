@@ -70,7 +70,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
           <div className={classes.wrapper}
             style={{ width: `${window.innerWidth - colWidth}px` }}>
             {!!outputData && (
-              <Output data={outputData.data} />
+              <Output outputData={outputData.data} />
             )}
           </div>
         </React.Fragment>
