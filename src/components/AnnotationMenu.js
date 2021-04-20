@@ -180,11 +180,21 @@ const AnnotationMenu = ({
       ))
     }
 
+    if ( !!suggestions['roles'].length ) {
+      ROLE = ROLES.find(option => (
+        option.value === suggestions['roles'][0]
+      ))
+    }
+
     if ( !ROLE || !ROLE.children ) { return }
 
     let defaultValue = ''
     if ( selectedAnnotation && selectedAnnotation.type ) {
       defaultValue = selectedAnnotation.type
+    } else {
+      if ( !!suggestions['types'].length ) {
+        defaultValue = suggestions['types'][0]
+      }
     }
 
     return (
