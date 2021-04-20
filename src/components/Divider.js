@@ -4,10 +4,12 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import Draggable from 'react-draggable'
 
+import classNames from '../utils/classNames'
+
 
 const useStyles = makeStyles(theme => ({
   divider: {
-    width: '10px',
+    width: theme.spacing(1),
     height: '95vh',
     position: 'absolute',
     left: '65vw',
@@ -15,6 +17,10 @@ const useStyles = makeStyles(theme => ({
     cursor: 'ew-resize',
     background: '#c7c7c7',
     zIndex: '5',
+    '&.active': {
+      background: '#a1a1a1',
+      transform: 'all 250ms ease',
+    },
   },
 }))
 
@@ -48,7 +54,7 @@ const Divider = ({ setColWidth }) => {
       onDrag={handleOnDrag}
       onStart={handleOnStart}
       onStop={handleOnStop}>
-      <div className={classes.divider} />
+      <div className={classNames(classes.divider, {'active': active})} />
     </Draggable>
   )
 }
