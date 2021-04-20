@@ -8,9 +8,9 @@ import Draggable from 'react-draggable'
 const useStyles = makeStyles(theme => ({
   divider: {
     width: '5px',
-    height: '100vh',
+    height: '95vh',
     position: 'absolute',
-    left: '50vw',
+    left: '65vw',
     top: theme.spacing(6),
     cursor: 'ew-resize',
     background: '#c7c7c7',

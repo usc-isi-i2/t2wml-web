@@ -20,7 +20,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const [outputData, setOutputData] = useState()
 
-  const [colWidth, setColWidth] = useState(window.innerWidth / 2)
+  const [colWidth, setColWidth] = useState(window.innerWidth * 0.65)
 
   const handleOnUnload = event => {
     event.preventDefault()
@@ -59,7 +59,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
       {data ? (
         <React.Fragment>
           <div className={classes.wrapper}
-            style={{ display: 'inline-block', width: `${colWidth}px` }}>
+            style={{ width: `${colWidth}px` }}>
             <Table
               file={data.filepath}
               sheet={data.sheetName}
@@ -67,7 +67,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
               updateOutputData={updateOutputData} />
           </div>
           <Divider setColWidth={setColWidth} />
-          <div className={classes.wrapper}>
+          <div className={classes.wrapper}
+            style={{ width: `${window.innerWidth - colWidth}px` }}>
             {!!outputData && (
               <Output data={outputData.data} />
             )}
