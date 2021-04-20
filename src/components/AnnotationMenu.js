@@ -53,6 +53,7 @@ const AnnotationMenu = ({
       ...formState,
       selectedRole: !!suggestions && suggestions['roles'].length ? suggestions['roles'][0] : '',
       selectedType: !!suggestions && suggestions['types'].length ? suggestions['types'][0] : '',
+      selectedProperty: !!suggestions && 'property' in suggestions['children'] ? suggestions['children']['property'] : '',
     })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
