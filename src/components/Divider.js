@@ -7,7 +7,7 @@ import Draggable from 'react-draggable'
 
 const useStyles = makeStyles(theme => ({
   divider: {
-    width: '5px',
+    width: '10px',
     height: '95vh',
     position: 'absolute',
     left: '65vw',
