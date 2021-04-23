@@ -8,6 +8,7 @@ const useStyles = makeStyles(theme => ({
   },
   wrapper: {
     display: 'inline-block',
+    position: 'relative',
     height: '95vh',
   },
 }))
