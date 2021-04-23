@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import Fab from '@material-ui/core/Fab'
+import Grow from '@material-ui/core/Grow'
 import Slide from '@material-ui/core/Slide'
 import GetAppIcon from '@material-ui/icons/GetApp'
 
@@ -64,20 +65,15 @@ const Download = ({ data, filename }) => {
   }
 
   const renderDownloadOptions = () => {
-    return OPTIONS.map(option => {
-      const classNames = [classes.button, option.value]
-      return (
-        <Slide key={option.value}
-          in={active}
-          direction="up"
-          mountOnEnter>
-          <Fab variant="extended"
-            className={classNames}>
-            {option.label}
-          </Fab>
-        </Slide>
-      )
-    })
+    return OPTIONS.map((option, i) => (
+      <Grow key={option.value}
+        in={active}
+        timeout={100 * (OPTIONS.length - i)}>
+        <Fab className={[classes.button, option.value]}>
+          {option.label}
+        </Fab>
+      </Grow>
+    ))
   }
 
   return (
