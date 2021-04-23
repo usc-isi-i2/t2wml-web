@@ -201,6 +201,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }
 
   const resetSelection = () => {
+    if ( !tableElement.current ) { return }
     tableElement.current.classList.remove('active')
     tableElement.current.querySelectorAll('.active .cell-border-top').forEach(e => e.remove())
     tableElement.current.querySelectorAll('.active .cell-border-left').forEach(e => e.remove())
