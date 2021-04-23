@@ -39,18 +39,6 @@ const Content = ({darkTheme, setDarkTheme}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const updateOutputData = () => {
-    fetchOutput(data.filepath, data.sheetName)
-      .then(data => setOutputData(data))
-      .catch(error => console.log(error))
-  }
-
-  useEffect(() => {
-    if ( !data ) { return }
-    updateOutputData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data])
-
   return (
     <Grid className={classes.content}>
       <Header
@@ -64,8 +52,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
             <Table
               file={data.filepath}
               sheet={data.sheetName}
-              data={data.table.cells}
-              updateOutputData={updateOutputData} />
+              data={data.table.cells} />
           </div>
           <Divider setColWidth={setColWidth} />
           <div className={classes.wrapper}
