@@ -27,9 +27,11 @@ const Download = ({ data, filename }) => {
   }
 
   return (
-    <Slide direction="up"
-      in={data && data.length > 29}
-      mountOnEnter unmountOnExit>
+    <Slide
+      in={data.length > 1}
+      direction="up"
+      mountOnEnter
+      unmountOnExit>
       <Fab
         onClick={handleOnClick}
         className={classes.button}>
