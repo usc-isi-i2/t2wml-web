@@ -60,8 +60,8 @@ const Download = ({ data, filename }) => {
 
   const [active, setActive] = useState(false)
 
-  const handleOnClick = () => {
-    downloadFile(data, filename)
+  const handleOnClick = fileType => {
+    downloadFile(data, filename, fileType)
   }
 
   const renderDownloadOptions = () => {
@@ -69,7 +69,9 @@ const Download = ({ data, filename }) => {
       <Grow key={option.value}
         in={active}
         timeout={100 * (OPTIONS.length - i)}>
-        <Fab className={[classes.button, option.value]}>
+        <Fab
+          className={[classes.button, option.value]}
+          onClick={() => handleOnClick(option.value)}>
           {option.label}
         </Fab>
       </Grow>
@@ -85,7 +87,6 @@ const Download = ({ data, filename }) => {
         mountOnEnter
         unmountOnExit>
         <Fab variant="extended"
-          onClick={handleOnClick}
           className={classes.button}
           onMouseEnter={() => setActive(true)}>
           <GetAppIcon fontSize="default" />
