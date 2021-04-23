@@ -9,6 +9,18 @@ import { makeStyles } from '@material-ui/styles'
 import downloadFile from '../utils/downloadFile'
 
 
+const OPTIONS = [{
+  label: 'CSV',
+  value: 'csv',
+}, {
+  label: 'TSV',
+  value: 'tsv',
+}, {
+  label: 'JSON',
+  value: 'json',
+}]
+
+
 const useStyles = makeStyles(theme => ({
   button: {
     position: 'absolute',
@@ -16,6 +28,15 @@ const useStyles = makeStyles(theme => ({
     bottom: theme.spacing(3),
     '& svg': {
       marginRight: theme.spacing(1),
+    },
+    '&.csv': {
+      bottom: theme.spacing(27),
+    },
+    '&.tsv': {
+      bottom: theme.spacing(19),
+    },
+    '&.json': {
+      bottom: theme.spacing(11),
     },
   },
 }))
@@ -31,8 +52,26 @@ const Download = ({ data, filename }) => {
     downloadFile(data, filename)
   }
 
+  const renderDownloadOptions = () => {
+    return OPTIONS.map(option => {
+      const classNames = [classes.button, option.value]
+      return (
+        <Slide key={option.value}
+          in={active}
+          direction="up"
+          mountOnEnter>
+          <Fab variant="extended"
+            className={classNames}>
+            {option.label}
+          </Fab>
+        </Slide>
+      )
+    })
+  }
+
   return (
-    <React.Fragment onMouseLeave={setActive(false)}>
+    <div className={classes.wrapper}
+      onMouseLeave={() => setActive(false)}>
       <Slide
         in={data.length > 1}
         direction="up"
@@ -41,12 +80,13 @@ const Download = ({ data, filename }) => {
         <Fab variant="extended"
           onClick={handleOnClick}
           className={classes.button}
-          onMouseEnter={setActive(true)}>
+          onMouseEnter={() => setActive(true)}>
           <GetAppIcon fontSize="default" />
           Download
         </Fab>
       </Slide>
-    </React.Fragment>
+      {renderDownloadOptions()}
+    </div>
   )
 }
 
