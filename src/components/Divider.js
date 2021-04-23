@@ -54,7 +54,7 @@ const Divider = ({ setColWidth }) => {
       onDrag={handleOnDrag}
       onStart={handleOnStart}
       onStop={handleOnStop}>
-      <div className={classNames(classes.divider, {'active': active})} />
+      <div className={classNames(classes.divider, {active})} />
     </Draggable>
   )
 }
