@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Fab from '@material-ui/core/Fab'
 import Slide from '@material-ui/core/Slide'
@@ -25,23 +25,28 @@ const Download = ({ data, filename }) => {
 
   const classes = useStyles()
 
+  const [active, setActive] = useState(false)
+
   const handleOnClick = () => {
     downloadFile(data, filename)
   }
 
   return (
-    <Slide
-      in={data.length > 1}
-      direction="up"
-      mountOnEnter
-      unmountOnExit>
-      <Fab variant="extended"
-        onClick={handleOnClick}
-        className={classes.button}>
-        <GetAppIcon fontSize="default" />
-        Download
-      </Fab>
-    </Slide>
+    <React.Fragment onMouseLeave={setActive(false)}>
+      <Slide
+        in={data.length > 1}
+        direction="up"
+        mountOnEnter
+        unmountOnExit>
+        <Fab variant="extended"
+          onClick={handleOnClick}
+          className={classes.button}
+          onMouseEnter={setActive(true)}>
+          <GetAppIcon fontSize="default" />
+          Download
+        </Fab>
+      </Slide>
+    </React.Fragment>
   )
 }
 
