@@ -7,6 +7,7 @@ import GetAppIcon from '@material-ui/icons/GetApp'
 import { makeStyles } from '@material-ui/styles'
 
 import downloadFile from '../utils/downloadFile'
+import classNames from '../utils/classNames'
 
 
 const OPTIONS = [{
@@ -22,6 +23,16 @@ const OPTIONS = [{
 
 
 const useStyles = makeStyles(theme => ({
+  wrapper: {
+    position: 'absolute',
+    width: theme.spacing(21),
+    height: theme.spacing(10),
+    right: 0,
+    bottom: 0,
+    '&.active': {
+      height: theme.spacing(30),
+    },
+  },
   button: {
     position: 'absolute',
     right: theme.spacing(3),
@@ -70,7 +81,7 @@ const Download = ({ data, filename }) => {
   }
 
   return (
-    <div className={classes.wrapper}
+    <div className={classNames(classes.wrapper, {active})}
       onMouseLeave={() => setActive(false)}>
       <Slide
         in={data.length > 1}
