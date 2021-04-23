@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import fetchOutput from '../utils/fetchOutput'
 import useStyles from '../styles/content'
 
+import Instructions from './Instructions'
 import FileDrop from './FileDrop'
 import Divider from './Divider'
 import Header from './Header'
@@ -69,10 +70,12 @@ const Content = ({darkTheme, setDarkTheme}) => {
           <Divider setColWidth={setColWidth} />
           <div className={classes.wrapper}
             style={{ width: `${window.innerWidth - colWidth}px` }}>
-            {!!outputData && (
+            {!!outputData ? (
               <Output
                 filename={data.filepath}
                 outputData={outputData.data} />
+            ) : (
+              <Instructions />
             )}
           </div>
         </React.Fragment>
