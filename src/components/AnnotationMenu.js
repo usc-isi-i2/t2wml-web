@@ -93,7 +93,7 @@ const AnnotationMenu = ({
     })
 
     uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
-      hideMenu(data.annotations)
+      hideMenu(data.annotations, data.partialCsv)
     }).catch(error => {
       hideMenu()
     })
@@ -107,7 +107,7 @@ const AnnotationMenu = ({
     )
 
     uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
-      hideMenu(data.annotations, selectedAnnotation)
+      hideMenu(data.annotations, data.partialCsv, selectedAnnotation)
     }).catch(error => {
       hideMenu()
     })

@@ -9,7 +9,7 @@ import useStyles from '../styles/table'
 import * as utils from '../utils/table'
 
 
-const Table = ({ file, sheet, data }) => {
+const Table = ({ file, sheet, data, setOutputData }) => {
 
   const classes = useStyles()
 
@@ -562,7 +562,12 @@ const Table = ({ file, sheet, data }) => {
     }
   }
 
-  const hideAnnotationMenu = (annotations, deletedAnnotationBlock=null) => {
+  const hideAnnotationMenu = (annotations, outputData, deletedAnnotationBlock=null) => {
+
+    // update output data
+    if ( outputData && outputData.cells ) {
+      setOutputData(outputData.cells)
+    }
 
     setShowAnnotationMenu(false)
     setSelectedAnnotationBlock(undefined)

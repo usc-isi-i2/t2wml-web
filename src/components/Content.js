@@ -52,15 +52,14 @@ const Content = ({darkTheme, setDarkTheme}) => {
             <Table
               file={data.filepath}
               sheet={data.sheetName}
-              data={data.table.cells} />
+              data={data.table.cells}
+              setOutputData={setOutputData} />
           </div>
           <Divider setColWidth={setColWidth} />
           <div className={classes.wrapper}
             style={{ width: `${window.innerWidth - colWidth}px` }}>
             {!!outputData ? (
-              <Output
-                filename={data.filepath}
-                outputData={outputData.data} />
+              <Output filename={data.filepath} data={outputData} />
             ) : (
               <Instructions />
             )}

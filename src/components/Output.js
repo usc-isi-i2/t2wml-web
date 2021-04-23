@@ -8,13 +8,12 @@ import * as utils from '../utils/table'
 import Download from './Download'
 
 
-const Output = ({ outputData, filename }) => {
+const Output = ({ data, filename }) => {
 
   const classes = useStyles()
 
   const tableElement = useRef(null)
 
-  const [data, setData] = useState([])
   const [rows, setRows] = useState([])
   const [cols, setCols] = useState([])
 
@@ -22,14 +21,9 @@ const Output = ({ outputData, filename }) => {
   const MIN_NUM_COLS = 10
 
   useEffect(() => {
-    const newData = []
-    outputData.split(/[\r\n|\n]+/).forEach(row => {
-      newData.push(row.split(','))
-    })
-    setData(newData)
-    setRows([...Array(Math.max(newData.length, MIN_NUM_ROWS))])
-    setCols([...Array(Math.max(newData[0].length, MIN_NUM_COLS))])
-  }, [outputData])
+    setRows([...Array(Math.max(data.length, MIN_NUM_ROWS))])
+    setCols([...Array(Math.max(data[0].length, MIN_NUM_COLS))])
+  }, [data])
 
   const handleOnClickHeader = event => {
     const element = event.target
@@ -88,7 +82,7 @@ const Output = ({ outputData, filename }) => {
     return (
       <Download
         filename={filename}
-        data={outputData} />
+        data={data} />
     )
   }
 
