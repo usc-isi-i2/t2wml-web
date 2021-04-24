@@ -123,8 +123,8 @@ const useStyles = makeStyles(theme => ({
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
         },
         '&.role-qualifier': {
-          background:'#DDD9F2',
-          color: '#111',
+          background: theme.palette.type === 'dark' ? '#3f3865' : '#DDD9F2',
+          color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
         },
         '&.role-property': {
           background: '#fbe5ce',
@@ -159,7 +159,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
         '&.role-qualifier div.cell-border-top': {
-          background:'#8867cb',
+          background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
         '&.role-property div.cell-border-top': {
           background:'#f1a655',
@@ -191,7 +191,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
         '&.role-qualifier div.cell-border-left': {
-          background:'#8867cb',
+          background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
         '&.role-property div.cell-border-left': {
           background:'#f1a655',
@@ -223,7 +223,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
         '&.role-qualifier div.cell-border-right': {
-          background:'#8867cb',
+          background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
         '&.role-property div.cell-border-right': {
           background:'#f1a655',
@@ -255,7 +255,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
         '&.role-qualifier div.cell-border-bottom': {
-          background:'#8867cb',
+          background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
         '&.role-property div.cell-border-bottom': {
           background:'#f1a655',
@@ -285,7 +285,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
         '&.role-qualifier div.cell-resize-corner': {
-          background:'#8867cb',
+          background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
         '&.role-property div.cell-resize-corner': {
           background:'#f1a655',
