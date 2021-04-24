@@ -127,8 +127,8 @@ const useStyles = makeStyles(theme => ({
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
         },
         '&.role-property': {
-          background: '#fbe5ce',
-          color: '#111',
+          background: theme.palette.type === 'dark' ? '#bb670f' : '#fbe5ce',
+          color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
         },
         '&.role-metadata': {
           background: '#d8dfe7',
@@ -162,7 +162,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
         '&.role-property div.cell-border-top': {
-          background:'#f1a655',
+          background: theme.palette.type === 'dark' ? '#fbe5ce' : '#f1a655',
         },
         '&.role-metadata div.cell-border-top': {
           background:'#556e8b',
@@ -194,7 +194,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
         '&.role-property div.cell-border-left': {
-          background:'#f1a655',
+          background: theme.palette.type === 'dark' ? '#fbe5ce' : '#f1a655',
         },
         '&.role-metadata div.cell-border-left': {
           background:'#556e8b',
@@ -226,7 +226,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
         '&.role-property div.cell-border-right': {
-          background:'#f1a655',
+          background: theme.palette.type === 'dark' ? '#fbe5ce' : '#f1a655',
         },
         '&.role-metadata div.cell-border-right': {
           background:'#556e8b',
@@ -258,7 +258,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
         '&.role-property div.cell-border-bottom': {
-          background:'#f1a655',
+          background: theme.palette.type === 'dark' ? '#fbe5ce' : '#f1a655',
         },
         '&.role-metadata div.cell-border-bottom': {
           background:'#556e8b',
@@ -288,7 +288,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
         '&.role-property div.cell-resize-corner': {
-          background:'#f1a655',
+          background: theme.palette.type === 'dark' ? '#fbe5ce' : '#f1a655',
         },
         '&.role-metadata div.cell-resize-corner': {
           background:'#556e8b',
