@@ -115,12 +115,12 @@ const useStyles = makeStyles(theme => ({
         width: '75px',
         zIndex: '1',
         '&.role-mainSubject': {
-          background: '#D9EAF2',
-          color: '#006699',
+          background: theme.palette.type === 'dark' ? '#347898' : '#D9EAF2',
+          color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
         },
         '&.role-dependentVar': {
-          background:'#D9F2E6',
-          color: '#111',
+          background: theme.palette.type === 'dark' ? '#3bab75' : '#D9F2E6',
+          color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
         },
         '&.role-qualifier': {
           background:'#DDD9F2',
@@ -153,10 +153,10 @@ const useStyles = makeStyles(theme => ({
           height: '2px',
         },
         '&.role-mainSubject div.cell-border-top': {
-          background:'#499bc1',
+          background: theme.palette.type === 'dark' ? '#99ddff' : '#499bc1',
         },
         '&.role-dependentVar div.cell-border-top': {
-          background:'#3bab75',
+          background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
         '&.role-qualifier div.cell-border-top': {
           background:'#8867cb',
@@ -185,10 +185,10 @@ const useStyles = makeStyles(theme => ({
           width: '2px',
         },
         '&.role-mainSubject div.cell-border-left': {
-          background:'#499bc1',
+          background: theme.palette.type === 'dark' ? '#99ddff' : '#499bc1',
         },
         '&.role-dependentVar div.cell-border-left': {
-          background:'#3bab75',
+          background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
         '&.role-qualifier div.cell-border-left': {
           background:'#8867cb',
@@ -217,10 +217,10 @@ const useStyles = makeStyles(theme => ({
           width: '2px',
         },
         '&.role-mainSubject div.cell-border-right': {
-          background:'#499bc1',
+          background: theme.palette.type === 'dark' ? '#99ddff' : '#499bc1',
         },
         '&.role-dependentVar div.cell-border-right': {
-          background:'#3bab75',
+          background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
         '&.role-qualifier div.cell-border-right': {
           background:'#8867cb',
@@ -249,10 +249,10 @@ const useStyles = makeStyles(theme => ({
           height: '2px',
         },
         '&.role-mainSubject div.cell-border-bottom': {
-          background:'#499bc1',
+          background: theme.palette.type === 'dark' ? '#99ddff' : '#499bc1',
         },
         '&.role-dependentVar div.cell-border-bottom': {
-          background:'#3bab75',
+          background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
         '&.role-qualifier div.cell-border-bottom': {
           background:'#8867cb',
@@ -279,10 +279,10 @@ const useStyles = makeStyles(theme => ({
           zIndex: '25',
         },
         '&.role-mainSubject div.cell-resize-corner': {
-          background:'#499bc1',
+          background: theme.palette.type === 'dark' ? '#99ddff' : '#499bc1',
         },
         '&.role-dependentVar div.cell-resize-corner': {
-          background:'#3bab75',
+          background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
         '&.role-qualifier div.cell-resize-corner': {
           background:'#8867cb',
