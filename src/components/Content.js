@@ -46,8 +46,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {data ? (
         <React.Fragment>
-          <div className={classes.inputWrapper}
-            style={{ width: `${colWidth}px` }}>
+          <div className={classes.inputWrapper}>
             <Table
               file={data.filepath}
               sheet={data.sheetName}
@@ -56,7 +55,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
           </div>
           <Divider setColWidth={setColWidth} />
           <div className={classes.outputWrapper}
-            style={{ width: `${window.innerWidth - colWidth}px` }}>
+            style={{ left: `${colWidth}px` }}>
             {!!outputData ? (
               <Output filename={data.filepath} data={outputData} />
             ) : (
