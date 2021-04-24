@@ -361,8 +361,8 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
       // call the annotation suggestion endpoint
       fetchSuggestions(file, sheet, selection.current, annotationBlocks)
-        .then(data => setSuggestions(data))
-        .catch(error => console.log(error))
+      .then(data => setSuggestions(data))
+      .catch(error => console.log(error))
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -590,14 +590,14 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       <Paper>
         <div className={classes.tableWrapper}>
           <table ref={element => tableElement.current = element}
-            onMouseDown={event => handleOnMouseDown(event)}
-            onMouseMove={event => handleOnMouseMove(event)}>
+            onMouseDown={handleOnMouseDown}
+            onMouseMove={handleOnMouseMove}>
             <thead>
               <tr>
                 <th scope="col"></th>
                 {cols.map((r, i) => (
                   <th scope="col" key={i}>
-                    <div onDoubleClick={event => handleOnClickHeader(event)}>
+                    <div onDoubleClick={handleOnClickHeader}>
                       {utils.columnToLetter(i + 1)}
                     </div>
                   </th>
