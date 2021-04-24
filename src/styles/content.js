@@ -6,9 +6,20 @@ const useStyles = makeStyles(theme => ({
     width: '100vw',
     height: '100vh',
   },
-  wrapper: {
-    display: 'inline-block',
-    position: 'relative',
+  inputWrapper: {
+    position: 'absolute',
+    top: theme.spacing(6),
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: '95vh',
+  },
+  outputWrapper: {
+    position: 'absolute',
+    top: theme.spacing(6),
+    left: '65vw',
+    right: 0,
+    bottom: 0,
     height: '95vh',
   },
 }))
