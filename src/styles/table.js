@@ -135,8 +135,8 @@ const useStyles = makeStyles(theme => ({
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
         },
         '&.role-unit': {
-          background: '#fff2ce',
-          color: '#111',
+          background: theme.palette.type === 'dark' ? '#ce9700' : '#fff2ce',
+          color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
         },
         '& div.cell-border-top': {
           display: 'block',
@@ -168,7 +168,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#d8dfe7' : '#556e8b',
         },
         '&.role-unit div.cell-border-top': {
-          background:'#ffca38',
+          background: theme.palette.type === 'dark' ? '#fff2ce' : '#ffca38',
         },
         '& div.cell-border-left': {
           display: 'block',
@@ -200,7 +200,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#d8dfe7' : '#556e8b',
         },
         '&.role-unit div.cell-border-left': {
-          background:'#ffca38',
+          background: theme.palette.type === 'dark' ? '#fff2ce' : '#ffca38',
         },
         '& div.cell-border-right': {
           display: 'block',
@@ -232,7 +232,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#d8dfe7' : '#556e8b',
         },
         '&.role-unit div.cell-border-right': {
-          background:'#ffca38',
+          background: theme.palette.type === 'dark' ? '#fff2ce' : '#ffca38',
         },
         '& div.cell-border-bottom': {
           display: 'block',
@@ -264,7 +264,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#d8dfe7' : '#556e8b',
         },
         '&.role-unit div.cell-border-bottom': {
-          background:'#ffca38',
+          background: theme.palette.type === 'dark' ? '#fff2ce' : '#ffca38',
         },
         '& div.cell-resize-corner': {
           display: 'block',
@@ -294,7 +294,7 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#d8dfe7' : '#556e8b',
         },
         '&.role-unit div.cell-resize-corner': {
-          background:'#ffca38',
+          background: theme.palette.type === 'dark' ? '#fff2ce' : '#ffca38',
         },
       },
       '&.active tr td': {
