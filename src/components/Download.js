@@ -82,7 +82,7 @@ const Download = ({ data, filename }) => {
     <div className={classNames(classes.wrapper, {active})}
       onMouseLeave={() => setActive(false)}>
       <Slide
-        in={data.length > 1}
+        in={true}
         direction="up"
         mountOnEnter
         unmountOnExit>

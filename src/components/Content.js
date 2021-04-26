@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import useStyles from '../styles/content'
 
 import Instructions from './Instructions'
+import Download from './Download'
 import FileDrop from './FileDrop'
 import Divider from './Divider'
 import Header from './Header'
@@ -65,6 +66,11 @@ const Content = ({darkTheme, setDarkTheme}) => {
         </React.Fragment>
       ) : (
         <FileDrop onSuccess={data => setData(data)} />
+      )}
+      {!!outputData && outputData.length > 1 && (
+        <Download
+          filename={data.filepath}
+          sheetname={data.sheetName} />
       )}
     </Grid>
   )
