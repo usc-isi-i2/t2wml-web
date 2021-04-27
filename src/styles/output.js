@@ -119,7 +119,7 @@ const useStyles = makeStyles(theme => ({
         width: '75px',
         zIndex: '1',
         '&.active': {
-          animationName: theme.palette.type === 'dark' ? 'darkBlink' : 'lightBlink',
+          animationName: 'blink',
           animationDuration: '10s',
           animationTimingFunction: 'ease-in-out',
           animationIterationCount: 'infinite',

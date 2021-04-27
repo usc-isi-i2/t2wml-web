@@ -18,26 +18,15 @@ const styles = theme => ({
       color: '#fefefe',
       background: 'linear-gradient(180deg, #4D4D4D, #737373)',
     },
-    '@keyframes darkBlink': {
+    '@keyframes blink': {
       '45%': {
-        background: '#424242',
+        opacity: 1,
       },
       '50%': {
-        background: 'rgba(59, 171, 117, 0.75)',
+        opacity: 0.25,
       },
       '55%': {
-        background: '#424242',
-      },
-    },
-    '@keyframes lightBlink': {
-      '45%': {
-        background: '#fff',
-      },
-      '50%': {
-        background: 'rgba(217, 242, 230, 0.75)',
-      },
-      '55%': {
-        background: '#fff',
+        opacity: 1,
       },
     },
   },
