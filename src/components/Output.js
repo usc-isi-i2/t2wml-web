@@ -86,10 +86,18 @@ const Output = ({ data, filename }) => {
                 <tr key={`row-${i}`}>
                   <td>{i + 1}</td>
                   {cols.map((r, j) => {
+                    const classNames = []
+                    if ( data[0][j] === activeCol ) {
+                      classNames.push('active')
+                    }
                     if ( i < data.length && j < data[i].length && data[i][j] ) {
-                      return <td key={`cell-${j}`}>{data[i][j]}</td>
+                      return (
+                        <td key={`cell-${j}`} className={classNames}>
+                          {data[i][j]}
+                        </td>
+                      )
                     } else {
-                      return <td key={`cell-${j}`} />
+                      return <td key={`cell-${j}`} className={classNames} />
                     }
                   })}
                 </tr>

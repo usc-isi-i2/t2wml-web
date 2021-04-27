@@ -118,6 +118,9 @@ const useStyles = makeStyles(theme => ({
         maxWidth: '75px',
         width: '75px',
         zIndex: '1',
+        '&.active': {
+          background: '#eee',
+        },
         '&.role-mainSubject': {
           background: '#D9EAF2',
           color: '#006699',
