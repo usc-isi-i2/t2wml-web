@@ -73,7 +73,7 @@ const Output = ({ data, filename }) => {
                   <td>{i + 1}</td>
                   {cols.map((r, j) => {
                     const classNames = []
-                    if ( data[0][j] === activeCol ) {
+                    if ( !!activeCol && data[0][j] === activeCol ) {
                       classNames.push('active')
                     }
                     if ( i < data.length && j < data[i].length && data[i][j] ) {
