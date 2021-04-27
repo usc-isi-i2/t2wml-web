@@ -14,6 +14,7 @@ const Output = ({ data, filename }) => {
 
   const [rows, setRows] = useState([])
   const [cols, setCols] = useState([])
+  const [activeCol, setActiveCol] = useState()
 
   const MIN_NUM_ROWS = 100
   const MIN_NUM_COLS = 10
@@ -21,32 +22,17 @@ const Output = ({ data, filename }) => {
   useEffect(() => {
     setRows([...Array(Math.max(data.length, MIN_NUM_ROWS))])
     setCols([...Array(Math.max(data[0].length, MIN_NUM_COLS))])
-  }, [data])
 
-  const intervalID = useRef(null)
-  const [activeCol, setActiveCol] = useState()
-  const NUDGE_INTERVAL = 3000 // ms
-
-  useEffect(() => {
-    // component did mount
-    intervalID.current = setInterval(() => {
-      if ( data.length < 2 ) { return }
-      let counter = 0
-      while ( counter < data[0].length ) {
-        if ( !data[1][counter] ) {
-          setActiveCol(data[0][counter])
-          break
-        }
-        counter += 1
+    if ( data.length < 2 ) { return }
+    let counter = 0
+    while ( counter < data[0].length ) {
+      if ( !data[1][counter] ) {
+        setActiveCol(data[0][counter])
+        break
       }
-    }, NUDGE_INTERVAL)
-
-    // component will unmount
-    return () => {
-      clearInterval(intervalID.current)
+      counter += 1
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [data])
 
   const handleOnClickHeader = event => {
     const element = event.target
