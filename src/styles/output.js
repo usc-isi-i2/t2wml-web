@@ -125,6 +125,22 @@ const useStyles = makeStyles(theme => ({
           animationIterationCount: 'infinite',
           background: 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #eee 25%, #eee 50%, #fff 50%) top left fixed',
           backgroundSize: '30px 30px',
+          '&.subject': {
+            background: 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #D9EAF2 25%, #D9EAF2 50%, #fff 50%) top left fixed',
+            backgroundSize: '30px 30px',
+          },
+          '&.property': {
+            background: 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #fbe5ce 25%, #fbe5ce 50%, #fff 50%) top left fixed',
+            backgroundSize: '30px 30px',
+          },
+          '&.value': {
+            background: 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #D9F2E6 25%, #D9F2E6 50%, #fff 50%) top left fixed',
+            backgroundSize: '30px 30px',
+          },
+          '&.unit': {
+            background: 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #fff2ce 25%, #fff2ce 50%, #fff 50%) top left fixed',
+            backgroundSize: '30px 30px',
+          },
         },
         '&.role-mainSubject': {
           background: '#D9EAF2',
