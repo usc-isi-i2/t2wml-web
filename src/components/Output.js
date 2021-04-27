@@ -23,6 +23,31 @@ const Output = ({ data, filename }) => {
     setCols([...Array(Math.max(data[0].length, MIN_NUM_COLS))])
   }, [data])
 
+  const intervalID = useRef(null)
+  const [activeCol, setActiveCol] = useState()
+  const NUDGE_INTERVAL = 3000 // ms
+
+  useEffect(() => {
+    // component did mount
+    intervalID.current = setInterval(() => {
+      if ( data.length < 2 ) { return }
+      let counter = 0
+      while ( counter < data[0].length ) {
+        if ( !data[1][counter] ) {
+          setActiveCol(data[0][counter])
+          break
+        }
+        counter += 1
+      }
+    }, NUDGE_INTERVAL)
+
+    // component will unmount
+    return () => {
+      clearInterval(intervalID.current)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const handleOnClickHeader = event => {
     const element = event.target
     element.setAttribute('style', 'width: 100%')
