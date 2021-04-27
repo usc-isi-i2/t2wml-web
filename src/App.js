@@ -34,7 +34,7 @@ const styles = theme => ({
         background: '#fff',
       },
       '50%': {
-        background: 'rgba(50, 205, 50, 0.25)',
+        background: 'rgba(217, 242, 230, 0.75)',
       },
       '55%': {
         background: '#fff',
