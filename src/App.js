@@ -18,6 +18,17 @@ const styles = theme => ({
       color: '#fefefe',
       background: 'linear-gradient(180deg, #4D4D4D, #737373)',
     },
+    '@keyframes pulsate': {
+      '0%': {
+        background: '#fff',
+      },
+      '50%': {
+        background: '#eee',
+      },
+      '100%': {
+        background: '#fff',
+      },
+    },
   },
 })
 

@@ -119,7 +119,7 @@ const useStyles = makeStyles(theme => ({
         width: '75px',
         zIndex: '1',
         '&.active': {
-          background: '#eee',
+          animation: 'pulsate 2500ms ease-in-out 200ms infinite',
         },
         '&.role-mainSubject': {
           background: '#D9EAF2',
