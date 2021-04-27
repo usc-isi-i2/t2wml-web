@@ -126,19 +126,19 @@ const useStyles = makeStyles(theme => ({
           background: 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #eee 25%, #eee 50%, #fff 50%) top left fixed',
           backgroundSize: '30px 30px',
           '&.subject': {
-            background: 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #D9EAF2 25%, #D9EAF2 50%, #fff 50%) top left fixed',
+            background: theme.palette.type === 'dark' ? 'repeating-linear-gradient(-45deg, #4d4d4d, #4d4d4d 25%, #347898 25%, #347898 50%, #4d4d4d 50%) top left fixed' : 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #D9EAF2 25%, #D9EAF2 50%, #fff 50%) top left fixed',
             backgroundSize: '30px 30px',
           },
           '&.property': {
-            background: 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #fbe5ce 25%, #fbe5ce 50%, #fff 50%) top left fixed',
+            background: theme.palette.type === 'dark' ? 'repeating-linear-gradient(-45deg, #4d4d4d, #4d4d4d 25%, #bb670f 25%, #bb670f 50%, #4d4d4d 50%) top left fixed' : 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #fbe5ce 25%, #fbe5ce 50%, #fff 50%) top left fixed',
             backgroundSize: '30px 30px',
           },
           '&.value': {
-            background: 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #D9F2E6 25%, #D9F2E6 50%, #fff 50%) top left fixed',
+            background: theme.palette.type === 'dark' ? 'repeating-linear-gradient(-45deg, #4d4d4d, #4d4d4d 25%, #3bab75 25%, #3bab75 50%, #4d4d4d 50%) top left fixed' : 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #D9F2E6 25%, #D9F2E6 50%, #fff 50%) top left fixed',
             backgroundSize: '30px 30px',
           },
           '&.unit': {
-            background: 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #fff2ce 25%, #fff2ce 50%, #fff 50%) top left fixed',
+            background: theme.palette.type === 'dark' ? 'repeating-linear-gradient(-45deg, #4d4d4d, #4d4d4d 25%, #fff2ce 25%, #fff2ce 50%, #4d4d4d 50%) top left fixed' : 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #fff2ce 25%, #fff2ce 50%, #fff 50%) top left fixed',
             backgroundSize: '30px 30px',
           },
         },
