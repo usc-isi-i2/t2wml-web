@@ -123,6 +123,8 @@ const useStyles = makeStyles(theme => ({
           animationDuration: '10s',
           animationTimingFunction: 'ease-in-out',
           animationIterationCount: 'infinite',
+          background: 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #eee 25%, #eee 50%, #fff 50%) top left fixed',
+          backgroundSize: '30px 30px',
         },
         '&.role-mainSubject': {
           background: '#D9EAF2',
