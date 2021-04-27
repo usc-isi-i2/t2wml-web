@@ -119,7 +119,10 @@ const useStyles = makeStyles(theme => ({
         width: '75px',
         zIndex: '1',
         '&.active': {
-          animation: 'pulsate 10s ease-in-out infinite',
+          animationName: theme.palette.type === 'dark' ? 'darkBlink' : 'lightBlink',
+          animationDuration: '10s',
+          animationTimingFunction: 'ease-in-out',
+          animationIterationCount: 'infinite',
         },
         '&.role-mainSubject': {
           background: '#D9EAF2',
