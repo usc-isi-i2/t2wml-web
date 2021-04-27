@@ -19,14 +19,14 @@ const styles = theme => ({
       background: 'linear-gradient(180deg, #4D4D4D, #737373)',
     },
     '@keyframes pulsate': {
-      '0%': {
-        background: '#fff',
+      '45%': {
+        background: 'rgba(255, 255, 255, 1)',
       },
       '50%': {
-        background: '#eee',
+        background: 'rgba(50, 205, 50, 0.25)',
       },
-      '100%': {
-        background: '#fff',
+      '55%': {
+        background: 'rgba(255, 255, 255, 1)',
       },
     },
   },
