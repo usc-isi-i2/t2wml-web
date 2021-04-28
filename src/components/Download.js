@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Fab from '@material-ui/core/Fab'
 import Grow from '@material-ui/core/Grow'
 import Slide from '@material-ui/core/Slide'
+import Tooltip from '@material-ui/core/Tooltip'
 import GetAppIcon from '@material-ui/icons/GetApp'
 
 import { makeStyles } from '@material-ui/styles'
@@ -15,12 +16,15 @@ import classNames from '../utils/classNames'
 const OPTIONS = [{
   label: 'CSV',
   value: 'csv',
+  title: 'canonical spreadsheet (.csv)',
 }, {
   label: 'TSV',
   value: 'tsv',
+  title: 'kgtk (.tsv)',
 }, {
   label: 'JSON',
   value: 'json',
+  title: '.json',
 }]
 
 
@@ -71,11 +75,13 @@ const Download = ({ filename, sheetname }) => {
       <Grow key={option.value}
         in={active}
         timeout={100 * (OPTIONS.length - i)}>
-        <Fab
-          className={[classes.button, option.value]}
-          onClick={() => handleOnClick(option.value)}>
-          {option.label}
-        </Fab>
+        <Tooltip arrow placement="left" title={option.title}>
+          <Fab
+            className={[classes.button, option.value]}
+            onClick={() => handleOnClick(option.value)}>
+            {option.label}
+          </Fab>
+        </Tooltip>
       </Grow>
     ))
   }
