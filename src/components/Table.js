@@ -2,9 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import { Paper } from '@material-ui/core'
 
-import AnnotationMenu from './AnnotationMenu'
-
-import fetchSuggestions from '../utils/fetchSuggestions'
+import OverlayMenu from './OverlayMenu'
 import useStyles from '../styles/table'
 import * as utils from '../utils/table'
 
@@ -19,13 +17,11 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   const tableElement = useRef(null)
   const prevDirection = useRef(null)
 
-  const [suggestions, setSuggestions] = useState({
-    roles: [], types: [], children: {},
-  })
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
-  const [showAnnotationMenu, setShowAnnotationMenu] = useState(false)
   const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
+
+  const [showOverlayMenu, setShowOverlayMenu] = useState()
 
   const MIN_NUM_ROWS = 100
   const rows = [...Array(Math.max(data.length, MIN_NUM_ROWS))]
@@ -84,7 +80,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       event.preventDefault()
 
       // Hide annotation menu when moving
-      setShowAnnotationMenu(false)
+      setShowOverlayMenu(false)
 
       const { x1, x2, y1, y2 } = selection.current
       const rows = tableElement.current.querySelectorAll('tr')
@@ -196,7 +192,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   const handleOnKeyUp = () => {
     clearTimeout(timeoutID.current)
     timeoutID.current = setTimeout(() => {
-      setShowAnnotationMenu(true)
+      setShowOverlayMenu(true)
     }, 350)
   }
 
@@ -355,19 +351,6 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     }
   }
 
-  useEffect(() => {
-    // user is opening the annotation menu with a selection
-    if ( selection.current && showAnnotationMenu && !selectedAnnotationBlock ) {
-
-      // call the annotation suggestion endpoint
-      fetchSuggestions(file, sheet, selection.current, annotationBlocks)
-      .then(data => setSuggestions(data))
-      .catch(error => console.log(error))
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showAnnotationMenu])
-
   const handleOnMouseUp = () => {
     if ( selection.current ) {
       selection.current = utils.standardizeSelection(selection.current)
@@ -377,7 +360,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       ) ) {
         hideAnnotationMenu()
       } else {
-        setShowAnnotationMenu(true)
+        setShowOverlayMenu(true)
       }
     }
     setUserSelecting(false)
@@ -389,7 +372,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     // Allow users to select the resize-corner of the cell
     if ( element.className === 'cell-resize-corner' ) {
       prevElement.current = element.parentElement
-      setShowAnnotationMenu(false)
+      setShowOverlayMenu(false)
       setUserSelecting(true)
       return
     } else if ( element.nodeName !== 'TD' ) { return }
@@ -570,7 +553,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       setOutputData(outputData.cells)
     }
 
-    setShowAnnotationMenu(false)
+    setShowOverlayMenu(false)
     setSelectedAnnotationBlock(undefined)
     selection.current = null
     resetSelection()
@@ -635,16 +618,16 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   const renderAnnotationMenu = () => {
     if ( !selection.current ) { return }
     return (
-      <AnnotationMenu
+      <OverlayMenu
         file={file}
         sheet={sheet}
+        isOpen={showOverlayMenu}
         selection={selection.current}
-        suggestions={suggestions}
-        annotations={annotationBlocks}
-        selectedAnnotation={selectedAnnotationBlock}
-        onSelectionChange={handleOnSelectionChange}
-        openMenu={showAnnotationMenu}
-        hideMenu={hideAnnotationMenu} />
+        annotationBlocks={annotationBlocks}
+        selectedAnnotationBlock={selectedAnnotationBlock}
+        handleOnSelectionChange={handleOnSelectionChange}
+        hideAnnotationMenu={hideAnnotationMenu}
+        onClose={() => setShowOverlayMenu(false)} />
     )
   }
 
