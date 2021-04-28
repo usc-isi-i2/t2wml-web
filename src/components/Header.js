@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import {
   AppBar,
   IconButton,
-  Popover,
+  Tooltip,
   Toolbar,
   Typography,
 } from '@material-ui/core'
@@ -17,16 +17,6 @@ import useStyles from '../styles/header'
 const Header = ({filename, darkTheme, switchTheme}) => {
 
   const classes = useStyles()
-
-  const [anchorElement, setAnchorElement] = useState(null)
-
-  const handlePopoverOpen = event => {
-    setAnchorElement(event.currentTarget)
-  }
-
-  const handlePopoverClose = () => {
-    setAnchorElement(null)
-  }
 
   const refresh = () => {
     window.location.reload()
@@ -46,31 +36,12 @@ const Header = ({filename, darkTheme, switchTheme}) => {
         <Typography variant="h6" className={classes.title}>
           {filename ? filename : 'T2WML'}
         </Typography>
-        <IconButton
-          edge="end"
-          color="inherit"
-          onClick={() => switchTheme()}
-          onMouseEnter={handlePopoverOpen}
-          onMouseLeave={handlePopoverClose}
-          aria-label="account of current user">
-          {darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
-        </IconButton>
-        <Popover
-          className={classes.tooltip}
-          open={!!anchorElement}
-          anchorEl={anchorElement}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-          transformOrigin={{
-            vertical: -10,
-            horizontal: 'center',
-          }}
-          onClose={handlePopoverClose}
-          disableRestoreFocus>
-          <Typography variant="body2">toggle light/dark theme</Typography>
-        </Popover>
+        <Tooltip arrow title="toggle light/dark theme">
+          <IconButton edge="end" color="inherit"
+            onClick={() => switchTheme()}>
+            {darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
+        </Tooltip>
       </Toolbar>
     </AppBar>
   )
