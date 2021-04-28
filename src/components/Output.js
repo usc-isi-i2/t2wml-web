@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import Paper from '@material-ui/core/Paper'
+import Tooltip from '@material-ui/core/Tooltip'
 
 import useStyles from '../styles/output'
 import * as utils from '../utils/table'
@@ -60,9 +61,22 @@ const Output = ({ data, filename }) => {
                 <th scope="col"></th>
                 {cols.map((r, i) => (
                   <th scope="col" key={i}>
-                    <div onDoubleClick={handleOnClickHeader}>
-                      {utils.columnToLetter(i + 1)}
-                    </div>
+                    <Tooltip arrow
+                      placement="top"
+                      title={`Please select the ${data[0][i]}`}
+                      open={!!activeCol && data[0][i] === activeCol}
+                      classes={{ tooltipPlacementTop: classes.tooltipTop }}
+                      PopperProps={{
+                        popperOptions: {
+                          modifiers: {
+                            flip: { enabled: false },
+                          }
+                        }
+                      }}>
+                      <div onDoubleClick={handleOnClickHeader}>
+                        {utils.columnToLetter(i + 1)}
+                      </div>
+                    </Tooltip>
                   </th>
                 ))}
               </tr>

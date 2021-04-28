@@ -145,6 +145,9 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
+  tooltipTop: {
+    marginTop: '10px',
+  },
 }))
 
 
