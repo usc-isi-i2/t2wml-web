@@ -57,27 +57,40 @@ const OverlayMenu = ({ isOpen, handleOnClose, selection }) => {
     )
   }
 
+  const renderOverlayMenu = () => {
+    return (
+      <Dialog
+        open={isOpen}
+        onClose={handleOnClose}
+        classes={{ paper: classes.menu }}
+        PaperProps={{ tabIndex: -1 }}
+        TransitionComponent={Draggable}
+        TransitionProps={{ handle: '.draggable-handle' }}>
+        <DialogTitle classes={{ root: 'draggable-handle' }}>
+          Selected {utils.humanReadableSelection(selection)}
+          <IconButton aria-label="close" onClick={handleOnClose}>
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          {renderContent()}
+        </DialogContent>
+        <DialogActions>
+          {renderActions()}
+        </DialogActions>
+      </Dialog>
+    )
+  }
+
+  const renderAnnotationMenu = () => {}
+  const renderWikificationMenu = () => {}
+
   return (
-    <Dialog
-      open={isOpen}
-      onClose={handleOnClose}
-      classes={{ paper: classes.menu }}
-      PaperProps={{ tabIndex: -1 }}
-      TransitionComponent={Draggable}
-      TransitionProps={{ handle: '.draggable-handle' }}>
-      <DialogTitle classes={{ root: 'draggable-handle' }}>
-        Selected {utils.humanReadableSelection(selection)}
-        <IconButton aria-label="close" onClick={handleOnClose}>
-          <CloseIcon />
-        </IconButton>
-      </DialogTitle>
-      <DialogContent>
-        {renderContent()}
-      </DialogContent>
-      <DialogActions>
-        {renderActions()}
-      </DialogActions>
-    </Dialog>
+    <React.Fragment>
+      {renderOverlayMenu()}
+      {renderAnnotationMenu()}
+      {renderWikificationMenu()}
+    </React.Fragment>
   )
 }
 
