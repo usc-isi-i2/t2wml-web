@@ -36,13 +36,11 @@ const OverlayMenu = ({
   file,
   sheet,
   isOpen,
-  onClose,
-  handleOnClose,
   selection,
   annotationBlocks,
   selectedAnnotationBlock,
   handleOnSelectionChange,
-  hideAnnotationMenu,
+  hideOverlayMenu,
 }) => {
 
   const classes = useStyles()
@@ -104,14 +102,14 @@ const OverlayMenu = ({
     return (
       <Dialog
         open={isOpen}
-        onClose={onClose}
+        onClose={hideOverlayMenu}
         classes={{ paper: classes.menu }}
         PaperProps={{ tabIndex: -1 }}
         TransitionComponent={Draggable}
         TransitionProps={{ handle: '.draggable-handle' }}>
         <DialogTitle classes={{ root: 'draggable-handle' }}>
           Selected {utils.humanReadableSelection(selection)}
-          <IconButton aria-label="close" onClick={onClose}>
+          <IconButton aria-label="close" onClick={hideOverlayMenu}>
             <CloseIcon />
           </IconButton>
         </DialogTitle>
@@ -136,7 +134,7 @@ const OverlayMenu = ({
         selectedAnnotation={selectedAnnotationBlock}
         onSelectionChange={handleOnSelectionChange}
         openMenu={showAnnotationMenu}
-        hideMenu={hideAnnotationMenu} />
+        hideMenu={hideOverlayMenu} />
     )
   }
 
