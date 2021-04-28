@@ -162,6 +162,18 @@ const App = () => {
           padding: defaultTheme.spacing(1),
         },
       },
+      MuiTooltip: {
+        tooltip: {
+          fontSize: defaultTheme.spacing(2),
+          color: darkTheme ? '#4D4D4D' : '#fefefe',
+            backgroundColor: darkTheme ? '#fefefe' : '#4d4d4d',
+        },
+        arrow: {
+          '&::before': {
+            backgroundColor: darkTheme ? '#fefefe' : '#4d4d4d',
+          },
+        },
+      },
     },
     props: {
       MuiButton: {
