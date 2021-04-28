@@ -8,6 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
+import CheckIcon from '@material-ui/icons/Check'
 import { makeStyles } from '@material-ui/styles'
 
 import Draggable from 'react-draggable'
@@ -23,6 +24,10 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     top: theme.spacing(4),
     right: theme.spacing(15),
+  },
+  checkIcon: {
+    fill: theme.palette.type === 'dark' ? 'lime' : '#3bab75',
+    verticalAlign: 'middle',
   },
 }))
 
@@ -78,6 +83,9 @@ const OverlayMenu = ({
             onClick={openAnnotationMenu}>
             1. specify selection (subject/property/value)
           </Button>
+          { !!selectedAnnotationBlock && (
+            <CheckIcon className={classes.checkIcon} />
+          )}
         </Grid>
         <Grid item xs={12}>
           <Button
