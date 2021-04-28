@@ -46,8 +46,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
         darkTheme={darkTheme}
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {data ? (
-        <React.Fragment>
-          <div className={classes.inputWrapper}>
+        <div className={classes.wrapper}>
+          <div className={classes.inputWrapper}
+            style={{ width: `${colWidth}px` }}>
             <Table
               file={data.filepath}
               sheet={data.sheetName}
@@ -55,15 +56,14 @@ const Content = ({darkTheme, setDarkTheme}) => {
               setOutputData={setOutputData} />
           </div>
           <Divider setColWidth={setColWidth} />
-          <div className={classes.outputWrapper}
-            style={{ left: `${colWidth}px` }}>
+          <div className={classes.outputWrapper}>
             {!!outputData ? (
               <Output filename={data.filepath} data={outputData} />
             ) : (
               <Instructions />
             )}
           </div>
-        </React.Fragment>
+        </div>
       ) : (
         <FileDrop onSuccess={data => setData(data)} />
       )}

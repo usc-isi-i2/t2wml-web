@@ -9,11 +9,11 @@ import classNames from '../utils/classNames'
 
 const useStyles = makeStyles(theme => ({
   divider: {
+    flex: '0 0 .5em',
     width: theme.spacing(1),
     height: '95vh',
     position: 'absolute',
     left: '65vw',
-    top: theme.spacing(6),
     cursor: 'ew-resize',
     background: '#c7c7c7',
     zIndex: '5',
