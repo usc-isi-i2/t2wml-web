@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -26,9 +28,34 @@ const OverlayMenu = ({ isOpen, handleOnClose, selection }) => {
 
   const classes = useStyles()
 
+  const openAnnotationMenu = () => {}
+  const openWikifyMenu = () => {}
+
   const renderContent = () => {}
 
-  const renderActions = () => {}
+  const renderActions = () => {
+    return (
+      <Grid container justify="space-between">
+        <Grid item xs={12}>
+          <Button
+            autoFocus
+            color="primary"
+            variant="link"
+            onClick={openAnnotationMenu}>
+            1. specify selection (subject/property/value)
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            color="primary"
+            variant="link"
+            onClick={openWikifyMenu}>
+            2. link selection to wikidata knowledge base
+          </Button>
+        </Grid>
+      </Grid>
+    )
+  }
 
   return (
     <Dialog
