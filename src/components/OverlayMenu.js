@@ -27,7 +27,8 @@ const useStyles = makeStyles(theme => ({
   },
   checkIcon: {
     fill: theme.palette.type === 'dark' ? 'lime' : '#3bab75',
-    verticalAlign: 'middle',
+    position: 'absolute',
+    left: theme.spacing(1),
   },
 }))
 
@@ -73,23 +74,25 @@ const OverlayMenu = ({
 
   const renderActions = () => {
     return (
-      <Grid container justify="space-between">
+      <Grid container spacing={1} justify="space-between">
         <Grid item xs={12}>
           <Button
             autoFocus
             color="primary"
-            variant="link"
+            variant="outlined"
+            fullWidth={true}
             onClick={openAnnotationMenu}>
+            { !!selectedAnnotationBlock && (
+              <CheckIcon className={classes.checkIcon} />
+            )}
             1. specify selection (subject/property/value)
           </Button>
-          { !!selectedAnnotationBlock && (
-            <CheckIcon className={classes.checkIcon} />
-          )}
         </Grid>
         <Grid item xs={12}>
           <Button
             color="primary"
-            variant="link"
+            variant="outlined"
+            fullWidth={true}
             onClick={openWikifyMenu}>
             2. link selection to wikidata knowledge base
           </Button>
