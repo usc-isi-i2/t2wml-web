@@ -73,6 +73,15 @@ const App = () => {
             cursor: 'not-allowed',
           },
         },
+        outlinedPrimary: {
+          color: darkTheme ? '#fefefe' : '#4D4D4D',
+          borderColor: darkTheme ? '#fefefe' : '#4D4D4D',
+          '&:hover': {
+            color: darkTheme ? '#333' : '#fff',
+            backgroundColor: darkTheme ? '#eee' : '#7f7f7f',
+            borderColor: darkTheme ? '#fefefe' : '#4D4D4D',
+          },
+        },
       },
       MuiFab: {
         root: {
