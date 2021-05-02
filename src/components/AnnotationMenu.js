@@ -273,7 +273,18 @@ const AnnotationMenu = ({
     })
   }
 
-  const renderForm = () => {
+  const renderTitle = () => {
+    return (
+      <React.Fragment>
+        Selected {utils.humanReadableSelection(selection)}
+        <IconButton aria-label="close" onClick={hideMenu}>
+          <CloseIcon />
+        </IconButton>
+      </React.Fragment>
+    )
+  }
+
+  const renderContent = () => {
     return (
       <form noValidate autoComplete="off"
         className={classes.form}
@@ -327,13 +338,10 @@ const AnnotationMenu = ({
       TransitionComponent={Draggable}
       TransitionProps={{ handle: '.draggable-handle' }}>
       <DialogTitle classes={{ root: 'draggable-handle' }}>
-        Selected {utils.humanReadableSelection(selection)}
-        <IconButton aria-label="close" onClick={hideMenu}>
-          <CloseIcon />
-        </IconButton>
+        {renderTitle()}
       </DialogTitle>
       <DialogContent>
-        {renderForm()}
+        {renderContent()}
       </DialogContent>
       <DialogActions>
         {renderButtons()}
