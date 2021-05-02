@@ -319,7 +319,7 @@ const AnnotationMenu = ({
 
   return (
     <Dialog
-      open={openMenu}
+      open={true}
       onClose={hideMenu}
       classes={{ paper: classes.menu }}
       aria-labelledby='dialog-modal-title'

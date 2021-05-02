@@ -632,7 +632,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }
 
   const renderAnnotationMenu = () => {
-    if ( !selection.current ) { return }
+    if ( !selection.current || !showAnnotationMenu ) { return }
     return (
       <AnnotationMenu
         file={file}
@@ -642,7 +642,6 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         annotations={annotationBlocks}
         selectedAnnotation={selectedAnnotationBlock}
         onSelectionChange={handleOnSelectionChange}
-        openMenu={showAnnotationMenu}
         hideMenu={hideOverlayMenu} />
     )
   }
