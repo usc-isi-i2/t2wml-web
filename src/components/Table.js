@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import { Paper } from '@material-ui/core'
 
-import OverlayMenu from './OverlayMenu'
+import AnnotationMenu from './AnnotationMenu'
 import useStyles from '../styles/table'
 import * as utils from '../utils/table'
+import fetchSuggestions from '../utils/fetchSuggestions'
 
 
 const Table = ({ file, sheet, data, setOutputData }) => {
@@ -20,8 +21,10 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
   const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
-
-  const [showOverlayMenu, setShowOverlayMenu] = useState()
+  const [suggestions, setSuggestions] = useState({
+    roles: [], types: [], children: {},
+  })
+  const [showAnnotationMenu, setShowAnnotationMenu] = useState(false)
 
   const MIN_NUM_ROWS = 100
   const rows = [...Array(Math.max(data.length, MIN_NUM_ROWS))]
@@ -58,6 +61,19 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    // user is opening the annotation menu with a selection
+    if ( selection && showAnnotationMenu && !selectedAnnotationBlock ) {
+
+      // call the annotation suggestion endpoint
+      fetchSuggestions(file, sheet, selection.current, annotationBlocks)
+      .then(data => setSuggestions(data))
+      .catch(error => console.log(error))
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showAnnotationMenu])
+
   const handleOnKeyDown = event => {
 
     // Close annotation menu with ESC key
@@ -80,7 +96,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       event.preventDefault()
 
       // Hide annotation menu when moving
-      setShowOverlayMenu(false)
+      setShowAnnotationMenu(false)
 
       const { x1, x2, y1, y2 } = selection.current
       const rows = tableElement.current.querySelectorAll('tr')
@@ -192,7 +208,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   const handleOnKeyUp = () => {
     clearTimeout(timeoutID.current)
     timeoutID.current = setTimeout(() => {
-      setShowOverlayMenu(true)
+      setShowAnnotationMenu(true)
     }, 350)
   }
 
@@ -360,7 +376,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       ) ) {
         hideOverlayMenu()
       } else {
-        setShowOverlayMenu(true)
+        setShowAnnotationMenu(true)
       }
     }
     setUserSelecting(false)
@@ -372,7 +388,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     // Allow users to select the resize-corner of the cell
     if ( element.className === 'cell-resize-corner' ) {
       prevElement.current = element.parentElement
-      setShowOverlayMenu(false)
+      setShowAnnotationMenu(false)
       setUserSelecting(true)
       return
     } else if ( element.nodeName !== 'TD' ) { return }
@@ -553,7 +569,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       setOutputData(outputData.cells)
     }
 
-    setShowOverlayMenu(false)
+    setShowAnnotationMenu(false)
     setSelectedAnnotationBlock(undefined)
     selection.current = null
     resetSelection()
@@ -618,15 +634,16 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   const renderAnnotationMenu = () => {
     if ( !selection.current ) { return }
     return (
-      <OverlayMenu
+      <AnnotationMenu
         file={file}
         sheet={sheet}
-        isOpen={showOverlayMenu}
         selection={selection.current}
-        annotationBlocks={annotationBlocks}
-        selectedAnnotationBlock={selectedAnnotationBlock}
-        handleOnSelectionChange={handleOnSelectionChange}
-        hideOverlayMenu={hideOverlayMenu} />
+        suggestions={suggestions}
+        annotations={annotationBlocks}
+        selectedAnnotation={selectedAnnotationBlock}
+        onSelectionChange={handleOnSelectionChange}
+        openMenu={showAnnotationMenu}
+        hideMenu={hideOverlayMenu} />
     )
   }
 
