@@ -78,7 +78,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
     // Close annotation menu with ESC key
     if ( event.code === 'Escape' ) {
-      hideOverlayMenu()
+      hideAnnotationMenu()
     }
 
     const arrowKeyCodes = [
@@ -374,7 +374,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         selection.current,
         annotationBlocks.map(block => block.selection),
       ) ) {
-        hideOverlayMenu()
+        hideAnnotationMenu()
       } else {
         setShowAnnotationMenu(true)
       }
@@ -445,7 +445,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     } else {
 
       // Reset annotation menu
-      hideOverlayMenu()
+      hideAnnotationMenu()
 
       // Activate the element on click
       selectCell(element, y1, x1, y1, x1, x1, y1, ['active'])
@@ -562,7 +562,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     }
   }
 
-  const hideOverlayMenu = (annotations, outputData, deletedAnnotationBlock=null) => {
+  const hideAnnotationMenu = (annotations, outputData, deletedAnnotationBlock=null) => {
 
     // update output data
     if ( outputData && outputData.cells ) {
@@ -642,7 +642,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         annotations={annotationBlocks}
         selectedAnnotation={selectedAnnotationBlock}
         onSelectionChange={handleOnSelectionChange}
-        hideMenu={hideOverlayMenu} />
+        hideMenu={hideAnnotationMenu} />
     )
   }
 
