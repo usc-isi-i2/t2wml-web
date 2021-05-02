@@ -63,7 +63,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
   useEffect(() => {
     // user is opening the annotation menu with a selection
-    if ( selection && showAnnotationMenu && !selectedAnnotationBlock ) {
+    if ( selection.current && showAnnotationMenu && !selectedAnnotationBlock ) {
 
       // call the annotation suggestion endpoint
       fetchSuggestions(file, sheet, selection.current, annotationBlocks)
