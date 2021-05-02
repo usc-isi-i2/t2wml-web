@@ -413,11 +413,13 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     const y1 = element.parentElement.rowIndex
     const y2 = element.parentElement.rowIndex
     const newSelection = { x1, x2, y1, y2 }
-    setTargetSelection(newSelection)
 
     // check if the user is selecting an annotation block
     const selectedBlock = utils.checkSelectedAnnotationBlocks(newSelection, annotationBlocks)
     if ( selectedBlock ) {
+
+      // update the target selection cell
+      setTargetSelection(newSelection)
 
       // Reset annotation menu
       if ( selectedBlock !== selectedAnnotationBlock ) {
