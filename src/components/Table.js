@@ -12,7 +12,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
   const classes = useStyles()
 
-  const selection = useRef({})
+  const selection = useRef(null)
   const timeoutID = useRef(null)
   const prevElement = useRef(null)
   const tableElement = useRef(null)
@@ -63,10 +63,10 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
   useEffect(() => {
     // user is opening the annotation menu with a selection
-    if ( selection.current.area && showAnnotationMenu && !selectedAnnotationBlock ) {
+    if ( selection.current && showAnnotationMenu && !selectedAnnotationBlock ) {
 
       // call the annotation suggestion endpoint
-      fetchSuggestions(file, sheet, selection.current.area, annotationBlocks)
+      fetchSuggestions(file, sheet, selection.current, annotationBlocks)
       .then(data => setSuggestions(data))
       .catch(error => console.log(error))
     }
@@ -87,7 +87,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       'ArrowLeft',
       'ArrowRight',
     ]
-    if ( arrowKeyCodes.includes(event.code) && selection.current.area ) {
+    if ( arrowKeyCodes.includes(event.code) && selection.current ) {
 
       // Don't allow moving around when users are typing
       if ( (event.target).nodeName === 'INPUT' ) { return }
@@ -98,7 +98,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       // Hide annotation menu when moving
       setShowAnnotationMenu(false)
 
-      const { x1, x2, y1, y2 } = selection.current.area
+      const { x1, x2, y1, y2 } = selection.current
       const rows = tableElement.current.querySelectorAll('tr')
 
       // arrow up
@@ -107,18 +107,18 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         // extend selection with shift key
         if ( event.shiftKey ) {
           if ( y1 === y2 ) {
-            selection.current.area = {'x1': x1, 'x2': x2, 'y1': y1 - 1, 'y2': y2}
+            selection.current = {'x1': x1, 'x2': x2, 'y1': y1 - 1, 'y2': y2}
             prevDirection.current = 'up'
           } else {
             if ( prevDirection.current === 'down' ) {
-              selection.current.area = {'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2 - 1}
+              selection.current = {'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2 - 1}
             } else {
-              selection.current.area = {'x1': x1, 'x2': x2, 'y1': y1 - 1, 'y2': y2}
+              selection.current = {'x1': x1, 'x2': x2, 'y1': y1 - 1, 'y2': y2}
               prevDirection.current = 'up'
             }
           }
         } else {
-          selection.current.area = {'x1': x1, 'x2': x1, 'y1': y1 - 1, 'y2': y1 - 1}
+          selection.current = {'x1': x1, 'x2': x1, 'y1': y1 - 1, 'y2': y1 - 1}
           const nextElement = rows[y1 - 1].children[x1]
           prevElement.current = nextElement
         }
@@ -128,18 +128,18 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       if ( event.code === 'ArrowDown' && y1 < rows.length - 1 ) {
         if ( event.shiftKey ) {
           if ( y1 === y2 ) {
-            selection.current.area = {'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2 + 1}
+            selection.current = {'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2 + 1}
             prevDirection.current = 'down'
           } else {
             if ( prevDirection.current === 'up' ) {
-              selection.current.area = {'x1': x1, 'x2': x2, 'y1': y1 + 1, 'y2': y2}
+              selection.current = {'x1': x1, 'x2': x2, 'y1': y1 + 1, 'y2': y2}
             } else {
-              selection.current.area = {'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2 + 1}
+              selection.current = {'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2 + 1}
               prevDirection.current = 'down'
             }
           }
         } else {
-          selection.current.area = {'x1': x1, 'x2': x1, 'y1': y1 + 1, 'y2': y1 + 1}
+          selection.current = {'x1': x1, 'x2': x1, 'y1': y1 + 1, 'y2': y1 + 1}
           const nextElement = rows[y1 + 1].children[x1]
           prevElement.current = nextElement
         }
@@ -149,18 +149,18 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       if ( event.code === 'ArrowLeft' && x1 > 1 ) {
         if ( event.shiftKey ) {
           if ( x1 === x2 ) {
-            selection.current.area = {'x1': x1 - 1, 'x2': x2, 'y1': y1, 'y2': y2}
+            selection.current = {'x1': x1 - 1, 'x2': x2, 'y1': y1, 'y2': y2}
             prevDirection.current = 'left'
           } else {
             if ( prevDirection.current === 'right' ) {
-              selection.current.area = {'x1': x1, 'x2': x2 - 1, 'y1': y1, 'y2': y2}
+              selection.current = {'x1': x1, 'x2': x2 - 1, 'y1': y1, 'y2': y2}
             } else {
-              selection.current.area = {'x1': x1 - 1, 'x2': x2, 'y1': y1, 'y2': y2}
+              selection.current = {'x1': x1 - 1, 'x2': x2, 'y1': y1, 'y2': y2}
               prevDirection.current = 'left'
             }
           }
         } else {
-          selection.current.area = {'x1': x1 - 1, 'x2': x1 - 1, 'y1': y1, 'y2': y1}
+          selection.current = {'x1': x1 - 1, 'x2': x1 - 1, 'y1': y1, 'y2': y1}
           const nextElement = rows[y1].children[x1 - 1]
           prevElement.current = nextElement
         }
@@ -170,18 +170,18 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       if (event.code === 'ArrowRight' && x1 < rows[y1].children.length - 1) {
         if ( event.shiftKey ) {
           if ( x1 === x2 ) {
-            selection.current.area = {'x1': x1, 'x2': x2 + 1, 'y1': y1, 'y2': y2}
+            selection.current = {'x1': x1, 'x2': x2 + 1, 'y1': y1, 'y2': y2}
             prevDirection.current = 'right'
           } else {
             if ( prevDirection.current === 'left' ) {
-              selection.current.area = {'x1': x1 + 1, 'x2': x2, 'y1': y1, 'y2': y2}
+              selection.current = {'x1': x1 + 1, 'x2': x2, 'y1': y1, 'y2': y2}
             } else {
-              selection.current.area = {'x1': x1, 'x2': x2 + 1, 'y1': y1, 'y2': y2}
+              selection.current = {'x1': x1, 'x2': x2 + 1, 'y1': y1, 'y2': y2}
               prevDirection.current = 'right'
             }
           }
         } else {
-          selection.current.area = {'x1': x1 + 1, 'x2': x1 + 1, 'y1': y1, 'y2': y1}
+          selection.current = {'x1': x1 + 1, 'x2': x1 + 1, 'y1': y1, 'y2': y1}
           const nextElement = rows[y1].children[x1 + 1]
           prevElement.current = nextElement
         }
@@ -189,12 +189,12 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
       // check if the user is selecting an annotation block
       setAnnotationBlocks(annotationBlocks => {
-        const selectedBlock = utils.checkSelectedAnnotationBlocks(selection.current.area, annotationBlocks)
+        const selectedBlock = utils.checkSelectedAnnotationBlocks(selection.current, annotationBlocks)
         if ( selectedBlock ) {
           // Reset annotation menu
           if ( selectedBlock !== selectedAnnotationBlock ) {
             setSelectedAnnotationBlock(selectedBlock)
-            selection.current.area = selectedBlock.selection
+            selection.current = selectedBlock.selection
           }
         } else {
           setSelectedAnnotationBlock(undefined)
@@ -230,12 +230,12 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }
 
   const resetEmptyCells = (x1, x2, y1, y2) => {
-    if ( !selection.current.area ) { return }
+    if ( !selection.current ) { return }
 
     const rows = tableElement.current.querySelectorAll('tr')
     rows.forEach((row, index) => {
-      if ( selection.current.area.y1 < selection.current.area.y2 ) {
-        if ( index >= selection.current.area.y1 && index <= selection.current.area.y2 ) {
+      if ( selection.current.y1 < selection.current.y2 ) {
+        if ( index >= selection.current.y1 && index <= selection.current.y2 ) {
           // reset cell class names on the vertical axes
           let colIndex = x1
           while ( colIndex > x2 ) {
@@ -244,7 +244,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
           }
         }
       } else {
-        if ( index >= selection.current.area.y2 && index <= selection.current.area.y1 ) {
+        if ( index >= selection.current.y2 && index <= selection.current.y1 ) {
           // reset cell class names on the vertical axes
           let colIndex = x1
           while ( colIndex > x2 ) {
@@ -259,15 +259,15 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     let rowIndex = y1
     while ( rowIndex > y2 ) {
       const row = rows[rowIndex]
-      if ( selection.current.area.x1 < selection.current.area.x2 ) {
-        let colIndex = selection.current.area.x1
-        while ( colIndex <= selection.current.area.x2 ) {
+      if ( selection.current.x1 < selection.current.x2 ) {
+        let colIndex = selection.current.x1
+        while ( colIndex <= selection.current.x2 ) {
           row.children[colIndex].className = ''
           colIndex = colIndex + 1
         }
       } else {
-        let colIndex = selection.current.area.x2
-        while ( colIndex <= selection.current.area.x1 ) {
+        let colIndex = selection.current.x2
+        while ( colIndex <= selection.current.x1 ) {
           row.children[colIndex].className = ''
           colIndex = colIndex + 1
         }
@@ -279,10 +279,10 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   useEffect(() => {
     updateSelections()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedAnnotationBlock, selection.current.area])
+  }, [selectedAnnotationBlock, selection.current])
 
   const updateSelections = () => {
-    if ( !selection.current.area ) { return }
+    if ( !selection.current ) { return }
 
     // Reset selections before update
     resetSelection()
@@ -297,7 +297,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     }
 
     const rows = tableElement.current.querySelectorAll('tr')
-    const { x1, x2, y1, y2 } = selection.current.area
+    const { x1, x2, y1, y2 } = selection.current
     const leftCol = Math.min(x1, x2)
     const rightCol = Math.max(x1, x2)
     const topRow = Math.min(y1, y2)
@@ -368,10 +368,10 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }
 
   const handleOnMouseUp = () => {
-    if ( selection.current.area ) {
-      selection.current.area = utils.standardizeSelection(selection.current.area)
+    if ( selection.current ) {
+      selection.current = utils.standardizeSelection(selection.current)
       if ( !selectedAnnotationBlock && utils.checkOverlaps(
-        selection.current.area,
+        selection.current,
         annotationBlocks.map(block => block.selection),
       ) ) {
         hideOverlayMenu()
@@ -407,7 +407,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       // Reset annotation menu
       if ( selectedBlock !== selectedAnnotationBlock ) {
         setSelectedAnnotationBlock(selectedBlock)
-        selection.current.area = selectedBlock.selection
+        selection.current = selectedBlock.selection
       }
 
       return
@@ -417,14 +417,14 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     setUserSelecting(true)
 
     // Extend the previous selection if user is holding down Shift key
-    if ( event.shiftKey && selection.current.area ) {
+    if ( event.shiftKey && selection.current ) {
 
       // initialize the updated selection object
       const newUserSelection = {}
 
       // Extend the previous selection left or right
-      if ( x1 !== selection.current.area['x1'] ) {
-        if ( x1 < selection.current.area['x1'] ) {
+      if ( x1 !== selection.current['x1'] ) {
+        if ( x1 < selection.current['x1'] ) {
           newUserSelection['x1'] = x1
         } else {
           newUserSelection['x2'] = x1
@@ -432,8 +432,8 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       }
 
       // Extend the previous selection up or down
-      if ( y1 !== selection.current.area['y1'] ) {
-        if ( y1 < selection.current.area['y1'] ) {
+      if ( y1 !== selection.current['y1'] ) {
+        if ( y1 < selection.current['y1'] ) {
           newUserSelection['y1'] = y1
         } else {
           newUserSelection['y2'] = y1
@@ -441,7 +441,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       }
 
       // Update user selection with the new coordinates
-      selection.current.area = {...selection.current.area, ...newUserSelection}
+      selection.current = {...selection.current, ...newUserSelection}
     } else {
 
       // Reset annotation menu
@@ -449,7 +449,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
       // Activate the element on click
       selectCell(element, y1, x1, y1, x1, x1, y1, ['active'])
-      selection.current.area = { x1, x2, y1, y2 }
+      selection.current = { x1, x2, y1, y2 }
     }
 
     // Initialize the previous element with the one selected
@@ -464,13 +464,13 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     if ( element.nodeName !== 'TD' ) { return }
 
     if ( userSelecting && !event.shiftKey ) {
-      if ( !selection.current.area ) { return }
+      if ( !selection.current ) { return }
 
       // Update the last x and y coordinates of the selection
       const newCellIndex = element.cellIndex
       const newRowIndex = element.parentElement.rowIndex
-      selection.current.area = {
-        ...selection.current.area,
+      selection.current = {
+        ...selection.current,
         x2: newCellIndex,
         y2: newRowIndex,
       }
@@ -571,7 +571,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
     setShowAnnotationMenu(false)
     setSelectedAnnotationBlock(undefined)
-    selection.current.area = null
+    selection.current = null
     resetSelection()
 
     if ( annotations && annotations instanceof Array ) {
@@ -623,8 +623,8 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     )
   }
 
-  const handleOnSelectionChange = newAreaSelection => {
-    selection.current.area = {...newAreaSelection}
+  const handleOnSelectionChange = newSelection => {
+    selection.current = {...newSelection}
     updateSelections()
 
     // trigger a re-render of the annotation menu with the updated selection
@@ -632,12 +632,12 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }
 
   const renderAnnotationMenu = () => {
-    if ( !selection.current.area || !showAnnotationMenu ) { return }
+    if ( !selection.current || !showAnnotationMenu ) { return }
     return (
       <AnnotationMenu
         file={file}
         sheet={sheet}
-        selection={selection.current.area}
+        selection={selection.current}
         suggestions={suggestions}
         annotations={annotationBlocks}
         selectedAnnotation={selectedAnnotationBlock}
