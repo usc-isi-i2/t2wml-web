@@ -99,109 +99,117 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       // Hide annotation menu when moving
       setShowAnnotationMenu(false)
 
-      const { x1, x2, y1, y2 } = selection.current
-      const rows = tableElement.current.querySelectorAll('tr')
+      setTargetSelection(targetSelection => {
+        let nextSelection = {}
+        const { x1, x2, y1, y2 } = targetSelection
+        const rows = tableElement.current.querySelectorAll('tr')
 
-      // arrow up
-      if ( event.code === 'ArrowUp' && y1 > 1 ) {
+        // arrow up
+        if ( event.code === 'ArrowUp' && y1 > 1 ) {
 
-        // extend selection with shift key
-        if ( event.shiftKey ) {
-          if ( y1 === y2 ) {
-            selection.current = {'x1': x1, 'x2': x2, 'y1': y1 - 1, 'y2': y2}
-            prevDirection.current = 'up'
-          } else {
-            if ( prevDirection.current === 'down' ) {
-              selection.current = {'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2 - 1}
-            } else {
+          // extend selection with shift key
+          if ( event.shiftKey ) {
+            if ( y1 === y2 ) {
               selection.current = {'x1': x1, 'x2': x2, 'y1': y1 - 1, 'y2': y2}
               prevDirection.current = 'up'
-            }
-          }
-        } else {
-          selection.current = {'x1': x1, 'x2': x1, 'y1': y1 - 1, 'y2': y1 - 1}
-          const nextElement = rows[y1 - 1].children[x1]
-          prevElement.current = nextElement
-        }
-      }
-
-      // arrow down
-      if ( event.code === 'ArrowDown' && y1 < rows.length - 1 ) {
-        if ( event.shiftKey ) {
-          if ( y1 === y2 ) {
-            selection.current = {'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2 + 1}
-            prevDirection.current = 'down'
-          } else {
-            if ( prevDirection.current === 'up' ) {
-              selection.current = {'x1': x1, 'x2': x2, 'y1': y1 + 1, 'y2': y2}
             } else {
+              if ( prevDirection.current === 'down' ) {
+                selection.current = {'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2 - 1}
+              } else {
+                selection.current = {'x1': x1, 'x2': x2, 'y1': y1 - 1, 'y2': y2}
+                prevDirection.current = 'up'
+              }
+            }
+          } else {
+            nextSelection = {'x1': x1, 'x2': x1, 'y1': y1 - 1, 'y2': y1 - 1}
+            setTargetSelection(nextSelection)
+            const nextElement = rows[y1 - 1].children[x1]
+            prevElement.current = nextElement
+          }
+        }
+
+        // arrow down
+        if ( event.code === 'ArrowDown' && y1 < rows.length - 1 ) {
+          if ( event.shiftKey ) {
+            if ( y1 === y2 ) {
               selection.current = {'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2 + 1}
               prevDirection.current = 'down'
-            }
-          }
-        } else {
-          selection.current = {'x1': x1, 'x2': x1, 'y1': y1 + 1, 'y2': y1 + 1}
-          const nextElement = rows[y1 + 1].children[x1]
-          prevElement.current = nextElement
-        }
-      }
-
-      // arrow left
-      if ( event.code === 'ArrowLeft' && x1 > 1 ) {
-        if ( event.shiftKey ) {
-          if ( x1 === x2 ) {
-            selection.current = {'x1': x1 - 1, 'x2': x2, 'y1': y1, 'y2': y2}
-            prevDirection.current = 'left'
-          } else {
-            if ( prevDirection.current === 'right' ) {
-              selection.current = {'x1': x1, 'x2': x2 - 1, 'y1': y1, 'y2': y2}
             } else {
+              if ( prevDirection.current === 'up' ) {
+                selection.current = {'x1': x1, 'x2': x2, 'y1': y1 + 1, 'y2': y2}
+              } else {
+                selection.current = {'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2 + 1}
+                prevDirection.current = 'down'
+              }
+            }
+          } else {
+            nextSelection = {'x1': x1, 'x2': x1, 'y1': y1 + 1, 'y2': y1 + 1}
+            setTargetSelection(nextSelection)
+            const nextElement = rows[y1 + 1].children[x1]
+            prevElement.current = nextElement
+          }
+        }
+
+        // arrow left
+        if ( event.code === 'ArrowLeft' && x1 > 1 ) {
+          if ( event.shiftKey ) {
+            if ( x1 === x2 ) {
               selection.current = {'x1': x1 - 1, 'x2': x2, 'y1': y1, 'y2': y2}
               prevDirection.current = 'left'
-            }
-          }
-        } else {
-          selection.current = {'x1': x1 - 1, 'x2': x1 - 1, 'y1': y1, 'y2': y1}
-          const nextElement = rows[y1].children[x1 - 1]
-          prevElement.current = nextElement
-        }
-      }
-
-      // arrow right
-      if (event.code === 'ArrowRight' && x1 < rows[y1].children.length - 1) {
-        if ( event.shiftKey ) {
-          if ( x1 === x2 ) {
-            selection.current = {'x1': x1, 'x2': x2 + 1, 'y1': y1, 'y2': y2}
-            prevDirection.current = 'right'
-          } else {
-            if ( prevDirection.current === 'left' ) {
-              selection.current = {'x1': x1 + 1, 'x2': x2, 'y1': y1, 'y2': y2}
             } else {
+              if ( prevDirection.current === 'right' ) {
+                selection.current = {'x1': x1, 'x2': x2 - 1, 'y1': y1, 'y2': y2}
+              } else {
+                selection.current = {'x1': x1 - 1, 'x2': x2, 'y1': y1, 'y2': y2}
+                prevDirection.current = 'left'
+              }
+            }
+          } else {
+            nextSelection = {'x1': x1 - 1, 'x2': x1 - 1, 'y1': y1, 'y2': y1}
+            setTargetSelection(nextSelection)
+            const nextElement = rows[y1].children[x1 - 1]
+            prevElement.current = nextElement
+          }
+        }
+
+        // arrow right
+        if ( event.code === 'ArrowRight' && x1 < rows[y1].children.length - 1 ) {
+          if ( event.shiftKey ) {
+            if ( x1 === x2 ) {
               selection.current = {'x1': x1, 'x2': x2 + 1, 'y1': y1, 'y2': y2}
               prevDirection.current = 'right'
+            } else {
+              if ( prevDirection.current === 'left' ) {
+                selection.current = {'x1': x1 + 1, 'x2': x2, 'y1': y1, 'y2': y2}
+              } else {
+                selection.current = {'x1': x1, 'x2': x2 + 1, 'y1': y1, 'y2': y2}
+                prevDirection.current = 'right'
+              }
             }
+          } else {
+            nextSelection = {'x1': x1 + 1, 'x2': x1 + 1, 'y1': y1, 'y2': y1}
+            setTargetSelection(nextSelection)
+            const nextElement = rows[y1].children[x1 + 1]
+            prevElement.current = nextElement
           }
-        } else {
-          selection.current = {'x1': x1 + 1, 'x2': x1 + 1, 'y1': y1, 'y2': y1}
-          const nextElement = rows[y1].children[x1 + 1]
-          prevElement.current = nextElement
         }
-      }
 
-      // check if the user is selecting an annotation block
-      setAnnotationBlocks(annotationBlocks => {
-        const selectedBlock = utils.checkSelectedAnnotationBlocks(selection.current, annotationBlocks)
-        if ( selectedBlock ) {
-          // Reset annotation menu
-          if ( selectedBlock !== selectedAnnotationBlock ) {
-            setSelectedAnnotationBlock(selectedBlock)
-            selection.current = selectedBlock.selection
+        // check if the user is selecting an annotation block
+        setAnnotationBlocks(annotationBlocks => {
+          const selectedBlock = utils.checkSelectedAnnotationBlocks(nextSelection, annotationBlocks)
+          if ( selectedBlock ) {
+            // Reset annotation menu
+            if ( selectedBlock !== selectedAnnotationBlock ) {
+              setSelectedAnnotationBlock(selectedBlock)
+              selection.current = selectedBlock.selection
+            }
+          } else {
+            setSelectedAnnotationBlock(undefined)
+            selection.current = nextSelection
           }
-        } else {
-          setSelectedAnnotationBlock(undefined)
           updateSelections()
-        }
-        return annotationBlocks
+          return annotationBlocks
+        })
       })
     }
   }
