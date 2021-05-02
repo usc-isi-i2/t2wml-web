@@ -10,6 +10,7 @@ import {
   IconButton,
   TextField,
   MenuItem,
+  FormHelperText,
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 
@@ -138,6 +139,16 @@ const AnnotationMenu = ({
         onSelectionChange(newSelection)
       }
     }
+  }
+
+  const renderFormInstructions = () => {
+    return (
+      <Grid item xs={12}>
+        <FormHelperText component="p">
+          Use this form to provide annotations for the selected area in the table
+        </FormHelperText>
+      </Grid>
+    )
   }
 
   const renderSelectedAreaInput = () => {
@@ -290,6 +301,7 @@ const AnnotationMenu = ({
         className={classes.form}
         onSubmit={handleOnSubmit}>
         <Grid container spacing={3}>
+          {renderFormInstructions()}
           {renderSelectedAreaInput()}
           {renderSelectedRoleInput()}
           {renderSelectedTypeInput()}
