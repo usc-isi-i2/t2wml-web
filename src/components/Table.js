@@ -278,6 +278,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }
 
   useEffect(() => {
+    // remove any previous highlights from the table cells
     tableElement.current.querySelectorAll('td.highlight').forEach(e => {
       e.classList.remove('highlight')
     })
