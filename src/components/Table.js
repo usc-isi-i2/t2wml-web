@@ -25,6 +25,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     roles: [], types: [], children: {},
   })
   const [showAnnotationMenu, setShowAnnotationMenu] = useState(false)
+  const [targetSelection, setTargetSelection] = useState(false)
 
   const MIN_NUM_ROWS = 100
   const rows = [...Array(Math.max(data.length, MIN_NUM_ROWS))]
@@ -277,6 +278,19 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }
 
   useEffect(() => {
+    tableElement.current.querySelectorAll('td.highlight').forEach(e => {
+      e.classList.remove('highlight')
+    })
+
+    // highlight original target selection (cell)
+    if ( !targetSelection || !tableElement.current ) { return }
+    const {x1, y1} = targetSelection
+    const rows = tableElement.current.querySelectorAll('tr')
+    const element = rows[y1].children[x1]
+    element.classList.add('highlight')
+  }, [targetSelection])
+
+  useEffect(() => {
     updateSelections()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedAnnotationBlock, selection.current])
@@ -399,6 +413,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     const y1 = element.parentElement.rowIndex
     const y2 = element.parentElement.rowIndex
     const newSelection = { x1, x2, y1, y2 }
+    setTargetSelection(newSelection)
 
     // check if the user is selecting an annotation block
     const selectedBlock = utils.checkSelectedAnnotationBlocks(newSelection, annotationBlocks)
@@ -571,6 +586,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
     setShowAnnotationMenu(false)
     setSelectedAnnotationBlock(undefined)
+    setTargetSelection(undefined)
     selection.current = null
     resetSelection()
 
