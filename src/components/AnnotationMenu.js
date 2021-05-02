@@ -276,7 +276,7 @@ const AnnotationMenu = ({
   const renderTitle = () => {
     return (
       <React.Fragment>
-        Selected {utils.humanReadableSelection(selection)}
+        {`Annotate this ${utils.isBlock(selection) ? 'block' : 'cell'}`}
         <IconButton aria-label="close" onClick={hideMenu}>
           <CloseIcon />
         </IconButton>
