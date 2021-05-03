@@ -289,6 +289,11 @@ const AnnotationMenu = ({
                   ) : ''}
                   onChange={handleOnChange} />
               </Grid>
+              <Grid item xs={6}>
+                <FormHelperText component="p" style={{marginTop: '0'}}>
+                  You can select property cells in the table or search wikidata for a property in the search box below
+                </FormHelperText>
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   fullWidth
