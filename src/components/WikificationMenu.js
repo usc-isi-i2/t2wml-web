@@ -24,6 +24,17 @@ const useStyles = makeStyles(theme => ({
     top: theme.spacing(12),
     right: theme.spacing(5),
   },
+  results: {
+    paddingInlineStart: theme.spacing(2),
+    marginBlockStart: 0,
+    '&> li': {
+      paddingBottom: theme.spacing(1),
+      cursor: 'pointer',
+      '&:hover': {
+        textDecoration: 'underline',
+      },
+    },
+  },
 }))
 
 
@@ -51,6 +62,9 @@ const WikificationMenu = ({
         .catch(error => console.log(error))
       }, 250)
     }
+  }
+
+  const selectResult = result => {
   }
 
   const renderTitle = () => {
@@ -88,12 +102,28 @@ const WikificationMenu = ({
     )
   }
 
+  const renderQnodeResults = () => {
+    return (
+      <Grid item xs={12}>
+        <ol className={classes.results}>
+          {results.map(result => (
+            <li key={result.qnode}
+              onClick={() => selectResult(result)}>
+              {`${result.label[0]} (${result.qnode})`}
+            </li>
+          ))}
+        </ol>
+      </Grid>
+    )
+  }
+
   const renderContent = () => {
     return (
       <Grid container spacing={3}>
         {renderFormInstructions()}
         <p style={{paddingLeft: '12px'}}>value: {selectedCell}</p>
         {renderQnodeSearch()}
+        {renderQnodeResults()}
       </Grid>
     )
   }
