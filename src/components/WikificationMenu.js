@@ -49,6 +49,7 @@ const WikificationMenu = ({
   const timeoutID = useRef(null)
 
   const [results, setResults] = useState([])
+  const [selectedQnode, setSelectedQnode] = useState()
 
   const handleOnChange = event => {
     const value = event.target.value
@@ -65,6 +66,7 @@ const WikificationMenu = ({
   }
 
   const selectResult = result => {
+    setSelectedQnode(result)
   }
 
   const renderTitle = () => {
@@ -121,7 +123,14 @@ const WikificationMenu = ({
     return (
       <Grid container spacing={3}>
         {renderFormInstructions()}
-        <p style={{paddingLeft: '12px'}}>value: {selectedCell}</p>
+        <Grid item xs={12}>
+          <p style={{paddingLeft: '12px'}}>value: {selectedCell}</p>
+          {!!selectedQnode && (
+            <p style={{paddingLeft: '12px', color: '#006699'}}>
+              qnode: {`${selectedQnode.label[0]} (${selectedQnode.qnode})`}
+            </p>
+          )}
+        </Grid>
         {renderQnodeSearch()}
         {renderQnodeResults()}
       </Grid>
