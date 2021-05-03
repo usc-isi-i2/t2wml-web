@@ -316,6 +316,15 @@ const AnnotationMenu = ({
                   value={formState[`selected${option.label}`] || defaultValue}
                   onChange={handleOnChange} />
               </Grid>
+              <Grid item xs={12}>
+                <ol className={classes.properties}>
+                  {properties.map(property => (
+                    <li key={property.qnode}>
+                      {`${property.label[0]} (${property.qnode})`}
+                    </li>
+                  ))}
+                </ol>
+              </Grid>
             </Grid>
           </Grid>
         )
