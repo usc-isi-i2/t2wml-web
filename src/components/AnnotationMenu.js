@@ -18,6 +18,7 @@ import Draggable from 'react-draggable'
 
 import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
+import fetchProperties from '../utils/fetchProperties'
 import useStyles from '../styles/annotationMenu'
 import * as utils from '../utils/table'
 
@@ -47,6 +48,8 @@ const AnnotationMenu = ({
     selectedFormat: '',
     selectedUnit: '',
   })
+
+  const [properties, setProperties] = useState([])
 
   useEffect(() => {
 
@@ -137,6 +140,15 @@ const AnnotationMenu = ({
       const newSelection = parseSelectedAreaInput(value)
       if ( newSelection ) {
         onSelectionChange(newSelection)
+      }
+    }
+    if ( event.target.name === 'selectedProperty' ) {
+      if ( !value ) {
+        setProperties([])
+      } else {
+        fetchProperties(value)
+        .then(data => setProperties(data))
+        .catch(error => console.log(error))
       }
     }
   }
