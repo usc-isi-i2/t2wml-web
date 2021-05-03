@@ -8,6 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import IconButton from '@material-ui/core/IconButton'
+import TextField from '@material-ui/core/TextField'
 import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/styles'
 
@@ -54,11 +55,26 @@ const WikificationMenu = ({
     )
   }
 
+  const renderQnodeSearch = () => {
+    return (
+      <Grid item xs={12}>
+        <TextField
+          fullWidth
+          variant="outlined"
+          label={'Search wikidata'}
+          id={'wikidata-search'}
+          name={'wikidata-search'}
+          onChange={handleOnChange} />
+      </Grid>
+    )
+  }
+
   const renderContent = () => {
     return (
       <Grid container spacing={3}>
         {renderFormInstructions()}
         <p style={{paddingLeft: '12px'}}>value: {selectedCell}</p>
+        {renderQnodeSearch()}
       </Grid>
     )
   }
