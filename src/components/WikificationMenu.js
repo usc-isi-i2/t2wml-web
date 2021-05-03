@@ -137,7 +137,23 @@ const WikificationMenu = ({
     )
   }
 
-  const renderActions = () => {}
+  const handleOnSubmit = () => {}
+
+  const renderActions = () => {
+    return (
+      <Grid container spacing={3} justify="space-between">
+        <Grid item>
+          <Button
+            autoFocus
+            color="primary"
+            variant="contained"
+            onClick={handleOnSubmit}>
+            Submit
+          </Button>
+        </Grid>
+      </Grid>
+    )
+  }
 
   return (
     <Dialog
