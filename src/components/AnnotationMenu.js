@@ -52,7 +52,7 @@ const AnnotationMenu = ({
   })
 
   const [properties, setProperties] = useState([])
-  const [showWikifyMenu, setShowWikifyMenu] = useState(false)
+  const [showWikificationMenu, setShowWikificationMenu] = useState(false)
 
   useEffect(() => {
 
@@ -141,9 +141,9 @@ const AnnotationMenu = ({
     })
     if ( event.target.name === 'selectedType' ) {
       if ( value === 'wikibaseitem' ) {
-        setShowWikifyMenu(true)
+        setShowWikificationMenu(true)
       } else {
-        setShowWikifyMenu(false)
+        setShowWikificationMenu(false)
       }
     }
     if ( event.target.name === 'selectedArea' ) {
