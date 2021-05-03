@@ -282,7 +282,7 @@ const AnnotationMenu = ({
                   id={'selectedPropertyCells'}
                   name={'selectedPropertyCells'}
                   label={'Select property cells'}
-                  value={formState.selectedPropertyCells || defaultValue}
+                  value={formState.selectedPropertyCells}
                   error={!!formState.selectedPropertyCells && !parsedCorrectly}
                   helperText={formState.selectedPropertyCells && !parsedCorrectly ? (
                     'format: [col][row]:[col][row]'
