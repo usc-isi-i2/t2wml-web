@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import {
   Grid,
@@ -36,6 +36,8 @@ const AnnotationMenu = ({
 }) => {
 
   const classes = useStyles()
+
+  const timeoutID = useRef(null)
 
   const [formState, setFormState] = useState({
     selectedArea: '',
@@ -146,9 +148,12 @@ const AnnotationMenu = ({
       if ( !value ) {
         setProperties([])
       } else {
-        fetchProperties(value)
-        .then(data => setProperties(data))
-        .catch(error => console.log(error))
+        clearTimeout(timeoutID.current)
+        timeoutID.current = setTimeout(() => {
+          fetchProperties(value)
+          .then(data => setProperties(data))
+          .catch(error => console.log(error))
+        }, 250)
       }
     }
   }
