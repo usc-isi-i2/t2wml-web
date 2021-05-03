@@ -153,6 +153,14 @@ const AnnotationMenu = ({
     }
   }
 
+  const selectProperty = property => {
+    setFormState({
+      ...formState,
+      selectedProperty: property.qnode,
+    })
+    setProperties([])
+  }
+
   const renderFormInstructions = () => {
     return (
       <Grid item xs={12}>
@@ -319,7 +327,8 @@ const AnnotationMenu = ({
               <Grid item xs={12}>
                 <ol className={classes.properties}>
                   {properties.map(property => (
-                    <li key={property.qnode}>
+                    <li key={property.qnode}
+                      onClick={() => selectProperty(property)}>
                       {`${property.label[0]} (${property.qnode})`}
                     </li>
                   ))}
