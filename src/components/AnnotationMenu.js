@@ -52,6 +52,7 @@ const AnnotationMenu = ({
   })
 
   const [properties, setProperties] = useState([])
+  const [showWikifyMenu, setShowWikifyMenu] = useState(false)
 
   useEffect(() => {
 
@@ -138,6 +139,13 @@ const AnnotationMenu = ({
       ...formState,
       [event.target.name]: value,
     })
+    if ( event.target.name === 'selectedType' ) {
+      if ( value === 'wikibaseitem' ) {
+        setShowWikifyMenu(true)
+      } else {
+        setShowWikifyMenu(false)
+      }
+    }
     if ( event.target.name === 'selectedArea' ) {
       const newSelection = parseSelectedAreaInput(value)
       if ( newSelection ) {
