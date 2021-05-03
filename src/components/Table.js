@@ -659,10 +659,12 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
   const renderAnnotationMenu = () => {
     if ( !selection.current || !showAnnotationMenu ) { return }
+    const selectedCell = data[targetSelection.y1-1][targetSelection.x1-1]
     return (
       <AnnotationMenu
         file={file}
         sheet={sheet}
+        selectedCell={selectedCell}
         selection={selection.current}
         suggestions={suggestions}
         annotations={annotationBlocks}

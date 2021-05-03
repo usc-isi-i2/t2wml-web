@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
 const WikificationMenu = ({
   hideMenu,
   selection,
+  selectedCell,
 }) => {
 
   const classes = useStyles()
@@ -42,7 +43,11 @@ const WikificationMenu = ({
     )
   }
 
-  const renderContent = () => {}
+  const renderContent = () => {
+    return (
+      <p>value: {selectedCell}</p>
+    )
+  }
 
   const renderActions = () => {}
 

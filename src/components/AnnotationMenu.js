@@ -27,6 +27,7 @@ import * as utils from '../utils/table'
 const AnnotationMenu = ({
   file,
   sheet,
+  selectedCell,
   selection,
   suggestions,
   annotations,
@@ -456,6 +457,7 @@ const AnnotationMenu = ({
     return (
       <WikificationMenu
         selection={selection}
+        selectedCell={selectedCell}
         hideMenu={() => hideWikificationMenu()} />
     )
   }
