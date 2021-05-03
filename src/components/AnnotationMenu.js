@@ -161,6 +161,7 @@ const AnnotationMenu = ({
           name="selectedArea"
           label="Selected area"
           variant="outlined"
+          inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
           value={formState.selectedArea || defaultValue}
           error={!!formState.selectedArea && !parsedCorrectly}
