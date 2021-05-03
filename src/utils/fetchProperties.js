@@ -1,4 +1,4 @@
-const fetchSuggestions = q => {
+const fetchProperties = q => {
   const url = `https://kgtk.isi.edu/api?q=${q}&type=ngram&extra_info=true&language=en&item=property&size=5`
 
   return new Promise((resolve, reject) => {
@@ -19,4 +19,4 @@ const fetchSuggestions = q => {
 }
 
 
-export default fetchSuggestions
+export default fetchProperties
