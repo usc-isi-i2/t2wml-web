@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/styles'
 
 import Draggable from 'react-draggable'
 
+import fetchQnodes from '../utils/fetchQnodes'
 import * as utils from '../utils/table'
 
 
@@ -33,6 +34,24 @@ const WikificationMenu = ({
 }) => {
 
   const classes = useStyles()
+
+  const timeoutID = useRef(null)
+
+  const [results, setResults] = useState([])
+
+  const handleOnChange = event => {
+    const value = event.target.value
+    if ( !value ) {
+      setResults([])
+    } else {
+      clearTimeout(timeoutID.current)
+      timeoutID.current = setTimeout(() => {
+        fetchQnodes(value)
+        .then(data => setResults(data))
+        .catch(error => console.log(error))
+      }, 250)
+    }
+  }
 
   const renderTitle = () => {
     return (
