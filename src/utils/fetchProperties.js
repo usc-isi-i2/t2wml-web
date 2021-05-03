@@ -1,5 +1,5 @@
 const fetchSuggestions = q => {
-  const url = `https://kgtk.isi.edu/api?q=${q}&type=ngram&extra_info=true&language=en&item=property`
+  const url = `https://kgtk.isi.edu/api?q=${q}&type=ngram&extra_info=true&language=en&item=property&size=5`
 
   return new Promise((resolve, reject) => {
     fetch(url, {
