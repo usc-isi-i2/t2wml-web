@@ -397,7 +397,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         selection.current,
         annotationBlocks.map(block => block.selection),
       ) ) {
-        hideAnnotationMenu()
+        setShowAnnotationMenu(false)
       } else {
         setShowAnnotationMenu(true)
       }
@@ -469,7 +469,8 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     } else {
 
       // Reset annotation menu
-      hideAnnotationMenu()
+      setShowAnnotationMenu(false)
+      setSelectedAnnotationBlock(undefined)
 
       // Activate the element on click
       selectCell(element, y1, x1, y1, x1, x1, y1, ['active'])
