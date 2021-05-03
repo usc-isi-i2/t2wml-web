@@ -16,6 +16,7 @@ import CloseIcon from '@material-ui/icons/Close'
 
 import Draggable from 'react-draggable'
 
+import WikificationMenu from './WikificationMenu'
 import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
 import fetchProperties from '../utils/fetchProperties'
@@ -446,7 +447,18 @@ const AnnotationMenu = ({
     )
   }
 
-  const renderWikificationMenu = () => {}
+  const hideWikificationMenu = () => {
+    setShowWikificationMenu(false)
+  }
+
+  const renderWikificationMenu = () => {
+    if ( !showWikificationMenu ) { return }
+    return (
+      <WikificationMenu
+        selection={selection}
+        hideMenu={() => hideWikificationMenu()} />
+    )
+  }
 
   return (
     <React.Fragment>
