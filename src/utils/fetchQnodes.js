@@ -1,5 +1,5 @@
 const fetchQnodes = q => {
-  const url = `https://kgtk.isi.edu/api?q=${q}&type=ngram&extra_info=true&language=en&item=qnode&size=5`
+  const url = `https://kgtk.isi.edu/api?q=${q}&type=ngram&extra_info=true&language=en&item=qnode&size=10`
 
   return new Promise((resolve, reject) => {
     fetch(url, {
