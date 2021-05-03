@@ -423,25 +423,36 @@ const AnnotationMenu = ({
     )
   }
 
+  const renderAnnotationMenu = () => {
+    return (
+      <Dialog
+        open={true}
+        onClose={hideMenu}
+        classes={{ paper: classes.menu }}
+        aria-labelledby='dialog-modal-title'
+        PaperProps={{ tabIndex: -1 }}
+        TransitionComponent={Draggable}
+        TransitionProps={{ handle: '.draggable-handle' }}>
+        <DialogTitle classes={{ root: 'draggable-handle' }}>
+          {renderTitle()}
+        </DialogTitle>
+        <DialogContent>
+          {renderContent()}
+        </DialogContent>
+        <DialogActions>
+          {renderButtons()}
+        </DialogActions>
+      </Dialog>
+    )
+  }
+
+  const renderWikificationMenu = () => {}
+
   return (
-    <Dialog
-      open={true}
-      onClose={hideMenu}
-      classes={{ paper: classes.menu }}
-      aria-labelledby='dialog-modal-title'
-      PaperProps={{ tabIndex: -1 }}
-      TransitionComponent={Draggable}
-      TransitionProps={{ handle: '.draggable-handle' }}>
-      <DialogTitle classes={{ root: 'draggable-handle' }}>
-        {renderTitle()}
-      </DialogTitle>
-      <DialogContent>
-        {renderContent()}
-      </DialogContent>
-      <DialogActions>
-        {renderButtons()}
-      </DialogActions>
-    </Dialog>
+    <React.Fragment>
+      {renderAnnotationMenu()}
+      {renderWikificationMenu()}
+    </React.Fragment>
   )
 }
 
