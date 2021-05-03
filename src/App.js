@@ -129,7 +129,6 @@ const App = () => {
       },
       MuiDialog: {
         root: {
-          userSelect: 'none',
           pointerEvents: 'none',
           '& .MuiDialog-container .MuiPaper-root': {
             border: darkTheme ? '1px solid #fefefe' : '1px solid #777',
