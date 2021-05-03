@@ -270,6 +270,40 @@ const AnnotationMenu = ({
         defaultValue = selectedAnnotation[option.value]
       }
 
+      if  ( option.value === 'property' ) {
+        const parsedCorrectly = parseSelectedAreaInput(formState.selectedPropertyCells)
+        return (
+          <Grid item xs={12} key={option.value}>
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id={'selectedPropertyCells'}
+                  name={'selectedPropertyCells'}
+                  label={'Select property cells'}
+                  value={formState.selectedPropertyCells || defaultValue}
+                  error={!!formState.selectedPropertyCells && !parsedCorrectly}
+                  helperText={formState.selectedPropertyCells && !parsedCorrectly ? (
+                    'format: [col][row]:[col][row]'
+                  ) : ''}
+                  onChange={handleOnChange} />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  label={'Search wikidata property'}
+                  id={`selected${option.label}`}
+                  name={`selected${option.label}`}
+                  value={formState[`selected${option.label}`] || defaultValue}
+                  onChange={handleOnChange} />
+              </Grid>
+            </Grid>
+          </Grid>
+        )
+      }
+
       return (
         <Grid item xs={12} key={option.value}>
           <TextField
