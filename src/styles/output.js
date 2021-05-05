@@ -138,7 +138,7 @@ const useStyles = makeStyles(theme => ({
             backgroundSize: '30px 30px',
           },
           '&.unit': {
-            background: theme.palette.type === 'dark' ? 'repeating-linear-gradient(-45deg, #4d4d4d, #4d4d4d 25%, #fff2ce 25%, #fff2ce 50%, #4d4d4d 50%) top left fixed' : 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #fff2ce 25%, #fff2ce 50%, #fff 50%) top left fixed',
+            background: theme.palette.type === 'dark' ? 'repeating-linear-gradient(-45deg, #4d4d4d, #4d4d4d 25%, #333 25%, #333 50%, #4d4d4d 50%) top left fixed' : 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #ddd 25%, #ddd 50%, #fff 50%) top left fixed',
             backgroundSize: '30px 30px',
           },
         },

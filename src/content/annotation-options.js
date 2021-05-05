@@ -41,6 +41,13 @@ export const TYPES = [{
     'label': 'Property',
     'value': 'property',
   }],
+}, {
+  'label': 'Wikidata Item',
+  'value': 'wikibaseitem',
+  'children': [{
+    'label': 'Property',
+    'value': 'property',
+  }],
 }]
 
 

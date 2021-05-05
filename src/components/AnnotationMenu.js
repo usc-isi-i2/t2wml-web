@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import {
   Grid,
@@ -10,13 +10,16 @@ import {
   IconButton,
   TextField,
   MenuItem,
+  FormHelperText,
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 
 import Draggable from 'react-draggable'
 
+import WikificationMenu from './WikificationMenu'
 import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
+import fetchProperties from '../utils/fetchProperties'
 import useStyles from '../styles/annotationMenu'
 import * as utils from '../utils/table'
 
@@ -24,6 +27,7 @@ import * as utils from '../utils/table'
 const AnnotationMenu = ({
   file,
   sheet,
+  selectedCell,
   selection,
   suggestions,
   annotations,
@@ -34,6 +38,8 @@ const AnnotationMenu = ({
 }) => {
 
   const classes = useStyles()
+
+  const timeoutID = useRef(null)
 
   const [formState, setFormState] = useState({
     selectedArea: '',
@@ -46,6 +52,9 @@ const AnnotationMenu = ({
     selectedFormat: '',
     selectedUnit: '',
   })
+
+  const [properties, setProperties] = useState([])
+  const [showWikificationMenu, setShowWikificationMenu] = useState(false)
 
   useEffect(() => {
 
@@ -132,12 +141,49 @@ const AnnotationMenu = ({
       ...formState,
       [event.target.name]: value,
     })
+    if ( event.target.name === 'selectedType' ) {
+      if ( value === 'wikibaseitem' ) {
+        setShowWikificationMenu(true)
+      } else {
+        setShowWikificationMenu(false)
+      }
+    }
     if ( event.target.name === 'selectedArea' ) {
       const newSelection = parseSelectedAreaInput(value)
       if ( newSelection ) {
         onSelectionChange(newSelection)
       }
     }
+    if ( event.target.name === 'selectedProperty' ) {
+      if ( !value ) {
+        setProperties([])
+      } else {
+        clearTimeout(timeoutID.current)
+        timeoutID.current = setTimeout(() => {
+          fetchProperties(value)
+          .then(data => setProperties(data))
+          .catch(error => console.log(error))
+        }, 250)
+      }
+    }
+  }
+
+  const selectProperty = property => {
+    setFormState({
+      ...formState,
+      selectedProperty: property.qnode,
+    })
+    setProperties([])
+  }
+
+  const renderFormInstructions = () => {
+    return (
+      <Grid item xs={12}>
+        <FormHelperText component="p">
+          Use this form to provide annotations for the selected area in the table
+        </FormHelperText>
+      </Grid>
+    )
   }
 
   const renderSelectedAreaInput = () => {
@@ -150,6 +196,7 @@ const AnnotationMenu = ({
           name="selectedArea"
           label="Selected area"
           variant="outlined"
+          inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
           value={formState.selectedArea || defaultValue}
           error={!!formState.selectedArea && !parsedCorrectly}
@@ -258,6 +305,55 @@ const AnnotationMenu = ({
         defaultValue = selectedAnnotation[option.value]
       }
 
+      if  ( option.value === 'property' ) {
+        const parsedCorrectly = parseSelectedAreaInput(formState.selectedPropertyCells)
+        return (
+          <Grid item xs={12} key={option.value}>
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  id={'selectedPropertyCells'}
+                  name={'selectedPropertyCells'}
+                  label={'Select property cells'}
+                  value={formState.selectedPropertyCells}
+                  error={!!formState.selectedPropertyCells && !parsedCorrectly}
+                  helperText={formState.selectedPropertyCells && !parsedCorrectly ? (
+                    'format: [col][row]:[col][row]'
+                  ) : ''}
+                  onChange={handleOnChange} />
+              </Grid>
+              <Grid item xs={6}>
+                <FormHelperText component="p" style={{marginTop: '0'}}>
+                  You can select property cells in the table or search wikidata for a property in the search box below
+                </FormHelperText>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  label={'Search wikidata property'}
+                  id={`selected${option.label}`}
+                  name={`selected${option.label}`}
+                  value={formState[`selected${option.label}`] || defaultValue}
+                  onChange={handleOnChange} />
+              </Grid>
+              <Grid item xs={12}>
+                <ol className={classes.properties}>
+                  {properties.map(property => (
+                    <li key={property.qnode}
+                      onClick={() => selectProperty(property)}>
+                      {`${property.label[0]} (${property.qnode})`}
+                    </li>
+                  ))}
+                </ol>
+              </Grid>
+            </Grid>
+          </Grid>
+        )
+      }
+
       return (
         <Grid item xs={12} key={option.value}>
           <TextField
@@ -273,12 +369,24 @@ const AnnotationMenu = ({
     })
   }
 
-  const renderForm = () => {
+  const renderTitle = () => {
+    return (
+      <React.Fragment>
+        {`Annotate this ${utils.isBlock(selection) ? 'block' : 'cell'}`}
+        <IconButton aria-label="close" onClick={hideMenu}>
+          <CloseIcon />
+        </IconButton>
+      </React.Fragment>
+    )
+  }
+
+  const renderContent = () => {
     return (
       <form noValidate autoComplete="off"
         className={classes.form}
         onSubmit={handleOnSubmit}>
         <Grid container spacing={3}>
+          {renderFormInstructions()}
           {renderSelectedAreaInput()}
           {renderSelectedRoleInput()}
           {renderSelectedTypeInput()}
@@ -317,28 +425,48 @@ const AnnotationMenu = ({
     )
   }
 
+  const renderAnnotationMenu = () => {
+    return (
+      <Dialog
+        open={true}
+        onClose={hideMenu}
+        classes={{ paper: classes.menu }}
+        aria-labelledby='dialog-modal-title'
+        PaperProps={{ tabIndex: -1 }}
+        TransitionComponent={Draggable}
+        TransitionProps={{ handle: '.draggable-handle' }}>
+        <DialogTitle classes={{ root: 'draggable-handle' }}>
+          {renderTitle()}
+        </DialogTitle>
+        <DialogContent>
+          {renderContent()}
+        </DialogContent>
+        <DialogActions>
+          {renderButtons()}
+        </DialogActions>
+      </Dialog>
+    )
+  }
+
+  const hideWikificationMenu = () => {
+    setShowWikificationMenu(false)
+  }
+
+  const renderWikificationMenu = () => {
+    if ( !showWikificationMenu ) { return }
+    return (
+      <WikificationMenu
+        selection={selection}
+        selectedCell={selectedCell}
+        hideMenu={() => hideWikificationMenu()} />
+    )
+  }
+
   return (
-    <Dialog
-      open={openMenu}
-      onClose={hideMenu}
-      classes={{ paper: classes.menu }}
-      aria-labelledby='dialog-modal-title'
-      PaperProps={{ tabIndex: -1 }}
-      TransitionComponent={Draggable}
-      TransitionProps={{ handle: '.draggable-handle' }}>
-      <DialogTitle classes={{ root: 'draggable-handle' }}>
-        Selected {utils.humanReadableSelection(selection)}
-        <IconButton aria-label="close" onClick={hideMenu}>
-          <CloseIcon />
-        </IconButton>
-      </DialogTitle>
-      <DialogContent>
-        {renderForm()}
-      </DialogContent>
-      <DialogActions>
-        {renderButtons()}
-      </DialogActions>
-    </Dialog>
+    <React.Fragment>
+      {renderAnnotationMenu()}
+      {renderWikificationMenu()}
+    </React.Fragment>
   )
 }
 

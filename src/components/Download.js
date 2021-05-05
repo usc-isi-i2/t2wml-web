@@ -35,6 +35,7 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(10),
     right: 0,
     bottom: 0,
+    zIndex: 100,
     '&.active': {
       height: theme.spacing(30),
     },

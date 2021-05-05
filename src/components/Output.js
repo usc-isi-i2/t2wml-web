@@ -63,7 +63,7 @@ const Output = ({ data, filename }) => {
                   <th scope="col" key={i}>
                     <Tooltip arrow
                       placement="top"
-                      title={`Please select the ${data[0][i]}`}
+                      title={`select the ${data[0][i]} next`}
                       open={!!activeCol && data[0][i] === activeCol}
                       classes={{ tooltipPlacementTop: classes.tooltipTop }}
                       PopperProps={{

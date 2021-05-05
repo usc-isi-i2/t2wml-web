@@ -73,6 +73,15 @@ const App = () => {
             cursor: 'not-allowed',
           },
         },
+        outlinedPrimary: {
+          color: darkTheme ? '#fefefe' : '#4D4D4D',
+          borderColor: darkTheme ? '#fefefe' : '#4D4D4D',
+          '&:hover': {
+            color: darkTheme ? '#333' : '#fff',
+            backgroundColor: darkTheme ? '#eee' : '#7f7f7f',
+            borderColor: darkTheme ? '#fefefe' : '#4D4D4D',
+          },
+        },
       },
       MuiFab: {
         root: {
@@ -120,7 +129,6 @@ const App = () => {
       },
       MuiDialog: {
         root: {
-          userSelect: 'none',
           pointerEvents: 'none',
           '& .MuiDialog-container .MuiPaper-root': {
             border: darkTheme ? '1px solid #fefefe' : '1px solid #777',

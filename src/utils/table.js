@@ -137,3 +137,8 @@ export const humanReadableSelection = selection => {
   }
   return text
 }
+
+
+export const isBlock = selection => {
+  return !(selection.x1 === selection.x2 && selection.y1 === selection.y2)
+}
