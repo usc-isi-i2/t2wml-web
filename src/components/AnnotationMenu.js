@@ -310,25 +310,6 @@ const AnnotationMenu = ({
         return (
           <Grid item xs={12} key={option.value}>
             <Grid container spacing={3}>
-              <Grid item xs={6}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  id={'selectedPropertyCells'}
-                  name={'selectedPropertyCells'}
-                  label={'Select property cells'}
-                  value={formState.selectedPropertyCells}
-                  error={!!formState.selectedPropertyCells && !parsedCorrectly}
-                  helperText={formState.selectedPropertyCells && !parsedCorrectly ? (
-                    'format: [col][row]:[col][row]'
-                  ) : ''}
-                  onChange={handleOnChange} />
-              </Grid>
-              <Grid item xs={6}>
-                <FormHelperText component="p" style={{marginTop: '0'}}>
-                  You can select property cells in the table or search wikidata for a property in the search box below
-                </FormHelperText>
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   fullWidth
