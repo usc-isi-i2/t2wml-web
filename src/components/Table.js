@@ -397,14 +397,24 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   const handleOnMouseUp = () => {
     if ( selection.current ) {
       selection.current = utils.standardizeSelection(selection.current)
-      if ( !selectedAnnotationBlock && utils.checkOverlaps(
-        selection.current,
-        annotationBlocks.map(block => block.selection),
-      ) ) {
-        setShowAnnotationMenu(false)
-      } else {
-        setShowAnnotationMenu(true)
-      }
+      setAnnotationBlocks(annotationBlocks => {
+        setSelectedAnnotationBlock(selectedAnnotationBlock => {
+          if ( !selectedAnnotationBlock && utils.checkOverlaps(
+            selection.current,
+            annotationBlocks.map(block => block.selection),
+          ) ) {
+            setShowAnnotationMenu(false)
+            setSelectedAnnotationBlock(undefined)
+            setTargetSelection(undefined)
+            selection.current = null
+            resetSelection()
+          } else {
+            setShowAnnotationMenu(true)
+          }
+          return selectedAnnotationBlock
+        })
+        return annotationBlocks
+      })
     }
     setUserSelecting(false)
   }
