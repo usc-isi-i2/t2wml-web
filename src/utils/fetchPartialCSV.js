@@ -10,7 +10,6 @@ const fetchPartialCSV = (file, sheet) => {
     fetch(url, {method: 'GET'})
       .then((response) => response.json())
       .then((response) => {
-        debugger
         if ( !!response.error ) {
           reject(response.error)
         }
