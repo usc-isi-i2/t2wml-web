@@ -562,43 +562,46 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }
 
   const updateAnnotationBlocks = () => {
-    for ( const block of annotationBlocks ) {
-      const { role, type, selection } = block
+    setAnnotationBlocks(annotationBlocks => {
+      for ( const block of annotationBlocks ) {
+        const { role, type, selection } = block
 
-      const classNames = []
-      if ( role ) {
-        classNames.push(`role-${role}`)
-      }
-      if ( type ) {
-        classNames.push(`type-${type}`)
-      }
-
-      const rows = tableElement.current.querySelectorAll('tr')
-      const { x1, y1, x2, y2 } = selection
-      const leftCol = Math.min(x1, x2)
-      const rightCol = Math.max(x1, x2)
-      const topRow = Math.min(y1, y2)
-      const bottomRow = Math.max(y1, y2)
-      let rowIndex = topRow
-      while ( rowIndex <= bottomRow ) {
-        let colIndex = leftCol
-        const row = rows[rowIndex]
-        while ( row && colIndex <= rightCol ) {
-          selectCell(
-            row.children[colIndex],
-            rowIndex,
-            colIndex,
-            topRow,
-            leftCol,
-            rightCol,
-            bottomRow,
-            classNames,
-          )
-          colIndex += 1
+        const classNames = []
+        if ( role ) {
+          classNames.push(`role-${role}`)
         }
-        rowIndex += 1
+        if ( type ) {
+          classNames.push(`type-${type}`)
+        }
+
+        const rows = tableElement.current.querySelectorAll('tr')
+        const { x1, y1, x2, y2 } = selection
+        const leftCol = Math.min(x1, x2)
+        const rightCol = Math.max(x1, x2)
+        const topRow = Math.min(y1, y2)
+        const bottomRow = Math.max(y1, y2)
+        let rowIndex = topRow
+        while ( rowIndex <= bottomRow ) {
+          let colIndex = leftCol
+          const row = rows[rowIndex]
+          while ( row && colIndex <= rightCol ) {
+            selectCell(
+              row.children[colIndex],
+              rowIndex,
+              colIndex,
+              topRow,
+              leftCol,
+              rightCol,
+              bottomRow,
+              classNames,
+            )
+            colIndex += 1
+          }
+          rowIndex += 1
+        }
       }
-    }
+      return annotationBlocks
+    })
   }
 
   const hideAnnotationMenu = (annotations, deletedAnnotationBlock=null) => {
