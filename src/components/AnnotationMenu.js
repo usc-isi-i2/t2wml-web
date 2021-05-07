@@ -306,7 +306,6 @@ const AnnotationMenu = ({
       }
 
       if  ( option.value === 'property' ) {
-        const parsedCorrectly = parseSelectedAreaInput(formState.selectedPropertyCells)
         return (
           <Grid item xs={12} key={option.value}>
             <Grid container spacing={3}>
