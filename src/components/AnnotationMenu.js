@@ -63,8 +63,8 @@ const AnnotationMenu = ({
       // update form state with suggested type, role and property values
       setFormState({
         ...formState,
-        selectedRole: !!suggestions['roles'].length ? suggestions['roles'][0] : '',
-        selectedType: !!suggestions['types'].length ? suggestions['types'][0] : '',
+        selectedRole: !!suggestions['role'] ? suggestions['role'] : '',
+        selectedType: !!suggestions['type'] ? suggestions['type'] : '',
         selectedProperty: 'property' in suggestions['children'] ? suggestions['children']['property'] : '',
       })
     } else {
@@ -254,8 +254,8 @@ const AnnotationMenu = ({
     if ( selectedAnnotation && selectedAnnotation.type ) {
       defaultValue = selectedAnnotation.type
     } else {
-      if ( !!suggestions['types'].length ) {
-        defaultValue = suggestions['types'][0]
+      if ( !!suggestions['type'] ) {
+        defaultValue = suggestions['type']
       }
     }
 
