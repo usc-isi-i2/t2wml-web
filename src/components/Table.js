@@ -594,6 +594,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     setTargetSelection(undefined)
     selection.current = null
     resetSelection()
+    updateAnnotationBlocks()
 
     if ( annotations && annotations instanceof Array ) {
       setAnnotationBlocks(annotationBlocks => {
