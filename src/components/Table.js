@@ -5,6 +5,7 @@ import { Paper } from '@material-ui/core'
 import AnnotationMenu from './AnnotationMenu'
 import useStyles from '../styles/table'
 import * as utils from '../utils/table'
+import fetchPartialCSV from '../utils/fetchPartialCSV'
 import fetchSuggestions from '../utils/fetchSuggestions'
 
 
@@ -588,12 +589,6 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }
 
   const hideAnnotationMenu = (annotations, deletedAnnotationBlock=null) => {
-
-    // update output data
-    if ( outputData && outputData.cells ) {
-      setOutputData(outputData.cells)
-    }
-
     setShowAnnotationMenu(false)
     setSelectedAnnotationBlock(undefined)
     setTargetSelection(undefined)
@@ -607,6 +602,11 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         }
         return annotations
       })
+
+      // update output data with partial csv
+      fetchPartialCSV(file, sheet)
+      .then(data => setOutputData(data.cells))
+      .catch(error => console.log(error))
     }
   }
 
