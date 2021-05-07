@@ -587,7 +587,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     }
   }
 
-  const hideAnnotationMenu = (annotations, outputData, deletedAnnotationBlock=null) => {
+  const hideAnnotationMenu = (annotations, deletedAnnotationBlock=null) => {
 
     // update output data
     if ( outputData && outputData.cells ) {
