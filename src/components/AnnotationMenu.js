@@ -42,15 +42,15 @@ const AnnotationMenu = ({
   const timeoutID = useRef(null)
 
   const [formState, setFormState] = useState({
-    selectedArea: '',
-    selectedRole: '',
-    selectedType: '',
-    selectedProperty: '',
-    selectedLanguage: '',
-    selectedPrecision: '',
-    selectedCalendar: '',
-    selectedFormat: '',
-    selectedUnit: '',
+    selectedArea: undefined,
+    selectedRole: undefined,
+    selectedType: undefined,
+    selectedProperty: undefined,
+    selectedLanguage: undefined,
+    selectedPrecision: undefined,
+    selectedCalendar: undefined,
+    selectedFormat: undefined,
+    selectedUnit: undefined,
   })
 
   const [properties, setProperties] = useState([])
@@ -72,9 +72,9 @@ const AnnotationMenu = ({
       // reset the form state to all defaults
       setFormState({
         ...formState,
-        selectedRole: '',
-        selectedType: '',
-        selectedProperty: '',
+        selectedRole: undefined,
+        selectedType: undefined,
+        selectedProperty: undefined,
       })
     }
 
