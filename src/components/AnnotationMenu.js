@@ -72,9 +72,9 @@ const AnnotationMenu = ({
       // reset the form state to all defaults
       setFormState({
         ...formState,
-        selectedRole: undefined,
-        selectedType: undefined,
-        selectedProperty: undefined,
+        selectedRole: selectedAnnotation.role,
+        selectedType: selectedAnnotation.type,
+        selectedProperty: selectedAnnotation.property,
       })
     }
 
