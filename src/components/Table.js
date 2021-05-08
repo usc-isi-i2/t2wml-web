@@ -605,12 +605,6 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }
 
   const hideAnnotationMenu = (annotations, deletedAnnotationBlock=null) => {
-    setShowAnnotationMenu(false)
-    setSelectedAnnotationBlock(undefined)
-    setTargetSelection(undefined)
-    selection.current = null
-    resetSelection()
-
     if ( annotations && annotations instanceof Array ) {
       setAnnotationBlocks(annotationBlocks => {
         if ( deletedAnnotationBlock ) {
@@ -624,6 +618,12 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       .then(data => setOutputData(data.cells))
       .catch(error => console.log(error))
     }
+
+    setShowAnnotationMenu(false)
+    setSelectedAnnotationBlock(undefined)
+    setTargetSelection(undefined)
+    selection.current = null
+    resetSelection()
   }
 
   const renderTable = () => {
