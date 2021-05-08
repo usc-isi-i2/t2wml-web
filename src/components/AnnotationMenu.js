@@ -332,7 +332,7 @@ const AnnotationMenu = ({
                   label={'Search wikidata property'}
                   id={`selected${option.label}`}
                   name={`selected${option.label}`}
-                  value={formState[`selected${option.label}`] || defaultValue}
+                  value={formState[`selected${option.label}`] !== undefined ? formState[`selected${option.label}`] : defaultValue}
                   onChange={handleOnChange} />
               </Grid>
               <Grid item xs={12}>
