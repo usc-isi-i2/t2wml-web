@@ -30,6 +30,8 @@ const Output = ({ data, filename }) => {
       if ( !data[1][counter] ) {
         setActiveCol(data[0][counter])
         break
+      } else {
+        setActiveCol(undefined)
       }
       counter += 1
     }
