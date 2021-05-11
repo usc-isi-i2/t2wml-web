@@ -48,27 +48,26 @@ const PropertyInput = ({
   }
 
   const renderSelectedProperty = () => {
-    if ( !!selected ) {
-      return (
-        <Grid container spacing={3}>
-          <Grid item xs={10}>
-            <p>{`Selected property: ${selected.label[0]} (${selected.qnode})`}</p>
-          </Grid>
-          <Grid item xs={2}>
-            <Tooltip arrow placement="top" title={'remove selected property'}>
-              <IconButton onClick={removeSelected}>
-                <CloseIcon />
-              </IconButton>
-            </Tooltip>
-          </Grid>
+    if ( !selected ) { return null }
+    return (
+      <Grid container spacing={3}>
+        <Grid item xs={10}>
+          <p>{`Selected property: ${selected.label[0]} (${selected.qnode})`}</p>
         </Grid>
-      )
-    }
+        <Grid item xs={2}>
+          <Tooltip arrow placement="top" title={'remove selected property'}>
+            <IconButton onClick={removeSelected}>
+              <CloseIcon />
+            </IconButton>
+          </Tooltip>
+        </Grid>
+      </Grid>
+    )
   }
 
-  return (
-    <Grid item xs={12}>
-      {renderSelectedProperty()}
+  const renderPropertySearch = () => {
+    if ( !!selected ) { return null }
+    return (
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <TextField
@@ -78,7 +77,7 @@ const PropertyInput = ({
             autoComplete="off"
             autoCapitalize="off"
             spellCheck="false"
-            label={'Search wikidata property'}
+            label={'Search wikidata properties'}
             id={'selectedProperty'}
             name={'selectedProperty'}
             onChange={handleOnChange} />
@@ -94,6 +93,13 @@ const PropertyInput = ({
           </ol>
         </Grid>
       </Grid>
+    )
+  }
+
+  return (
+    <Grid item xs={12}>
+      {renderSelectedProperty()}
+      {renderPropertySearch()}
     </Grid>
   )
 }
