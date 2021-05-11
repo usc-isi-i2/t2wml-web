@@ -301,7 +301,7 @@ const AnnotationMenu = ({
     })
   }
 
-  const renderSelectedTypeChildren = () => {
+  const renderAdditionalInputs = () => {
     let TYPE = undefined
 
     if ( formState.selectedType ) {
@@ -333,7 +333,7 @@ const AnnotationMenu = ({
         )
       }
 
-      if ( showAdditionalInputs === 'property' ) {
+      if ( showAdditionalInputs ) {
         return (
           <Grid item xs={12} key={option.value}>
             <TextField
@@ -351,6 +351,8 @@ const AnnotationMenu = ({
           </Grid>
         )
       }
+
+      return null
     })
   }
 
@@ -375,7 +377,7 @@ const AnnotationMenu = ({
           {renderSelectedAreaInput()}
           {renderSelectedRoleInput()}
           {renderSelectedTypeInput()}
-          {renderSelectedTypeChildren()}
+          {renderAdditionalInputs()}
         </Grid>
       </form>
     )
