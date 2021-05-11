@@ -20,6 +20,7 @@ import PropertyInput from './PropertyInput'
 import WikificationMenu from './WikificationMenu'
 import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
+import fetchProperties from '../utils/fetchProperties'
 import useStyles from '../styles/annotationMenu'
 import * as utils from '../utils/table'
 
@@ -58,12 +59,27 @@ const AnnotationMenu = ({
     if ( !selectedAnnotation ) {
 
       // update form state with suggested type, role and property values
-      setFormState({
-        ...formState,
-        selectedRole: !!suggestions['role'] ? suggestions['role'] : '',
-        selectedType: !!suggestions['type'] ? suggestions['type'] : '',
-        selectedProperty: 'property' in suggestions['children'] ? suggestions['children']['property'] : '',
+      setFormState(formState => {
+        return {
+          ...formState,
+          selectedRole: !!suggestions['role'] ? suggestions['role'] : undefined,
+          selectedType: !!suggestions['type'] ? suggestions['type'] : undefined,
+        }
       })
+
+      // fetch the suggested property using kgtk search
+      if ( 'property' in suggestions.children ) {
+        fetchProperties(suggestions.children.property, 'exact_match')
+        .then(data => {
+          if ( !!data.length ) {
+            setFormState({
+              ...formState,
+              selectedProperty: data[0],
+            })
+          }
+        })
+      }
+
     } else {
 
       // reset the form state to all defaults
