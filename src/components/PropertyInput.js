@@ -7,8 +7,27 @@ import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 
-import useStyles from '../styles/annotationMenu'
+import { makeStyles } from '@material-ui/styles'
 import fetchProperties from '../utils/fetchProperties'
+
+
+const useStyles = makeStyles(theme => ({
+  title: {
+    fontSize: theme.spacing(2),
+    marginTop: theme.spacing(2),
+  },
+  properties: {
+    paddingInlineStart: theme.spacing(2),
+    marginBlockStart: 0,
+    '&> li': {
+      paddingBottom: theme.spacing(1),
+      cursor: 'pointer',
+      '&:hover': {
+        textDecoration: 'underline',
+      },
+    },
+  },
+}))
 
 
 const PropertyInput = ({
