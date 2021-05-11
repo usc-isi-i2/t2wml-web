@@ -5,6 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import CloseIcon from '@material-ui/icons/Close'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
 
 import useStyles from '../styles/annotationMenu'
 import fetchProperties from '../utils/fetchProperties'
@@ -47,12 +48,21 @@ const PropertyInput = ({
     setSelected()
   }
 
+  const renderTitle = () => {
+    return (
+      <Typography className={classes.title}
+        style={{marginBottom: !!selected ? '0' : '16px'}}>
+        <b>{!!selected ? 'Selected property' : 'Select property'}</b>
+      </Typography>
+    )
+  }
+
   const renderSelectedProperty = () => {
     if ( !selected ) { return null }
     return (
       <Grid container spacing={3}>
         <Grid item xs={10}>
-          <p>{`Selected property: ${selected.label[0]} (${selected.qnode})`}</p>
+          <p>{`${selected.label[0]} (${selected.qnode})`}</p>
         </Grid>
         <Grid item xs={2}>
           <Tooltip arrow placement="top" title={'remove selected property'}>
@@ -98,6 +108,7 @@ const PropertyInput = ({
 
   return (
     <Grid item xs={12}>
+      {renderTitle()}
       {renderSelectedProperty()}
       {renderPropertySearch()}
     </Grid>
