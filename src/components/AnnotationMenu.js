@@ -58,37 +58,57 @@ const AnnotationMenu = ({
 
     if ( !selectedAnnotation ) {
 
-      // update form state with suggested type, role and property values
-      setFormState(formState => {
-        return {
-          ...formState,
-          selectedRole: !!suggestions['role'] ? suggestions['role'] : undefined,
-          selectedType: !!suggestions['type'] ? suggestions['type'] : undefined,
-        }
-      })
-
       // fetch the suggested property using kgtk search
       if ( 'property' in suggestions.children ) {
         fetchProperties(suggestions.children.property, 'exact_match')
         .then(data => {
           if ( !!data.length ) {
-            setFormState({
+            setFormState(formState => {
+              return {
               ...formState,
+              selectedRole: !!suggestions['role'] ? suggestions['role'] : undefined,
+              selectedType: !!suggestions['type'] ? suggestions['type'] : undefined,
               selectedProperty: data[0],
+              }
             })
           }
         })
+      } else {
+        // update form state with suggested type, role and property values
+        setFormState(formState => {
+          return {
+            ...formState,
+            selectedRole: !!suggestions['role'] ? suggestions['role'] : undefined,
+            selectedType: !!suggestions['type'] ? suggestions['type'] : undefined,
+          }
+        })
       }
-
     } else {
 
-      // reset the form state to all defaults
-      setFormState({
-        ...formState,
-        selectedRole: selectedAnnotation.role,
-        selectedType: selectedAnnotation.type,
-        selectedProperty: selectedAnnotation.property,
-      })
+      // fetch the suggested property using kgtk search
+      if ( selectedAnnotation.property ) {
+        fetchProperties(selectedAnnotation.property, 'exact_match')
+        .then(data => {
+          if ( !!data.length ) {
+            setFormState(formState => {
+              return {
+                ...formState,
+                selectedRole: selectedAnnotation.role,
+                selectedType: selectedAnnotation.type,
+                selectedProperty: data[0],
+              }
+            })
+          }
+        })
+      } else {
+        setFormState(formState => {
+          return {
+            ...formState,
+            selectedRole: selectedAnnotation.role,
+            selectedType: selectedAnnotation.type,
+          }
+        })
+      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
