@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   Grid,
@@ -16,10 +16,10 @@ import CloseIcon from '@material-ui/icons/Close'
 
 import Draggable from 'react-draggable'
 
+import PropertyInput from './PropertyInput'
 import WikificationMenu from './WikificationMenu'
 import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
-import fetchProperties from '../utils/fetchProperties'
 import useStyles from '../styles/annotationMenu'
 import * as utils from '../utils/table'
 
@@ -39,8 +39,6 @@ const AnnotationMenu = ({
 
   const classes = useStyles()
 
-  const timeoutID = useRef(null)
-
   const [formState, setFormState] = useState({
     selectedArea: undefined,
     selectedRole: undefined,
@@ -53,7 +51,6 @@ const AnnotationMenu = ({
     selectedUnit: undefined,
   })
 
-  const [properties, setProperties] = useState([])
   const [showWikificationMenu, setShowWikificationMenu] = useState(false)
 
   useEffect(() => {
@@ -154,26 +151,6 @@ const AnnotationMenu = ({
         onSelectionChange(newSelection)
       }
     }
-    if ( event.target.name === 'selectedProperty' ) {
-      if ( !value ) {
-        setProperties([])
-      } else {
-        clearTimeout(timeoutID.current)
-        timeoutID.current = setTimeout(() => {
-          fetchProperties(value)
-          .then(data => setProperties(data))
-          .catch(error => console.log(error))
-        }, 250)
-      }
-    }
-  }
-
-  const selectProperty = property => {
-    setFormState({
-      ...formState,
-      selectedProperty: property.qnode,
-    })
-    setProperties([])
   }
 
   const renderFormInstructions = () => {
@@ -293,6 +270,13 @@ const AnnotationMenu = ({
     )
   }
 
+  const handleOnSelectProperty = node => {
+    setFormState({
+      ...formState,
+      selectedProperty: node,
+    })
+  }
+
   const renderSelectedTypeChildren = () => {
     let TYPE = undefined
 
@@ -319,34 +303,9 @@ const AnnotationMenu = ({
 
       if  ( option.value === 'property' ) {
         return (
-          <Grid item xs={12} key={option.value}>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  autoCorrect="off"
-                  autoComplete="off"
-                  autoCapitalize="off"
-                  spellCheck="false"
-                  label={'Search wikidata property'}
-                  id={`selected${option.label}`}
-                  name={`selected${option.label}`}
-                  value={formState[`selected${option.label}`] !== undefined ? formState[`selected${option.label}`] : defaultValue}
-                  onChange={handleOnChange} />
-              </Grid>
-              <Grid item xs={12}>
-                <ol className={classes.properties}>
-                  {properties.map(property => (
-                    <li key={property.qnode}
-                      onClick={() => selectProperty(property)}>
-                      {`${property.label[0]} (${property.qnode})`}
-                    </li>
-                  ))}
-                </ol>
-              </Grid>
-            </Grid>
-          </Grid>
+          <PropertyInput
+            selectedProperty={formState.selectedProperty}
+            onSelectProperty={handleOnSelectProperty} />
         )
       }
 
