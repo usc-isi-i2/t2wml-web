@@ -77,7 +77,7 @@ const PropertyInput = ({
   }
 
   const renderSelectedProperty = () => {
-    if ( !selected ) { return null }
+    if ( !selected || !selected.label ) { return }
     return (
       <Grid container spacing={3}>
         <Grid item xs={10}>
@@ -95,7 +95,7 @@ const PropertyInput = ({
   }
 
   const renderPropertySearch = () => {
-    if ( !!selected ) { return null }
+    if ( !!selected ) { return }
     return (
       <Grid container spacing={3}>
         <Grid item xs={12}>
