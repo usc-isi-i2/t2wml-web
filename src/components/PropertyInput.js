@@ -6,9 +6,11 @@ import CloseIcon from '@material-ui/icons/Close'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
+import FormHelperText from '@material-ui/core/FormHelperText'
 
 import { makeStyles } from '@material-ui/styles'
 import fetchProperties from '../utils/fetchProperties'
+import * as utils from '../utils/table'
 
 
 const useStyles = makeStyles(theme => ({
@@ -43,6 +45,7 @@ const PropertyInput = ({
   const timeoutID = useRef(null)
 
   const [selected, setSelected] = useState(selectedProperty)
+  const [selectedPropertyCells, setSelectedPropertyCells] = useState()
   const [properties, setProperties] = useState([])
 
   useEffect(() => {
@@ -61,6 +64,11 @@ const PropertyInput = ({
         .catch(error => console.log(error))
       }, 250)
     }
+  }
+
+  const handleOnChangePropertyCells = event => {
+    const value = event.target.value
+    setSelectedPropertyCells(value)
   }
 
   const selectProperty = property => {
@@ -101,6 +109,34 @@ const PropertyInput = ({
     )
   }
 
+  const renderPropertyCellSelection = () => {
+    if ( !!selected ) { return }
+    const parsedCorrectly = utils.parseSelectedAreaInput(selectedPropertyCells)
+    return (
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            id={'selectedPropertyCells'}
+            name={'selectedPropertyCells'}
+            label={'Select property cell(s)'}
+            value={selectedPropertyCells}
+            error={!!selectedPropertyCells && !parsedCorrectly}
+            helperText={selectedPropertyCells && !parsedCorrectly ? (
+              'format: [col][row]:[col][row]'
+            ) : ''}
+            onChange={handleOnChangePropertyCells} />
+        </Grid>
+        <Grid item xs={6}>
+          <FormHelperText component="p" style={{marginTop: '0'}}>
+            You can select property cells in the table or search wikidata for a property in the search box below
+          </FormHelperText>
+        </Grid>
+      </Grid>
+    )
+  }
+
   const renderPropertySearch = () => {
     if ( !!selected ) { return }
     return (
@@ -136,6 +172,7 @@ const PropertyInput = ({
     <Grid item xs={12} className={classes.wrapper}>
       {renderTitle()}
       {renderSelectedProperty()}
+      {renderPropertyCellSelection()}
       {renderPropertySearch()}
     </Grid>
   )
