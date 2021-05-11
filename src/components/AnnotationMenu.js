@@ -126,7 +126,7 @@ const AnnotationMenu = ({
       selection: {...selection},
       role: formState.selectedRole,
       type: formState.selectedType,
-      property: formState.selectedProperty.qnode,
+      property: formState.selectedProperty ? formState.selectedProperty.qnode : '',
       language: formState.selectedLanguage,
       precision: formState.selectedPrecision,
       calendar: formState.selectedCalendar,
