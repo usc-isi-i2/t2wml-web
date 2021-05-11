@@ -21,6 +21,12 @@ const useStyles = makeStyles(theme => ({
   title: {
     fontSize: theme.spacing(2),
   },
+  removeButton: {
+    '&:hover': {
+      color: 'red',
+      transition: 'color 150ms ease',
+    },
+  },
   properties: {
     paddingInlineStart: theme.spacing(2),
     marginBlockStart: 0,
@@ -100,7 +106,8 @@ const PropertyInput = ({
         </Grid>
         <Grid item xs={2}>
           <Tooltip arrow placement="top" title={'remove selected property'}>
-            <IconButton onClick={removeSelected}>
+            <IconButton className={classes.removeButton}
+              onClick={removeSelected}>
               <CloseIcon />
             </IconButton>
           </Tooltip>
