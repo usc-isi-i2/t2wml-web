@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
+import Tooltip from '@material-ui/core/Tooltip'
 import CloseIcon from '@material-ui/icons/Close'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
@@ -54,9 +55,11 @@ const PropertyInput = ({
             <p>{`Selected property: ${selected.label[0]} (${selected.qnode})`}</p>
           </Grid>
           <Grid item xs={2}>
-            <IconButton onClick={removeSelected}>
-              <CloseIcon />
-            </IconButton>
+            <Tooltip arrow placement="top" title={'remove selected property'}>
+              <IconButton onClick={removeSelected}>
+                <CloseIcon />
+              </IconButton>
+            </Tooltip>
           </Grid>
         </Grid>
       )
