@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
+import CloseIcon from '@material-ui/icons/Close'
 import TextField from '@material-ui/core/TextField'
+import IconButton from '@material-ui/core/IconButton'
 
 import useStyles from '../styles/annotationMenu'
 import fetchProperties from '../utils/fetchProperties'
@@ -36,11 +37,35 @@ const PropertyInput = ({
 
   const selectProperty = property => {
     onSelectProperty(property)
+    setSelected(property)
     setProperties([])
+  }
+
+  const removeSelected = () => {
+    onSelectProperty()
+    setSelected()
+  }
+
+  const renderSelectedProperty = () => {
+    if ( !!selected ) {
+      return (
+        <Grid container spacing={3}>
+          <Grid item xs={10}>
+            <p>{`Selected property: ${selected.label[0]} (${selected.qnode})`}</p>
+          </Grid>
+          <Grid item xs={2}>
+            <IconButton onClick={removeSelected}>
+              <CloseIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
+      )
+    }
   }
 
   return (
     <Grid item xs={12}>
+      {renderSelectedProperty()}
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <TextField
