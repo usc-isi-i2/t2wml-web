@@ -337,9 +337,9 @@ const AnnotationMenu = ({
         defaultValue = selectedAnnotation[option.value]
       }
 
-      if  ( option.value === 'property' ) {
+      if ( option.value === 'property' ) {
         return (
-          <PropertyInput
+          <PropertyInput key={option.value}
             selectedProperty={formState.selectedProperty}
             onSelectProperty={handleOnSelectProperty} />
         )
