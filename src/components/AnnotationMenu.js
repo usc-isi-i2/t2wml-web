@@ -9,10 +9,13 @@ import {
   DialogActions,
   IconButton,
   TextField,
+  Typography,
   MenuItem,
   FormHelperText,
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
+import ExpandLessIcon from '@material-ui/icons/ExpandLess'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import Draggable from 'react-draggable'
 
@@ -294,6 +297,24 @@ const AnnotationMenu = ({
     )
   }
 
+  const toggleAdditionalInputs = () => {
+    setShowAdditionalInputs(showAdditionalInputs => !showAdditionalInputs)
+  }
+
+  const renderAdditionalInputsToggle = () => {
+    return (
+      <Grid>
+        <IconButton className={classes.removeButton}
+          onClick={toggleAdditionalInputs}>
+          {showAdditionalInputs ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </IconButton>
+        <Typography variant={'p'}>
+          {showAdditionalInputs ? 'Hide additional inputs' : 'Show additional inputs'}
+        </Typography>
+      </Grid>
+    )
+  }
+
   const handleOnSelectProperty = node => {
     setFormState({
       ...formState,
@@ -377,6 +398,7 @@ const AnnotationMenu = ({
           {renderSelectedAreaInput()}
           {renderSelectedRoleInput()}
           {renderSelectedTypeInput()}
+          {renderAdditionalInputsToggle()}
           {renderAdditionalInputs()}
         </Grid>
       </form>
