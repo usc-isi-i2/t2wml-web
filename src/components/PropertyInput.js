@@ -12,9 +12,12 @@ import fetchProperties from '../utils/fetchProperties'
 
 
 const useStyles = makeStyles(theme => ({
+  wrapper: {
+    marginTop: theme.spacing(2),
+    paddingBottom: theme.spacing(4),
+  },
   title: {
     fontSize: theme.spacing(2),
-    marginTop: theme.spacing(2),
   },
   properties: {
     paddingInlineStart: theme.spacing(2),
@@ -130,7 +133,7 @@ const PropertyInput = ({
   }
 
   return (
-    <Grid item xs={12}>
+    <Grid item xs={12} className={classes.wrapper}>
       {renderTitle()}
       {renderSelectedProperty()}
       {renderPropertySearch()}
