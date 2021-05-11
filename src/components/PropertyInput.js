@@ -49,7 +49,7 @@ const PropertyInput = ({
     setSelected(selectedProperty)
   }, [selectedProperty])
 
-  const handleOnChange = event => {
+  const handleOnChangePropertySearch = event => {
     const value = event.target.value
     if ( !value ) {
       setProperties([])
@@ -116,7 +116,7 @@ const PropertyInput = ({
             label={'Search wikidata properties'}
             id={'selectedProperty'}
             name={'selectedProperty'}
-            onChange={handleOnChange} />
+            onChange={handleOnChangePropertySearch} />
         </Grid>
         <Grid item xs={12}>
           <ol className={classes.properties}>
