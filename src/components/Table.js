@@ -101,7 +101,8 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       setShowAnnotationMenu(false)
 
       setTargetSelection(targetSelection => {
-        let nextSelection = {}
+
+        let nextSelection = targetSelection
         const { x1, x2, y1, y2 } = targetSelection
         const rows = tableElement.current.querySelectorAll('tr')
 
@@ -123,7 +124,6 @@ const Table = ({ file, sheet, data, setOutputData }) => {
             }
           } else {
             nextSelection = {'x1': x1, 'x2': x1, 'y1': y1 - 1, 'y2': y1 - 1}
-            setTargetSelection(nextSelection)
             const nextElement = rows[y1 - 1].children[x1]
             prevElement.current = nextElement
           }
@@ -145,7 +145,6 @@ const Table = ({ file, sheet, data, setOutputData }) => {
             }
           } else {
             nextSelection = {'x1': x1, 'x2': x1, 'y1': y1 + 1, 'y2': y1 + 1}
-            setTargetSelection(nextSelection)
             const nextElement = rows[y1 + 1].children[x1]
             prevElement.current = nextElement
           }
@@ -167,7 +166,6 @@ const Table = ({ file, sheet, data, setOutputData }) => {
             }
           } else {
             nextSelection = {'x1': x1 - 1, 'x2': x1 - 1, 'y1': y1, 'y2': y1}
-            setTargetSelection(nextSelection)
             const nextElement = rows[y1].children[x1 - 1]
             prevElement.current = nextElement
           }
@@ -189,7 +187,6 @@ const Table = ({ file, sheet, data, setOutputData }) => {
             }
           } else {
             nextSelection = {'x1': x1 + 1, 'x2': x1 + 1, 'y1': y1, 'y2': y1}
-            setTargetSelection(nextSelection)
             const nextElement = rows[y1].children[x1 + 1]
             prevElement.current = nextElement
           }
@@ -211,6 +208,8 @@ const Table = ({ file, sheet, data, setOutputData }) => {
           updateSelections()
           return annotationBlocks
         })
+
+        return nextSelection
       })
     }
   }
