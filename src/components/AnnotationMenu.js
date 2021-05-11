@@ -53,6 +53,7 @@ const AnnotationMenu = ({
   })
 
   const [showWikificationMenu, setShowWikificationMenu] = useState(false)
+  const [showAdditionalInputs, setShowAdditionalInputs] = useState(false)
 
   useEffect(() => {
 
@@ -332,22 +333,24 @@ const AnnotationMenu = ({
         )
       }
 
-      return (
-        <Grid item xs={12} key={option.value}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            autoCorrect="off"
-            autoComplete="off"
-            autoCapitalize="off"
-            spellCheck="false"
-            label={option.label}
-            id={`selected${option.label}`}
-            name={`selected${option.label}`}
-            value={formState[`selected${option.label}`] || defaultValue}
-            onChange={handleOnChange} />
-        </Grid>
-      )
+      if ( showAdditionalInputs === 'property' ) {
+        return (
+          <Grid item xs={12} key={option.value}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              autoCorrect="off"
+              autoComplete="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              label={option.label}
+              id={`selected${option.label}`}
+              name={`selected${option.label}`}
+              value={formState[`selected${option.label}`] || defaultValue}
+              onChange={handleOnChange} />
+          </Grid>
+        )
+      }
     })
   }
 
