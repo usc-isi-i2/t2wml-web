@@ -11,6 +11,12 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     marginTop: theme.spacing(1),
   },
+  additionalFieldsToggle: {
+    '& > span': {
+      cursor: 'pointer',
+      userSelect: 'none',
+    },
+  },
   deleteButton: {
     '&:hover': {
       color: 'red',

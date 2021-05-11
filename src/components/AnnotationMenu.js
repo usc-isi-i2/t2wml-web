@@ -303,12 +303,12 @@ const AnnotationMenu = ({
 
   const renderAdditionalInputsToggle = () => {
     return (
-      <Grid>
-        <IconButton className={classes.removeButton}
-          onClick={toggleAdditionalInputs}>
+      <Grid className={classes.additionalFieldsToggle}
+        onClick={toggleAdditionalInputs}>
+        <IconButton className={classes.removeButton}>
           {showAdditionalInputs ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </IconButton>
-        <Typography variant={'p'}>
+        <Typography variant="p">
           {showAdditionalInputs ? 'Hide additional inputs' : 'Show additional inputs'}
         </Typography>
       </Grid>
