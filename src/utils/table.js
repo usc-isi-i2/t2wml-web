@@ -143,6 +143,28 @@ export const isBlock = selection => {
   return !(selection.x1 === selection.x2 && selection.y1 === selection.y2)
 }
 
+
+export const selectionHasData = (data, selection) => {
+  const { x1, x2, y1, y2 } = selection.current
+  const leftCol = Math.min(x1-1, x2-1)
+  const rightCol = Math.max(x1-1, x2-1)
+  const topRow = Math.min(y1-1, y2-1)
+  const bottomRow = Math.max(y1-1, y2-1)
+  let rowIndex = topRow
+  while ( rowIndex <= bottomRow ) {
+    let colIndex = leftCol
+    while ( colIndex <= rightCol ) {
+      if ( !!data[rowIndex][colIndex] ) {
+        return true
+      }
+      colIndex += 1
+    }
+    rowIndex += 1
+  }
+  return false
+}
+
+
 export const parseSelectedAreaInput = value => {
   const regex = /^.?([a-z]+)([0-9]+):([a-z]+)([0-9]+).?$/gmi
   const groups = regex.exec(value)
