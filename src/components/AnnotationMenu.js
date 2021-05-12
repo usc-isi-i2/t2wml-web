@@ -209,7 +209,7 @@ const AnnotationMenu = ({
           value={formState.selectedArea || defaultValue}
           error={!!formState.selectedArea && !parsedCorrectly}
           helperText={formState.selectedArea && !parsedCorrectly ? (
-            'format: [col][row]:[col][row]'
+            'format: [col][row](:[col][row])?'
           ) : ''} />
       </Grid>
     )

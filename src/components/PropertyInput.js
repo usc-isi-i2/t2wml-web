@@ -131,7 +131,7 @@ const PropertyInput = ({
             value={selectedPropertyCells}
             error={!!selectedPropertyCells && !parsedCorrectly}
             helperText={selectedPropertyCells && !parsedCorrectly ? (
-              'format: [col][row]:[col][row]'
+              'format: [col][row](:[col][row])?'
             ) : ''}
             onChange={handleOnChangePropertyCells} />
         </Grid>
