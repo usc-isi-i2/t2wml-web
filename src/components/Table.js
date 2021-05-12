@@ -67,10 +67,14 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     // user is opening the annotation menu with a selection
     if ( selection.current && showAnnotationMenu && !selectedAnnotationBlock ) {
 
-      // call the annotation suggestion endpoint
-      fetchSuggestions(file, sheet, selection.current, annotationBlocks)
-      .then(data => setSuggestions(data))
-      .catch(error => console.log(error))
+      // check that the selected cells have content
+      if ( !!data[selection.current.x1][selection.current.y1] ) {
+
+        // call the annotation suggestion endpoint
+        fetchSuggestions(file, sheet, selection.current, annotationBlocks)
+        .then(data => setSuggestions(data))
+        .catch(error => console.log(error))
+      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
