@@ -64,11 +64,12 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }, [])
 
   useEffect(() => {
+
     // user is opening the annotation menu with a selection
     if ( selection.current && showAnnotationMenu && !selectedAnnotationBlock ) {
 
       // check that the selected cells have content
-      if ( !!data[selection.current.x1][selection.current.y1] ) {
+      if ( utils.selectionHasData(data, selection) ) {
 
         // call the annotation suggestion endpoint
         fetchSuggestions(file, sheet, selection.current, annotationBlocks)
