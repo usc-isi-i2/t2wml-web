@@ -339,42 +339,48 @@ const AnnotationMenu = ({
 
     if ( !TYPE || !TYPE.children ) { return }
 
-    return TYPE.children.map(option => {
 
-      let defaultValue = ''
-      if ( selectedAnnotation && selectedAnnotation[option.value] ) {
-        defaultValue = selectedAnnotation[option.value]
-      }
+    return (
+      <React.Fragment>
+        {renderAdditionalInputsToggle()}
+        {TYPE.children.map(option => {
 
-      if ( option.value === 'property' ) {
-        return (
-          <PropertyInput key={option.value}
-            selectedProperty={formState.selectedProperty}
-            onSelectProperty={handleOnSelectProperty} />
-        )
-      }
+          let defaultValue = ''
+          if ( selectedAnnotation && selectedAnnotation[option.value] ) {
+            defaultValue = selectedAnnotation[option.value]
+          }
 
-      if ( showAdditionalInputs ) {
-        return (
-          <Grid item xs={12} key={option.value}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              autoCorrect="off"
-              autoComplete="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              label={option.label}
-              id={`selected${option.label}`}
-              name={`selected${option.label}`}
-              value={formState[`selected${option.label}`] || defaultValue}
-              onChange={handleOnChange} />
-          </Grid>
-        )
-      }
+          if ( option.value === 'property' ) {
+            return (
+              <PropertyInput key={option.value}
+                selectedProperty={formState.selectedProperty}
+                onSelectProperty={handleOnSelectProperty} />
+            )
+          }
 
-      return null
-    })
+          if ( showAdditionalInputs ) {
+            return (
+              <Grid item xs={12} key={option.value}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  autoCorrect="off"
+                  autoComplete="off"
+                  autoCapitalize="off"
+                  spellCheck="false"
+                  label={option.label}
+                  id={`selected${option.label}`}
+                  name={`selected${option.label}`}
+                  value={formState[`selected${option.label}`] || defaultValue}
+                  onChange={handleOnChange} />
+              </Grid>
+            )
+          }
+
+          return null
+        })}
+      </React.Fragment>
+    )
   }
 
   const renderTitle = () => {
@@ -398,7 +404,6 @@ const AnnotationMenu = ({
           {renderSelectedAreaInput()}
           {renderSelectedRoleInput()}
           {renderSelectedTypeInput()}
-          {renderAdditionalInputsToggle()}
           {renderAdditionalInputs()}
         </Grid>
       </form>
