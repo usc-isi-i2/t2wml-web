@@ -75,6 +75,10 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         .then(data => setSuggestions(data))
         .catch(error => console.log(error))
       }
+    } else {
+
+      // reset the suggestions otherwise
+      setSuggestions({roles: [], types: [], children: {}})
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
