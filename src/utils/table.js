@@ -166,8 +166,16 @@ export const selectionHasData = (data, selection) => {
 
 
 export const parseSelectedAreaInput = value => {
-  const regex = /^.?([a-z]+)([0-9]+):([a-z]+)([0-9]+).?$/gmi
+  const regex = /([a-z]+)([0-9]+):?([a-z]+)?([0-9]+)?$/gmi
   const groups = regex.exec(value)
+  if ( groups && groups[1] && groups[2] && !groups[3] && !groups[4] ) {
+    return {
+      x1: letterToColumn(groups[1]),
+      x2: letterToColumn(groups[1]),
+      y1: parseInt(groups[2]),
+      y2: parseInt(groups[2]),
+    }
+  }
   if ( groups && groups[1] && groups[2] && groups[3] && groups[4] ) {
     return {
       x1: letterToColumn(groups[1]),
