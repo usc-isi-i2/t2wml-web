@@ -469,8 +469,7 @@ const AnnotationMenu = ({
         <DialogTitle classes={{ root: 'draggable-handle' }}>
           {renderTitle()}
         </DialogTitle>
-        <DialogContent
-        tabIndex="-1">
+        <DialogContent>
           {renderContent()}
         </DialogContent>
         <DialogActions>
