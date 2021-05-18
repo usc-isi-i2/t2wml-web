@@ -24,10 +24,10 @@ const Output = ({ data, filename }) => {
     setRows([...Array(Math.max(data.length, MIN_NUM_ROWS))])
     setCols([...Array(Math.max(data[0].length, MIN_NUM_COLS))])
 
-    if ( data.length < 2 ) { return }
+    if ( !data || !data.length ) { return }
     let counter = 0
     while ( counter < data[0].length ) {
-      if ( !data[1][counter] ) {
+      if ( !data[1] || !data[1][counter] ) {
         setActiveCol(data[0][counter])
         break
       } else {
