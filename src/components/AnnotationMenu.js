@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import {
   Grid,
+  Paper,
   Button,
   Dialog,
   DialogTitle,
@@ -446,13 +447,16 @@ const AnnotationMenu = ({
         onClose={hideMenu}
         classes={{ paper: classes.menu }}
         aria-labelledby='dialog-modal-title'
-        PaperProps={{ tabIndex: -1 }}
-        TransitionComponent={Draggable}
-        TransitionProps={{ handle: '.draggable-handle' }}>
+        PaperComponent={props => (
+          <Draggable handle='.draggable-handle'>
+            <Paper {...props} />
+          </Draggable>
+        )}>
         <DialogTitle classes={{ root: 'draggable-handle' }}>
           {renderTitle()}
         </DialogTitle>
-        <DialogContent>
+        <DialogContent
+        tabIndex="-1">
           {renderContent()}
         </DialogContent>
         <DialogActions>
