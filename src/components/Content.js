@@ -20,11 +20,11 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const [data, setData] = useState()
 
+  const [message, setMessage] = useState({})
+
   const [outputData, setOutputData] = useState()
 
   const [colWidth, setColWidth] = useState(window.innerWidth * 0.65)
-
-  const [message, setMessage] = useState({})
 
   const handleOnUnload = event => {
     event.preventDefault()
@@ -68,7 +68,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
           </div>
         </div>
       ) : (
-        <FileDrop onSuccess={data => setData(data)} />
+        <FileDrop
+          onSuccess={setData} setMessage={setMessage} />
       )}
       {!!outputData && outputData.length > 1 && (
         <Download

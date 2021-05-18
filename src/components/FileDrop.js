@@ -10,7 +10,7 @@ import UploadIcon from '../icons/Upload'
 import useStyles from '../styles/fileDrop'
 
 
-const FileDrop = ({onSuccess}) => {
+const FileDrop = ({ onSuccess, setMessage }) => {
 
   const classes = useStyles()
 
@@ -49,8 +49,19 @@ const FileDrop = ({onSuccess}) => {
     maxFiles: 1,
   })
 
-  function onUpload(data) {
+  function onUploadSuccess(data) {
     onSuccess(data)
+    setMessage({
+      type: 'success',
+      text: 'Good news! File uploaded',
+    })
+  }
+
+  function onUploadError() {
+    setMessage({
+      type: 'error',
+      text: 'Err! Unable to upload file',
+    })
   }
 
   function onDelete(file) {
