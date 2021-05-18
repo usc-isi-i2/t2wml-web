@@ -8,6 +8,7 @@ import Instructions from './Instructions'
 import Download from './Download'
 import FileDrop from './FileDrop'
 import Divider from './Divider'
+import Message from './Message'
 import Header from './Header'
 import Output from './Output'
 import Table from './Table'
@@ -22,6 +23,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const [outputData, setOutputData] = useState()
 
   const [colWidth, setColWidth] = useState(window.innerWidth * 0.65)
+
+  const [message, setMessage] = useState({})
 
   const handleOnUnload = event => {
     event.preventDefault()
@@ -72,6 +75,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
           filename={data.filepath}
           sheetname={data.sheetName} />
       )}
+      <Message message={message} />
     </Grid>
   )
 }
