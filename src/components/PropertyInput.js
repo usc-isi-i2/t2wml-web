@@ -167,6 +167,9 @@ const PropertyInput = ({
               <li key={property.qnode}
                 onClick={() => selectProperty(property)}>
                 {`${property.label[0]} (${property.qnode})`}
+                <Typography variant="inherit" paragraph={true}>
+                  {property.description[0]}
+                </Typography>
               </li>
             ))}
           </ol>
