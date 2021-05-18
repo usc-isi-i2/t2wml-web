@@ -15,6 +15,8 @@ const useStyles = makeStyles(theme => ({
     '& > span': {
       cursor: 'pointer',
       userSelect: 'none',
+      display: 'inline-block',
+      verticalAlign: 'middle',
     },
   },
   deleteButton: {

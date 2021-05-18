@@ -308,7 +308,7 @@ const AnnotationMenu = ({
         <IconButton className={classes.removeButton}>
           {showAdditionalInputs ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </IconButton>
-        <Typography variant="p">
+        <Typography variant="inherit">
           {showAdditionalInputs ? 'Hide additional inputs' : 'Show additional inputs'}
         </Typography>
       </Grid>
