@@ -7,7 +7,7 @@ import uploadFile from '../utils/uploadFile'
 import readFile from '../utils/readFile'
 
 
-const FileUpload = ({file, onUpload, onDelete}) => {
+const FileUpload = ({file, onUploadSuccess, onUploadError, onDelete}) => {
 
   const [progress, setProgress] = useState(0)
 
@@ -15,12 +15,14 @@ const FileUpload = ({file, onUpload, onDelete}) => {
     let isMounted = true
     uploadFile(file, setProgress).then(data => {
       if ( isMounted ) {
-        onUpload(data)
+        onUploadSuccess(data)
       }
     }).catch(() => {
       if ( isMounted ) {
         readFile(file).then(data => {
-          onUpload(data)
+          onUploadSuccess(data)
+        }).catch(() => {
+          onUploadError()
         })
       }
     })

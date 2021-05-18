@@ -87,7 +87,8 @@ const FileDrop = ({ onSuccess, setMessage }) => {
         <Grid item key={index}>
           <FileUpload
             onDelete={onDelete}
-            onUpload={onUpload}
+            onUploadSuccess={onUploadSuccess}
+            onUploadError={onUploadError}
             file={file}
           />
         </Grid>
