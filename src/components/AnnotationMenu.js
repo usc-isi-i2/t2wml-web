@@ -342,7 +342,7 @@ const AnnotationMenu = ({
 
     return (
       <React.Fragment>
-        {renderAdditionalInputsToggle()}
+        {TYPE.children.length > 1 && renderAdditionalInputsToggle()}
         {TYPE.children.map(option => {
 
           let defaultValue = ''
