@@ -7,6 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import TextField from '@material-ui/core/TextField'
 import CloseIcon from '@material-ui/icons/Close'
@@ -112,6 +113,9 @@ const WikificationMenu = ({
             <li key={result.qnode}
               onClick={() => selectResult(result)}>
               {`${result.label[0]} (${result.qnode})`}
+              <Typography variant="inherit" paragraph={true}>
+                {result.description[0]}
+              </Typography>
             </li>
           ))}
         </ol>
