@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import {
+  Box,
   Tab,
   Tabs,
   Grid,
@@ -31,6 +32,27 @@ import useStyles from '../styles/annotationMenu'
 import * as utils from '../utils/table'
 
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  )
+}
+
+
 const AnnotationMenu = ({
   file,
   sheet,
@@ -59,8 +81,8 @@ const AnnotationMenu = ({
   })
 
   const [selectedTab, setSelectedTab] = useState('block')
-  const handleTabChange = tab => {
-    setSelectedTab(tab)
+  const handleTabChange = (event, value) => {
+    setSelectedTab(value)
   }
 
   const [showWikificationMenu, setShowWikificationMenu] = useState(false)
@@ -409,7 +431,7 @@ const AnnotationMenu = ({
     )
   }
 
-  const renderContent = () => {
+  const renderBlockMenu = () => {
     return (
       <form noValidate autoComplete="off"
         className={classes.form}
@@ -422,6 +444,27 @@ const AnnotationMenu = ({
           {renderAdditionalInputs()}
         </Grid>
       </form>
+    )
+  }
+
+  const renderCellMenu = () => {
+    return (
+      <WikificationMenu
+        selection={selection}
+        selectedCell={selectedCell} />
+    )
+  }
+
+  const renderContent = () => {
+    return (
+      <React.Fragment>
+        <TabPanel value={selectedTab} index={'block'}>
+          {renderBlockMenu()}
+        </TabPanel>
+        <TabPanel value={selectedTab} index={'cell'}>
+          {renderCellMenu()}
+        </TabPanel>
+      </React.Fragment>
     )
   }
 
@@ -454,7 +497,7 @@ const AnnotationMenu = ({
     )
   }
 
-  const renderAnnotationMenu = () => {
+  const renderDialog = () => {
     return (
       <Dialog
         open={true}
@@ -479,24 +522,9 @@ const AnnotationMenu = ({
     )
   }
 
-  const hideWikificationMenu = () => {
-    setShowWikificationMenu(false)
-  }
-
-  const renderWikificationMenu = () => {
-    if ( !showWikificationMenu ) { return }
-    return (
-      <WikificationMenu
-        selection={selection}
-        selectedCell={selectedCell}
-        hideMenu={() => hideWikificationMenu()} />
-    )
-  }
-
   return (
     <React.Fragment>
-      {renderAnnotationMenu()}
-      {renderWikificationMenu()}
+      {renderDialog()}
     </React.Fragment>
   )
 }
