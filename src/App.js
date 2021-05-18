@@ -149,10 +149,11 @@ const App = () => {
       },
       MuiDialogTitle: {
         root: {
+          padding: 0,
           '& .MuiIconButton-root': {
             position: 'absolute',
-            top: defaultTheme.spacing(1),
-            right: defaultTheme.spacing(1),
+            top: '1px',
+            right: '1px',
           },
         },
       },
