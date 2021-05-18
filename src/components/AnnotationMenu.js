@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
 import {
+  Tab,
+  Tabs,
   Grid,
   Paper,
   Button,
@@ -55,6 +57,11 @@ const AnnotationMenu = ({
     selectedFormat: undefined,
     selectedUnit: undefined,
   })
+
+  const [selectedTab, setSelectedTab] = useState('block')
+  const handleTabChange = tab => {
+    setSelectedTab(tab)
+  }
 
   const [showWikificationMenu, setShowWikificationMenu] = useState(false)
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false)
@@ -387,7 +394,14 @@ const AnnotationMenu = ({
   const renderTitle = () => {
     return (
       <React.Fragment>
-        {`Annotate this ${utils.isBlock(selection) ? 'block' : 'cell'}`}
+        <Tabs
+          value={selectedTab}
+          onChange={handleTabChange}
+          indicatorColor="primary"
+          textColor="primary">
+          <Tab label="Block" value={'block'} />
+          <Tab label="Cell" value={'cell'} />
+        </Tabs>
         <IconButton aria-label="close" onClick={hideMenu}>
           <CloseIcon />
         </IconButton>
