@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Snackbar from '@material-ui/core/Snackbar'
 import Alert from '@material-ui/lab/Alert'
@@ -18,7 +18,13 @@ const Message = ({ message }) => {
 
   const classes = useStyles()
 
-  const [open, setOpen] = useState(!!message.text)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if ( !!message.text ) {
+      setOpen(true)
+    }
+  }, [message])
 
   const handleClose = (event, reason) => {
     if ( reason === 'clickaway' ) {
