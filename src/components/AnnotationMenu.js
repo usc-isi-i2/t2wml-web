@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
 import {
-  Box,
   Tab,
   Tabs,
   Grid,
@@ -23,6 +22,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import Draggable from 'react-draggable'
 
+import TabPanel from './TabPanel'
 import WikifyButton from './WikifyButton'
 import PropertyInput from './PropertyInput'
 import WikificationMenu from './WikificationMenu'
@@ -31,27 +31,6 @@ import uploadAnnotations from '../utils/uploadAnnotations'
 import fetchProperties from '../utils/fetchProperties'
 import useStyles from '../styles/annotationMenu'
 import * as utils from '../utils/table'
-
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  )
-}
 
 
 const AnnotationMenu = ({
