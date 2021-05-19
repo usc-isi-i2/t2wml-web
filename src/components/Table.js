@@ -682,7 +682,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }
 
   const renderAnnotationMenu = () => {
-    if ( !selection.current || !showOverlayMenu ) { return }
+    if ( !targetSelection || !selection.current || !showOverlayMenu ) { return }
     const selectedCellValue = data[targetSelection.y1-1][targetSelection.x1-1]
     return (
       <OverlayMenu
