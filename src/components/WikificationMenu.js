@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/styles'
 
-
 import fetchQnodes from '../utils/fetchQnodes'
+import * as utils from '../utils/table'
 
 
 const useStyles = makeStyles(theme => ({
@@ -106,17 +106,25 @@ const WikificationMenu = ({
 
   const handleOnSubmit = () => {}
 
-  return (
-    <Grid container spacing={3}>
-      {renderFormInstructions()}
+  const renderCellContent = () => {
+    return (
       <Grid item xs={12}>
-        <p style={{paddingLeft: '12px'}}>{selectedCell.value}</p>
+        <p style={{paddingLeft: '12px'}}>
+          {utils.humanReadableSelection(selectedCell)}: {selectedCell.value}
+        </p>
         {!!selectedQnode && (
           <p style={{paddingLeft: '12px', color: '#006699'}}>
             qnode: {`${selectedQnode.label[0]} (${selectedQnode.qnode})`}
           </p>
         )}
       </Grid>
+    )
+  }
+
+  return (
+    <Grid container spacing={3}>
+      {renderFormInstructions()}
+      {renderCellContent()}
       {renderQnodeSearch()}
       {renderQnodeResults()}
       <Grid item>
