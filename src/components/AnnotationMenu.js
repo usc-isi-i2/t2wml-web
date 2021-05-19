@@ -4,6 +4,7 @@ import {
   Box,
   Tab,
   Tabs,
+  Link,
   Grid,
   Paper,
   Button,
@@ -315,6 +316,14 @@ const AnnotationMenu = ({
             </MenuItem>
           ))}
         </TextField>
+        {formState.selectedType === 'wikibaseitem' && (
+          <Link
+            variant="body1"
+            component="button"
+            onClick={() => {}}>
+            Wikify this block automatically
+          </Link>
+        )}
       </Grid>
     )
   }
