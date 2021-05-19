@@ -350,19 +350,25 @@ const AnnotationMenu = ({
 
           if ( showAdditionalInputs ) {
             return (
-              <Grid item xs={12} key={option.value}>
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  autoCorrect="off"
-                  autoComplete="off"
-                  autoCapitalize="off"
-                  spellCheck="false"
-                  label={option.label}
-                  id={`selected${option.label}`}
-                  name={`selected${option.label}`}
-                  value={formState[`selected${option.label}`] || defaultValue}
-                  onChange={handleOnChange} />
+              <Grid item xs={12}>
+                <Grid container>
+                  <Grid item xs={1} key={option.value}>
+                  </Grid>
+                  <Grid item xs={11} key={option.value}>
+                    <TextField
+                      fullWidth
+                      variant="outlined"
+                      autoCorrect="off"
+                      autoComplete="off"
+                      autoCapitalize="off"
+                      spellCheck="false"
+                      label={option.label}
+                      id={`selected${option.label}`}
+                      name={`selected${option.label}`}
+                      value={formState[`selected${option.label}`] || defaultValue}
+                      onChange={handleOnChange} />
+                  </Grid>
+                </Grid>
               </Grid>
             )
           }
