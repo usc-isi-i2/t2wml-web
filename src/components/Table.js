@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import { Paper } from '@material-ui/core'
 
-import AnnotationMenu from './AnnotationMenu'
+import OverlayMenu from './OverlayMenu'
 import useStyles from '../styles/table'
 import * as utils from '../utils/table'
 import fetchPartialCSV from '../utils/fetchPartialCSV'
@@ -25,7 +25,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   const [suggestions, setSuggestions] = useState({
     roles: [], types: [], children: {},
   })
-  const [showAnnotationMenu, setShowAnnotationMenu] = useState(false)
+  const [showOverlayMenu, setShowOverlayMenu] = useState(false)
   const [targetSelection, setTargetSelection] = useState(false)
 
   const MIN_NUM_ROWS = 100
@@ -66,7 +66,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   useEffect(() => {
 
     // user is opening the annotation menu with a selection
-    if ( selection.current && showAnnotationMenu && !selectedAnnotationBlock ) {
+    if ( selection.current && showOverlayMenu && !selectedAnnotationBlock ) {
 
       // check that the selected cells have content
       if ( utils.selectionHasData(data, selection) ) {
@@ -83,13 +83,13 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showAnnotationMenu])
+  }, [showOverlayMenu])
 
   const handleOnKeyDown = event => {
 
     // Close annotation menu with ESC key
     if ( event.code === 'Escape' ) {
-      hideAnnotationMenu()
+      hideOverlayMenu()
     }
 
     const arrowKeyCodes = [
@@ -107,7 +107,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       event.preventDefault()
 
       // Hide annotation menu when moving
-      setShowAnnotationMenu(false)
+      setShowOverlayMenu(false)
 
       setTargetSelection(targetSelection => {
 
@@ -226,7 +226,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   const handleOnKeyUp = () => {
     clearTimeout(timeoutID.current)
     timeoutID.current = setTimeout(() => {
-      setShowAnnotationMenu(true)
+      setShowOverlayMenu(true)
     }, 350)
   }
 
@@ -411,13 +411,13 @@ const Table = ({ file, sheet, data, setOutputData }) => {
             selection.current,
             annotationBlocks.map(block => block.selection),
           ) ) {
-            setShowAnnotationMenu(false)
+            setShowOverlayMenu(false)
             setSelectedAnnotationBlock(undefined)
             setTargetSelection(undefined)
             selection.current = null
             resetSelection()
           } else {
-            setShowAnnotationMenu(true)
+            setShowOverlayMenu(true)
           }
           return selectedAnnotationBlock
         })
@@ -433,7 +433,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     // Allow users to select the resize-corner of the cell
     if ( element.className === 'cell-resize-corner' ) {
       prevElement.current = element.parentElement
-      setShowAnnotationMenu(false)
+      setShowOverlayMenu(false)
       setUserSelecting(true)
       return
     } else if ( element.nodeName !== 'TD' ) { return }
@@ -491,7 +491,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     } else {
 
       // Reset annotation menu
-      setShowAnnotationMenu(false)
+      setShowOverlayMenu(false)
       setSelectedAnnotationBlock(undefined)
 
       // Activate the element on click
@@ -612,7 +612,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     })
   }
 
-  const hideAnnotationMenu = (annotations, deletedAnnotationBlock=null) => {
+  const hideOverlayMenu = (annotations, deletedAnnotationBlock=null) => {
     if ( annotations && annotations instanceof Array ) {
       setAnnotationBlocks(annotationBlocks => {
         if ( deletedAnnotationBlock ) {
@@ -627,7 +627,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       .catch(error => console.log(error))
     }
 
-    setShowAnnotationMenu(false)
+    setShowOverlayMenu(false)
     setSelectedAnnotationBlock(undefined)
     setTargetSelection(undefined)
     selection.current = null
@@ -682,10 +682,10 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }
 
   const renderAnnotationMenu = () => {
-    if ( !selection.current || !showAnnotationMenu ) { return }
+    if ( !selection.current || !showOverlayMenu ) { return }
     const selectedCell = data[targetSelection.y1-1][targetSelection.x1-1]
     return (
-      <AnnotationMenu
+      <OverlayMenu
         file={file}
         sheet={sheet}
         selectedCell={selectedCell}
@@ -694,7 +694,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         annotations={annotationBlocks}
         selectedAnnotation={selectedAnnotationBlock}
         onSelectionChange={handleOnSelectionChange}
-        hideMenu={hideAnnotationMenu} />
+        hideOverlayMenu={hideOverlayMenu} />
     )
   }
 

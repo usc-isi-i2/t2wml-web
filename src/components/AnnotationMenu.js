@@ -25,7 +25,6 @@ import Draggable from 'react-draggable'
 import TabPanel from './TabPanel'
 import WikifyButton from './WikifyButton'
 import PropertyInput from './PropertyInput'
-import WikificationMenu from './WikificationMenu'
 import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
 import fetchProperties from '../utils/fetchProperties'
@@ -40,9 +39,8 @@ const AnnotationMenu = ({
   selection,
   suggestions,
   annotations,
+  hideOverlayMenu,
   selectedAnnotation,
-  openMenu,
-  hideMenu,
   onSelectionChange,
 }) => {
 
@@ -148,9 +146,9 @@ const AnnotationMenu = ({
     })
 
     uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
-      hideMenu(data.annotations)
+      hideOverlayMenu(data.annotations)
     }).catch(error => {
-      hideMenu()
+      hideOverlayMenu()
     })
   }
 
@@ -162,9 +160,9 @@ const AnnotationMenu = ({
     )
 
     uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
-      hideMenu(data.annotations, selectedAnnotation)
+      hideOverlayMenu(data.annotations, selectedAnnotation)
     }).catch(error => {
-      hideMenu()
+      hideOverlayMenu()
     })
   }
 
@@ -391,61 +389,6 @@ const AnnotationMenu = ({
     )
   }
 
-  const renderTitle = () => {
-    return (
-      <React.Fragment>
-        <Tabs
-          value={selectedTab}
-          onChange={handleTabChange}
-          indicatorColor="primary"
-          textColor="primary">
-          <Tab label="Block" value={'block'} />
-          <Tab label="Cell" value={'cell'} />
-        </Tabs>
-        <IconButton aria-label="close" onClick={hideMenu}>
-          <CloseIcon />
-        </IconButton>
-      </React.Fragment>
-    )
-  }
-
-  const renderBlockMenu = () => {
-    return (
-      <form noValidate autoComplete="off"
-        className={classes.form}
-        onSubmit={handleOnSubmit}>
-        <Grid container spacing={3}>
-          {renderFormInstructions()}
-          {renderSelectedAreaInput()}
-          {renderSelectedRoleInput()}
-          {renderSelectedTypeInput()}
-          {renderAdditionalInputs()}
-        </Grid>
-      </form>
-    )
-  }
-
-  const renderCellMenu = () => {
-    return (
-      <WikificationMenu
-        selection={selection}
-        selectedCell={selectedCell} />
-    )
-  }
-
-  const renderContent = () => {
-    return (
-      <React.Fragment>
-        <TabPanel value={selectedTab} index={'block'}>
-          {renderBlockMenu()}
-        </TabPanel>
-        <TabPanel value={selectedTab} index={'cell'}>
-          {renderCellMenu()}
-        </TabPanel>
-      </React.Fragment>
-    )
-  }
-
   const renderButtons = () => {
     return (
       <Grid container spacing={3} justify="space-between">
@@ -475,35 +418,19 @@ const AnnotationMenu = ({
     )
   }
 
-  const renderDialog = () => {
-    return (
-      <Dialog
-        open={true}
-        onClose={hideMenu}
-        classes={{ paper: classes.menu }}
-        aria-labelledby='dialog-modal-title'
-        PaperComponent={props => (
-          <Draggable handle='.draggable-handle'>
-            <Paper {...props} />
-          </Draggable>
-        )}>
-        <DialogTitle classes={{ root: 'draggable-handle' }}>
-          {renderTitle()}
-        </DialogTitle>
-        <DialogContent>
-          {renderContent()}
-        </DialogContent>
-        <DialogActions>
-          {renderButtons()}
-        </DialogActions>
-      </Dialog>
-    )
-  }
-
   return (
-    <React.Fragment>
-      {renderDialog()}
-    </React.Fragment>
+    <form noValidate autoComplete="off"
+      className={classes.form}
+      onSubmit={handleOnSubmit}>
+      <Grid container spacing={3}>
+        {renderFormInstructions()}
+        {renderSelectedAreaInput()}
+        {renderSelectedRoleInput()}
+        {renderSelectedTypeInput()}
+        {renderAdditionalInputs()}
+      </Grid>
+      {renderButtons()}
+    </form>
   )
 }
 
