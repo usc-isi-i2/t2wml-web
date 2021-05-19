@@ -350,11 +350,11 @@ const AnnotationMenu = ({
 
           if ( showAdditionalInputs ) {
             return (
-              <Grid item xs={12}>
+              <Grid item xs={12} key={option.value}>
                 <Grid container>
-                  <Grid item xs={1} key={option.value}>
+                  <Grid item xs={1}>
                   </Grid>
-                  <Grid item xs={11} key={option.value}>
+                  <Grid item xs={11}>
                     <TextField
                       fullWidth
                       variant="outlined"
