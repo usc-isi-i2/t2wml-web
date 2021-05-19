@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
   },
   form: {
     width: '100%',
+    minHeight: '500px',
     marginTop: theme.spacing(1),
   },
   additionalFieldsToggle: {

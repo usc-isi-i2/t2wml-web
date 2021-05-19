@@ -379,30 +379,32 @@ const AnnotationMenu = ({
     )
   }
 
-  const renderButtons = () => {
+  const renderActionButtons = () => {
     return (
-      <Grid container spacing={3} justify="space-between">
-        <Grid item>
-          <Button
-            autoFocus
-            color="primary"
-            variant="contained"
-            disabled={
-              (!formState.selectedRole && !selectedAnnotation) ||
-              (!!selectedAnnotation && !selectedAnnotation.role)
-            }
-            onClick={handleOnSubmit}>
-            Submit
-          </Button>
-        </Grid>
-        <Grid item>
-          {!!selectedAnnotation && (
+      <Grid item xs={12}>
+        <Grid container spacing={3} justify="space-between">
+          <Grid item>
             <Button
-              onClick={handleOnDelete}
-              className={classes.deleteButton}>
-              DELETE
+              autoFocus
+              color="primary"
+              variant="contained"
+              disabled={
+                (!formState.selectedRole && !selectedAnnotation) ||
+                (!!selectedAnnotation && !selectedAnnotation.role)
+              }
+              onClick={handleOnSubmit}>
+              Submit
             </Button>
-          )}
+          </Grid>
+          <Grid item>
+            {!!selectedAnnotation && (
+              <Button
+                onClick={handleOnDelete}
+                className={classes.deleteButton}>
+                DELETE
+              </Button>
+            )}
+          </Grid>
         </Grid>
       </Grid>
     )
@@ -418,8 +420,8 @@ const AnnotationMenu = ({
         {renderSelectedRoleInput()}
         {renderSelectedTypeInput()}
         {renderAdditionalInputs()}
+        {renderActionButtons()}
       </Grid>
-      {renderButtons()}
     </form>
   )
 }

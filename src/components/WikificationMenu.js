@@ -17,6 +17,11 @@ const useStyles = makeStyles(theme => ({
     top: theme.spacing(12),
     right: theme.spacing(5),
   },
+  form: {
+    width: '100%',
+    minHeight: '300px',
+    marginTop: theme.spacing(1),
+  },
   results: {
     paddingInlineStart: theme.spacing(2),
     marginBlockStart: 0,
@@ -109,9 +114,9 @@ const WikificationMenu = ({
   const renderCellContent = () => {
     return (
       <Grid item xs={12}>
-        <p style={{paddingLeft: '12px'}}>
+        <Typography variant="body1" paragraph={true}>
           {utils.humanReadableSelection(selectedCell)}: {selectedCell.value}
-        </p>
+        </Typography>
         {!!selectedQnode && (
           <p style={{paddingLeft: '12px', color: '#006699'}}>
             qnode: {`${selectedQnode.label[0]} (${selectedQnode.qnode})`}
@@ -121,22 +126,36 @@ const WikificationMenu = ({
     )
   }
 
-  return (
-    <Grid container spacing={3}>
-      {renderFormInstructions()}
-      {renderCellContent()}
-      {renderQnodeSearch()}
-      {renderQnodeResults()}
-      <Grid item>
-        <Button
-          autoFocus
-          color="primary"
-          variant="contained"
-          onClick={handleOnSubmit}>
-          Submit
-        </Button>
+  const renderActionButtons = () => {
+    return (
+      <Grid item xs={12}>
+        <Grid container spacing={3} justify="space-between">
+          <Grid item>
+            <Button
+              autoFocus
+              color="primary"
+              variant="contained"
+              onClick={handleOnSubmit}>
+              Submit
+            </Button>
+          </Grid>
+        </Grid>
       </Grid>
-    </Grid>
+    )
+  }
+
+  return (
+    <form noValidate autoComplete="off"
+      className={classes.form}
+      onSubmit={handleOnSubmit}>
+      <Grid container spacing={3}>
+        {renderFormInstructions()}
+        {renderCellContent()}
+        {renderQnodeSearch()}
+        {renderQnodeResults()}
+        {renderActionButtons()}
+      </Grid>
+    </form>
   )
 }
 
