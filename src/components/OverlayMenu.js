@@ -16,6 +16,7 @@ import Draggable from 'react-draggable'
 import TabPanel from './TabPanel'
 import AnnotationMenu from './AnnotationMenu'
 import WikificationMenu from './WikificationMenu'
+import * as utils from '../utils/table'
 
 
 const useStyles = makeStyles(theme => ({
@@ -47,8 +48,9 @@ const OverlayMenu = ({
     setSelectedTab(value)
   }
 
-
   const renderTitle = () => {
+    const blockTabLabel = `Block ${utils.humanReadableSelection(selection)}`
+    const cellTabLabel = `Cell ${utils.humanReadableSelection(selectedCell)}`
     return (
       <React.Fragment>
         <Tabs
@@ -56,8 +58,8 @@ const OverlayMenu = ({
           onChange={handleTabChange}
           indicatorColor="primary"
           textColor="primary">
-          <Tab label="Block" value={'block'} />
-          <Tab label="Cell" value={'cell'} />
+          <Tab label={blockTabLabel} value={'block'} />
+          <Tab label={cellTabLabel} value={'cell'} />
         </Tabs>
         <IconButton onClick={hideOverlayMenu}>
           <CloseIcon />
