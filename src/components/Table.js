@@ -25,6 +25,8 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   const [suggestions, setSuggestions] = useState({
     roles: [], types: [], children: {},
   })
+
+  const [selectedTab, setSelectedTab] = useState('block')
   const [showOverlayMenu, setShowOverlayMenu] = useState(false)
   const [targetSelection, setTargetSelection] = useState(false)
 
@@ -688,6 +690,8 @@ const Table = ({ file, sheet, data, setOutputData }) => {
       <OverlayMenu
         file={file}
         sheet={sheet}
+        selectedTab={selectedTab}
+        setSelectedTab={setSelectedTab}
         selectedCell={{...targetSelection, value: selectedCellValue}}
         selection={selection.current}
         suggestions={suggestions}

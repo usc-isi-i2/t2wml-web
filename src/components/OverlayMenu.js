@@ -31,6 +31,8 @@ const useStyles = makeStyles(theme => ({
 const OverlayMenu = ({
   file,
   sheet,
+  selectedTab,
+  setSelectedTab,
   selectedCell,
   selection,
   suggestions,
@@ -41,8 +43,6 @@ const OverlayMenu = ({
 }) => {
 
   const classes = useStyles()
-
-  const [selectedTab, setSelectedTab] = useState('block')
 
   const handleTabChange = (event, value) => {
     setSelectedTab(value)
