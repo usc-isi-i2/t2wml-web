@@ -9,8 +9,8 @@ import {
   MenuItem,
   FormHelperText,
 } from '@material-ui/core'
-import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 import WikifyButton from './WikifyButton'
 import PropertyInput from './PropertyInput'
@@ -296,7 +296,7 @@ const AnnotationMenu = ({
       <Grid className={classes.additionalFieldsToggle}
         onClick={toggleAdditionalInputs}>
         <IconButton className={classes.removeButton}>
-          {showAdditionalInputs ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          {showAdditionalInputs ? <ChevronRightIcon /> : <ExpandMoreIcon />}
         </IconButton>
         <Typography variant="inherit">
           {showAdditionalInputs ? 'Hide additional inputs' : 'Show additional inputs'}
