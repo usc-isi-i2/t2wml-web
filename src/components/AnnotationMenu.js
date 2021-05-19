@@ -85,7 +85,6 @@ const AnnotationMenu = ({
     setSelectedTab(value)
   }
 
-  const [showWikificationMenu, setShowWikificationMenu] = useState(false)
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false)
 
   useEffect(() => {
@@ -195,13 +194,6 @@ const AnnotationMenu = ({
       ...formState,
       [event.target.name]: value,
     })
-    if ( event.target.name === 'selectedType' ) {
-      if ( value === 'wikibaseitem' ) {
-        setShowWikificationMenu(true)
-      } else {
-        setShowWikificationMenu(false)
-      }
-    }
     if ( event.target.name === 'selectedArea' ) {
       const newSelection = utils.parseSelectedAreaInput(value)
       if ( newSelection ) {
