@@ -1,28 +1,17 @@
 import React, { useEffect, useState } from 'react'
 
 import {
-  Tab,
-  Tabs,
   Grid,
-  Paper,
   Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
   IconButton,
   TextField,
   Typography,
   MenuItem,
   FormHelperText,
 } from '@material-ui/core'
-import CloseIcon from '@material-ui/icons/Close'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-import Draggable from 'react-draggable'
-
-import TabPanel from './TabPanel'
 import WikifyButton from './WikifyButton'
 import PropertyInput from './PropertyInput'
 import { ROLES, TYPES } from '../content/annotation-options'
@@ -57,11 +46,6 @@ const AnnotationMenu = ({
     selectedFormat: undefined,
     selectedUnit: undefined,
   })
-
-  const [selectedTab, setSelectedTab] = useState('block')
-  const handleTabChange = (event, value) => {
-    setSelectedTab(value)
-  }
 
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false)
 
