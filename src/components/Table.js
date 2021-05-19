@@ -683,12 +683,12 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
   const renderAnnotationMenu = () => {
     if ( !selection.current || !showOverlayMenu ) { return }
-    const selectedCell = data[targetSelection.y1-1][targetSelection.x1-1]
+    const selectedCellValue = data[targetSelection.y1-1][targetSelection.x1-1]
     return (
       <OverlayMenu
         file={file}
         sheet={sheet}
-        selectedCell={selectedCell}
+        selectedCell={{...targetSelection, value: selectedCellValue}}
         selection={selection.current}
         suggestions={suggestions}
         annotations={annotationBlocks}

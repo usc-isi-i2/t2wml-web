@@ -110,7 +110,7 @@ const WikificationMenu = ({
     <Grid container spacing={3}>
       {renderFormInstructions()}
       <Grid item xs={12}>
-        <p style={{paddingLeft: '12px'}}>value: {selectedCell}</p>
+        <p style={{paddingLeft: '12px'}}>{selectedCell.value}</p>
         {!!selectedQnode && (
           <p style={{paddingLeft: '12px', color: '#006699'}}>
             qnode: {`${selectedQnode.label[0]} (${selectedQnode.qnode})`}
