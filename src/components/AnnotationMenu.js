@@ -4,7 +4,6 @@ import {
   Box,
   Tab,
   Tabs,
-  Link,
   Grid,
   Paper,
   Button,
@@ -24,6 +23,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import Draggable from 'react-draggable'
 
+import WikifyButton from './WikifyButton'
 import PropertyInput from './PropertyInput'
 import WikificationMenu from './WikificationMenu'
 import { ROLES, TYPES } from '../content/annotation-options'
@@ -264,6 +264,9 @@ const AnnotationMenu = ({
             </MenuItem>
           ))}
         </TextField>
+        {formState.selectedRole === 'mainSubject' && (
+          <WikifyButton />
+        )}
       </Grid>
     )
   }
@@ -317,12 +320,7 @@ const AnnotationMenu = ({
           ))}
         </TextField>
         {formState.selectedType === 'wikibaseitem' && (
-          <Link
-            variant="body1"
-            component="button"
-            onClick={() => {}}>
-            Wikify this block automatically
-          </Link>
+          <WikifyButton />
         )}
       </Grid>
     )
