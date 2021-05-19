@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
   form: {
     width: '100%',
-    minHeight: '300px',
+    minHeight: '250px',
     marginTop: theme.spacing(1),
   },
   results: {
