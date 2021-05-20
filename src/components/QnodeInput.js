@@ -174,6 +174,10 @@ const QnodeInput = ({
         <Grid item xs={12}>
           <TextField
             fullWidth
+            autoCorrect="off"
+            autoComplete="off"
+            autoCapitalize="off"
+            spellCheck="false"
             variant="outlined"
             label={'Search for qnodes on wikidata'}
             id={'wikidata-search'}
