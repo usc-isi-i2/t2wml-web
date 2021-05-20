@@ -100,7 +100,7 @@ const WikificationMenu = ({
         <TextField
           fullWidth
           variant="outlined"
-          label={'Search wikidata'}
+          label={'Search for qnodes on wikidata'}
           id={'wikidata-search'}
           name={'wikidata-search'}
           onChange={handleOnChange} />
