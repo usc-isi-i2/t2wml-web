@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
+import Link from '@material-ui/core/Link'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -23,8 +24,10 @@ const useStyles = makeStyles(theme => ({
   title: {
     fontSize: theme.spacing(2),
   },
-  label: {
+  link: {
+    color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
     marginTop: theme.spacing(2),
+    display: 'inline-block',
   },
   removeButton: {
     '&:hover': {
@@ -123,9 +126,18 @@ const PropertyInput = ({
     return (
       <Grid container spacing={3}>
         <Grid item xs={10}>
-          <Typography className={classes.label}>
+          <Link
+            variant="body1"
+            className={classes.link}
+            target="_blank" rel="noopener noreferrer"
+            href={`https://ringgaard.com/kb/${selected.qnode}`}>
             {`${selected.label[0]} (${selected.qnode})`}
-          </Typography>
+          </Link>
+          {!!selected.description && !!selected.description.length && (
+            <Typography variant="body1">
+              {selected.description[0]}
+            </Typography>
+          )}
         </Grid>
         <Grid item xs={2}>
           <Tooltip arrow placement="top" title={'remove selected property'}>
