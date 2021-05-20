@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
 import CloseIcon from '@material-ui/icons/Close'
 import TextField from '@material-ui/core/TextField'
@@ -104,6 +105,8 @@ const QnodeInput = ({
     setSelected()
   }
 
+  const applyToBlock = () => {}
+
   const renderTitle = () => {
     return (
       <Typography className={classes.title}
@@ -140,6 +143,14 @@ const QnodeInput = ({
               <CloseIcon />
             </IconButton>
           </Tooltip>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={applyToBlock}>
+            Apply selected Qnode to the block
+          </Button>
         </Grid>
       </Grid>
     )
