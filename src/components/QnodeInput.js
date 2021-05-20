@@ -121,15 +121,13 @@ const QnodeInput = ({
     return (
       <Grid container spacing={3}>
         <Grid item xs={10}>
-          {!!selected && (
-            <Link
-              variant="body1"
-              className={classes.link}
-              target="_blank" rel="noopener noreferrer"
-              href={`https://ringgaard.com/kb/${selected.qnode}`}>
-              {`${selected.label[0]} (${selected.qnode})`}
-            </Link>
-          )}
+          <Link
+            variant="body1"
+            className={classes.link}
+            target="_blank" rel="noopener noreferrer"
+            href={`https://ringgaard.com/kb/${selected.qnode}`}>
+            {`${selected.label[0]} (${selected.qnode})`}
+          </Link>
           {!!selected.description && !!selected.description.length && (
             <Typography variant="body1">
               {selected.description[0]}
