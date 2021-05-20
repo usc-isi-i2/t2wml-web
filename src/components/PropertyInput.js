@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 import Tooltip from '@material-ui/core/Tooltip'
 import CloseIcon from '@material-ui/icons/Close'
 import TextField from '@material-ui/core/TextField'
@@ -27,15 +29,18 @@ const useStyles = makeStyles(theme => ({
       transition: 'color 150ms ease',
     },
   },
-  properties: {
-    paddingInlineStart: theme.spacing(2),
-    marginBlockStart: 0,
-    '&> li': {
-      paddingBottom: theme.spacing(1),
-      cursor: 'pointer',
-      '&:hover': {
-        textDecoration: 'underline',
-      },
+  menu: {
+    padding: 0,
+    '& > ul': {
+      padding: 0,
+      maxWidth: '500px',
+    },
+  },
+  menuItem: {
+    '& > p': {
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
     },
   },
 }))
@@ -53,6 +58,7 @@ const PropertyInput = ({
   const [selected, setSelected] = useState(selectedProperty)
   const [selectedPropertyCells, setSelectedPropertyCells] = useState()
   const [properties, setProperties] = useState([])
+  const [anchorElement, setAnchorElement] = useState()
 
   useEffect(() => {
     setSelected(selectedProperty)
@@ -66,7 +72,12 @@ const PropertyInput = ({
       clearTimeout(timeoutID.current)
       timeoutID.current = setTimeout(() => {
         fetchProperties(value)
-        .then(data => setProperties(data))
+        .then(data => {
+          if ( data.length ) {
+            setAnchorElement(event.target)
+          }
+          setProperties(data)
+        })
         .catch(error => console.log(error))
       }, 250)
     }
@@ -75,6 +86,10 @@ const PropertyInput = ({
   const handleOnChangePropertyCells = event => {
     const value = event.target.value
     setSelectedPropertyCells(value)
+  }
+
+  const handleCloseMenu = () => {
+    setAnchorElement()
   }
 
   const selectProperty = property => {
@@ -161,20 +176,39 @@ const PropertyInput = ({
             name={'selectedProperty'}
             onChange={handleOnChangePropertySearch} />
         </Grid>
-        <Grid item xs={12}>
-          <ol className={classes.properties}>
-            {properties.map(property => (
-              <li key={property.qnode}
-                onClick={() => selectProperty(property)}>
-                {`${property.label[0]} (${property.qnode})`}
-                <Typography variant="inherit" paragraph={true}>
-                  {property.description[0]}
-                </Typography>
-              </li>
-            ))}
-          </ol>
-        </Grid>
+        {renderSearchResults()}
       </Grid>
+    )
+  }
+
+  const renderSearchResults = () => {
+    return (
+      <Menu
+        id="qnode-search-results"
+        anchorEl={anchorElement}
+        classes={{paper: classes.menu}}
+        keepMounted
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: -60,
+        }}
+        open={!!anchorElement}
+        onClose={handleCloseMenu}>
+        {properties.map(property => (
+          <MenuItem key={property.qnode}
+            className={classes.menuItem}
+            onClick={() => selectProperty(property)}>
+            <Typography variant="body1">
+              {`${property.label[0]} (${property.qnode})`}
+              <br/>
+              {property.description[0]}
+            </Typography>
+          </MenuItem>
+        ))}
+      </Menu>
     )
   }
 
