@@ -9,8 +9,8 @@ import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
-
 import { makeStyles } from '@material-ui/styles'
+
 import fetchProperties from '../utils/fetchProperties'
 import * as utils from '../utils/table'
 
@@ -22,6 +22,9 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     fontSize: theme.spacing(2),
+  },
+  label: {
+    marginTop: theme.spacing(2),
   },
   removeButton: {
     '&:hover': {
@@ -120,7 +123,9 @@ const PropertyInput = ({
     return (
       <Grid container spacing={3}>
         <Grid item xs={10}>
-          <p>{`${selected.label[0]} (${selected.qnode})`}</p>
+          <Typography className={classes.label}>
+            {`${selected.label[0]} (${selected.qnode})`}
+          </Typography>
         </Grid>
         <Grid item xs={2}>
           <Tooltip arrow placement="top" title={'remove selected property'}>
