@@ -1,13 +1,12 @@
 import React from 'react'
 
-import Link from '@material-ui/core/Link'
+import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 
 
 const useStyles = makeStyles(theme => ({
   button: {
     marginTop: theme.spacing(1),
-    color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
     float: 'right',
   },
 }))
@@ -20,13 +19,13 @@ const WikifyButton = () => {
   const handleOnClick = () => {}
 
   return (
-    <Link
-      variant="body1"
-      component="button"
+    <Button
+      color="primary"
+      variant="contained"
       className={classes.button}
       onClick={handleOnClick}>
       wikify this block automatically
-    </Link>
+    </Button>
   )
 }
 
