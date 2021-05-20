@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles'
 
@@ -10,8 +9,7 @@ import * as utils from '../utils/table'
 
 
 const useStyles = makeStyles(theme => ({
-  form: {
-    width: '100%',
+  wrapper: {
     minHeight: '250px',
     marginTop: theme.spacing(1),
   },
@@ -25,8 +23,6 @@ const WikificationMenu = ({
 }) => {
 
   const classes = useStyles()
-
-  const handleOnSubmit = () => {}
 
   const handleOnSelectQnode = () => {}
 
@@ -50,34 +46,12 @@ const WikificationMenu = ({
     )
   }
 
-  const renderActionButtons = () => {
-    return (
-      <Grid item xs={12}>
-        <Grid container spacing={3} justify="space-between">
-          <Grid item>
-            <Button
-              autoFocus
-              color="primary"
-              variant="contained"
-              onClick={handleOnSubmit}>
-              Submit
-            </Button>
-          </Grid>
-        </Grid>
-      </Grid>
-    )
-  }
-
   return (
-    <form noValidate autoComplete="off"
-      className={classes.form}
-      onSubmit={handleOnSubmit}>
-      <Grid container spacing={3}>
-        {renderCellContent()}
-        {renderSelectedQnode()}
-        {renderActionButtons()}
-      </Grid>
-    </form>
+    <Grid container spacing={3}
+      className={classes.wrapper}>
+      {renderCellContent()}
+      {renderSelectedQnode()}
+    </Grid>
   )
 }
 
