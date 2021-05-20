@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Typography from '@material-ui/core/Typography'
@@ -48,8 +50,10 @@ const WikificationMenu = ({
 
   const [results, setResults] = useState([])
   const [selectedQnode, setSelectedQnode] = useState()
+  const [anchorElement, setAnchorElement] = useState()
 
   const handleOnChange = event => {
+    setAnchorElement(event.target)
     const value = event.target.value
     if ( !value ) {
       setResults([])
@@ -65,6 +69,10 @@ const WikificationMenu = ({
 
   const selectResult = result => {
     setSelectedQnode(result)
+  }
+
+  const handleCloseMenu = () => {
+    setAnchorElement()
   }
 
   const renderFormInstructions = () => {
@@ -93,19 +101,31 @@ const WikificationMenu = ({
 
   const renderQnodeResults = () => {
     return (
-      <Grid item xs={12}>
-        <ol className={classes.results}>
-          {results.map(result => (
-            <li key={result.qnode}
-              onClick={() => selectResult(result)}>
+      <Menu
+        id="qnode-search-results"
+        anchorEl={anchorElement}
+        keepMounted
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: -65,
+        }}
+        open={!!anchorElement}
+        onClose={handleCloseMenu}>
+        {results.map(result => (
+          <MenuItem key={result.qnode}
+            onClick={() => selectResult(result)}>
+            <Typography variant="body1">
               {`${result.label[0]} (${result.qnode})`}
-              <Typography variant="inherit" paragraph={true}>
-                {result.description[0]}
-              </Typography>
-            </li>
-          ))}
-        </ol>
-      </Grid>
+            </Typography>
+            <Typography variant="body1" paragraph={true}>
+              {result.description[0]}
+            </Typography>
+          </MenuItem>
+        ))}
+      </Menu>
     )
   }
 
