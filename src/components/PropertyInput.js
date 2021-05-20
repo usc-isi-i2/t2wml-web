@@ -196,10 +196,6 @@ const PropertyInput = ({
         anchorEl={anchorElement}
         classes={{paper: classes.menu}}
         keepMounted
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
         transformOrigin={{
           vertical: -60,
         }}
