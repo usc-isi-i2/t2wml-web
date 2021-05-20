@@ -44,6 +44,7 @@ export const TYPES = [{
 }, {
   'label': 'Wikidata Item',
   'value': 'wikibaseitem',
+  'wikify': true,
   'children': [{
     'label': 'Property',
     'value': 'property',
@@ -54,6 +55,7 @@ export const TYPES = [{
 export const ROLES = [{
   'label': 'Main Subject',
   'value': 'mainSubject',
+  'wikify': true,
 }, {
   'label': 'Dependent Variable',
   'value': 'dependentVar',
@@ -61,6 +63,7 @@ export const ROLES = [{
 }, {
   'label': 'Property',
   'value': 'property',
+  'wikify': true,
 }, {
   'label': 'Qualifier',
   'value': 'qualifier',
@@ -71,4 +74,5 @@ export const ROLES = [{
 }, {
   'label': 'Unit',
   'value': 'unit',
+  'wikify': true,
 }]

@@ -204,6 +204,16 @@ const AnnotationMenu = ({
     if ( selectedAnnotation ) {
       defaultValue = selectedAnnotation.role
     }
+
+    // check if the selected role can be wikified
+    let showWikifyButton = false
+    if ( formState.selectedRole ) {
+      const ROLE = ROLES.find(role => role.value === formState.selectedRole)
+      if ( ROLE && ROLE.wikify ) {
+        showWikifyButton = true
+      }
+    }
+
     return (
       <Grid item xs={12}>
         <TextField
@@ -225,9 +235,7 @@ const AnnotationMenu = ({
             </MenuItem>
           ))}
         </TextField>
-        {formState.selectedRole === 'mainSubject' && (
-          <WikifyButton />
-        )}
+        {showWikifyButton && <WikifyButton />}
       </Grid>
     )
   }
@@ -258,6 +266,15 @@ const AnnotationMenu = ({
       }
     }
 
+    // check if the selected type can be wikified
+    let showWikifyButton = false
+    if ( formState.selectedType ) {
+      const TYPE = TYPES.find(type => type.value === formState.selectedType)
+      if ( TYPE && TYPE.wikify ) {
+        showWikifyButton = true
+      }
+    }
+
     return (
       <Grid item xs={12}>
         <TextField
@@ -280,9 +297,7 @@ const AnnotationMenu = ({
             </MenuItem>
           ))}
         </TextField>
-        {formState.selectedType === 'wikibaseitem' && (
-          <WikifyButton />
-        )}
+        {showWikifyButton && <WikifyButton />}
       </Grid>
     )
   }
