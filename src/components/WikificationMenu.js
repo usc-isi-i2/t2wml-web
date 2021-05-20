@@ -53,7 +53,6 @@ const WikificationMenu = ({
   const [anchorElement, setAnchorElement] = useState()
 
   const handleOnChange = event => {
-    setAnchorElement(event.target)
     const value = event.target.value
     if ( !value ) {
       setResults([])
@@ -61,7 +60,12 @@ const WikificationMenu = ({
       clearTimeout(timeoutID.current)
       timeoutID.current = setTimeout(() => {
         fetchQnodes(value)
-        .then(data => setResults(data))
+        .then(data => {
+          if ( data.length ) {
+            setAnchorElement(event.target)
+          }
+          setResults(data)
+        })
         .catch(error => console.log(error))
       }, 250)
     }
