@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
+import Link from '@material-ui/core/Link'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
@@ -18,6 +19,9 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     minHeight: '250px',
     marginTop: theme.spacing(1),
+  },
+  link: {
+    color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
   },
   menu: {
     padding: 0,
@@ -140,13 +144,17 @@ const WikificationMenu = ({
   const renderCellContent = () => {
     return (
       <Grid item xs={12}>
-        <Typography variant="body1" paragraph={true}>
+        <Typography variant="body1">
           {utils.humanReadableSelection(selectedCell)}: {selectedCell.value}
         </Typography>
         {!!selectedQnode && (
-          <p style={{paddingLeft: '12px', color: '#006699'}}>
-            qnode: {`${selectedQnode.label[0]} (${selectedQnode.qnode})`}
-          </p>
+          <Link
+            variant="body1"
+            className={classes.link}
+            target="_blank" rel="noopener" rel="noreferrer"
+            href={`https://ringgaard.com/kb/${selectedQnode.qnode}`}>
+            {`${selectedQnode.label[0]} (${selectedQnode.qnode})`}
+          </Link>
         )}
       </Grid>
     )
