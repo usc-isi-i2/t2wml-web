@@ -73,6 +73,7 @@ const WikificationMenu = ({
 
   const selectResult = result => {
     setSelectedQnode(result)
+    setAnchorElement()
   }
 
   const handleCloseMenu = () => {

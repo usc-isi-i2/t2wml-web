@@ -97,6 +97,7 @@ const PropertyInput = ({
   const selectProperty = property => {
     onSelectProperty(property)
     setSelected(property)
+    setAnchorElement()
     setProperties([])
   }
 
