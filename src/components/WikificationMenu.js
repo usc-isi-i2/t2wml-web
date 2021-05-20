@@ -14,25 +14,23 @@ import * as utils from '../utils/table'
 
 
 const useStyles = makeStyles(theme => ({
-  menu: {
-    position: 'absolute',
-    top: theme.spacing(12),
-    right: theme.spacing(5),
-  },
   form: {
     width: '100%',
     minHeight: '250px',
     marginTop: theme.spacing(1),
   },
-  results: {
-    paddingInlineStart: theme.spacing(2),
-    marginBlockStart: 0,
-    '&> li': {
-      paddingBottom: theme.spacing(1),
-      cursor: 'pointer',
-      '&:hover': {
-        textDecoration: 'underline',
-      },
+  menu: {
+    padding: 0,
+    '& > ul': {
+      padding: 0,
+      maxWidth: '500px',
+    },
+  },
+  menuItem: {
+    '& > p': {
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
     },
   },
 }))
@@ -108,23 +106,24 @@ const WikificationMenu = ({
       <Menu
         id="qnode-search-results"
         anchorEl={anchorElement}
+        classes={{paper: classes.menu}}
         keepMounted
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',
         }}
         transformOrigin={{
-          vertical: -65,
+          vertical: -60,
         }}
         open={!!anchorElement}
         onClose={handleCloseMenu}>
         {results.map(result => (
           <MenuItem key={result.qnode}
+            className={classes.menuItem}
             onClick={() => selectResult(result)}>
             <Typography variant="body1">
               {`${result.label[0]} (${result.qnode})`}
-            </Typography>
-            <Typography variant="body1" paragraph={true}>
+              <br/>
               {result.description[0]}
             </Typography>
           </MenuItem>
