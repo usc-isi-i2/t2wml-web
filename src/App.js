@@ -183,6 +183,18 @@ const App = () => {
           },
         },
       },
+      MuiTab: {
+        textColorPrimary: {
+          "&$selected": {
+            color: darkTheme ? '#fefefe' : '#4d4d4d',
+          },
+        },
+      },
+      MuiTabs: {
+        indicator: {
+          backgroundColor: darkTheme ? '#fefefe' : '#4d4d4d',
+        },
+      },
     },
     props: {
       MuiButton: {
