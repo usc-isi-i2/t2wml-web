@@ -34,6 +34,8 @@ const useStyles = makeStyles(theme => ({
     '& > ul': {
       padding: 0,
       maxWidth: '500px',
+      maxHeight: '300px',
+      overflowY: 'auto',
     },
   },
   menuItem: {
