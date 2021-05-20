@@ -151,7 +151,7 @@ const WikificationMenu = ({
           <Link
             variant="body1"
             className={classes.link}
-            target="_blank" rel="noopener" rel="noreferrer"
+            target="_blank" rel="noopener noreferrer"
             href={`https://ringgaard.com/kb/${selectedQnode.qnode}`}>
             {`${selectedQnode.label[0]} (${selectedQnode.qnode})`}
           </Link>
