@@ -103,7 +103,10 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     if ( arrowKeyCodes.includes(event.code) && selection.current ) {
 
       // Don't allow moving around when users are typing
-      if ( (event.target).nodeName === 'INPUT' ) { return }
+      if ( event.target.nodeName === 'INPUT' ) { return }
+
+      // Don't allow moving around when users are selecting in menus
+      if ( event.target.nodeName === 'LI' ) { return }
 
       // Prevent scroll with arrow keys
       event.preventDefault()
