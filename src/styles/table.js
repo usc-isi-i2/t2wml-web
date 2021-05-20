@@ -116,7 +116,7 @@ const useStyles = makeStyles(theme => ({
         zIndex: '1',
         '&.role-mainSubject': {
           background: theme.palette.type === 'dark' ? '#347898' : '#D9EAF2',
-          color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
+          color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
           '&.highlight': {
             background: theme.palette.type === 'dark' ? '#54a1c5' : '#a0cbdf',
           },
