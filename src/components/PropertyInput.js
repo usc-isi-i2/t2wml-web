@@ -200,6 +200,7 @@ const PropertyInput = ({
         anchorEl={anchorElement}
         transformOrigin={{
           vertical: -60,
+          horizontal: 0,
         }}
         open={!!anchorElement}
         onClose={handleCloseMenu}>
