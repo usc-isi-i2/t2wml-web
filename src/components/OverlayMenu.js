@@ -24,6 +24,9 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     top: theme.spacing(4),
     right: theme.spacing(15),
+    '& > .MuiDialogTitle-root': {
+      padding: 0,
+    },
   },
 }))
 

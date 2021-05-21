@@ -149,7 +149,6 @@ const App = () => {
       },
       MuiDialogTitle: {
         root: {
-          padding: 0,
           '& .MuiIconButton-root': {
             position: 'absolute',
             top: '1px',
