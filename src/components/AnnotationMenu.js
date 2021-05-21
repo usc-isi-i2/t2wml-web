@@ -355,9 +355,11 @@ const AnnotationMenu = ({
 
           if ( option.value === 'property' ) {
             return (
-              <PropertyInput key={option.value}
-                selectedProperty={formState.selectedProperty}
-                onSelectProperty={handleOnSelectProperty} />
+              <Grid item xs={12} key={option.value}>
+                <PropertyInput
+                  selectedProperty={formState.selectedProperty}
+                  onSelectProperty={handleOnSelectProperty} />
+              </Grid>
             )
           }
 

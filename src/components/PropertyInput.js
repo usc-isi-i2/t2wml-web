@@ -19,19 +19,12 @@ import * as utils from '../utils/table'
 
 
 const useStyles = makeStyles(theme => ({
-  wrapper: {
-    marginTop: theme.spacing(2),
-    paddingBottom: theme.spacing(4),
-  },
-  title: {
-    fontSize: theme.spacing(2),
-  },
   link: {
     color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
-    marginTop: theme.spacing(2),
     display: 'inline-block',
   },
   removeButton: {
+    marginTop: -1 * theme.spacing(2),
     '&:hover': {
       color: 'red',
       transition: 'color 150ms ease',
@@ -125,38 +118,41 @@ const PropertyInput = ({
 
   const renderTitle = () => {
     return (
-      <Typography className={classes.title}
-        style={{marginBottom: !!selected ? '0' : '16px'}}>
-        <b>{!!selected ? 'Selected property' : 'Select property'}</b>
-      </Typography>
+      <Grid item xs={12}>
+        <Typography variant="body1">
+          <b>{!!selected ? 'Selected property' : 'Select property'}</b>
+        </Typography>
+      </Grid>
     )
   }
 
   const renderSelectedProperty = () => {
     if ( !selected || !selected.label ) { return }
     return (
-      <Grid container spacing={3}>
-        <Grid item xs={10}>
-          <Link
-            variant="body1"
-            className={classes.link}
-            target="_blank" rel="noopener noreferrer"
-            href={`https://ringgaard.com/kb/${selected.qnode}`}>
-            {`${selected.label[0]} (${selected.qnode})`}
-          </Link>
-          {!!selected.description && !!selected.description.length && (
-            <Typography variant="body1">
-              {selected.description[0]}
-            </Typography>
-          )}
-        </Grid>
-        <Grid item xs={2}>
-          <Tooltip arrow placement="top" title={'remove selected property'}>
-            <IconButton className={classes.removeButton}
-              onClick={removeSelected}>
-              <CloseIcon />
-            </IconButton>
-          </Tooltip>
+      <Grid item xs={12}>
+        <Grid container spacing={3}>
+          <Grid item xs={10}>
+            <Link
+              variant="body1"
+              className={classes.link}
+              target="_blank" rel="noopener noreferrer"
+              href={`https://ringgaard.com/kb/${selected.qnode}`}>
+              {`${selected.label[0]} (${selected.qnode})`}
+            </Link>
+            {!!selected.description && !!selected.description.length && (
+              <Typography variant="body1">
+                {selected.description[0]}
+              </Typography>
+            )}
+          </Grid>
+          <Grid item xs={2}>
+            <Tooltip arrow placement="top" title={'remove selected property'}>
+              <IconButton className={classes.removeButton}
+                onClick={removeSelected}>
+                <CloseIcon />
+              </IconButton>
+            </Tooltip>
+          </Grid>
         </Grid>
       </Grid>
     )
@@ -166,25 +162,27 @@ const PropertyInput = ({
     if ( !!selected ) { return }
     const parsedCorrectly = utils.parseSelectedAreaInput(selectedPropertyCells)
     return (
-      <Grid container spacing={3}>
-        <Grid item xs={6}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            id={'selectedPropertyCells'}
-            name={'selectedPropertyCells'}
-            label={'Select property cell(s)'}
-            value={selectedPropertyCells}
-            error={!!selectedPropertyCells && !parsedCorrectly}
-            helperText={selectedPropertyCells && !parsedCorrectly ? (
-              'format: [col][row](:[col][row])?'
-            ) : ''}
-            onChange={handleOnChangePropertyCells} />
-        </Grid>
-        <Grid item xs={6}>
-          <FormHelperText component="p" style={{marginTop: '0'}}>
-            You can select property cells in the table or search wikidata for a property in the search box below
-          </FormHelperText>
+      <Grid item xs={12}>
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              id={'selectedPropertyCells'}
+              name={'selectedPropertyCells'}
+              label={'Select property cell(s)'}
+              value={selectedPropertyCells}
+              error={!!selectedPropertyCells && !parsedCorrectly}
+              helperText={selectedPropertyCells && !parsedCorrectly ? (
+                'format: [col][row](:[col][row])?'
+              ) : ''}
+              onChange={handleOnChangePropertyCells} />
+          </Grid>
+          <Grid item xs={6}>
+            <FormHelperText component="p" style={{marginTop: '0'}}>
+              You can select property cells in the table or search wikidata for a property in the search box below
+            </FormHelperText>
+          </Grid>
         </Grid>
       </Grid>
     )
@@ -193,21 +191,18 @@ const PropertyInput = ({
   const renderPropertySearch = () => {
     if ( !!selected ) { return }
     return (
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            autoCorrect="off"
-            autoComplete="off"
-            autoCapitalize="off"
-            spellCheck="false"
-            label={'Search for properties on wikidata'}
-            id={'selectedProperty'}
-            name={'selectedProperty'}
-            onChange={handleOnChangePropertySearch} />
-        </Grid>
-        {renderSearchResults()}
+      <Grid item xs={12}>
+        <TextField
+          fullWidth
+          variant="outlined"
+          autoCorrect="off"
+          autoComplete="off"
+          autoCapitalize="off"
+          spellCheck="false"
+          label={'Search for properties on wikidata'}
+          id={'selectedProperty'}
+          name={'selectedProperty'}
+          onChange={handleOnChangePropertySearch} />
       </Grid>
     )
   }
@@ -239,7 +234,8 @@ const PropertyInput = ({
     )
   }
 
-  const renderCreatePropertyToggle = () => {
+  const renderPropertyCreate = () => {
+    if ( !!selected ) { return }
     return (
       <Grid item xs={12}>
         <Button
@@ -253,21 +249,13 @@ const PropertyInput = ({
     )
   }
 
-  const renderPropertyCreate = () => {
-    if ( !!selected ) { return }
-    return (
-      <React.Fragment>
-        {renderCreatePropertyToggle()}
-      </React.Fragment>
-    )
-  }
-
   return (
-    <Grid item xs={12} className={classes.wrapper}>
+    <Grid container spacing={3}>
       {renderTitle()}
       {renderSelectedProperty()}
       {renderPropertyCellSelection()}
       {renderPropertySearch()}
+      {renderSearchResults()}
       {renderPropertyCreate()}
     </Grid>
   )
