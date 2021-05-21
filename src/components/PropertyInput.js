@@ -14,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/styles'
 
+import CreateProperty from './CreateProperty'
 import fetchProperties from '../utils/fetchProperties'
 import * as utils from '../utils/table'
 
@@ -245,6 +246,10 @@ const PropertyInput = ({
           onClick={() => setShowCreateProperty(true)}>
           Add a new property
         </Button>
+        {showCreateProperty && (
+          <CreateProperty
+            hideMenu={() => setShowCreateProperty(false)} />
+        )}
       </Grid>
     )
   }

@@ -14,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/styles'
 
+import CreateQnode from './CreateQnode'
 import fetchQnodes from '../utils/fetchQnodes'
 
 const useStyles = makeStyles(theme => ({
@@ -220,6 +221,10 @@ const QnodeInput = ({
           onClick={() => setShowCreateQnode(true)}>
           Add a new qnode
         </Button>
+        {showCreateQnode && (
+          <CreateQnode
+            hideMenu={() => setShowCreateQnode(false)} />
+        )}
       </Grid>
     )
   }
