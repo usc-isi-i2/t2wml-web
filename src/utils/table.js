@@ -154,7 +154,7 @@ export const selectionHasData = (data, selection) => {
   while ( rowIndex <= bottomRow ) {
     let colIndex = leftCol
     while ( colIndex <= rightCol ) {
-      if ( !!data[rowIndex][colIndex] ) {
+      if ( !!data[rowIndex] && !!data[rowIndex][colIndex] ) {
         return true
       }
       colIndex += 1

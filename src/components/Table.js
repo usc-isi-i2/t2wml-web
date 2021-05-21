@@ -346,6 +346,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     while ( rowIndex <= bottomRow ) {
       let colIndex = leftCol
       while ( colIndex <= rightCol ) {
+        if ( !rows[rowIndex] ) { break }
         const cell = rows[rowIndex].children[colIndex]
         if ( !!cell ) {
           selectCell(
