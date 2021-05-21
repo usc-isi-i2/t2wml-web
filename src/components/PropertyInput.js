@@ -4,14 +4,14 @@ import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
-import CloseIcon from '@material-ui/icons/Close'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import CloseIcon from '@material-ui/icons/Close'
+import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/styles'
 
 import fetchProperties from '../utils/fetchProperties'
@@ -239,21 +239,16 @@ const PropertyInput = ({
     )
   }
 
-  const toggleShowCreateProperty = () => {
-    setShowCreateProperty(showCreateProperty => !showCreateProperty)
-  }
-
   const renderCreatePropertyToggle = () => {
     return (
-      <Grid container spacing={3}
-        className={classes.showCreatePropertyToggle}
-        onClick={toggleShowCreateProperty}>
-        <IconButton>
-          {showCreateProperty ? <ChevronRightIcon /> : <ExpandMoreIcon />}
-        </IconButton>
-        <Typography variant="inherit">
-          {showCreateProperty ? 'Hide new property' : 'Create new property'}
-        </Typography>
+      <Grid item xs={12}>
+        <Button
+          color="primary"
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={() => setShowCreateProperty(true)}>
+          Add a new property
+        </Button>
       </Grid>
     )
   }
