@@ -689,7 +689,10 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
   const renderOverlayMenu = () => {
     if ( !targetSelection || !selection.current || !showOverlayMenu ) { return }
-    const selectedCellValue = data[targetSelection.y1-1][targetSelection.x1-1]
+    let selectedCellValue = ''
+    if ( !!data[targetSelection.y1-1] ) {
+      selectedCellValue = data[targetSelection.y1-1][targetSelection.x1-1]
+    }
     return (
       <OverlayMenu
         file={file}
