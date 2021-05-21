@@ -10,11 +10,42 @@ import DialogActions from '@material-ui/core/DialogActions'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
+import MenuItem from '@material-ui/core/MenuItem'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
 
 import DraggablePaper from './DraggablePaper'
+
+
+const DATA_TYPES = [{
+  label: 'External ID',
+  value: 'externalid',
+}, {
+  label: 'Quantity',
+  value: 'quantity',
+}, {
+  label: 'String',
+  value: 'string',
+}, {
+  label: 'Time',
+  value: 'time',
+}, {
+  label: 'Monolingual Text',
+  value: 'monolingualtext',
+}, {
+  label: 'Globe Coordinates',
+  value: 'globecoordinate',
+}, {
+  label: 'Url',
+  value: 'url',
+}, {
+  label: 'Wikibase Item',
+  value: 'wikibaseitem',
+}, {
+  label: 'Wikibase Property',
+  value: 'wikibaseproperty',
+}]
 
 
 const useStyles = makeStyles(theme => ({
@@ -38,6 +69,7 @@ const CreateProperty = ({ hideMenu }) => {
   const [formState, setFormState] = useState({
     qnodeID: '',
     qnodeLabel: '',
+    qnodeType: '',
   })
 
   const handleOnSubmit = () => {}
@@ -113,6 +145,32 @@ const CreateProperty = ({ hideMenu }) => {
     )
   }
 
+  const renderPropertyTypeInput = () => {
+    return (
+      <Grid item xs={12}>
+        <TextField
+          select
+          fullWidth
+          id="qnodeType"
+          name="qnodeType"
+          label="Data Type"
+          variant="outlined"
+          autoCorrect="off"
+          autoComplete="off"
+          autoCapitalize="off"
+          spellCheck="false"
+          onChange={handleOnChange}
+          value={formState.qnodeType}>
+          {DATA_TYPES.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+      </Grid>
+    )
+  }
+
 
   const renderContent = () => {
     return (
@@ -123,6 +181,7 @@ const CreateProperty = ({ hideMenu }) => {
           {renderFormInstructions()}
           {renderIDInput()}
           {renderLabelInput()}
+          {renderPropertyTypeInput()}
         </Grid>
       </form>
     )
