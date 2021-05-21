@@ -686,7 +686,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     setAnnotationBlocks(annotationBlocks => ([...annotationBlocks]))
   }
 
-  const renderAnnotationMenu = () => {
+  const renderOverlayMenu = () => {
     if ( !targetSelection || !selection.current || !showOverlayMenu ) { return }
     const selectedCellValue = data[targetSelection.y1-1][targetSelection.x1-1]
     return (
@@ -708,7 +708,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   return (
     <React.Fragment>
       {renderTable()}
-      {renderAnnotationMenu()}
+      {renderOverlayMenu()}
     </React.Fragment>
   )
 }
