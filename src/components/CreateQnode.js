@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Paper from '@material-ui/core/Paper'
+import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -26,6 +27,8 @@ const CreateQnode = ({ hideMenu }) => {
 
   const classes = useStyles()
 
+  const handleOnSubmit = () => {}
+
   const renderTitle = () => {
     return (
       <React.Fragment>
@@ -41,7 +44,16 @@ const CreateQnode = ({ hideMenu }) => {
 
   const renderContent = () => {}
 
-  const renderButtons = () => {}
+  const renderButtons = () => {
+    return (
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={handleOnSubmit}>
+        Submit
+      </Button>
+    )
+  }
 
   return (
     <Dialog
