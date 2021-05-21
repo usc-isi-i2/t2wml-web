@@ -6,11 +6,12 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
-import CloseIcon from '@material-ui/icons/Close'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import CloseIcon from '@material-ui/icons/Close'
+import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/styles'
 
 import fetchQnodes from '../utils/fetchQnodes'
@@ -58,6 +59,7 @@ const QnodeInput = ({
   const [qnodes, setQnodes] = useState([])
   const [selected, setSelected] = useState(selectedQnode)
   const [anchorElement, setAnchorElement] = useState()
+  const [showCreateQnode, setShowCreateQnode] = useState()
 
   useEffect(() => {
     setSelected(selectedQnode)
@@ -207,6 +209,21 @@ const QnodeInput = ({
     )
   }
 
+  const renderQnodeCreate = () => {
+    if ( !!selected ) { return }
+    return (
+      <Grid item xs={12}>
+        <Button
+          color="primary"
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={() => setShowCreateQnode(true)}>
+          Add a new qnode
+        </Button>
+      </Grid>
+    )
+  }
+
   return (
     <Grid container spacing={3}>
       {renderTitle()}
@@ -214,6 +231,7 @@ const QnodeInput = ({
       {renderInstructions()}
       {renderQnodeSearch()}
       {renderSearchResults()}
+      {renderQnodeCreate()}
     </Grid>
   )
 }
