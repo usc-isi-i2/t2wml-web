@@ -50,11 +50,11 @@ const CreateProperty = ({ hideMenu }) => {
       classes={{paper: classes.menu}}
       aria-labelledby='dialog-modal-title'
       PaperComponent={props => (
-        <Draggable handle='.draggable-handle'>
+        <Draggable handle='.draggable-property-handle'>
           <Paper {...props} />
         </Draggable>
       )}>
-      <DialogTitle classes={{ root: 'draggable-handle' }}>
+      <DialogTitle classes={{ root: 'draggable-property-handle' }}>
         {renderTitle()}
       </DialogTitle>
       <DialogContent>

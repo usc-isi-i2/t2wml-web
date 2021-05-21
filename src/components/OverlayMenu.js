@@ -104,11 +104,11 @@ const OverlayMenu = ({
       classes={{paper: classes.overlayMenu}}
       aria-labelledby='dialog-modal-title'
       PaperComponent={props => (
-        <Draggable handle='.draggable-handle'>
+        <Draggable handle='.draggable-overlay-handle'>
           <Paper {...props} />
         </Draggable>
       )}>
-      <DialogTitle classes={{ root: 'draggable-handle' }}>
+      <DialogTitle classes={{ root: 'draggable-overlay-handle' }}>
         {renderTitle()}
       </DialogTitle>
       <DialogContent>

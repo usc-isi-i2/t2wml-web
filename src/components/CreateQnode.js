@@ -50,11 +50,11 @@ const CreateQnode = ({ hideMenu }) => {
       classes={{paper: classes.menu}}
       aria-labelledby='dialog-modal-title'
       PaperComponent={props => (
-        <Draggable handle='.draggable-handle'>
+        <Draggable handle='.draggable-qnode-handle'>
           <Paper {...props} />
         </Draggable>
       )}>
-      <DialogTitle classes={{ root: 'draggable-handle' }}>
+      <DialogTitle classes={{ root: 'draggable-qnode-handle' }}>
         {renderTitle()}
       </DialogTitle>
       <DialogContent>
