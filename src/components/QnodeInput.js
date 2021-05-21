@@ -16,19 +16,12 @@ import { makeStyles } from '@material-ui/styles'
 import fetchQnodes from '../utils/fetchQnodes'
 
 const useStyles = makeStyles(theme => ({
-  wrapper: {
-    marginTop: theme.spacing(2),
-    paddingBottom: theme.spacing(4),
-  },
-  title: {
-    fontSize: theme.spacing(2),
-  },
   link: {
     color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
-    marginTop: theme.spacing(2),
     display: 'inline-block',
   },
   removeButton: {
+    marginTop: -1 * theme.spacing(2),
     '&:hover': {
       color: 'red',
       transition: 'color 150ms ease',
@@ -109,52 +102,56 @@ const QnodeInput = ({
 
   const renderTitle = () => {
     return (
-      <Typography className={classes.title}
-        style={{marginBottom: !!selected ? '0' : '16px'}}>
-        <b>{!!selected ? 'Selected qnode' : 'Select qnode'}</b>
-      </Typography>
+      <Grid item xs={12}>
+        <Typography variant="body1">
+          <b>{!!selected ? 'Selected qnode' : 'Select qnode'}</b>
+        </Typography>
+      </Grid>
     )
   }
 
   const renderSelectedQnode = () => {
     if ( !selected || !selected.label ) { return }
     return (
-      <Grid container spacing={3}>
-        <Grid item xs={10}>
-          <Link
-            variant="body1"
-            className={classes.link}
-            target="_blank" rel="noopener noreferrer"
-            href={`https://ringgaard.com/kb/${selected.qnode}`}>
-            {`${selected.label[0]} (${selected.qnode})`}
-          </Link>
-          {!!selected.description && !!selected.description.length && (
-            <Typography variant="body1">
-              {selected.description[0]}
-            </Typography>
-          )}
-        </Grid>
-        <Grid item xs={2}>
-          <Tooltip arrow placement="top" title={'remove selected qnode'}>
-            <IconButton className={classes.removeButton}
-              onClick={removeSelected}>
-              <CloseIcon />
-            </IconButton>
-          </Tooltip>
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={applyToBlock}>
-            Apply selected Qnode to the block
-          </Button>
+      <Grid item xs={12}>
+        <Grid container spacing={3}>
+          <Grid item xs={10}>
+            <Link
+              variant="body1"
+              className={classes.link}
+              target="_blank" rel="noopener noreferrer"
+              href={`https://ringgaard.com/kb/${selected.qnode}`}>
+              {`${selected.label[0]} (${selected.qnode})`}
+            </Link>
+            {!!selected.description && !!selected.description.length && (
+              <Typography variant="body1">
+                {selected.description[0]}
+              </Typography>
+            )}
+          </Grid>
+          <Grid item xs={2}>
+            <Tooltip arrow placement="top" title={'remove selected qnode'}>
+              <IconButton className={classes.removeButton}
+                onClick={removeSelected}>
+                <CloseIcon />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={applyToBlock}>
+              Apply selected Qnode to the block
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     )
   }
 
   const renderInstructions = () => {
+    if ( !!selected ) { return }
     return (
       <Grid item xs={12}>
         <FormHelperText component="p">
@@ -167,22 +164,18 @@ const QnodeInput = ({
   const renderQnodeSearch = () => {
     if ( !!selected ) { return }
     return (
-      <Grid container spacing={3}>
-        {renderInstructions()}
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            autoCorrect="off"
-            autoComplete="off"
-            autoCapitalize="off"
-            spellCheck="false"
-            variant="outlined"
-            label={'Search for qnodes on wikidata'}
-            id={'wikidata-search'}
-            name={'wikidata-search'}
-            onChange={handleOnChange} />
-        </Grid>
-        {renderSearchResults()}
+      <Grid item xs={12}>
+        <TextField
+          fullWidth
+          autoCorrect="off"
+          autoComplete="off"
+          autoCapitalize="off"
+          spellCheck="false"
+          variant="outlined"
+          label={'Search for qnodes on wikidata'}
+          id={'wikidata-search'}
+          name={'wikidata-search'}
+          onChange={handleOnChange} />
       </Grid>
     )
   }
@@ -215,10 +208,12 @@ const QnodeInput = ({
   }
 
   return (
-    <Grid item xs={12} className={classes.wrapper}>
+    <Grid container spacing={3}>
       {renderTitle()}
       {renderSelectedQnode()}
+      {renderInstructions()}
       {renderQnodeSearch()}
+      {renderSearchResults()}
     </Grid>
   )
 }
