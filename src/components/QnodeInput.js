@@ -29,13 +29,6 @@ const useStyles = makeStyles(theme => ({
       transition: 'color 150ms ease',
     },
   },
-  menuItem: {
-    '& > p': {
-      overflow: 'hidden',
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
-    },
-  },
 }))
 
 
@@ -187,7 +180,6 @@ const QnodeInput = ({
         onClose={handleCloseMenu}>
         {qnodes.map(qnode => (
           <MenuItem key={qnode.qnode}
-            className={classes.menuItem}
             onClick={() => selectQnode(qnode)}>
             <Typography variant="body1">
               {`${qnode.label[0]} (${qnode.qnode})`}

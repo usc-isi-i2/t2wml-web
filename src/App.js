@@ -153,6 +153,15 @@ const App = () => {
           },
         },
       },
+      MuiMenuItem: {
+        root: {
+          '& > p': {
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
+          },
+        },
+      },
       MuiBackdrop: {
         root: {
           display: 'none',

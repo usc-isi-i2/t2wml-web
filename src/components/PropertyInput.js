@@ -31,13 +31,6 @@ const useStyles = makeStyles(theme => ({
       transition: 'color 150ms ease',
     },
   },
-  menuItem: {
-    '& > p': {
-      overflow: 'hidden',
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
-    },
-  },
   showCreatePropertyToggle: {
     '& > span': {
       cursor: 'pointer',
@@ -212,7 +205,6 @@ const PropertyInput = ({
         onClose={handleCloseMenu}>
         {properties.map(property => (
           <MenuItem key={property.qnode}
-            className={classes.menuItem}
             onClick={() => selectProperty(property)}>
             <Typography variant="body1">
               {`${property.label[0]} (${property.qnode})`}
