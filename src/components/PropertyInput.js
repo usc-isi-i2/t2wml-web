@@ -10,6 +10,8 @@ import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import { makeStyles } from '@material-ui/styles'
 
 import fetchProperties from '../utils/fetchProperties'
@@ -51,6 +53,14 @@ const useStyles = makeStyles(theme => ({
       textOverflow: 'ellipsis',
     },
   },
+  showCreatePropertyToggle: {
+    '& > span': {
+      cursor: 'pointer',
+      userSelect: 'none',
+      display: 'inline-block',
+      marginTop: theme.spacing(2),
+    },
+  },
 }))
 
 
@@ -67,6 +77,7 @@ const PropertyInput = ({
   const [selectedPropertyCells, setSelectedPropertyCells] = useState()
   const [properties, setProperties] = useState([])
   const [anchorElement, setAnchorElement] = useState()
+  const [showCreateProperty, setShowCreateProperty] = useState(false)
 
   useEffect(() => {
     setSelected(selectedProperty)
@@ -228,12 +239,41 @@ const PropertyInput = ({
     )
   }
 
+  const toggleShowCreateProperty = () => {
+    setShowCreateProperty(showCreateProperty => !showCreateProperty)
+  }
+
+  const renderCreatePropertyToggle = () => {
+    return (
+      <Grid container spacing={3}
+        className={classes.showCreatePropertyToggle}
+        onClick={toggleShowCreateProperty}>
+        <IconButton>
+          {showCreateProperty ? <ChevronRightIcon /> : <ExpandMoreIcon />}
+        </IconButton>
+        <Typography variant="inherit">
+          {showCreateProperty ? 'Hide new property' : 'Create new property'}
+        </Typography>
+      </Grid>
+    )
+  }
+
+  const renderPropertyCreate = () => {
+    if ( !!selected ) { return }
+    return (
+      <React.Fragment>
+        {renderCreatePropertyToggle()}
+      </React.Fragment>
+    )
+  }
+
   return (
     <Grid item xs={12} className={classes.wrapper}>
       {renderTitle()}
       {renderSelectedProperty()}
       {renderPropertyCellSelection()}
       {renderPropertySearch()}
+      {renderPropertyCreate()}
     </Grid>
   )
 }
