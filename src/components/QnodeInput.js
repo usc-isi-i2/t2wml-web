@@ -29,15 +29,6 @@ const useStyles = makeStyles(theme => ({
       transition: 'color 150ms ease',
     },
   },
-  menu: {
-    padding: 0,
-    '& > ul': {
-      padding: 0,
-      maxWidth: '500px',
-      maxHeight: '300px',
-      overflowY: 'auto',
-    },
-  },
   menuItem: {
     '& > p': {
       overflow: 'hidden',
@@ -186,10 +177,9 @@ const QnodeInput = ({
   const renderSearchResults = () => {
     return (
       <Menu
+        keepMounted
         id="qnode-search-results"
         anchorEl={anchorElement}
-        classes={{paper: classes.menu}}
-        keepMounted
         transformOrigin={{
           vertical: -60,
         }}

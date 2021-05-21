@@ -142,6 +142,17 @@ const App = () => {
           },
         },
       },
+      MuiMenu: {
+        paper: {
+          padding: 0,
+          '& > ul': {
+            padding: 0,
+            maxWidth: '500px',
+            maxHeight: '300px',
+            overflowY: 'auto',
+          },
+        },
+      },
       MuiBackdrop: {
         root: {
           display: 'none',
