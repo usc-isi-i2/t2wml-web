@@ -11,9 +11,8 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
 
-import Draggable from 'react-draggable'
-
 import TabPanel from './TabPanel'
+import DraggablePaper from './DraggablePaper'
 import AnnotationMenu from './AnnotationMenu'
 import WikificationMenu from './WikificationMenu'
 import * as utils from '../utils/table'
@@ -103,11 +102,8 @@ const OverlayMenu = ({
       onClose={hideOverlayMenu}
       classes={{paper: classes.overlayMenu}}
       aria-labelledby='dialog-modal-title'
-      PaperComponent={props => (
-        <Draggable handle='.draggable-overlay-handle'>
-          <Paper {...props} />
-        </Draggable>
-      )}>
+      PaperComponent={DraggablePaper}
+      PaperProps={{handle: '.draggable-overlay-handle'}}>
       <DialogTitle classes={{ root: 'draggable-overlay-handle' }}>
         {renderTitle()}
       </DialogTitle>

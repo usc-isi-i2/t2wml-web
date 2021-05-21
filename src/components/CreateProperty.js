@@ -11,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
 
-import Draggable from 'react-draggable'
+import DraggablePaper from './DraggablePaper'
 
 
 const useStyles = makeStyles(theme => ({
@@ -61,11 +61,8 @@ const CreateProperty = ({ hideMenu }) => {
       onClose={hideMenu}
       classes={{paper: classes.menu}}
       aria-labelledby='dialog-modal-title'
-      PaperComponent={props => (
-        <Draggable handle='.draggable-property-handle'>
-          <Paper {...props} />
-        </Draggable>
-      )}>
+      PaperComponent={DraggablePaper}
+      PaperProps={{handle: '.draggable-property-handle'}}>
       <DialogTitle classes={{ root: 'draggable-property-handle' }}>
         {renderTitle()}
       </DialogTitle>
