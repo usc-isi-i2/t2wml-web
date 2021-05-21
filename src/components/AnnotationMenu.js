@@ -310,7 +310,7 @@ const AnnotationMenu = ({
     return (
       <Grid className={classes.additionalFieldsToggle}
         onClick={toggleAdditionalInputs}>
-        <IconButton className={classes.removeButton}>
+        <IconButton>
           {showAdditionalInputs ? <ChevronRightIcon /> : <ExpandMoreIcon />}
         </IconButton>
         <Typography variant="inherit">
