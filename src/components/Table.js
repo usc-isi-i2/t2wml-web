@@ -332,6 +332,21 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
   useEffect(() => {
     updateSelections()
+
+    if ( !!selectedAnnotationBlock && !!selectedAnnotationBlock.property ) {
+      if ( typeof selectedAnnotationBlock.property === 'string' ) {
+        fetchProperties(selectedAnnotationBlock.property, 'exact_match')
+        .then(data => {
+          if ( !!data.length ) {
+            setSelectedAnnotationBlock(selectedAnnotation => ({
+              ...selectedAnnotation,
+              property: data[0],
+            }))
+          }
+        })
+      }
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedAnnotationBlock, selection.current])
 
