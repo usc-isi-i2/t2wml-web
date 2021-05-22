@@ -22,9 +22,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
   const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
-  const [suggestions, setSuggestions] = useState({
-    roles: [], types: [], children: {},
-  })
+  const [suggestions, setSuggestions] = useState()
 
   const [selectedTab, setSelectedTab] = useState('block')
   const [showOverlayMenu, setShowOverlayMenu] = useState(false)
@@ -81,7 +79,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     } else {
 
       // reset the suggestions otherwise
-      setSuggestions({roles: [], types: [], children: {}})
+      setSuggestions()
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
