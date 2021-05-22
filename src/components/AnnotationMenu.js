@@ -64,8 +64,6 @@ const AnnotationMenu = ({
   useEffect(() => {
 
     if ( !!suggestions ) {
-
-      // update form state with suggested role and type
       setFormState(formState => {
         return {
           ...formState,
@@ -77,19 +75,14 @@ const AnnotationMenu = ({
     }
 
     if ( !!selectedAnnotation ) {
-
       setFormState(formState => {
         return {
           ...formState,
           selectedRole: selectedAnnotation.role,
           selectedType: selectedAnnotation.type,
+          selectedProperty: selectedAnnotation.property,
         }
       })
-
-      // fetch the suggested property using kgtk search
-      if ( selectedAnnotation.property ) {
-        getPropertyNode(selectedAnnotation.property)
-      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
