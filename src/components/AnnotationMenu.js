@@ -71,13 +71,9 @@ const AnnotationMenu = ({
           ...formState,
           selectedRole: !!suggestions['role'] ? suggestions['role'] : undefined,
           selectedType: !!suggestions['type'] ? suggestions['type'] : undefined,
+          selectedProperty: !!suggestions['children'] ? suggestions['children']['property'] : undefined,
         }
       })
-
-      // fetch the suggested property using kgtk search
-      if ( 'property' in suggestions.children ) {
-        getPropertyNode(suggestions.children.property)
-      }
     }
 
     if ( !!selectedAnnotation ) {
