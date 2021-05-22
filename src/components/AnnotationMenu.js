@@ -47,60 +47,52 @@ const AnnotationMenu = ({
 
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false)
 
-  useEffect(() => {
-
-    if ( !selectedAnnotation ) {
-
-      // fetch the suggested property using kgtk search
-      if ( 'property' in suggestions.children ) {
-        fetchProperties(suggestions.children.property, 'exact_match')
-        .then(data => {
-          if ( !!data.length ) {
-            setFormState(formState => {
-              return {
-              ...formState,
-              selectedRole: !!suggestions['role'] ? suggestions['role'] : undefined,
-              selectedType: !!suggestions['type'] ? suggestions['type'] : undefined,
-              selectedProperty: data[0],
-              }
-            })
-          }
-        })
-      } else {
-        // update form state with suggested type, role and property values
+  const getPropertyNode = property => {
+    fetchProperties(property, 'exact_match')
+    .then(data => {
+      if ( !!data.length ) {
         setFormState(formState => {
           return {
             ...formState,
-            selectedRole: !!suggestions['role'] ? suggestions['role'] : undefined,
-            selectedType: !!suggestions['type'] ? suggestions['type'] : undefined,
+            selectedProperty: data[0],
           }
         })
       }
-    } else {
+    })
+  }
+
+  useEffect(() => {
+
+    if ( !!suggestions ) {
+
+      // update form state with suggested role and type
+      setFormState(formState => {
+        return {
+          ...formState,
+          selectedRole: !!suggestions['role'] ? suggestions['role'] : undefined,
+          selectedType: !!suggestions['type'] ? suggestions['type'] : undefined,
+        }
+      })
+
+      // fetch the suggested property using kgtk search
+      if ( 'property' in suggestions.children ) {
+        getPropertyNode(suggestions.children.property)
+      }
+    }
+
+    if ( !!selectedAnnotation ) {
+
+      setFormState(formState => {
+        return {
+          ...formState,
+          selectedRole: selectedAnnotation.role,
+          selectedType: selectedAnnotation.type,
+        }
+      })
 
       // fetch the suggested property using kgtk search
       if ( selectedAnnotation.property ) {
-        fetchProperties(selectedAnnotation.property, 'exact_match')
-        .then(data => {
-          if ( !!data.length ) {
-            setFormState(formState => {
-              return {
-                ...formState,
-                selectedRole: selectedAnnotation.role,
-                selectedType: selectedAnnotation.type,
-                selectedProperty: data[0],
-              }
-            })
-          }
-        })
-      } else {
-        setFormState(formState => {
-          return {
-            ...formState,
-            selectedRole: selectedAnnotation.role,
-            selectedType: selectedAnnotation.type,
-          }
-        })
+        getPropertyNode(selectedAnnotation.property)
       }
     }
 
