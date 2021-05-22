@@ -14,7 +14,6 @@ import WikifyButton from './WikifyButton'
 import PropertyInput from './PropertyInput'
 import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
-import fetchProperties from '../utils/fetchProperties'
 import useStyles from '../styles/annotationMenu'
 import * as utils from '../utils/table'
 
@@ -46,20 +45,6 @@ const AnnotationMenu = ({
   })
 
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false)
-
-  const getPropertyNode = property => {
-    fetchProperties(property, 'exact_match')
-    .then(data => {
-      if ( !!data.length ) {
-        setFormState(formState => {
-          return {
-            ...formState,
-            selectedProperty: data[0],
-          }
-        })
-      }
-    })
-  }
 
   useEffect(() => {
 
