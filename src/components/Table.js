@@ -6,6 +6,7 @@ import OverlayMenu from './OverlayMenu'
 import useStyles from '../styles/table'
 import * as utils from '../utils/table'
 import fetchPartialCSV from '../utils/fetchPartialCSV'
+import fetchProperties from '../utils/fetchProperties'
 import fetchSuggestions from '../utils/fetchSuggestions'
 
 
@@ -73,7 +74,22 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
         // call the annotation suggestion endpoint
         fetchSuggestions(file, sheet, selection.current, annotationBlocks)
-        .then(data => setSuggestions(data))
+        .then(data => {
+          setSuggestions(data)
+
+          // fetch the suggested property using kgtk search
+          if ( 'property' in data.children ) {
+            fetchProperties(data.children.property, 'exact_match')
+            .then(data => {
+              if ( !!data.length ) {
+                setSuggestions(suggestions => ({
+                  ...suggestions,
+                  children: {...suggestions.children, property: data[0]},
+                }))
+              }
+            })
+          }
+        })
         .catch(error => console.log(error))
       }
     } else {
