@@ -34,14 +34,14 @@ const AnnotationMenu = ({
 
   const [formState, setFormState] = useState({
     range: undefined,
-    selectedRole: undefined,
-    selectedType: undefined,
-    selectedProperty: undefined,
-    selectedLanguage: undefined,
-    selectedPrecision: undefined,
-    selectedCalendar: undefined,
-    selectedFormat: undefined,
-    selectedUnit: undefined,
+    role: undefined,
+    type: undefined,
+    property: undefined,
+    language: undefined,
+    precision: undefined,
+    calendar: undefined,
+    format: undefined,
+    unit: undefined,
   })
 
   const [suggestion, setSuggestion] = useState({
@@ -85,21 +85,21 @@ const AnnotationMenu = ({
   const handleOnSubmit = event => {
     event.preventDefault()
 
-    if ( ( !formState.selectedRole && !selectedAnnotation ) || ( !!selectedAnnotation && !selectedAnnotation.role ) ) { return }
+    if ( ( !formState.role ) || ( !annotation.role ) ) { return }
 
     const filteredAnnotations = annotations.filter(
       annotation => annotation !== selectedAnnotation
     )
     filteredAnnotations.push({
       selection: {...selection},
-      role: formState.selectedRole,
-      type: formState.selectedType,
-      property: formState.selectedProperty ? formState.selectedProperty.qnode : '',
-      language: formState.selectedLanguage,
-      precision: formState.selectedPrecision,
-      calendar: formState.selectedCalendar,
-      format: formState.selectedFormat,
-      unit: formState.selectedUnit,
+      role: formState.role,
+      type: formState.type,
+      property: formState.property ? formState.property.qnode : '',
+      language: formState.language,
+      precision: formState.precision,
+      calendar: formState.calendar,
+      format: formState.format,
+      unit: formState.unit,
     })
 
     uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
@@ -110,7 +110,7 @@ const AnnotationMenu = ({
   }
 
   const handleOnDelete = () => {
-    if ( ( !formState.selectedRole && !selectedAnnotation ) || ( !!selectedAnnotation && !selectedAnnotation.role ) ) { return }
+    if ( ( !formState.role ) || ( !annotation.role ) ) { return }
 
     const filteredAnnotations = annotations.filter(
       annotation => annotation !== selectedAnnotation
@@ -180,8 +180,8 @@ const AnnotationMenu = ({
 
     // check if the selected role can be wikified
     let showWikifyButton = false
-    if ( formState.selectedRole ) {
-      const ROLE = ROLES.find(role => role.value === formState.selectedRole)
+    if ( formState.role ) {
+      const ROLE = ROLES.find(role => role.value === formState.role)
       if ( ROLE && ROLE.wikify ) {
         showWikifyButton = true
       }
@@ -193,14 +193,14 @@ const AnnotationMenu = ({
           select
           fullWidth
           label="Role"
-          id="selectedRole"
-          name="selectedRole"
+          id="role"
+          name="role"
           variant="outlined"
           autoCorrect="off"
           autoComplete="off"
           autoCapitalize="off"
           spellCheck="false"
-          value={formState.selectedRole || defaultValue}
+          value={formState.role || defaultValue}
           onChange={handleOnChange}>
           {ROLES.map(option => (
             <MenuItem key={option.value} value={option.value}>
@@ -216,23 +216,23 @@ const AnnotationMenu = ({
   const renderSelectedTypeInput = () => {
     let ROLE = undefined
 
-    if ( formState.selectedRole ) {
+    if ( formState.role ) {
       ROLE = ROLES.find(option => (
-        option.value === formState.selectedRole
+        option.value === formState.role
       ))
     }
 
-    if ( selectedAnnotation && selectedAnnotation.role ) {
+    if ( annotation.role ) {
       ROLE = ROLES.find(option => (
-        option.value === selectedAnnotation.role
+        option.value === annotation.role
       ))
     }
 
     if ( !ROLE || !ROLE.children ) { return }
 
     let defaultValue = ''
-    if ( selectedAnnotation && selectedAnnotation.type ) {
-      defaultValue = selectedAnnotation.type
+    if ( annotation.type ) {
+      defaultValue = annotation.type
     } else {
       if ( !!suggestion.type ) {
         defaultValue = suggestion.type
@@ -241,8 +241,8 @@ const AnnotationMenu = ({
 
     // check if the selected type can be wikified
     let showWikifyButton = false
-    if ( formState.selectedType ) {
-      const TYPE = TYPES.find(type => type.value === formState.selectedType)
+    if ( formState.type ) {
+      const TYPE = TYPES.find(type => type.value === formState.type)
       if ( TYPE && TYPE.wikify ) {
         showWikifyButton = true
       }
@@ -254,14 +254,14 @@ const AnnotationMenu = ({
           select
           fullWidth
           label="Type"
-          id="selectedType"
-          name="selectedType"
+          id="type"
+          name="type"
           variant="outlined"
           autoCorrect="off"
           autoComplete="off"
           autoCapitalize="off"
           spellCheck="false"
-          value={formState.selectedType || defaultValue}
+          value={formState.type || defaultValue}
           disabled={!ROLE.children.length}
           onChange={handleOnChange}>
           {ROLE.children.map(option => (
@@ -296,22 +296,22 @@ const AnnotationMenu = ({
   const handleOnSelectProperty = node => {
     setFormState({
       ...formState,
-      selectedProperty: node,
+      property: node,
     })
   }
 
   const renderAdditionalInputs = () => {
     let TYPE = undefined
 
-    if ( formState.selectedType ) {
+    if ( formState.type ) {
       TYPE = TYPES.find(option => (
-        option.value === formState.selectedType
+        option.value === formState.type
       ))
     }
 
-    if ( selectedAnnotation && selectedAnnotation.type ) {
+    if ( annotation.type ) {
       TYPE = TYPES.find(option => (
-        option.value === selectedAnnotation.type
+        option.value === annotation.type
       ))
     }
 
@@ -324,15 +324,15 @@ const AnnotationMenu = ({
         {TYPE.children.map(option => {
 
           let defaultValue = ''
-          if ( selectedAnnotation && selectedAnnotation[option.value] ) {
-            defaultValue = selectedAnnotation[option.value]
+          if ( annotation[option.value] ) {
+            defaultValue = annotation[option.value]
           }
 
           if ( option.value === 'property' ) {
             return (
               <Grid item xs={12} key={option.value}>
                 <PropertyInput
-                  selectedProperty={formState.selectedProperty}
+                  property={formState.property}
                   onSelectProperty={handleOnSelectProperty} />
               </Grid>
             )
@@ -353,9 +353,9 @@ const AnnotationMenu = ({
                       autoCapitalize="off"
                       spellCheck="false"
                       label={option.label}
-                      id={`selected${option.label}`}
-                      name={`selected${option.label}`}
-                      value={formState[`selected${option.label}`] || defaultValue}
+                      id={option.value}
+                      name={option.value}
+                      value={formState[option.value] || defaultValue}
                       onChange={handleOnChange} />
                   </Grid>
                 </Grid>
@@ -379,7 +379,7 @@ const AnnotationMenu = ({
               color="primary"
               variant="contained"
               disabled={
-                (!formState.selectedRole && !selectedAnnotation) ||
+                (!formState.role && !selectedAnnotation) ||
                 (!!selectedAnnotation && !selectedAnnotation.role)
               }
               onClick={handleOnSubmit}>
