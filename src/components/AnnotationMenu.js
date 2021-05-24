@@ -85,21 +85,29 @@ const AnnotationMenu = ({
   const handleOnSubmit = event => {
     event.preventDefault()
 
-    if ( ( !formState.role ) || ( !annotation.role ) ) { return }
-
     const filteredAnnotations = annotations.filter(
       annotation => annotation !== selectedAnnotation
     )
+
+    const role = getFormValue('role')
+    const type = getFormValue('type')
+    const property = getFormValue('property')
+    const language = getFormValue('language')
+    const precision = getFormValue('precision')
+    const calendar = getFormValue('calendar')
+    const format = getFormValue('format')
+    const unit = getFormValue('unit')
+
     filteredAnnotations.push({
       selection: {...selection},
-      role: formState.role,
-      type: formState.type,
-      property: formState.property ? formState.property.qnode : '',
-      language: formState.language,
-      precision: formState.precision,
-      calendar: formState.calendar,
-      format: formState.format,
-      unit: formState.unit,
+      role: role,
+      type: type,
+      property: property ? property.qnode : '',
+      language: language,
+      precision: precision,
+      calendar: calendar,
+      format: format,
+      unit: unit,
     })
 
     uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
@@ -366,10 +374,6 @@ const AnnotationMenu = ({
               autoFocus
               color="primary"
               variant="contained"
-              disabled={
-                (!formState.role && !selectedAnnotation) ||
-                (!!selectedAnnotation && !selectedAnnotation.role)
-              }
               onClick={handleOnSubmit}>
               Submit
             </Button>
