@@ -47,31 +47,28 @@ const AnnotationMenu = ({
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false)
 
   useEffect(() => {
+    if ( !suggestions ) { return }
+    setFormState(formState => {
+      return {
+        ...formState,
+        selectedRole: !!suggestions['role'] ? suggestions['role'] : undefined,
+        selectedType: !!suggestions['type'] ? suggestions['type'] : undefined,
+        selectedProperty: !!suggestions['children'] ? suggestions['children']['property'] : undefined,
+      }
+    })
+  }, [suggestions])
 
-    if ( !!suggestions ) {
-      setFormState(formState => {
-        return {
-          ...formState,
-          selectedRole: !!suggestions['role'] ? suggestions['role'] : undefined,
-          selectedType: !!suggestions['type'] ? suggestions['type'] : undefined,
-          selectedProperty: !!suggestions['children'] ? suggestions['children']['property'] : undefined,
-        }
-      })
-    }
-
-    if ( !!selectedAnnotation ) {
-      setFormState(formState => {
-        return {
-          ...formState,
-          selectedRole: selectedAnnotation.role,
-          selectedType: selectedAnnotation.type,
-          selectedProperty: selectedAnnotation.property,
-        }
-      })
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedAnnotation, suggestions])
+  useEffect(() => {
+    if ( !selectedAnnotation ) { return }
+    setFormState(formState => {
+      return {
+        ...formState,
+        selectedRole: selectedAnnotation.role,
+        selectedType: selectedAnnotation.type,
+        selectedProperty: selectedAnnotation.property,
+      }
+    })
+  }, [selectedAnnotation])
 
   const handleOnSubmit = event => {
     event.preventDefault()
