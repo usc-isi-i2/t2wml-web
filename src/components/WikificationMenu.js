@@ -20,6 +20,7 @@ const WikificationMenu = ({
   hideMenu,
   selection,
   selectedCell,
+  selectedAnnotation,
 }) => {
 
   const classes = useStyles()
@@ -37,6 +38,8 @@ const WikificationMenu = ({
   }
 
   const renderSelectedQnode = () => {
+    if ( !selectedAnnotation ) { return }
+    if ( selectedAnnotation.type !== 'wikibaseitem' ) { return }
     return (
       <Grid item xs={12}>
         <QnodeInput

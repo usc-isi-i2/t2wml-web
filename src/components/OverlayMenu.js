@@ -87,7 +87,8 @@ const OverlayMenu = ({
         <TabPanel value={selectedTab} index={'cell'}>
           <WikificationMenu
             selection={selection}
-            selectedCell={selectedCell} />
+            selectedCell={selectedCell}
+            selectedAnnotation={selectedAnnotation} />
         </TabPanel>
       </React.Fragment>
     )
