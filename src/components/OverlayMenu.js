@@ -36,9 +36,9 @@ const OverlayMenu = ({
   setSelectedTab,
   selectedCell,
   selection,
-  suggestions,
   annotations,
   selectedAnnotation,
+  suggestedAnnotation,
   onSelectionChange,
   hideOverlayMenu,
 }) => {
@@ -78,9 +78,9 @@ const OverlayMenu = ({
             sheet={sheet}
             selectedCell={selectedCell}
             selection={selection}
-            suggestions={suggestions}
             annotations={annotations}
             selectedAnnotation={selectedAnnotation}
+            suggestedAnnotation={suggestedAnnotation}
             onSelectionChange={onSelectionChange}
             hideOverlayMenu={hideOverlayMenu} />
         </TabPanel>

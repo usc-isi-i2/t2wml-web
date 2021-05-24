@@ -23,7 +23,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
   const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
-  const [suggestions, setSuggestions] = useState()
+  const [suggestedAnnotation, setSuggestedAnnotation] = useState()
 
   const [selectedTab, setSelectedTab] = useState('block')
   const [showOverlayMenu, setShowOverlayMenu] = useState(false)
@@ -75,16 +75,19 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         // call the annotation suggestion endpoint
         fetchSuggestions(file, sheet, selection.current, annotationBlocks)
         .then(data => {
-          setSuggestions(data)
+          setSuggestedAnnotation(data)
 
           // fetch the suggested property using kgtk search
           if ( 'property' in data.children ) {
             fetchProperties(data.children.property, 'exact_match')
             .then(data => {
               if ( !!data.length ) {
-                setSuggestions(suggestions => ({
-                  ...suggestions,
-                  children: {...suggestions.children, property: data[0]},
+                setSuggestedAnnotation(suggestedAnnotation => ({
+                  ...suggestedAnnotation,
+                  children: {
+                    ...suggestedAnnotation.children,
+                    property: data[0],
+                  },
                 }))
               }
             })
@@ -95,7 +98,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     } else {
 
       // reset the suggestions otherwise
-      setSuggestions()
+      setSuggestedAnnotation()
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -730,8 +733,8 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         setSelectedTab={setSelectedTab}
         selectedCell={{...targetSelection, value: selectedCellValue}}
         selection={selection.current}
-        suggestions={suggestions}
         annotations={annotationBlocks}
+        suggestedAnnotation={suggestedAnnotation}
         selectedAnnotation={selectedAnnotationBlock}
         onSelectionChange={handleOnSelectionChange}
         hideOverlayMenu={hideOverlayMenu} />
