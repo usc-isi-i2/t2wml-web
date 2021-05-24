@@ -189,11 +189,12 @@ const AnnotationMenu = ({
   }
 
   const renderSelectedRoleInput = () => {
+    const currentRole = getFormValue('role')
 
     // check if the selected role can be wikified
     let showWikifyButton = false
     if ( formState.role ) {
-      const ROLE = ROLES.find(role => role.value === formState.role)
+      const ROLE = ROLES.find(role => role.value === currentRole)
       if ( ROLE && ROLE.wikify ) {
         showWikifyButton = true
       }
@@ -212,7 +213,7 @@ const AnnotationMenu = ({
           autoComplete="off"
           autoCapitalize="off"
           spellCheck="false"
-          value={getFormValue('role')}
+          value={currentRole}
           onChange={handleOnChange}>
           {ROLES.map(option => (
             <MenuItem key={option.value} value={option.value}>
@@ -226,39 +227,26 @@ const AnnotationMenu = ({
   }
 
   const renderSelectedTypeInput = () => {
+    const currentRole = getFormValue('role')
+    const currentType = getFormValue('type')
+
     let ROLE = undefined
-
-    if ( formState.role ) {
+    if ( currentRole ) {
       ROLE = ROLES.find(option => (
-        option.value === formState.role
+        option.value === currentRole
       ))
-    }
-
-    if ( annotation.role ) {
-      ROLE = ROLES.find(option => (
-        option.value === annotation.role
-      ))
-    }
-
-    if ( !ROLE || !ROLE.children ) { return }
-
-    let defaultValue = ''
-    if ( annotation.type ) {
-      defaultValue = annotation.type
-    } else {
-      if ( !!suggestion.type ) {
-        defaultValue = suggestion.type
-      }
     }
 
     // check if the selected type can be wikified
     let showWikifyButton = false
-    if ( formState.type ) {
-      const TYPE = TYPES.find(type => type.value === formState.type)
+    if ( currentType ) {
+      const TYPE = TYPES.find(type => type.value === currentType)
       if ( TYPE && TYPE.wikify ) {
         showWikifyButton = true
       }
     }
+
+    if ( !ROLE || !ROLE.children ) { return }
 
     return (
       <Grid item xs={12}>
@@ -273,8 +261,7 @@ const AnnotationMenu = ({
           autoComplete="off"
           autoCapitalize="off"
           spellCheck="false"
-          value={formState.type || defaultValue}
-          disabled={!ROLE.children.length}
+          value={currentType}
           onChange={handleOnChange}>
           {ROLE.children.map(option => (
             <MenuItem key={option.value} value={option.value}>
@@ -313,38 +300,27 @@ const AnnotationMenu = ({
   }
 
   const renderAdditionalInputs = () => {
+    const currentType = getFormValue('type')
+
     let TYPE = undefined
-
-    if ( formState.type ) {
+    if ( currentType ) {
       TYPE = TYPES.find(option => (
-        option.value === formState.type
-      ))
-    }
-
-    if ( annotation.type ) {
-      TYPE = TYPES.find(option => (
-        option.value === annotation.type
+        option.value === currentType
       ))
     }
 
     if ( !TYPE || !TYPE.children ) { return }
-
 
     return (
       <React.Fragment>
         {TYPE.children.length > 1 && renderAdditionalInputsToggle()}
         {TYPE.children.map(option => {
 
-          let defaultValue = ''
-          if ( annotation[option.value] ) {
-            defaultValue = annotation[option.value]
-          }
-
           if ( option.value === 'property' ) {
             return (
               <Grid item xs={12} key={option.value}>
                 <PropertyInput
-                  property={formState.property}
+                  selectedProperty={getFormValue('property')}
                   onSelectProperty={handleOnSelectProperty} />
               </Grid>
             )
@@ -367,7 +343,7 @@ const AnnotationMenu = ({
                       label={option.label}
                       id={option.value}
                       name={option.value}
-                      value={formState[option.value] || defaultValue}
+                      value={getFormValue(option.value)}
                       onChange={handleOnChange} />
                   </Grid>
                 </Grid>
