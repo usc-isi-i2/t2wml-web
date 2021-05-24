@@ -33,27 +33,27 @@ const AnnotationMenu = ({
   const classes = useStyles()
 
   const [formState, setFormState] = useState({
-    range: undefined,
-    role: undefined,
-    type: undefined,
-    property: undefined,
-    language: undefined,
-    precision: undefined,
-    calendar: undefined,
-    format: undefined,
-    unit: undefined,
+    range: '',
+    role: '',
+    type: '',
+    property: '',
+    language: '',
+    precision: '',
+    calendar: '',
+    format: '',
+    unit: '',
   })
 
   const [suggestion, setSuggestion] = useState({
-    role: undefined,
-    type: undefined,
-    property: undefined,
+    role: '',
+    type: '',
+    property: '',
   })
 
   const [annotation, setAnnotation] = useState({
-    role: undefined,
-    type: undefined,
-    property: undefined,
+    role: '',
+    type: '',
+    property: '',
   })
 
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false)
@@ -63,9 +63,9 @@ const AnnotationMenu = ({
     setSuggestion(suggestion => {
       return {
         ...suggestion,
-        role: !!suggestedAnnotation['role'] ? suggestedAnnotation['role'] : undefined,
-        type: !!suggestedAnnotation['type'] ? suggestedAnnotation['type'] : undefined,
-        property: !!suggestedAnnotation['children'] ? suggestedAnnotation['children']['property'] : undefined,
+        role: !!suggestedAnnotation['role'] ? suggestedAnnotation['role'] : '',
+        type: !!suggestedAnnotation['type'] ? suggestedAnnotation['type'] : '',
+        property: !!suggestedAnnotation['children'] ? suggestedAnnotation['children']['property'] : '',
       }
     })
   }, [suggestedAnnotation])
