@@ -137,6 +137,22 @@ const AnnotationMenu = ({
     }
   }
 
+  const getFormValue = field => {
+    if ( !!formState[field] ) {
+      return formState[field]
+    }
+
+    if ( !!annotation[field] ) {
+      return annotation[field]
+    }
+
+    if ( !!suggestion[field] ) {
+      return suggestion[field]
+    }
+
+    return ''
+  }
+
   const renderFormInstructions = () => {
     return (
       <Grid item xs={12}>
@@ -173,10 +189,6 @@ const AnnotationMenu = ({
   }
 
   const renderSelectedRoleInput = () => {
-    let defaultValue = ''
-    if ( selectedAnnotation ) {
-      defaultValue = selectedAnnotation.role
-    }
 
     // check if the selected role can be wikified
     let showWikifyButton = false
@@ -200,7 +212,7 @@ const AnnotationMenu = ({
           autoComplete="off"
           autoCapitalize="off"
           spellCheck="false"
-          value={formState.role || defaultValue}
+          value={getFormValue('role')}
           onChange={handleOnChange}>
           {ROLES.map(option => (
             <MenuItem key={option.value} value={option.value}>
