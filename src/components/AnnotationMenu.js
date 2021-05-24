@@ -33,7 +33,7 @@ const AnnotationMenu = ({
   const classes = useStyles()
 
   const [formState, setFormState] = useState({
-    selectedArea: undefined,
+    range: undefined,
     selectedRole: undefined,
     selectedType: undefined,
     selectedProperty: undefined,
@@ -129,7 +129,7 @@ const AnnotationMenu = ({
       ...formState,
       [event.target.name]: value,
     })
-    if ( event.target.name === 'selectedArea' ) {
+    if ( event.target.name === 'range' ) {
       const newSelection = utils.parseSelectedAreaInput(value)
       if ( newSelection ) {
         onSelectionChange(newSelection)
@@ -141,7 +141,7 @@ const AnnotationMenu = ({
     return (
       <Grid item xs={12}>
         <FormHelperText component="p">
-          Use this form to provide annotations for the selected area in the table
+          Use this form to provide annotations for the selected range in the table
         </FormHelperText>
       </Grid>
     )
@@ -149,13 +149,13 @@ const AnnotationMenu = ({
 
   const renderSelectedAreaInput = () => {
     const defaultValue = utils.humanReadableSelection(selection)
-    const parsedCorrectly = utils.parseSelectedAreaInput(formState.selectedArea)
+    const parsedCorrectly = utils.parseSelectedAreaInput(formState.range)
     return (
       <Grid item xs={6}>
         <TextField
-          id="selectedArea"
-          name="selectedArea"
-          label="Selected area"
+          id="range"
+          name="range"
+          label="Selected range"
           variant="outlined"
           autoCorrect="off"
           autoComplete="off"
@@ -163,9 +163,9 @@ const AnnotationMenu = ({
           spellCheck="false"
           inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
-          value={formState.selectedArea || defaultValue}
-          error={!!formState.selectedArea && !parsedCorrectly}
-          helperText={formState.selectedArea && !parsedCorrectly ? (
+          value={formState.range || defaultValue}
+          error={!!formState.range && !parsedCorrectly}
+          helperText={formState.range && !parsedCorrectly ? (
             'format: [col][row](:[col][row])?'
           ) : ''} />
       </Grid>
