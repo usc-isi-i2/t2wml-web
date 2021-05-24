@@ -134,11 +134,13 @@ const AnnotationMenu = ({
 
   const handleOnChange = event => {
     const value = event.target.value
-    setUserChangedFormState(true)
     setFormState({
       ...formState,
       [event.target.name]: value,
     })
+    if ( event.target.name === 'role' ) {
+      setUserChangedFormState(true)
+    }
     if ( event.target.name === 'range' ) {
       const newSelection = utils.parseSelectedRangeInput(value)
       if ( newSelection ) {
