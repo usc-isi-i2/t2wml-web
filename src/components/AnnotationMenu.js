@@ -118,7 +118,7 @@ const AnnotationMenu = ({
   }
 
   const handleOnDelete = () => {
-    if ( ( !formState.role ) || ( !annotation.role ) ) { return }
+    if ( !annotation.role ) { return }
 
     const filteredAnnotations = annotations.filter(
       annotation => annotation !== selectedAnnotation
