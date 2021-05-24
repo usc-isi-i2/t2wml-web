@@ -165,7 +165,7 @@ export const selectionHasData = (data, selection) => {
 }
 
 
-export const parseSelectedAreaInput = value => {
+export const parseSelectedRangeInput = value => {
   const regex = /([a-z]+)([0-9]+):?([a-z]+)?([0-9]+)?$/gmi
   const groups = regex.exec(value)
   if ( groups && groups[1] && groups[2] && !groups[3] && !groups[4] ) {

@@ -130,7 +130,7 @@ const AnnotationMenu = ({
       [event.target.name]: value,
     })
     if ( event.target.name === 'range' ) {
-      const newSelection = utils.parseSelectedAreaInput(value)
+      const newSelection = utils.parseSelectedRangeInput(value)
       if ( newSelection ) {
         onSelectionChange(newSelection)
       }
@@ -147,9 +147,9 @@ const AnnotationMenu = ({
     )
   }
 
-  const renderSelectedAreaInput = () => {
+  const renderSelectedRangeInput = () => {
     const defaultValue = utils.humanReadableSelection(selection)
-    const parsedCorrectly = utils.parseSelectedAreaInput(formState.range)
+    const parsedCorrectly = utils.parseSelectedRangeInput(formState.range)
     return (
       <Grid item xs={6}>
         <TextField
@@ -406,7 +406,7 @@ const AnnotationMenu = ({
       onSubmit={handleOnSubmit}>
       <Grid container spacing={3}>
         {renderFormInstructions()}
-        {renderSelectedAreaInput()}
+        {renderSelectedRangeInput()}
         {renderSelectedRoleInput()}
         {renderSelectedTypeInput()}
         {renderAdditionalInputs()}

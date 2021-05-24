@@ -145,7 +145,7 @@ const PropertyInput = ({
 
   const renderPropertyCellSelection = () => {
     if ( !!selected ) { return }
-    const parsedCorrectly = utils.parseSelectedAreaInput(selectedPropertyCells)
+    const parsedCorrectly = utils.parseSelectedRangeInput(selectedPropertyCells)
     return (
       <Grid item xs={12}>
         <Grid container spacing={3}>
