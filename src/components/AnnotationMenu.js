@@ -50,6 +50,12 @@ const AnnotationMenu = ({
     property: undefined,
   })
 
+  const [annotation, setAnnotation] = useState({
+    role: undefined,
+    type: undefined,
+    property: undefined,
+  })
+
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false)
 
   useEffect(() => {
@@ -68,10 +74,10 @@ const AnnotationMenu = ({
     if ( !selectedAnnotation ) { return }
     setAnnotation(annotation => {
       return {
-        ...formState,
-        selectedRole: selectedAnnotation.role,
-        selectedType: selectedAnnotation.type,
-        selectedProperty: selectedAnnotation.property,
+        ...annotation,
+        role: selectedAnnotation.role,
+        type: selectedAnnotation.type,
+        property: selectedAnnotation.property,
       }
     })
   }, [selectedAnnotation])
