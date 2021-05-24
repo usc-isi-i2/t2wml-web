@@ -39,7 +39,7 @@ const WikificationMenu = ({
 
   const renderSelectedQnode = () => {
     if ( !selectedAnnotation ) { return }
-    if ( selectedAnnotation.type !== 'wikibaseitem' ) { return }
+    if ( !utils.isWikifyable(selectedAnnotation) ) { return }
     return (
       <Grid item xs={12}>
         <QnodeInput

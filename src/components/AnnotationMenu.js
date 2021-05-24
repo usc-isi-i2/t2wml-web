@@ -200,13 +200,7 @@ const AnnotationMenu = ({
     const currentRole = getFormValue('role')
 
     // check if the selected role can be wikified
-    let showWikifyButton = false
-    if ( formState.role ) {
-      const ROLE = ROLES.find(role => role.value === currentRole)
-      if ( ROLE && ROLE.wikify ) {
-        showWikifyButton = true
-      }
-    }
+    const showWikifyButton = utils.isWikifyable({role: currentRole})
 
     return (
       <Grid item xs={12}>
@@ -246,13 +240,7 @@ const AnnotationMenu = ({
     }
 
     // check if the selected type can be wikified
-    let showWikifyButton = false
-    if ( currentType ) {
-      const TYPE = TYPES.find(type => type.value === currentType)
-      if ( TYPE && TYPE.wikify ) {
-        showWikifyButton = true
-      }
-    }
+    const showWikifyButton = utils.isWikifyable({type: currentType})
 
     if ( !ROLE || !ROLE.children ) { return }
 
