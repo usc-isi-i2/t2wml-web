@@ -1,3 +1,5 @@
+import { ROLES, TYPES } from '../content/annotation-options'
+
 export const columnToLetter = column => {
   let temp, letter = ''
   while ( column > 0 ) {
@@ -184,4 +186,22 @@ export const parseSelectedRangeInput = value => {
       y2: parseInt(groups[4]),
     }
   }
+}
+
+
+export const isWikifyable = annotation => {
+
+  // check if the annotation role is wikifyable
+  const ROLE = ROLES.find(role => role.value === annotation.role)
+  if ( ROLE && ROLE.wikify ) {
+    return true
+  }
+
+  // check if the annotation type is wikifyable
+  const TYPE = TYPES.find(type => type.value === annotation.type)
+  if ( TYPE && TYPE.wikify ) {
+    return true
+  }
+
+  return false
 }
