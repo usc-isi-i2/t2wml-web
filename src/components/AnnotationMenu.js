@@ -23,11 +23,11 @@ const AnnotationMenu = ({
   sheet,
   selectedCell,
   selection,
-  suggestions,
   annotations,
   hideOverlayMenu,
-  selectedAnnotation,
   onSelectionChange,
+  selectedAnnotation,
+  suggestedAnnotation,
 }) => {
 
   const classes = useStyles()
@@ -44,23 +44,29 @@ const AnnotationMenu = ({
     selectedUnit: undefined,
   })
 
+  const [suggestion, setSuggestion] = useState({
+    role: undefined,
+    type: undefined,
+    property: undefined,
+  })
+
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false)
 
   useEffect(() => {
-    if ( !suggestions ) { return }
-    setFormState(formState => {
+    if ( !suggestedAnnotation ) { return }
+    setSuggestion(suggestion => {
       return {
-        ...formState,
-        selectedRole: !!suggestions['role'] ? suggestions['role'] : undefined,
-        selectedType: !!suggestions['type'] ? suggestions['type'] : undefined,
-        selectedProperty: !!suggestions['children'] ? suggestions['children']['property'] : undefined,
+        ...suggestion,
+        role: !!suggestedAnnotation['role'] ? suggestedAnnotation['role'] : undefined,
+        type: !!suggestedAnnotation['type'] ? suggestedAnnotation['type'] : undefined,
+        property: !!suggestedAnnotation['children'] ? suggestedAnnotation['children']['property'] : undefined,
       }
     })
-  }, [suggestions])
+  }, [suggestedAnnotation])
 
   useEffect(() => {
     if ( !selectedAnnotation ) { return }
-    setFormState(formState => {
+    setAnnotation(annotation => {
       return {
         ...formState,
         selectedRole: selectedAnnotation.role,
@@ -222,8 +228,8 @@ const AnnotationMenu = ({
     if ( selectedAnnotation && selectedAnnotation.type ) {
       defaultValue = selectedAnnotation.type
     } else {
-      if ( !!suggestions['type'] ) {
-        defaultValue = suggestions['type']
+      if ( !!suggestion.type ) {
+        defaultValue = suggestion.type
       }
     }
 
