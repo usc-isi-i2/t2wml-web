@@ -56,6 +56,7 @@ const AnnotationMenu = ({
     property: '',
   })
 
+  const [userChangedFormState, setUserChangedFormState] = useState(false)
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false)
 
   useEffect(() => {
@@ -133,6 +134,7 @@ const AnnotationMenu = ({
 
   const handleOnChange = event => {
     const value = event.target.value
+    setUserChangedFormState(true)
     setFormState({
       ...formState,
       [event.target.name]: value,
@@ -150,11 +152,11 @@ const AnnotationMenu = ({
       return formState[field]
     }
 
-    if ( !!annotation[field] ) {
+    if ( !!annotation[field] && !userChangedFormState ) {
       return annotation[field]
     }
 
-    if ( !!suggestion[field] ) {
+    if ( !!suggestion[field] && !userChangedFormState ) {
       return suggestion[field]
     }
 
