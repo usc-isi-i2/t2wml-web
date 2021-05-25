@@ -46,6 +46,7 @@ const useStyles = makeStyles(theme => ({
 const PropertyInput = ({
   selectedProperty,
   onSelectProperty,
+  onSubmitPropertyCells,
 }) => {
 
   const classes = useStyles()
@@ -88,6 +89,16 @@ const PropertyInput = ({
 
   const handleCloseMenu = () => {
     setAnchorElement()
+  }
+
+  const submitPropertyCells = () => {
+    const selection = {
+      x1: utils.letterToColumn(selectedPropertyCells[0]),
+      x2: utils.letterToColumn(selectedPropertyCells[0]),
+      y1: parseInt(selectedPropertyCells[1]),
+      y2: parseInt(selectedPropertyCells[1]),
+    }
+    onSubmitPropertyCells(selection)
   }
 
   const selectProperty = property => {
@@ -172,7 +183,8 @@ const PropertyInput = ({
                 color="primary"
                 variant="contained"
                 style={{height: '100%'}}
-                startIcon={<DoneIcon />}>
+                startIcon={<DoneIcon />}
+                onClick={submitPropertyCells}>
                 Submit {selectedPropertyCells}
               </Button>
             ) : (
