@@ -85,7 +85,7 @@ const CreateProperty = ({ hideMenu }) => {
     return (
       <React.Fragment>
         <Typography variant="body1">
-          Create a new Property
+          <b>Create a new Property</b>
         </Typography>
         <IconButton onClick={hideMenu}>
           <CloseIcon />

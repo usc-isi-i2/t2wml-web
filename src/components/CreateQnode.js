@@ -53,7 +53,7 @@ const CreateQnode = ({ hideMenu }) => {
     return (
       <React.Fragment>
         <Typography variant="body1">
-          Create a new Qnode
+          <b>Create a new Qnode</b>
         </Typography>
         <IconButton onClick={hideMenu}>
           <CloseIcon />
