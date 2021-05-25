@@ -362,13 +362,6 @@ const AnnotationMenu = ({
       <Grid item xs={12}>
         <Grid container spacing={3} justify="space-between">
           <Grid item>
-            <Button
-              autoFocus
-              color="primary"
-              variant="contained"
-              onClick={handleOnSubmit}>
-              Submit
-            </Button>
           </Grid>
           <Grid item>
             {!!selectedAnnotation && (
