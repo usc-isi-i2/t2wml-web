@@ -415,6 +415,14 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   }
 
   const selectCell = (cell, rowIndex, colIndex, topRow, leftCol, rightCol, bottomRow, classNames = []) => {
+
+    // remove any remaining role or type classes from the cell/element
+    cell.classList.forEach(className => {
+      if ( className.startsWith('role-') || className.startsWith('type-') ) {
+        cell.classList.remove(className)
+      }
+    })
+
     // Apply class names to the selected cell
     classNames.map(className => cell.classList.add(className))
 
