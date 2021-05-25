@@ -50,7 +50,7 @@ const DATA_TYPES = [{
 const useStyles = makeStyles(theme => ({
   menu: {
     position: 'absolute',
-    top: theme.spacing(65),
+    top: theme.spacing(54),
     right: theme.spacing(80),
   },
   form: {

@@ -19,8 +19,8 @@ import DraggablePaper from './DraggablePaper'
 const useStyles = makeStyles(theme => ({
   menu: {
     position: 'absolute',
-    top: theme.spacing(55),
-    right: theme.spacing(15),
+    top: theme.spacing(54),
+    right: theme.spacing(80),
   },
   form: {
     minHeight: '50px',
