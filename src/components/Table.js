@@ -671,7 +671,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     .catch(error => console.log(error))
   }
 
-  const hideOverlayMenu = (annotations, deletedAnnotationBlock=null) => {
+  const updateAnnotation = (annotations, deletedAnnotationBlock=null) => {
     if ( annotations && annotations instanceof Array ) {
       setAnnotationBlocks(annotationBlocks => {
         if ( deletedAnnotationBlock ) {
@@ -679,10 +679,11 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         }
         return annotations
       })
-
       updatePartialCSV()
     }
+  }
 
+  const hideOverlayMenu = () => {
     setShowOverlayMenu(false)
     setSelectedAnnotationBlock(undefined)
     setTargetSelection(undefined)
@@ -755,6 +756,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         suggestedAnnotation={suggestedAnnotation}
         selectedAnnotation={selectedAnnotationBlock}
         onSelectionChange={handleOnSelectionChange}
+        updateAnnotation={updateAnnotation}
         hideOverlayMenu={hideOverlayMenu} />
     )
   }

@@ -25,6 +25,7 @@ const AnnotationMenu = ({
   selection,
   annotations,
   hideOverlayMenu,
+  updateAnnotation,
   onSelectionChange,
   selectedAnnotation,
   suggestedAnnotation,
@@ -112,7 +113,8 @@ const AnnotationMenu = ({
     })
 
     uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
-      hideOverlayMenu(data.annotations)
+      updateAnnotation(data.annotations)
+      hideOverlayMenu()
     }).catch(error => {
       hideOverlayMenu()
     })
@@ -126,7 +128,8 @@ const AnnotationMenu = ({
     )
 
     uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
-      hideOverlayMenu(data.annotations, selectedAnnotation)
+      updateAnnotation(data.annotations, selectedAnnotation)
+      hideOverlayMenu()
     }).catch(error => {
       hideOverlayMenu()
     })

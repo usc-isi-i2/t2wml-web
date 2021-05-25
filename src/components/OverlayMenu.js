@@ -40,6 +40,7 @@ const OverlayMenu = ({
   selectedAnnotation,
   suggestedAnnotation,
   onSelectionChange,
+  updateAnnotation,
   hideOverlayMenu,
 }) => {
 
@@ -82,6 +83,7 @@ const OverlayMenu = ({
             selectedAnnotation={selectedAnnotation}
             suggestedAnnotation={suggestedAnnotation}
             onSelectionChange={onSelectionChange}
+            updateAnnotation={updateAnnotation}
             hideOverlayMenu={hideOverlayMenu} />
         </TabPanel>
         <TabPanel value={selectedTab} index={'cell'}>
