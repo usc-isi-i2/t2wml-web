@@ -18,32 +18,32 @@ import DraggablePaper from './DraggablePaper'
 
 
 const DATA_TYPES = [{
-  label: 'External ID',
-  value: 'externalid',
-}, {
-  label: 'Quantity',
-  value: 'quantity',
-}, {
-  label: 'String',
-  value: 'string',
-}, {
-  label: 'Time',
-  value: 'time',
-}, {
-  label: 'Monolingual Text',
-  value: 'monolingualtext',
-}, {
-  label: 'Globe Coordinates',
-  value: 'globecoordinate',
-}, {
-  label: 'Url',
-  value: 'url',
-}, {
   label: 'Wikibase Item',
   value: 'wikibaseitem',
 }, {
   label: 'Wikibase Property',
   value: 'wikibaseproperty',
+}, {
+  label: 'Quantity',
+  value: 'quantity',
+}, {
+  label: 'Time',
+  value: 'time',
+}, {
+  label: 'String',
+  value: 'string',
+}, {
+  label: 'Monolingual Text',
+  value: 'monolingualtext',
+}, {
+  label: 'Url',
+  value: 'url',
+}, {
+  label: 'External ID',
+  value: 'externalid',
+}, {
+  label: 'Globe Coordinates',
+  value: 'globecoordinate',
 }]
 
 
