@@ -2,10 +2,9 @@ import { makeStyles } from '@material-ui/styles'
 
 
 const useStyles = makeStyles(theme => ({
-  menu: {
-    position: 'absolute',
-    top: theme.spacing(4),
-    right: theme.spacing(15),
+  wrapper: {
+    minHeight: '250px',
+    marginTop: theme.spacing(1),
   },
   form: {
     width: '100%',

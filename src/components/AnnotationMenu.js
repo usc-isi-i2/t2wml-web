@@ -385,18 +385,15 @@ const AnnotationMenu = ({
   }
 
   return (
-    <form noValidate autoComplete="off"
-      className={classes.form}
-      onSubmit={handleOnSubmit}>
-      <Grid container spacing={3}>
-        {renderFormInstructions()}
-        {renderSelectedRangeInput()}
-        {renderSelectedRoleInput()}
-        {renderSelectedTypeInput()}
-        {renderAdditionalInputs()}
-        {renderActionButtons()}
-      </Grid>
-    </form>
+    <Grid container spacing={3}
+      className={classes.wrapper}>
+      {renderFormInstructions()}
+      {renderSelectedRangeInput()}
+      {renderSelectedRoleInput()}
+      {renderSelectedTypeInput()}
+      {renderAdditionalInputs()}
+      {renderActionButtons()}
+    </Grid>
   )
 }
 
