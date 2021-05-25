@@ -12,6 +12,7 @@ export const columnToLetter = column => {
 
 
 export const letterToColumn = letter => {
+  letter = letter.toUpperCase()
   let column = 0
   const length = letter.length
   let counter = 0
