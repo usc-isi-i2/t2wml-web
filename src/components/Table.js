@@ -650,6 +650,13 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     })
   }
 
+  const updatePartialCSV = () => {
+    // update output data with partial csv
+    fetchPartialCSV(file, sheet)
+    .then(data => setOutputData(data.cells))
+    .catch(error => console.log(error))
+  }
+
   const hideOverlayMenu = (annotations, deletedAnnotationBlock=null) => {
     if ( annotations && annotations instanceof Array ) {
       setAnnotationBlocks(annotationBlocks => {
@@ -659,10 +666,7 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         return annotations
       })
 
-      // update output data with partial csv
-      fetchPartialCSV(file, sheet)
-      .then(data => setOutputData(data.cells))
-      .catch(error => console.log(error))
+      updatePartialCSV()
     }
 
     setShowOverlayMenu(false)
