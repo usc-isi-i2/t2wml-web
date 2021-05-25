@@ -37,6 +37,7 @@ const CreateQnode = ({ hideMenu }) => {
   const [formState, setFormState] = useState({
     qnodeID: '',
     qnodeLabel: '',
+    qnodeDescription: '',
   })
 
   const handleOnSubmit = () => {}
@@ -112,6 +113,26 @@ const CreateQnode = ({ hideMenu }) => {
     )
   }
 
+  const renderDescriptionInput = () => {
+    return (
+      <Grid item xs={12}>
+        <TextField
+          fullWidth
+          id="qnodeDescription"
+          name="qnodeDescription"
+          label="Description"
+          variant="outlined"
+          autoCorrect="off"
+          autoComplete="off"
+          autoCapitalize="off"
+          spellCheck="false"
+          inputProps={{'data-lpignore': 'true'}}
+          onChange={handleOnChange}
+          value={formState.qnodeLabel} />
+      </Grid>
+    )
+  }
+
   const renderContent = () => {
     return (
       <form noValidate autoComplete="off"
@@ -121,6 +142,7 @@ const CreateQnode = ({ hideMenu }) => {
           {renderFormInstructions()}
           {renderIDInput()}
           {renderLabelInput()}
+          {renderDescriptionInput()}
         </Grid>
       </form>
     )
