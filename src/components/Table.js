@@ -86,8 +86,10 @@ const Table = ({ file, sheet, data, setOutputData }) => {
           })
           uploadAnnotations(file, sheet, annotations, () => {}).then(data => {
             setAnnotationBlocks(data.annotations)
-            const selectedBlock = utils.checkSelectedAnnotationBlocks(selection.current, data.annotations)
-            setSelectedAnnotationBlock(selectedBlock)
+            if ( selection.current ) {
+              const selectedBlock = utils.checkSelectedAnnotationBlocks(selection.current, data.annotations)
+              setSelectedAnnotationBlock(selectedBlock)
+            }
             updatePartialCSV()
           })
 
