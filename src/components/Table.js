@@ -8,6 +8,7 @@ import * as utils from '../utils/table'
 import fetchPartialCSV from '../utils/fetchPartialCSV'
 import fetchProperties from '../utils/fetchProperties'
 import fetchSuggestions from '../utils/fetchSuggestions'
+import uploadAnnotations from '../utils/uploadAnnotations'
 
 
 const Table = ({ file, sheet, data, setOutputData }) => {
@@ -76,6 +77,17 @@ const Table = ({ file, sheet, data, setOutputData }) => {
         fetchSuggestions(file, sheet, selection.current, annotationBlocks)
         .then(data => {
           setSuggestedAnnotation(data)
+
+          // upload suggestions as a new annotation
+          const annotations = annotationBlocks
+          annotations.push({
+            selection: {...selection.current},
+            ...data,
+          })
+          uploadAnnotations(file, sheet, annotations, () => {}).then(data => {
+            setAnnotationBlocks(data.annotations)
+            updatePartialCSV()
+          })
 
           // fetch the suggested property using kgtk search
           if ( 'property' in data.children ) {
