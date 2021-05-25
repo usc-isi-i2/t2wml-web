@@ -165,6 +165,10 @@ const PropertyInput = ({
             <TextField
               fullWidth
               variant="outlined"
+              autoCorrect="off"
+              autoComplete="off"
+              autoCapitalize="off"
+              spellCheck="false"
               id={'selectedPropertyCells'}
               name={'selectedPropertyCells'}
               label={'Select property cell(s)'}
