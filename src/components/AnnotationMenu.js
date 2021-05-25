@@ -84,9 +84,7 @@ const AnnotationMenu = ({
     })
   }, [selectedAnnotation])
 
-  const handleOnSubmit = event => {
-    event.preventDefault()
-
+  useEffect(() => {
     const filteredAnnotations = annotations.filter(
       annotation => annotation !== selectedAnnotation
     )
@@ -114,11 +112,10 @@ const AnnotationMenu = ({
 
     uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
       updateAnnotation(data.annotations)
-      hideOverlayMenu()
-    }).catch(error => {
-      hideOverlayMenu()
-    })
-  }
+    }).catch(error => console.log(error))
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formState])
 
   const handleOnDelete = () => {
     if ( !annotation.role ) { return }
