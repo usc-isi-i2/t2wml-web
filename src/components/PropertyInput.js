@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import CloseIcon from '@material-ui/icons/Close'
+import DoneIcon from '@material-ui/icons/Done'
 import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/styles'
 
@@ -164,9 +165,21 @@ const PropertyInput = ({
               onChange={handleOnChangePropertyCells} />
           </Grid>
           <Grid item xs={6}>
-            <FormHelperText component="p" style={{marginTop: '0'}}>
-              You can select property cells in the table or search wikidata for a property in the search box below
-            </FormHelperText>
+            { parsedCorrectly ? (
+              <Button
+                fullWidth
+                size="large"
+                color="primary"
+                variant="contained"
+                style={{height: '100%'}}
+                startIcon={<DoneIcon />}>
+                Submit {selectedPropertyCells}
+              </Button>
+            ) : (
+              <FormHelperText component="p" style={{marginTop: '0'}}>
+                You can select property cells in the table or search wikidata for a property in the search box below
+              </FormHelperText>
+            )}
           </Grid>
         </Grid>
       </Grid>
