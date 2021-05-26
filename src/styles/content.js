@@ -5,6 +5,9 @@ const useStyles = makeStyles(theme => ({
   content: {
     width: '100vw',
     height: '100vh',
+    background: theme.palette.type === 'dark' ?
+      'linear-gradient(180deg, #4D4D4D, #737373)' :
+      'linear-gradient(180deg, #d8d8d8, #fefefe)',
   },
   wrapper: {
     display: 'flex',
