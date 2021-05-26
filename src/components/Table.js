@@ -36,18 +36,18 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
   const handleOnClickHeader = event => {
     const element = event.target
-    element.setAttribute('style', 'width: 100%')
-    element.parentElement.setAttribute('style', 'max-width: 1%')
+    const index = element.parentElement.cellIndex
 
     const rows = tableElement.current.querySelectorAll('tr')
-    const index = element.parentElement.cellIndex
+
+    let maxWidth = 0
     rows.forEach(row => {
-      row.children[index].setAttribute('style', 'max-width: 1%')
+      if ( row.children[index].scrollWidth > maxWidth ) {
+        maxWidth = row.children[index].scrollWidth
+      }
     })
 
-    setTimeout(() => {
-      element.setAttribute('style', `min-width: ${element.clientWidth}px`)
-    }, 100)
+    element.setAttribute('style', `width: ${maxWidth}px`)
   }
 
   useEffect(() => {
