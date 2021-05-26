@@ -34,6 +34,22 @@ const Table = ({ file, sheet, data, setOutputData }) => {
   const rows = [...Array(Math.max(data.length, MIN_NUM_ROWS))]
   const cols = [...Array(Math.max(data[0].length, 26))]
 
+  const handleOnClickHeader = event => {
+    const element = event.target
+    element.setAttribute('style', 'width: 100%')
+    element.parentElement.setAttribute('style', 'max-width: 1%')
+
+    const rows = tableElement.current.querySelectorAll('tr')
+    const index = element.parentElement.cellIndex
+    rows.forEach(row => {
+      row.children[index].setAttribute('style', 'max-width: 1%')
+    })
+
+    setTimeout(() => {
+      element.setAttribute('style', `min-width: ${element.clientWidth}px`)
+    }, 100)
+  }
+
   useEffect(() => {
     // component did mount
     document.addEventListener('keydown', handleOnKeyDown)
@@ -700,7 +716,9 @@ const Table = ({ file, sheet, data, setOutputData }) => {
                 <th scope="col"></th>
                 {cols.map((r, i) => (
                   <th scope="col" key={i}>
-                    <div>{utils.columnToLetter(i + 1)}</div>
+                    <div onDoubleClick={handleOnClickHeader}>
+                      {utils.columnToLetter(i + 1)}
+                    </div>
                   </th>
                 ))}
               </tr>
