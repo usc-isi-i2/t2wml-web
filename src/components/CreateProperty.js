@@ -75,8 +75,8 @@ const CreateProperty = ({ file, sheet, selectProperty, hideMenu }) => {
 
   const handleOnSubmit = () => {
     if ( !formState.qnodeLabel ) { return }
-    uploadProperty(file, sheet, formState).then(data => {
-      selectProperty(data.entity)
+    uploadProperty(file, sheet, formState).then(property => {
+      selectProperty(property)
       hideMenu()
     })
   }

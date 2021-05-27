@@ -23,7 +23,14 @@ const uploadProperty = (file, sheet, property) => {
       if ( !!data.error ) {
         reject(data.error)
       }
-      resolve(data)
+      if ( !!data.entity ) {
+        resolve({
+          qnode: data.entity.id,
+          label: [data.entity.label],
+          description: [data.entity.description],
+        })
+      }
+      reject('Err! No entity found in the response data')
     })
   })
 }
