@@ -160,7 +160,7 @@ const CreateProperty = ({ hideMenu }) => {
           spellCheck="false"
           inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
-          value={formState.qnodeLabel} />
+          value={formState.qnodeDescription} />
       </Grid>
     )
   }
