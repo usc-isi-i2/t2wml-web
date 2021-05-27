@@ -67,7 +67,6 @@ const CreateProperty = ({ file, sheet, selectProperty, hideMenu }) => {
   const classes = useStyles()
 
   const [formState, setFormState] = useState({
-    qnodeID: '',
     qnodeLabel: '',
     qnodeDescription: '',
     qnodeType: '',
@@ -108,26 +107,6 @@ const CreateProperty = ({ file, sheet, selectProperty, hideMenu }) => {
         <FormHelperText component="p">
           Use this form to create a new property
         </FormHelperText>
-      </Grid>
-    )
-  }
-
-  const renderIDInput = () => {
-    return (
-      <Grid item xs={12}>
-        <TextField
-          fullWidth
-          id="qnodeID"
-          name="qnodeID"
-          label="Qnode ID"
-          variant="outlined"
-          autoCorrect="off"
-          autoComplete="off"
-          autoCapitalize="off"
-          spellCheck="false"
-          inputProps={{'data-lpignore': 'true'}}
-          onChange={handleOnChange}
-          value={formState.qnodeID} />
       </Grid>
     )
   }
@@ -205,7 +184,6 @@ const CreateProperty = ({ file, sheet, selectProperty, hideMenu }) => {
         onSubmit={handleOnSubmit}>
         <Grid container spacing={3}>
           {renderFormInstructions()}
-          {renderIDInput()}
           {renderLabelInput()}
           {renderDescriptionInput()}
           {renderPropertyTypeInput()}
