@@ -17,6 +17,8 @@ const useStyles = makeStyles(theme => ({
 
 
 const WikificationMenu = ({
+  file,
+  sheet,
   hideMenu,
   selection,
   selectedCell,
@@ -43,6 +45,8 @@ const WikificationMenu = ({
     return (
       <Grid item xs={12}>
         <QnodeInput
+          file={file}
+          sheet={sheet}
           selectedQnode={null}
           onSelectQnode={handleOnSelectQnode} />
       </Grid>

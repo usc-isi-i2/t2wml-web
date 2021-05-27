@@ -33,6 +33,8 @@ const useStyles = makeStyles(theme => ({
 
 
 const QnodeInput = ({
+  file,
+  sheet,
   selectedQnode,
   onSelectQnode,
 }) => {
@@ -206,6 +208,8 @@ const QnodeInput = ({
         </Button>
         {showCreateQnode && (
           <CreateQnode
+            file={file}
+            sheet={sheet}
             hideMenu={() => setShowCreateQnode(false)} />
         )}
       </Grid>

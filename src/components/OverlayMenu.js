@@ -88,6 +88,8 @@ const OverlayMenu = ({
         </TabPanel>
         <TabPanel value={selectedTab} index={'cell'}>
           <WikificationMenu
+            file={file}
+            sheet={sheet}
             selection={selection}
             selectedCell={selectedCell}
             selectedAnnotation={selectedAnnotation} />

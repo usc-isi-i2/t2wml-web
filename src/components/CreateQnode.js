@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const CreateQnode = ({ hideMenu }) => {
+const CreateQnode = ({ file, sheet, hideMenu }) => {
 
   const classes = useStyles()
 
