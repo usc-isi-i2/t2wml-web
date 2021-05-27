@@ -15,6 +15,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
 
 import DraggablePaper from './DraggablePaper'
+import uploadProperty from '../utils/uploadProperty'
 
 
 const DATA_TYPES = [{
@@ -61,7 +62,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const CreateProperty = ({ file, sheet, hideMenu }) => {
+const CreateProperty = ({ file, sheet, selectProperty, hideMenu }) => {
 
   const classes = useStyles()
 
@@ -72,7 +73,13 @@ const CreateProperty = ({ file, sheet, hideMenu }) => {
     qnodeType: '',
   })
 
-  const handleOnSubmit = () => {}
+  const handleOnSubmit = () => {
+    if ( !formState.qnodeLabel ) { return }
+    uploadProperty(file, sheet, formState).then(data => {
+      selectProperty(data.entity)
+      hideMenu()
+    })
+  }
 
   const handleOnChange = event => {
     const value = event.target.value

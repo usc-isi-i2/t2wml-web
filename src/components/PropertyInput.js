@@ -264,6 +264,7 @@ const PropertyInput = ({
           <CreateProperty
             file={file}
             sheet={sheet}
+            selectProperty={selectProperty}
             hideMenu={() => setShowCreateProperty(false)} />
         )}
       </Grid>
