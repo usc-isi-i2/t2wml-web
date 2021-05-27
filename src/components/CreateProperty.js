@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const CreateProperty = ({ hideMenu }) => {
+const CreateProperty = ({ file, sheet, hideMenu }) => {
 
   const classes = useStyles()
 

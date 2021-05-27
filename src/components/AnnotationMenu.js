@@ -335,6 +335,8 @@ const AnnotationMenu = ({
             return (
               <Grid item xs={12} key={option.value}>
                 <PropertyInput
+                  file={file}
+                  sheet={sheet}
                   selectedProperty={getFormValue('property')}
                   onSelectProperty={handleOnSelectProperty}
                   onSubmitPropertyCells={handleOnSubmitPropertyCells} />

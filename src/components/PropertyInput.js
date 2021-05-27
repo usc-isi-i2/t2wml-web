@@ -44,6 +44,8 @@ const useStyles = makeStyles(theme => ({
 
 
 const PropertyInput = ({
+  file,
+  sheet,
   selectedProperty,
   onSelectProperty,
   onSubmitPropertyCells,
@@ -260,6 +262,8 @@ const PropertyInput = ({
         </Button>
         {showCreateProperty && (
           <CreateProperty
+            file={file}
+            sheet={sheet}
             hideMenu={() => setShowCreateProperty(false)} />
         )}
       </Grid>
