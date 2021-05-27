@@ -210,6 +210,7 @@ const QnodeInput = ({
           <CreateQnode
             file={file}
             sheet={sheet}
+            selectQnode={setSelected}
             hideMenu={() => setShowCreateQnode(false)} />
         )}
       </Grid>
