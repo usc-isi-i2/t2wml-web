@@ -135,12 +135,12 @@ const PropertyInput = ({
               variant="body1"
               className={classes.link}
               target="_blank" rel="noopener noreferrer"
-              href={`https://ringgaard.com/kb/${selected.qnode}`}>
-              {`${selected.label[0]} (${selected.qnode})`}
+              href={`https://ringgaard.com/kb/${selected.id}`}>
+              {`${selected.label} (${selected.id})`}
             </Link>
-            {!!selected.description && !!selected.description.length && (
+            {!!selected.description && (
               <Typography variant="body1">
-                {selected.description[0]}
+                {selected.description}
               </Typography>
             )}
           </Grid>
