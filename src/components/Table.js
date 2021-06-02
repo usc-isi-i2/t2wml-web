@@ -6,7 +6,6 @@ import OverlayMenu from './OverlayMenu'
 import useStyles from '../styles/table'
 import * as utils from '../utils/table'
 import fetchPartialCSV from '../utils/fetchPartialCSV'
-import fetchProperties from '../utils/fetchProperties'
 import fetchSuggestions from '../utils/fetchSuggestions'
 import uploadAnnotations from '../utils/uploadAnnotations'
 
@@ -92,22 +91,6 @@ const Table = ({ file, sheet, data, setOutputData }) => {
             }
             updatePartialCSV()
           })
-
-          // fetch the suggested property using kgtk search
-          if ( 'property' in data.children ) {
-            fetchProperties(data.children.property, 'exact_match')
-            .then(data => {
-              if ( !!data.length ) {
-                setSuggestedAnnotation(suggestedAnnotation => ({
-                  ...suggestedAnnotation,
-                  children: {
-                    ...suggestedAnnotation.children,
-                    property: data[0],
-                  },
-                }))
-              }
-            })
-          }
         })
         .catch(error => console.log(error))
       }
@@ -351,20 +334,6 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
   useEffect(() => {
     updateSelections()
-
-    if ( !!selectedAnnotationBlock && !!selectedAnnotationBlock.property ) {
-      if ( typeof selectedAnnotationBlock.property === 'string' ) {
-        fetchProperties(selectedAnnotationBlock.property, 'exact_match')
-        .then(data => {
-          if ( !!data.length ) {
-            setSelectedAnnotationBlock(selectedAnnotation => ({
-              ...selectedAnnotation,
-              property: data[0],
-            }))
-          }
-        })
-      }
-    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedAnnotationBlock, selection.current])
