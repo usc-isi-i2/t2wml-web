@@ -4,7 +4,7 @@ const uploadQnode = (file, sheet, qnode) => {
   url += `&sheet_name=${sheet}`
 
   const requestData = {
-    isProperty: false,
+    is_property: false,
     label: qnode.qnodeLabel,
     description: qnode.qnodeDescription,
   }

@@ -4,10 +4,10 @@ const uploadProperty = (file, sheet, property) => {
   url += `&sheet_name=${sheet}`
 
   const requestData = {
-    isProperty: true,
+    is_property: true,
     label: property.qnodeLabel,
     description: property.qnodeDescription,
-    datatype: property.qnodeType,
+    data_type: property.qnodeType,
   }
 
   return new Promise((resolve, reject) => {
