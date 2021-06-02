@@ -79,10 +79,14 @@ const Table = ({ file, sheet, data, setOutputData }) => {
 
           // upload suggestions as a new annotation
           const annotations = annotationBlocks
-          annotations.push({
+          const newAnnotation = {
             selection: {...selection.current},
             ...data,
-          })
+          }
+          if ( !!data.children.property ) {
+            newAnnotation.property = data.children.property
+          }
+          annotations.push(newAnnotation)
           uploadAnnotations(file, sheet, annotations, () => {}).then(data => {
             setAnnotationBlocks(data.annotations)
             if ( selection.current ) {
