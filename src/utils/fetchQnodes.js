@@ -11,8 +11,13 @@ const fetchQnodes = q => {
     .then(response => response.json())
     .then(data => {
       if ( !!data.error ) {
+        reject(data.error)
       }
-      resolve(data)
+      resolve(data.map(item => ({
+        id: item.qnode,
+        label: item.label[0],
+        description: item.description[0],
+      })))
     })
     .catch(error => reject(error))
   })
