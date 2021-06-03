@@ -11,12 +11,14 @@ const fetchProperties = (q, type='ngram') => {
     .then(response => response.json())
     .then(data => {
       if ( !!data.error ) {
+        reject(data.error)
       }
-      resolve({
-        id: data.qnode,
-        label: data.label[0],
-        description: data.description[0],
-      })
+      resolve(data.map(item => ({
+        id: item.qnode,
+        label: item.label[0],
+        description: item.description[0],
+        data_type: item.data_type,
+      })))
     })
     .catch(error => reject(error))
   })

@@ -236,12 +236,12 @@ const PropertyInput = ({
         open={!!anchorElement}
         onClose={handleCloseMenu}>
         {properties.map(property => (
-          <MenuItem key={property.qnode}
+          <MenuItem key={property.id}
             onClick={() => selectProperty(property)}>
             <Typography variant="body1">
-              {`${property.label[0]} (${property.qnode})`}
+              {`${property.label} (${property.id})`}
               <br/>
-              {property.description[0]}
+              {property.description}
             </Typography>
           </MenuItem>
         ))}
