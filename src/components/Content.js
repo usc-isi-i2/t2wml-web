@@ -39,6 +39,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
     return () => {
       window.removeEventListener('beforeunload', handleOnUnload)
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -48,7 +49,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
         filename={data ? data.filepath : ''}
         darkTheme={darkTheme}
         switchTheme={() => setDarkTheme(!darkTheme)} />
-      {data ? (
+      {data && data.table ? (
         <div className={classes.wrapper}>
           <div className={classes.inputWrapper}
             style={{ width: `${colWidth}px` }}>
