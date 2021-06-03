@@ -4,7 +4,6 @@ import { Grid, LinearProgress } from '@material-ui/core'
 
 import FileHeader from './FileHeader'
 import uploadFile from '../utils/uploadFile'
-import readFile from '../utils/readFile'
 
 
 const FileUpload = ({file, onUploadSuccess, onUploadError, onDelete}) => {
@@ -17,13 +16,9 @@ const FileUpload = ({file, onUploadSuccess, onUploadError, onDelete}) => {
       if ( isMounted ) {
         onUploadSuccess(data)
       }
-    }).catch(() => {
+    }).catch(error => {
       if ( isMounted ) {
-        readFile(file).then(data => {
-          onUploadSuccess(data)
-        }).catch(() => {
-          onUploadError()
-        })
+        onUploadError(error)
       }
     })
     return () => {
