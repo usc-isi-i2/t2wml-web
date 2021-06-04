@@ -18,18 +18,30 @@ const ProjectMenu = () => {
 
   const openProjectSettings = () => {
     setShowProjectSettings(true)
+    hideProjectMenu()
   }
 
   const hideProjectSettings = () => {
     setShowProjectSettings(false)
+    hideProjectMenu()
   }
 
   const openProjectTags = () => {
     setShowProjectTags(true)
+    hideProjectMenu()
   }
 
   const hideProjectTags = () => {
     setShowProjectTags(false)
+    hideProjectMenu()
+  }
+
+  const openProjectMenu = event => {
+    setAnchorElement(event.target)
+  }
+
+  const hideProjectMenu = () => {
+    setAnchorElement()
   }
 
   const renderButton = () => {
@@ -37,7 +49,7 @@ const ProjectMenu = () => {
       <IconButton
         edge="end"
         color="inherit"
-        onClick={event => setAnchorElement(event.target)}>
+        onClick={openProjectMenu}>
         <MoreVertIcon />
       </IconButton>
     )
@@ -50,7 +62,7 @@ const ProjectMenu = () => {
         id="project-menu"
         open={!!anchorElement}
         anchorEl={anchorElement}
-        onClose={() => setAnchorElement()}>
+        onClose={hideProjectMenu}>
         <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
         <MenuItem onClick={openProjectTags}>Edit tags</MenuItem>
       </Menu>
