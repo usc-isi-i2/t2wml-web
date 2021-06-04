@@ -8,10 +8,10 @@ import {
   Typography,
 } from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 
+import ProjectMenu from './ProjectMenu'
 import useStyles from '../styles/header'
 
 
@@ -45,11 +45,7 @@ const Header = ({filename, darkTheme, switchTheme, toggleSettings}) => {
   }
 
   const renderProjectMenu = () => {
-    return (
-      <IconButton edge="end" color="inherit">
-        <MoreVertIcon />
-      </IconButton>
-    )
+    return <ProjectMenu />
   }
 
   const renderSpacer = () => {
