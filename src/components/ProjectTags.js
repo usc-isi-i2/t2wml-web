@@ -10,6 +10,7 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
+import SaveIcon from '@material-ui/icons/Save'
 import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -134,7 +135,52 @@ const ProjectTags = ({
     )
   }
 
-  const renderProjectTags = () => {}
+  const renderProjectTags = () => {
+    return tags.map(tag => (
+      <Grid item xs={12}>
+        <Grid container spacing={1}>
+          <Grid item xs={5}>
+            <TextField
+              fullWidth
+              size="small"
+              name="value"
+              label="Key"
+              variant="outlined"
+              autoCorrect="off"
+              autoComplete="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              inputProps={{'data-lpignore': 'true'}}
+              defaultValue={tag.key} />
+          </Grid>
+          <Grid item xs={5}>
+            <TextField
+              fullWidth
+              size="small"
+              name="value"
+              label="Value"
+              variant="outlined"
+              autoCorrect="off"
+              autoComplete="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              inputProps={{'data-lpignore': 'true'}}
+              defaultValue={tag.value} />
+          </Grid>
+          <Grid item xs={1}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="medium"
+              className={classes.addButton}
+              onClick={saveNewTag}>
+              <SaveIcon />
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
+    ))
+  }
 
   const renderContent = () => {
     return (
