@@ -63,7 +63,6 @@ export const ROLES = [{
 }, {
   'label': 'Property',
   'value': 'property',
-  'wikify': true,
 }, {
   'label': 'Qualifier',
   'value': 'qualifier',
