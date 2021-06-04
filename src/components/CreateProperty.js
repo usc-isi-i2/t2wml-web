@@ -7,7 +7,6 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
 import FormHelperText from '@material-ui/core/FormHelperText'
-import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import IconButton from '@material-ui/core/IconButton'
@@ -91,9 +90,7 @@ const CreateProperty = ({ file, sheet, selectProperty, hideMenu }) => {
   const renderTitle = () => {
     return (
       <React.Fragment>
-        <Typography variant="body1">
-          <b>Create a new Property</b>
-        </Typography>
+        Create a new property
         <IconButton onClick={hideMenu}>
           <CloseIcon />
         </IconButton>

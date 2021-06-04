@@ -7,7 +7,6 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
 import FormHelperText from '@material-ui/core/FormHelperText'
-import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
@@ -48,7 +47,6 @@ const CreateQnode = ({ file, sheet, selectQnode, hideMenu }) => {
     })
   }
 
-
   const handleOnChange = event => {
     const value = event.target.value
     setFormState({
@@ -60,9 +58,7 @@ const CreateQnode = ({ file, sheet, selectQnode, hideMenu }) => {
   const renderTitle = () => {
     return (
       <React.Fragment>
-        <Typography variant="body1">
-          <b>Create a new wikidata item</b>
-        </Typography>
+        Create a new wikidata item
         <IconButton onClick={hideMenu}>
           <CloseIcon />
         </IconButton>
