@@ -44,7 +44,9 @@ const Header = ({filename, darkTheme, switchTheme, toggleSettings}) => {
   }
 
   const renderProjectMenu = () => {
-    return <ProjectMenu />
+    if ( !!filename ) {
+      return <ProjectMenu />
+    }
   }
 
   const renderSpacer = () => {
