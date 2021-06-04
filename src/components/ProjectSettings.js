@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -26,6 +28,10 @@ const ProjectSettings = ({
 
   const classes = useStyles()
 
+  const handleOnSubmit = () => {
+    hideProjectSettings()
+  }
+
   const renderTitle = () => {
     return (
       <React.Fragment>
@@ -39,7 +45,22 @@ const ProjectSettings = ({
 
   const renderContent = () => {}
 
-  const renderButtons = () => {}
+  const renderButtons = () => {
+    return (
+      <Grid item xs={12}>
+        <Grid container spacing={3} justify="space-between">
+          <Grid item>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={handleOnSubmit}>
+              Submit
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
+    )
+  }
 
   return (
     <Dialog
