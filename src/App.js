@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
-import {
-  createMuiTheme,
-  ThemeProvider,
-  withStyles,
-} from '@material-ui/core/styles'
+import { createMuiTheme } from '@material-ui/core/styles'
+import { ThemeProvider } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles'
 
 import Content from './components/Content'
 

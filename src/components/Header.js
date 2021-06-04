@@ -1,12 +1,11 @@
 import React from 'react'
 
-import {
-  AppBar,
-  IconButton,
-  Tooltip,
-  Toolbar,
-  Typography,
-} from '@material-ui/core'
+import AppBar from '@material-ui/core/AppBar'
+import Tooltip from '@material-ui/core/Tooltip'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+
 import HomeIcon from '@material-ui/icons/Home'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
