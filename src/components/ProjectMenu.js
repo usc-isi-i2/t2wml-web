@@ -64,7 +64,7 @@ const ProjectMenu = ({ tags, setTags }) => {
         anchorEl={anchorElement}
         onClose={hideProjectMenu}>
         <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
-        <MenuItem onClick={openProjectTags}>Edit tags</MenuItem>
+        <MenuItem onClick={openProjectTags}>Edit Tags</MenuItem>
       </Menu>
     )
   }
