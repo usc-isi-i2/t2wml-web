@@ -7,14 +7,15 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core'
-import HomeIcon from '@material-ui/icons/Home';
+import HomeIcon from '@material-ui/icons/Home'
+import SettingsIcon from '@material-ui/icons/Settings'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 
 import useStyles from '../styles/header'
 
 
-const Header = ({filename, darkTheme, switchTheme}) => {
+const Header = ({filename, darkTheme, switchTheme, toggleSettings}) => {
 
   const classes = useStyles()
 
@@ -35,6 +36,12 @@ const Header = ({filename, darkTheme, switchTheme}) => {
         </IconButton>
         <Typography variant="h6" className={classes.title}>
           {filename ? filename : 'T2WML'}
+          <Tooltip arrow title="show project settings">
+            <IconButton edge="end" color="inherit"
+              onClick={() => toggleSettings()}>
+              <SettingsIcon />
+            </IconButton>
+          </Tooltip>
         </Typography>
         <Tooltip arrow title="toggle light/dark theme">
           <IconButton edge="end" color="inherit"
