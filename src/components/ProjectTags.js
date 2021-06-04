@@ -52,6 +52,11 @@ const ProjectTags = ({
     })
   }
 
+  const handleOnTagChange = (event, tag) => {
+    const value = event.target.value
+    tag[event.target.name] = value
+  }
+
   const saveNewTag = () => {
     if ( !formState.newTagKey || !formState.newTagValue ) { return }
     setTags(tags => [...tags, {
@@ -62,6 +67,10 @@ const ProjectTags = ({
       newTagKey: '',
       newTagValue: '',
     })
+  }
+
+  const updateTag = tag => {
+    setTags(tags)
   }
 
   const renderTitle = () => {
@@ -143,7 +152,7 @@ const ProjectTags = ({
             <TextField
               fullWidth
               size="small"
-              name="value"
+              name="key"
               label="Key"
               variant="outlined"
               autoCorrect="off"
@@ -151,6 +160,7 @@ const ProjectTags = ({
               autoCapitalize="off"
               spellCheck="false"
               inputProps={{'data-lpignore': 'true'}}
+              onChange={event => handleOnTagChange(event, tag)}
               defaultValue={tag.key} />
           </Grid>
           <Grid item xs={5}>
@@ -165,6 +175,7 @@ const ProjectTags = ({
               autoCapitalize="off"
               spellCheck="false"
               inputProps={{'data-lpignore': 'true'}}
+              onChange={event => handleOnTagChange(event, tag)}
               defaultValue={tag.value} />
           </Grid>
           <Grid item xs={1}>
@@ -173,7 +184,7 @@ const ProjectTags = ({
               color="primary"
               size="medium"
               className={classes.addButton}
-              onClick={saveNewTag}>
+              onClick={() => updateTag(tag)}>
               <SaveIcon />
             </Button>
           </Grid>
