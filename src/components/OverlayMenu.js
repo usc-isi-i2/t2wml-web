@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const OverlayMenu = ({
+  tags,
   file,
   sheet,
   selectedTab,
@@ -75,6 +76,7 @@ const OverlayMenu = ({
       <React.Fragment>
         <TabPanel value={selectedTab} index={'block'}>
           <AnnotationMenu
+            tags={tags}
             file={file}
             sheet={sheet}
             selectedCell={selectedCell}

@@ -14,7 +14,14 @@ import ProjectMenu from './ProjectMenu'
 import useStyles from '../styles/header'
 
 
-const Header = ({filename, darkTheme, switchTheme, toggleSettings}) => {
+const Header = ({
+  tags,
+  setTags,
+  filename,
+  darkTheme,
+  switchTheme,
+  toggleSettings,
+}) => {
 
   const classes = useStyles()
 
@@ -45,7 +52,7 @@ const Header = ({filename, darkTheme, switchTheme, toggleSettings}) => {
 
   const renderProjectMenu = () => {
     if ( !!filename ) {
-      return <ProjectMenu />
+      return <ProjectMenu tags={tags} setTags={setTags} />
     }
   }
 

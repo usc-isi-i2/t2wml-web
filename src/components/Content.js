@@ -19,11 +19,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const classes = useStyles()
 
   const [data, setData] = useState()
-
+  const [tags, setTags] = useState([])
   const [message, setMessage] = useState({})
-
   const [outputData, setOutputData] = useState()
-
   const [colWidth, setColWidth] = useState(window.innerWidth * 0.65)
 
   const handleOnUnload = event => {
@@ -46,6 +44,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
   return (
     <Grid className={classes.content}>
       <Header
+        tags={tags}
+        setTags={setTags}
         filename={data ? data.filepath : ''}
         darkTheme={darkTheme}
         switchTheme={() => setDarkTheme(!darkTheme)} />
@@ -54,6 +54,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
           <div className={classes.inputWrapper}
             style={{ width: `${colWidth}px` }}>
             <Table
+              tags={tags}
               file={data.filepath}
               sheet={data.sheetName}
               data={data.table.cells}

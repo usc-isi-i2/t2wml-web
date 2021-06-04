@@ -19,6 +19,7 @@ import * as utils from '../utils/table'
 
 
 const AnnotationMenu = ({
+  tags,
   file,
   sheet,
   selectedCell,

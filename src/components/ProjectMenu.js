@@ -9,7 +9,7 @@ import ProjectSettings from './ProjectSettings'
 import ProjectTags from './ProjectTags'
 
 
-const ProjectMenu = () => {
+const ProjectMenu = ({ tags, setTags }) => {
 
   const [anchorElement, setAnchorElement] = useState()
 
@@ -82,6 +82,8 @@ const ProjectMenu = () => {
     if ( showProjectTags ) {
       return (
         <ProjectTags
+          tags={tags}
+          setTags={setTags}
           hideProjectTags={hideProjectTags} />
       )
     }
