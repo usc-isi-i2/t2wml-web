@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
 import ProjectSettings from './ProjectSettings'
+import ProjectTags from './ProjectTags'
 
 
 const ProjectMenu = () => {
@@ -65,11 +66,21 @@ const ProjectMenu = () => {
     }
   }
 
+  const renderProjectTags = () => {
+    if ( showProjectTags ) {
+      return (
+        <ProjectTags
+          hideProjectTags={hideProjectTags} />
+      )
+    }
+  }
+
   return (
     <React.Fragment>
       {renderButton()}
       {renderMenu()}
       {renderProjectSettings()}
+      {renderProjectTags()}
     </React.Fragment>
   )
 }
