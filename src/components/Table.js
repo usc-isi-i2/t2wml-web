@@ -342,6 +342,19 @@ const Table = ({ file, sheet, data, setOutputData }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedAnnotationBlock, selection.current])
 
+  useEffect(() => {
+    setSelectedAnnotationBlock(selectedAnnotation => {
+      const filteredAnnotation = annotationBlocks.find(
+        annotation => annotation.id === selectedAnnotation.id
+      )
+      if ( !filteredAnnotation ) {
+        return selectedAnnotation
+      }
+      return filteredAnnotation
+    })
+
+  }, [annotationBlocks])
+
   const updateSelections = () => {
     if ( !selection.current ) { return }
 
