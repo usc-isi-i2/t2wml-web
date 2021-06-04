@@ -93,7 +93,7 @@ const QnodeInput = ({
     return (
       <Grid item xs={12}>
         <Typography variant="body1">
-          <b>{!!selected ? 'Selected qnode' : 'Select qnode'}</b>
+          <b>{!!selected ? 'Selected wikidata item' : 'Select wikidata item'}</b>
         </Typography>
       </Grid>
     )
@@ -119,7 +119,7 @@ const QnodeInput = ({
             )}
           </Grid>
           <Grid item xs={2}>
-            <Tooltip arrow placement="top" title={'remove selected qnode'}>
+            <Tooltip arrow placement="top" title={'remove selected wikidata item'}>
               <IconButton className={classes.removeButton}
                 onClick={removeSelected}>
                 <CloseIcon />
@@ -204,7 +204,7 @@ const QnodeInput = ({
           variant="contained"
           startIcon={<AddIcon />}
           onClick={() => setShowCreateQnode(true)}>
-          Add a new qnode
+          Add a new wikidata item
         </Button>
         {showCreateQnode && (
           <CreateQnode

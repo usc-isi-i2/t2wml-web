@@ -61,7 +61,7 @@ const CreateQnode = ({ file, sheet, selectQnode, hideMenu }) => {
     return (
       <React.Fragment>
         <Typography variant="body1">
-          <b>Create a new Qnode</b>
+          <b>Create a new wikidata item</b>
         </Typography>
         <IconButton onClick={hideMenu}>
           <CloseIcon />
@@ -74,7 +74,7 @@ const CreateQnode = ({ file, sheet, selectQnode, hideMenu }) => {
     return (
       <Grid item xs={12}>
         <FormHelperText component="p">
-          Use this form to create a new qnode
+          Use this form to create a new wikidata item
         </FormHelperText>
       </Grid>
     )
