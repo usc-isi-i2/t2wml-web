@@ -19,7 +19,7 @@ const ProjectMenu = () => {
       <IconButton
         edge="end"
         color="inherit"
-        onClick={event => setAnchorElement(event)}>
+        onClick={event => setAnchorElement(event.target)}>
         <MoreVertIcon />
       </IconButton>
     )
@@ -30,8 +30,8 @@ const ProjectMenu = () => {
       <Menu
         keepMounted
         id="project-menu"
+        open={!!anchorElement}
         anchorEl={anchorElement}
-        open={Boolean(anchorElement)}
         onClose={() => setAnchorElement()}>
         <MenuItem onClick={() => openSettings()}>Settings</MenuItem>
         <MenuItem onClick={() => openTagsMenu()}>Edit tags</MenuItem>
