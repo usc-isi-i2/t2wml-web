@@ -23,30 +23,60 @@ const Header = ({filename, darkTheme, switchTheme, toggleSettings}) => {
     window.location.reload()
   }
 
+  const renderHomeButton = () => {
+    return (
+      <IconButton
+        edge="start"
+        color="inherit"
+        aria-label="menu"
+        onClick={refresh}
+        className={classes.menuButton}>
+        <HomeIcon />
+      </IconButton>
+    )
+  }
+
+  const renderProjectInfo = () => {
+    return (
+      <Typography variant="h6" className={classes.title}>
+        {filename ? filename : 'T2WML'}
+      </Typography>
+    )
+  }
+
+  const renderProjectMenu = () => {
+    return (
+      <IconButton edge="end" color="inherit">
+        <MoreVertIcon />
+      </IconButton>
+    )
+  }
+
+  const renderSpacer = () => {
+    return (
+      <div style={{ flexGrow: 1 }} />
+    )
+  }
+
+  const renderThemeButton = () => {
+    return (
+      <Tooltip arrow title="toggle light/dark theme">
+        <IconButton edge="end" color="inherit"
+          onClick={() => switchTheme()}>
+          {darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
+        </IconButton>
+      </Tooltip>
+    )
+  }
+
   return (
     <AppBar position="static">
       <Toolbar variant="dense">
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          onClick={refresh}
-          className={classes.menuButton}>
-          <HomeIcon />
-        </IconButton>
-        <Typography variant="h6" className={classes.title}>
-          {filename ? filename : 'T2WML'}
-        </Typography>
-        <IconButton edge="end" color="inherit">
-          <MoreVertIcon />
-        </IconButton>
-        <div style={{ flexGrow: 1 }} />
-        <Tooltip arrow title="toggle light/dark theme">
-          <IconButton edge="end" color="inherit"
-            onClick={() => switchTheme()}>
-            {darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
-          </IconButton>
-        </Tooltip>
+        {renderHomeButton()}
+        {renderProjectInfo()}
+        {renderProjectMenu()}
+        {renderSpacer()}
+        {renderThemeButton()}
       </Toolbar>
     </AppBar>
   )
