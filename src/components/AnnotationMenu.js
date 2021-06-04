@@ -77,6 +77,7 @@ const AnnotationMenu = ({
     setAnnotation(annotation => {
       return {
         ...annotation,
+        id: selectedAnnotation.id,
         role: selectedAnnotation.role,
         type: selectedAnnotation.type,
         property: selectedAnnotation.property,
@@ -85,6 +86,7 @@ const AnnotationMenu = ({
   }, [selectedAnnotation])
 
   useEffect(() => {
+
     // skip if the form state is empty (on init)
     if ( Object.keys(formState).map(key => !!formState[key]).every(x => !x) ) {
       return
@@ -102,17 +104,19 @@ const AnnotationMenu = ({
     const calendar = getFormValue('calendar')
     const format = getFormValue('format')
     const unit = getFormValue('unit')
+    const id = annotation.id
 
     filteredAnnotations.push({
       selection: {...selection},
       role: role,
       type: type,
-      property: property ? property.qnode : '',
+      property: property,
       language: language,
       precision: precision,
       calendar: calendar,
       format: format,
       unit: unit,
+      id: id,
     })
 
     uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
