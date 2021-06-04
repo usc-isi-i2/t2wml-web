@@ -53,7 +53,14 @@ const ProjectTags = ({
 
   const saveNewTag = () => {
     if ( !formState.newTagKey || !formState.newTagValue ) { return }
-    setTags(tags => [...tags, {...formState}])
+    setTags(tags => [...tags, {
+      key: formState.newTagKey,
+      value: formState.newTagValue,
+    }])
+    setFormState({
+      newTagKey: '',
+      newTagValue: '',
+    })
   }
 
   const renderTitle = () => {
