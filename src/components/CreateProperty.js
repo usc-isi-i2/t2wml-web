@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const CreateProperty = ({ file, sheet, selectProperty, hideMenu }) => {
+const CreateProperty = ({ tags, file, sheet, selectProperty, hideMenu }) => {
 
   const classes = useStyles()
 
@@ -174,6 +174,32 @@ const CreateProperty = ({ file, sheet, selectProperty, hideMenu }) => {
     )
   }
 
+  const renderPropertyTagInput = () => {
+    return (
+      <Grid item xs={12}>
+        <TextField
+          select
+          fullWidth
+          id="qnodeTag"
+          name="qnodeTag"
+          label="Property Tag"
+          variant="outlined"
+          autoCorrect="off"
+          autoComplete="off"
+          autoCapitalize="off"
+          spellCheck="false"
+          onChange={handleOnChange}
+          value={formState.qnodeTag}>
+          {tags.map(tag => (
+            <MenuItem key={tag.value} value={tag.value}>
+              {tag.key} - {tag.value}
+            </MenuItem>
+          ))}
+        </TextField>
+      </Grid>
+    )
+  }
+
   const renderContent = () => {
     return (
       <form noValidate autoComplete="off"
@@ -184,6 +210,7 @@ const CreateProperty = ({ file, sheet, selectProperty, hideMenu }) => {
           {renderLabelInput()}
           {renderDescriptionInput()}
           {renderPropertyTypeInput()}
+          {renderPropertyTagInput()}
         </Grid>
       </form>
     )

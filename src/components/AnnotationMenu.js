@@ -340,6 +340,7 @@ const AnnotationMenu = ({
             return (
               <Grid item xs={12} key={option.value}>
                 <PropertyInput
+                  tags={tags}
                   file={file}
                   sheet={sheet}
                   selectedProperty={getFormValue('property')}

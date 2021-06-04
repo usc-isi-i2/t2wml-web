@@ -44,6 +44,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const PropertyInput = ({
+  tags,
   file,
   sheet,
   selectedProperty,
@@ -262,6 +263,7 @@ const PropertyInput = ({
         </Button>
         {showCreateProperty && (
           <CreateProperty
+            tags={tags}
             file={file}
             sheet={sheet}
             selectProperty={selectProperty}
