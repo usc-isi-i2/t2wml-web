@@ -113,14 +113,13 @@ const ProjectTags = ({
               onChange={handleOnChange}
               value={formState.newTagValue} />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <Button
               variant="contained"
               color="primary"
               size="medium"
-              startIcon={<AddIcon />}
               onClick={saveNewTag}>
-              Add
+              <AddIcon />
             </Button>
           </Grid>
         </Grid>
