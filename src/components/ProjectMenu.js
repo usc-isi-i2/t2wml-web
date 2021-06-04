@@ -10,9 +10,24 @@ const ProjectMenu = () => {
 
   const [anchorElement, setAnchorElement] = useState()
 
-  const openSettings = () => {}
+  const [showProjectSettings, setShowProjectSettings] = useState(false)
+  const [showProjectTags, setShowProjectTags] = useState(false)
 
-  const openTagsMenu = () => {}
+  const openProjectSettings = () => {
+    setShowProjectSettings(true)
+  }
+
+  const hideProjectSettings = () => {
+    setShowProjectSettings(false)
+  }
+
+  const openProjectTags = () => {
+    setShowProjectTags(true)
+  }
+
+  const hideProjectTags = () => {
+    setShowProjectTags(false)
+  }
 
   const renderButton = () => {
     return (
@@ -33,8 +48,8 @@ const ProjectMenu = () => {
         open={!!anchorElement}
         anchorEl={anchorElement}
         onClose={() => setAnchorElement()}>
-        <MenuItem onClick={() => openSettings()}>Settings</MenuItem>
-        <MenuItem onClick={() => openTagsMenu()}>Edit tags</MenuItem>
+        <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
+        <MenuItem onClick={openProjectTags}>Edit tags</MenuItem>
       </Menu>
     )
   }
