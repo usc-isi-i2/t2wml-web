@@ -93,7 +93,7 @@ const QnodeInput = ({
     return (
       <Grid item xs={12}>
         <Typography variant="body1">
-          <b>{!!selected ? 'Selected wikidata item' : 'Select wikidata item'}</b>
+          <b>{!!selected ? 'Selected Wikidata Item' : 'Select Wikidata Item'}</b>
         </Typography>
       </Grid>
     )
@@ -119,7 +119,7 @@ const QnodeInput = ({
             )}
           </Grid>
           <Grid item xs={2}>
-            <Tooltip arrow placement="top" title={'remove selected wikidata item'}>
+            <Tooltip arrow placement="top" title={'remove selected Wikidata Item'}>
               <IconButton className={classes.removeButton}
                 onClick={removeSelected}>
                 <CloseIcon />
@@ -144,7 +144,7 @@ const QnodeInput = ({
     return (
       <Grid item xs={12}>
         <FormHelperText component="p">
-          Use this form to connect the cell value to items in wikidata
+          Use this form to connect the cell value to items in Wikidata
         </FormHelperText>
       </Grid>
     )
@@ -161,7 +161,7 @@ const QnodeInput = ({
           autoCapitalize="off"
           spellCheck="false"
           variant="outlined"
-          label={'Search for qnodes on wikidata'}
+          label={'Search for Wikidata Items'}
           id={'wikidata-search'}
           name={'wikidata-search'}
           onChange={handleOnChange} />
@@ -204,7 +204,7 @@ const QnodeInput = ({
           variant="contained"
           startIcon={<AddIcon />}
           onClick={() => setShowCreateQnode(true)}>
-          Add a new wikidata item
+          Add a new Wikidata Item
         </Button>
         {showCreateQnode && (
           <CreateQnode

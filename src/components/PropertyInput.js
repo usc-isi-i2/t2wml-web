@@ -196,7 +196,7 @@ const PropertyInput = ({
               </Button>
             ) : (
               <FormHelperText component="p" style={{marginTop: '0'}}>
-                You can select property cells in the table or search wikidata for a property in the search box below
+                You can select property cells in the table or search Wikidata for a property in the search box below
               </FormHelperText>
             )}
           </Grid>
@@ -216,7 +216,7 @@ const PropertyInput = ({
           autoComplete="off"
           autoCapitalize="off"
           spellCheck="false"
-          label={'Search for properties on wikidata'}
+          label={'Search for properties on Wikidata'}
           id={'selectedProperty'}
           name={'selectedProperty'}
           onChange={handleOnChangePropertySearch} />
