@@ -6,15 +6,13 @@ import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
 import ProjectSettings from './ProjectSettings'
-import ProjectTags from './ProjectTags'
 
 
-const ProjectMenu = ({ tags, setTags }) => {
+const ProjectMenu = () => {
 
   const [anchorElement, setAnchorElement] = useState()
 
   const [showProjectSettings, setShowProjectSettings] = useState(false)
-  const [showProjectTags, setShowProjectTags] = useState(false)
 
   const openProjectSettings = () => {
     setShowProjectSettings(true)
@@ -23,16 +21,6 @@ const ProjectMenu = ({ tags, setTags }) => {
 
   const hideProjectSettings = () => {
     setShowProjectSettings(false)
-    hideProjectMenu()
-  }
-
-  const openProjectTags = () => {
-    setShowProjectTags(true)
-    hideProjectMenu()
-  }
-
-  const hideProjectTags = () => {
-    setShowProjectTags(false)
     hideProjectMenu()
   }
 
@@ -64,7 +52,6 @@ const ProjectMenu = ({ tags, setTags }) => {
         anchorEl={anchorElement}
         onClose={hideProjectMenu}>
         <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
-        <MenuItem onClick={openProjectTags}>Edit Tags</MenuItem>
       </Menu>
     )
   }
@@ -78,23 +65,11 @@ const ProjectMenu = ({ tags, setTags }) => {
     }
   }
 
-  const renderProjectTags = () => {
-    if ( showProjectTags ) {
-      return (
-        <ProjectTags
-          tags={tags}
-          setTags={setTags}
-          hideProjectTags={hideProjectTags} />
-      )
-    }
-  }
-
   return (
     <React.Fragment>
       {renderButton()}
       {renderMenu()}
       {renderProjectSettings()}
-      {renderProjectTags()}
     </React.Fragment>
   )
 }

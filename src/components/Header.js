@@ -15,8 +15,6 @@ import useStyles from '../styles/header'
 
 
 const Header = ({
-  tags,
-  setTags,
   filename,
   darkTheme,
   switchTheme,
@@ -52,7 +50,7 @@ const Header = ({
 
   const renderProjectMenu = () => {
     if ( !!filename ) {
-      return <ProjectMenu tags={tags} setTags={setTags} />
+      return <ProjectMenu />
     }
   }
 
