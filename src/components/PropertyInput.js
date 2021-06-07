@@ -44,7 +44,6 @@ const useStyles = makeStyles(theme => ({
 
 
 const PropertyInput = ({
-  tags,
   file,
   sheet,
   selectedProperty,
@@ -56,6 +55,7 @@ const PropertyInput = ({
 
   const timeoutID = useRef(null)
 
+  const [tags, setTags] = useState([])
   const [selected, setSelected] = useState(selectedProperty)
   const [selectedPropertyCells, setSelectedPropertyCells] = useState()
   const [properties, setProperties] = useState([])
@@ -263,7 +263,6 @@ const PropertyInput = ({
         </Button>
         {showCreateProperty && (
           <CreateProperty
-            tags={tags}
             file={file}
             sheet={sheet}
             selectProperty={selectProperty}

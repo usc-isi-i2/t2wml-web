@@ -10,7 +10,7 @@ import fetchSuggestions from '../utils/fetchSuggestions'
 import uploadAnnotations from '../utils/uploadAnnotations'
 
 
-const Table = ({ tags, file, sheet, data, setOutputData }) => {
+const Table = ({ file, sheet, data, setOutputData }) => {
 
   const classes = useStyles()
 
@@ -745,7 +745,6 @@ const Table = ({ tags, file, sheet, data, setOutputData }) => {
     }
     return (
       <OverlayMenu
-        tags={tags}
         file={file}
         sheet={sheet}
         selectedTab={selectedTab}
