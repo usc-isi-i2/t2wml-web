@@ -131,7 +131,7 @@ const QnodeInput = ({
               color="primary"
               variant="contained"
               onClick={applyToBlock}>
-              Apply selected Qnode to the block
+              Apply to block
             </Button>
           </Grid>
         </Grid>
