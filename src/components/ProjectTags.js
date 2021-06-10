@@ -18,7 +18,7 @@ import DraggablePaper from './DraggablePaper'
 
 
 const useStyles = makeStyles(theme => ({
-  projectTags: {
+  menu: {
     position: 'absolute',
     top: theme.spacing(12),
     left: theme.spacing(8),
@@ -26,11 +26,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const ProjectTags = ({
-  tags,
-  setTags,
-  hideProjectTags,
-}) => {
+const PropertyTags = ({ tags, setTags, hideMenu }) => {
 
   const classes = useStyles()
 
@@ -41,7 +37,7 @@ const ProjectTags = ({
 
   const handleOnSubmit = () => {
     setTags(tags)
-    hideProjectTags()
+    hideMenu()
   }
 
   const handleOnChange = event => {
@@ -76,8 +72,8 @@ const ProjectTags = ({
   const renderTitle = () => {
     return (
       <React.Fragment>
-        Project Tags
-        <IconButton onClick={hideProjectTags}>
+        Property Tags
+        <IconButton onClick={hideMenu}>
           <CloseIcon />
         </IconButton>
       </React.Fragment>
@@ -88,7 +84,7 @@ const ProjectTags = ({
     return (
       <Grid item xs={12}>
         <FormHelperText component="p">
-          Use this form to edit project tags
+          Use this form to edit property tags
         </FormHelperText>
       </Grid>
     )
@@ -144,7 +140,7 @@ const ProjectTags = ({
     )
   }
 
-  const renderProjectTags = () => {
+  const renderPropertyTags = () => {
     return tags.map(tag => (
       <Grid item xs={12}>
         <Grid container spacing={1}>
@@ -201,7 +197,7 @@ const ProjectTags = ({
         <Grid container spacing={3}>
           {renderFormInstructions()}
           {renderNewTagInputs()}
-          {renderProjectTags()}
+          {renderPropertyTags()}
         </Grid>
       </form>
     )
@@ -227,12 +223,12 @@ const ProjectTags = ({
   return (
     <Dialog
       open={true}
-      onClose={hideProjectTags}
-      classes={{paper: classes.projectTags}}
+      onClose={hideMenu}
+      classes={{paper: classes.menu}}
       aria-labelledby='dialog-modal-title'
       PaperComponent={DraggablePaper}
-      PaperProps={{handle: '.draggable-project-tags-handle'}}>
-      <DialogTitle classes={{ root: 'draggable-project-tags-handle' }}>
+      PaperProps={{handle: '.draggable-property-tags-handle'}}>
+      <DialogTitle classes={{ root: 'draggable-property-tags-handle' }}>
         {renderTitle()}
       </DialogTitle>
       <DialogContent>
@@ -246,4 +242,4 @@ const ProjectTags = ({
 }
 
 
-export default ProjectTags
+export default PropertyTags
