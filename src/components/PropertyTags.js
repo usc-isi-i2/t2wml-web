@@ -219,9 +219,9 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
         onSubmit={handleOnSubmit}>
         <Grid container spacing={3}>
           {renderFormInstructions()}
-          {renderNewTagInputs()}
           {renderDefaultTags()}
           {renderPropertyTags()}
+          {renderNewTagInputs()}
         </Grid>
       </form>
     )
