@@ -95,7 +95,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
     return (
       <Grid item xs={12}>
         <Grid container spacing={1}>
-          <Grid item xs={5}>
+          <Grid item xs={6}>
             <TextField
               fullWidth
               size="small"
@@ -111,7 +111,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
               onChange={handleOnChange}
               value={formState.newTagKey} />
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={6}>
             <TextField
               fullWidth
               size="small"
@@ -127,15 +127,6 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
               onChange={handleOnChange}
               value={formState.newTagValue} />
           </Grid>
-          <Grid item xs={1}>
-            <Button
-              variant="contained"
-              color="primary"
-              size="medium"
-              onClick={saveNewTag}>
-              <AddIcon />
-            </Button>
-          </Grid>
         </Grid>
       </Grid>
     )
@@ -145,7 +136,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
     return TAGS.map(tag => (
       <Grid item xs={12}>
         <Grid container spacing={1}>
-          <Grid item xs={5}>
+          <Grid item xs={6}>
             <TextField
               fullWidth
               size="small"
@@ -160,7 +151,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
               onChange={event => handleOnTagChange(event, tag)}
               defaultValue={tag.key} />
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={6}>
             <TextField
               fullWidth
               size="small"
@@ -174,16 +165,6 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
               inputProps={{'data-lpignore': 'true'}}
               onChange={event => handleOnTagChange(event, tag)}
               defaultValue={tag.value} />
-          </Grid>
-          <Grid item xs={1}>
-            <Button
-              variant="contained"
-              color="primary"
-              size="medium"
-              className={classes.addButton}
-              onClick={() => updateTag(tag)}>
-              <SaveIcon />
-            </Button>
           </Grid>
         </Grid>
       </Grid>
@@ -194,7 +175,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
     return tags.map(tag => (
       <Grid item xs={12}>
         <Grid container spacing={1}>
-          <Grid item xs={5}>
+          <Grid item xs={6}>
             <TextField
               fullWidth
               size="small"
@@ -209,7 +190,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
               onChange={event => handleOnTagChange(event, tag)}
               defaultValue={tag.key} />
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={6}>
             <TextField
               fullWidth
               size="small"
@@ -223,16 +204,6 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
               inputProps={{'data-lpignore': 'true'}}
               onChange={event => handleOnTagChange(event, tag)}
               defaultValue={tag.value} />
-          </Grid>
-          <Grid item xs={1}>
-            <Button
-              variant="contained"
-              color="primary"
-              size="medium"
-              className={classes.addButton}
-              onClick={() => updateTag(tag)}>
-              <SaveIcon />
-            </Button>
           </Grid>
         </Grid>
       </Grid>
