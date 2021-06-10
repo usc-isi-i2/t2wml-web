@@ -67,6 +67,9 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
   }
 
   const updateTag = tag => {
+    if ( !tag.key && !tag.value ) {
+      tags.splice(tags.indexOf(tag), 1)
+    }
     setTags(tags)
   }
 
@@ -190,6 +193,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
               spellCheck="false"
               inputProps={{'data-lpignore': 'true'}}
               onChange={event => handleOnTagChange(event, tag)}
+              onBlur={() => updateTag(tag)}
               defaultValue={tag.key} />
           </Grid>
           <Grid item xs={6}>
@@ -205,6 +209,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
               spellCheck="false"
               inputProps={{'data-lpignore': 'true'}}
               onChange={event => handleOnTagChange(event, tag)}
+              onBlur={() => updateTag(tag)}
               defaultValue={tag.value} />
           </Grid>
         </Grid>
