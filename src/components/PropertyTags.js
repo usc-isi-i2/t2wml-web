@@ -109,6 +109,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
               spellCheck="false"
               inputProps={{'data-lpignore': 'true'}}
               onChange={handleOnChange}
+              onBlur={saveNewTag}
               value={formState.newTagKey} />
           </Grid>
           <Grid item xs={6}>
@@ -125,6 +126,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
               spellCheck="false"
               inputProps={{'data-lpignore': 'true'}}
               onChange={handleOnChange}
+              onBlur={saveNewTag}
               value={formState.newTagValue} />
           </Grid>
         </Grid>
