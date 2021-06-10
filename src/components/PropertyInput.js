@@ -10,12 +10,14 @@ import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import ListAltIcon from '@material-ui/icons/ListAlt'
 import CloseIcon from '@material-ui/icons/Close'
 import DoneIcon from '@material-ui/icons/Done'
 import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/styles'
 
 import CreateProperty from './CreateProperty'
+import PropertyTags from './PropertyTags'
 import fetchProperties from '../utils/fetchProperties'
 import * as utils from '../utils/table'
 
@@ -61,6 +63,7 @@ const PropertyInput = ({
   const [properties, setProperties] = useState([])
   const [anchorElement, setAnchorElement] = useState()
   const [showCreateProperty, setShowCreateProperty] = useState(false)
+  const [showPropertyTags, setShowPropertyTags] = useState(false)
 
   useEffect(() => {
     setSelected(selectedProperty)
@@ -272,6 +275,26 @@ const PropertyInput = ({
     )
   }
 
+  const renderPropertyTags = () => {
+    return (
+      <Grid item xs={12}>
+        <Button
+          color="primary"
+          variant="contained"
+          startIcon={<ListAltIcon />}
+          onClick={() => setShowPropertyTags(true)}>
+          Show Property Tags
+        </Button>
+        {showPropertyTags && (
+          <PropertyTags
+            tags={tags}
+            setTags={setTags}
+            hideMenu={() => setShowPropertyTags(false)} />
+        )}
+      </Grid>
+    )
+  }
+
   return (
     <Grid container spacing={3}>
       {renderTitle()}
@@ -280,6 +303,7 @@ const PropertyInput = ({
       {renderPropertySearch()}
       {renderSearchResults()}
       {renderPropertyCreate()}
+      {renderPropertyTags()}
     </Grid>
   )
 }
