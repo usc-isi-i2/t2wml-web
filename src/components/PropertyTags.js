@@ -15,6 +15,7 @@ import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/core/styles'
 
 import DraggablePaper from './DraggablePaper'
+import { TAGS } from '../content/tag-options'
 
 
 const useStyles = makeStyles(theme => ({
@@ -140,6 +141,55 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
     )
   }
 
+  const renderDefaultTags = () => {
+    return TAGS.map(tag => (
+      <Grid item xs={12}>
+        <Grid container spacing={1}>
+          <Grid item xs={5}>
+            <TextField
+              fullWidth
+              size="small"
+              name="key"
+              label="Key"
+              variant="outlined"
+              autoCorrect="off"
+              autoComplete="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              inputProps={{'data-lpignore': 'true'}}
+              onChange={event => handleOnTagChange(event, tag)}
+              defaultValue={tag.key} />
+          </Grid>
+          <Grid item xs={5}>
+            <TextField
+              fullWidth
+              size="small"
+              name="value"
+              label="Value"
+              variant="outlined"
+              autoCorrect="off"
+              autoComplete="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              inputProps={{'data-lpignore': 'true'}}
+              onChange={event => handleOnTagChange(event, tag)}
+              defaultValue={tag.value} />
+          </Grid>
+          <Grid item xs={1}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="medium"
+              className={classes.addButton}
+              onClick={() => updateTag(tag)}>
+              <SaveIcon />
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
+    ))
+  }
+
   const renderPropertyTags = () => {
     return tags.map(tag => (
       <Grid item xs={12}>
@@ -197,6 +247,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
         <Grid container spacing={3}>
           {renderFormInstructions()}
           {renderNewTagInputs()}
+          {renderDefaultTags()}
           {renderPropertyTags()}
         </Grid>
       </form>
