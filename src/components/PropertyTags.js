@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -10,8 +9,6 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
-import SaveIcon from '@material-ui/icons/Save'
-import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/core/styles'
 
 import DraggablePaper from './DraggablePaper'
@@ -234,22 +231,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
     )
   }
 
-  const renderButtons = () => {
-    return (
-      <Grid item xs={12}>
-        <Grid container spacing={3} justify="space-between">
-          <Grid item>
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={handleOnSubmit}>
-              Submit
-            </Button>
-          </Grid>
-        </Grid>
-      </Grid>
-    )
-  }
+  const renderButtons = () => {}
 
   return (
     <Dialog
