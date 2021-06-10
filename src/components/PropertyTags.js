@@ -154,6 +154,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
               spellCheck="false"
               inputProps={{'data-lpignore': 'true'}}
               onChange={event => handleOnTagChange(event, tag)}
+              onBlur={() => updateTag(tag)}
               defaultValue={tag.key} />
           </Grid>
           <Grid item xs={6}>
@@ -169,6 +170,7 @@ const PropertyTags = ({ tags, setTags, hideMenu }) => {
               spellCheck="false"
               inputProps={{'data-lpignore': 'true'}}
               onChange={event => handleOnTagChange(event, tag)}
+              onBlur={() => updateTag(tag)}
               defaultValue={tag.value} />
           </Grid>
         </Grid>
