@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -36,9 +35,7 @@ const ProjectSettings = ({
     projectDataSource: '',
   })
 
-  const handleOnSubmit = () => {
-    hideProjectSettings()
-  }
+  const handleOnSubmit = () => {}
 
   const handleOnChange = event => {
     const value = event.target.value
@@ -84,6 +81,7 @@ const ProjectSettings = ({
           spellCheck="false"
           inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
+          onBlur={handleOnSubmit}
           value={formState.projectTitle} />
       </Grid>
     )
@@ -104,6 +102,7 @@ const ProjectSettings = ({
           spellCheck="false"
           inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
+          onBlur={handleOnSubmit}
           value={formState.projectDescription} />
       </Grid>
     )
@@ -124,6 +123,7 @@ const ProjectSettings = ({
           spellCheck="false"
           inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
+          onBlur={handleOnSubmit}
           value={formState.projectDataSource} />
       </Grid>
     )
@@ -144,22 +144,7 @@ const ProjectSettings = ({
     )
   }
 
-  const renderButtons = () => {
-    return (
-      <Grid item xs={12}>
-        <Grid container spacing={3} justify="space-between">
-          <Grid item>
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={handleOnSubmit}>
-              Submit
-            </Button>
-          </Grid>
-        </Grid>
-      </Grid>
-    )
-  }
+  const renderButtons = () => {}
 
   return (
     <Dialog
