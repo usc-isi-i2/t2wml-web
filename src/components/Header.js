@@ -50,11 +50,13 @@ const Header = ({
     )
   }
 
-  const renderAnnotationsButton = () => {
+  const renderSuggestButton = () => {
     if ( !project ) { return }
     return (
       <Tooltip arrow title="guess annotations">
-        <Button startIcon={<ViewQuiltIcon />}
+        <Button
+          color="secondary"
+          startIcon={<ViewQuiltIcon />}
           onClick={guessAnnotations}>
           Suggest Annotations
         </Button>
@@ -79,7 +81,7 @@ const Header = ({
         {renderProjectMenu()}
         {renderProjectInfo()}
         {renderSpacer()}
-        {renderAnnotationsButton()}
+        {renderSuggestButton()}
         {renderThemeButton()}
       </Toolbar>
     </AppBar>
