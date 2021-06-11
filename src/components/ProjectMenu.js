@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const ProjectMenu = () => {
+const ProjectMenu = ({ project }) => {
 
   const classes = useStyles()
 
@@ -71,6 +71,7 @@ const ProjectMenu = () => {
     if ( showProjectSettings ) {
       return (
         <ProjectSettings
+          project={project}
           hideProjectSettings={hideProjectSettings} />
       )
     }

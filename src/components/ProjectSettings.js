@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Dialog from '@material-ui/core/Dialog'
@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const ProjectSettings = ({
+  project,
   hideProjectSettings,
 }) => {
 
@@ -34,6 +35,14 @@ const ProjectSettings = ({
     projectDescription: '',
     projectDataSource: '',
   })
+
+  useEffect(() => {
+    setFormState({
+      projectTitle: project.title,
+      projectDescription: project.description,
+      projectDataSource: project.url,
+    })
+  }, [project])
 
   const handleOnSubmit = () => {}
 

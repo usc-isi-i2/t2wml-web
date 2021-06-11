@@ -32,7 +32,7 @@ const Header = ({
 
   const renderProjectMenu = () => {
     if ( !!project ) {
-      return <ProjectMenu />
+      return <ProjectMenu project={project} />
     }
   }
 
