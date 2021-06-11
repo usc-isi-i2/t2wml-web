@@ -55,7 +55,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
   return (
     <Grid className={classes.content}>
       <Header
-        filename={data ? data.filepath : ''}
+        project={project}
         darkTheme={darkTheme}
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {data && data.table ? (

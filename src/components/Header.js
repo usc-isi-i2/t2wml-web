@@ -14,7 +14,7 @@ import useStyles from '../styles/header'
 
 
 const Header = ({
-  filename,
+  project,
   darkTheme,
   switchTheme,
   toggleSettings,
@@ -25,13 +25,13 @@ const Header = ({
   const renderProjectInfo = () => {
     return (
       <Typography variant="h6" className={classes.title}>
-        {filename ? filename : 'T2WML'}
+        {project ? project.title : 'T2WML'}
       </Typography>
     )
   }
 
   const renderProjectMenu = () => {
-    if ( !!filename ) {
+    if ( !!project ) {
       return <ProjectMenu />
     }
   }
