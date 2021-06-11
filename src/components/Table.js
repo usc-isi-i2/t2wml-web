@@ -28,7 +28,7 @@ const Table = ({
 
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
-  const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState({})
+  const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
   const [suggestedAnnotation, setSuggestedAnnotation] = useState()
 
   const [selectedTab, setSelectedTab] = useState('block')
@@ -355,6 +355,7 @@ const Table = ({
 
   useEffect(() => {
     setSelectedAnnotationBlock(selectedAnnotation => {
+      if ( !selectedAnnotation ) { return undefined}
       const filteredAnnotation = annotationBlocks.find(
         annotation => annotation.id === selectedAnnotation.id
       )
