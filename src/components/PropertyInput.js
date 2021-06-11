@@ -203,9 +203,13 @@ const PropertyInput = ({
       <Grid item xs={12}>
         <Autocomplete
           id="properties-menu"
+          fullWidth={true}
+          clearOnBlur={false}
+          selectOnFocus={false}
           options={properties}
           onChange={selectProperty}
           getOptionLabel={property => property.label}
+          noOptionsText={'Enter a search term to search for properties'}
           renderInput={params => (
             <TextField {...params}
               fullWidth
