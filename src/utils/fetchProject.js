@@ -1,4 +1,4 @@
-const fetchSettings = () => {
+const fetchProject = () => {
   let url = '/api/project/settings'
   url += `?project_folder=/proj`
 
@@ -15,4 +15,4 @@ const fetchSettings = () => {
 }
 
 
-export default fetchSettings
+export default fetchProject

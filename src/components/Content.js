@@ -13,7 +13,7 @@ import Header from './Header'
 import Output from './Output'
 import Table from './Table'
 
-import fetchSettings from '../utils/fetchSettings'
+import fetchProject from '../utils/fetchProject'
 
 
 const Content = ({darkTheme, setDarkTheme}) => {
@@ -45,10 +45,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const handleFileUpload = data => {
     setData(data)
-    fetchSettings().then(project => {
+    fetchProject().then(project => {
       setProject(project)
-    }).catch(error => {
-      console.log(error)
     })
   }
 
