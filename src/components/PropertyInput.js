@@ -98,13 +98,8 @@ const PropertyInput = ({
   }
 
   const submitPropertyCells = () => {
-    const selection = {
-      x1: utils.letterToColumn(selectedPropertyCells[0]),
-      x2: utils.letterToColumn(selectedPropertyCells[0]),
-      y1: parseInt(selectedPropertyCells[1]),
-      y2: parseInt(selectedPropertyCells[1]),
-    }
-    onSubmitPropertyCells(selection)
+    const parsedCorrectly = utils.parseSelectedRangeInput(selectedPropertyCells)
+    onSubmitPropertyCells(parsedCorrectly)
   }
 
   const selectProperty = property => {
