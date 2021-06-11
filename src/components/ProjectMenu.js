@@ -60,6 +60,10 @@ const ProjectMenu = ({ project, setProject, guessAnnotations }) => {
         keepMounted
         id="project-menu"
         open={!!anchorElement}
+        transformOrigin={{
+          vertical: -50,
+          horizontal: 0,
+        }}
         anchorEl={anchorElement}
         onClose={hideProjectMenu}>
         <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
