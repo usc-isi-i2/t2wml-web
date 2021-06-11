@@ -101,7 +101,11 @@ const PropertyInput = ({
     onSubmitPropertyCells(parsedCorrectly)
   }
 
-  const selectProperty = (event, property) => {
+  const handleOnSelectProperty = (event, property) => {
+    selectProperty(property)
+  }
+
+  const selectProperty = property => {
     onSelectProperty(property)
     setSelected(property)
     setProperties([])
@@ -211,7 +215,7 @@ const PropertyInput = ({
           clearOnBlur={false}
           selectOnFocus={false}
           options={properties}
-          onChange={selectProperty}
+          onChange={handleOnSelectProperty}
           getOptionLabel={property => property.label}
           noOptionsText={'Enter a search term to search for properties'}
           classes={{ paper: classes.autocompletePaper }}

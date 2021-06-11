@@ -84,7 +84,11 @@ const QnodeInput = ({
     setAnchorElement()
   }
 
-  const selectQnode = (event, qnode) => {
+  const handleOnSelectQnode = (event, qnode) => {
+    selectQnode(qnode)
+  }
+
+  const selectQnode = qnode => {
     onSelectQnode(qnode)
     setSelected(qnode)
     setAnchorElement()
@@ -169,7 +173,7 @@ const QnodeInput = ({
           clearOnBlur={false}
           selectOnFocus={false}
           options={qnodes}
-          onChange={selectQnode}
+          onChange={handleOnSelectQnode}
           getOptionLabel={property => property.label}
           noOptionsText={'Enter a search term to search for Wikidata items'}
           classes={{ paper: classes.autocompletePaper }}
