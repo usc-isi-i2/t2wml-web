@@ -62,7 +62,9 @@ const QnodeInput = ({
     const value = event.target.value
     if ( !value ) {
       setQnodes([])
+      setLoading(false)
     } else {
+      setLoading(true)
       clearTimeout(timeoutID.current)
       timeoutID.current = setTimeout(() => {
         fetchQnodes(value)
@@ -71,6 +73,7 @@ const QnodeInput = ({
             setAnchorElement(event.target)
           }
           setQnodes(data)
+          setLoading(false)
         })
         .catch(error => console.log(error))
       }, 250)
