@@ -59,7 +59,7 @@ const PropertyInput = ({
 
   const [tags, setTags] = useState([])
   const [selected, setSelected] = useState(selectedProperty)
-  const [selectedPropertyCells, setSelectedPropertyCells] = useState()
+  const [selectedPropertyCells, setSelectedPropertyCells] = useState('')
   const [properties, setProperties] = useState([])
   const [anchorElement, setAnchorElement] = useState()
   const [showCreateProperty, setShowCreateProperty] = useState(false)
