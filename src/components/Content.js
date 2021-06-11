@@ -55,8 +55,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const guessAnnotations = () => {
     if ( !data.filepath ) { return }
     fetchAnnotations(data.filepath, data.sheetName)
-    .then(guessedAnnotations => {
-      setAnnotations(guessedAnnotations)
+    .then(suggestedAnnotations => {
+      setAnnotations(suggestedAnnotations)
     })
   }
 
@@ -76,6 +76,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
               file={data.filepath}
               sheet={data.sheetName}
               data={data.table.cells}
+              suggestedAnnotations={annotations}
               setOutputData={setOutputData} />
           </div>
           <Divider setColWidth={setColWidth} />

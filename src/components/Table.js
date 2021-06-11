@@ -10,7 +10,13 @@ import fetchSuggestions from '../utils/fetchSuggestions'
 import uploadAnnotations from '../utils/uploadAnnotations'
 
 
-const Table = ({ file, sheet, data, setOutputData }) => {
+const Table = ({
+  file,
+  sheet,
+  data,
+  suggestedAnnotations,
+  setOutputData,
+}) => {
 
   const classes = useStyles()
 
