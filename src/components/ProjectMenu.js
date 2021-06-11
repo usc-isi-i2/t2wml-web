@@ -4,11 +4,21 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import { makeStyles } from '@material-ui/core/styles'
 
 import ProjectSettings from './ProjectSettings'
 
 
+const useStyles = makeStyles(theme => ({
+  icon: {
+    marginLeft: -1 * theme.spacing(3),
+  },
+}))
+
+
 const ProjectMenu = () => {
+
+  const classes = useStyles()
 
   const [anchorElement, setAnchorElement] = useState()
 
@@ -37,6 +47,7 @@ const ProjectMenu = () => {
       <IconButton
         edge="start"
         color="inherit"
+        className={classes.icon}
         onClick={openProjectMenu}>
         <MoreVertIcon />
       </IconButton>
