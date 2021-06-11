@@ -57,6 +57,11 @@ const App = () => {
           color: '#f44336',
         },
       },
+      MuiAutocomplete: {
+        paper: {
+          maxHeight: '300px',
+        },
+      },
       MuiButton: {
         containedPrimary: {
           color: darkTheme ? '#fefefe' : '#4D4D4D',
