@@ -50,6 +50,7 @@ const Header = ({
   }
 
   const renderAnnotationsButton = () => {
+    if ( !project ) { return }
     return (
       <Tooltip arrow title="guess annotations">
         <Button startIcon={<ViewQuiltIcon />}
