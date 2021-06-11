@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 import CloseIcon from '@material-ui/icons/Close'
@@ -228,6 +229,17 @@ const PropertyInput = ({
               label={'Search for properties on Wikidata'}
               id={'selectedProperty'}
               name={'selectedProperty'}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <React.Fragment>
+                    {loading ? (
+                      <CircularProgress color="inherit" size={20} />
+                    ) : null }
+                    {params.InputProps.endAdornment}
+                  </React.Fragment>
+                ),
+              }}
               onChange={handleOnChangePropertySearch} />
           )}
         />
