@@ -2,14 +2,13 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import Autocomplete from '@material-ui/lab/Autocomplete'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 import CloseIcon from '@material-ui/icons/Close'
 import DoneIcon from '@material-ui/icons/Done'
@@ -61,7 +60,6 @@ const PropertyInput = ({
   const [selected, setSelected] = useState(selectedProperty)
   const [selectedPropertyCells, setSelectedPropertyCells] = useState('')
   const [properties, setProperties] = useState([])
-  const [anchorElement, setAnchorElement] = useState()
   const [showCreateProperty, setShowCreateProperty] = useState(false)
   const [showPropertyTags, setShowPropertyTags] = useState(false)
 
@@ -78,9 +76,6 @@ const PropertyInput = ({
       timeoutID.current = setTimeout(() => {
         fetchProperties(value)
         .then(data => {
-          if ( data.length ) {
-            setAnchorElement(event.target)
-          }
           setProperties(data)
         })
         .catch(error => console.log(error))
@@ -93,19 +88,14 @@ const PropertyInput = ({
     setSelectedPropertyCells(value)
   }
 
-  const handleCloseMenu = () => {
-    setAnchorElement()
-  }
-
   const submitPropertyCells = () => {
     const parsedCorrectly = utils.parseSelectedRangeInput(selectedPropertyCells)
     onSubmitPropertyCells(parsedCorrectly)
   }
 
-  const selectProperty = property => {
+  const selectProperty = (event, property) => {
     onSelectProperty(property)
     setSelected(property)
-    setAnchorElement()
     setProperties([])
   }
 
@@ -207,44 +197,26 @@ const PropertyInput = ({
     if ( !!selected ) { return }
     return (
       <Grid item xs={12}>
-        <TextField
-          fullWidth
-          variant="outlined"
-          autoCorrect="off"
-          autoComplete="off"
-          autoCapitalize="off"
-          spellCheck="false"
-          label={'Search for properties on Wikidata'}
-          id={'selectedProperty'}
-          name={'selectedProperty'}
-          onChange={handleOnChangePropertySearch} />
+        <Autocomplete
+          id="properties-menu"
+          options={properties}
+          onChange={selectProperty}
+          getOptionLabel={property => property.label}
+          renderInput={params => (
+            <TextField {...params}
+              fullWidth
+              variant="outlined"
+              autoCorrect="off"
+              autoComplete="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              label={'Search for properties on Wikidata'}
+              id={'selectedProperty'}
+              name={'selectedProperty'}
+              onChange={handleOnChangePropertySearch} />
+          )}
+        />
       </Grid>
-    )
-  }
-
-  const renderSearchResults = () => {
-    return (
-      <Menu
-        keepMounted
-        id="qnode-search-results"
-        anchorEl={anchorElement}
-        transformOrigin={{
-          vertical: -60,
-          horizontal: 0,
-        }}
-        open={!!anchorElement}
-        onClose={handleCloseMenu}>
-        {properties.map(property => (
-          <MenuItem key={property.id}
-            onClick={() => selectProperty(property)}>
-            <Typography variant="body1">
-              {`${property.label} (${property.id})`}
-              <br/>
-              {property.description}
-            </Typography>
-          </MenuItem>
-        ))}
-      </Menu>
     )
   }
 
@@ -296,7 +268,6 @@ const PropertyInput = ({
       {renderSelectedProperty()}
       {renderPropertyCellSelection()}
       {renderPropertySearch()}
-      {renderSearchResults()}
       {renderPropertyCreate()}
       {renderPropertyTags()}
     </Grid>
