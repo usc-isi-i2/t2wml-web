@@ -10,6 +10,8 @@ import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Autocomplete from '@material-ui/lab/Autocomplete'
 import CloseIcon from '@material-ui/icons/Close'
 import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/styles'
@@ -21,6 +23,9 @@ const useStyles = makeStyles(theme => ({
   link: {
     color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
     display: 'inline-block',
+  },
+  autocompletePaper: {
+    maxHeight: '350px',
   },
   removeButton: {
     marginTop: -1 * theme.spacing(2),
@@ -44,6 +49,7 @@ const QnodeInput = ({
   const timeoutID = useRef(null)
 
   const [qnodes, setQnodes] = useState([])
+  const [loading, setLoading] = useState(false)
   const [selected, setSelected] = useState(selectedQnode)
   const [anchorElement, setAnchorElement] = useState()
   const [showCreateQnode, setShowCreateQnode] = useState()
@@ -75,7 +81,7 @@ const QnodeInput = ({
     setAnchorElement()
   }
 
-  const selectQnode = qnode => {
+  const selectQnode = (event, qnode) => {
     onSelectQnode(qnode)
     setSelected(qnode)
     setAnchorElement()
@@ -154,44 +160,49 @@ const QnodeInput = ({
     if ( !!selected ) { return }
     return (
       <Grid item xs={12}>
-        <TextField
-          fullWidth
-          autoCorrect="off"
-          autoComplete="off"
-          autoCapitalize="off"
-          spellCheck="false"
-          variant="outlined"
-          label={'Search for Wikidata Items'}
-          id={'wikidata-search'}
-          name={'wikidata-search'}
-          onChange={handleOnChange} />
-      </Grid>
-    )
-  }
-
-  const renderSearchResults = () => {
-    return (
-      <Menu
-        keepMounted
-        id="qnode-search-results"
-        anchorEl={anchorElement}
-        transformOrigin={{
-          vertical: -60,
-          horizontal: 0,
-        }}
-        open={!!anchorElement}
-        onClose={handleCloseMenu}>
-        {qnodes.map(qnode => (
-          <MenuItem key={qnode.id}
-            onClick={() => selectQnode(qnode)}>
+        <Autocomplete
+          id="qnode-menu"
+          fullWidth={true}
+          clearOnBlur={false}
+          selectOnFocus={false}
+          options={qnodes}
+          onChange={selectQnode}
+          getOptionLabel={property => property.label}
+          noOptionsText={'Enter a search term to search for Wikidata items'}
+          classes={{ paper: classes.autocompletePaper }}
+          renderOption={property => (
             <Typography variant="body1">
-              {`${qnode.label} (${qnode.id})`}
+              <b>{`${property.label} (${property.id})`}</b>
               <br/>
-              {qnode.description}
+              {property.description}
             </Typography>
-          </MenuItem>
-        ))}
-      </Menu>
+          )}
+          renderInput={params => (
+            <TextField {...params}
+              fullWidth
+              variant="outlined"
+              autoCorrect="off"
+              autoComplete="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              label={'Search for Wikidata items'}
+              id={'selectedQnode'}
+              name={'selectedQnode'}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <React.Fragment>
+                    {loading ? (
+                      <CircularProgress color="inherit" size={20} />
+                    ) : null }
+                    {params.InputProps.endAdornment}
+                  </React.Fragment>
+                ),
+              }}
+              onChange={handleOnChange} />
+          )}
+        />
+      </Grid>
     )
   }
 
@@ -223,7 +234,6 @@ const QnodeInput = ({
       {renderSelectedQnode()}
       {renderInstructions()}
       {renderQnodeSearch()}
-      {renderSearchResults()}
       {renderQnodeCreate()}
     </Grid>
   )
