@@ -13,12 +13,15 @@ import Header from './Header'
 import Output from './Output'
 import Table from './Table'
 
+import fetchSettings from '../utils/fetchSettings'
+
 
 const Content = ({darkTheme, setDarkTheme}) => {
 
   const classes = useStyles()
 
   const [data, setData] = useState()
+  const [project, setProject] = useState()
   const [message, setMessage] = useState({})
   const [outputData, setOutputData] = useState()
   const [colWidth, setColWidth] = useState(window.innerWidth * 0.65)
@@ -39,6 +42,15 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const handleFileUpload = data => {
+    setData(data)
+    fetchSettings().then(project => {
+      setProject(project)
+    }).catch(error => {
+      console.log(error)
+    })
+  }
 
   return (
     <Grid className={classes.content}>
@@ -67,7 +79,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
         </div>
       ) : (
         <FileDrop
-          onSuccess={setData} setMessage={setMessage} />
+          setMessage={setMessage}
+          onSuccess={handleFileUpload} />
       )}
       {!!outputData && outputData.length > 1 && (
         <Download
