@@ -210,6 +210,13 @@ const PropertyInput = ({
           onChange={selectProperty}
           getOptionLabel={property => property.label}
           noOptionsText={'Enter a search term to search for properties'}
+          renderOption={property => (
+            <Typography variant="body1">
+              <b>{`${property.label} (${property.id})`}</b>
+              <br/>
+              {property.description}
+            </Typography>
+          )}
           renderInput={params => (
             <TextField {...params}
               fullWidth
