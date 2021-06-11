@@ -349,6 +349,11 @@ const Table = ({
   }, [selectedAnnotationBlock, selection.current])
 
   useEffect(() => {
+    // show the annotation blocks for the suggested/guessed annotations
+    setAnnotationBlocks(suggestedAnnotations)
+  }, [suggestedAnnotations])
+
+  useEffect(() => {
     setSelectedAnnotationBlock(selectedAnnotation => {
       const filteredAnnotation = annotationBlocks.find(
         annotation => annotation.id === selectedAnnotation.id
