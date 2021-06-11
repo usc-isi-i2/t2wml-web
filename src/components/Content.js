@@ -14,6 +14,7 @@ import Output from './Output'
 import Table from './Table'
 
 import fetchProject from '../utils/fetchProject'
+import fetchAnnotations from '../utils/fetchAnnotations'
 
 
 const Content = ({darkTheme, setDarkTheme}) => {
@@ -22,6 +23,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const [data, setData] = useState()
   const [project, setProject] = useState()
+  const [annotations, setAnnotations] = useState([])
   const [message, setMessage] = useState({})
   const [outputData, setOutputData] = useState()
   const [colWidth, setColWidth] = useState(window.innerWidth * 0.65)
@@ -50,12 +52,21 @@ const Content = ({darkTheme, setDarkTheme}) => {
     })
   }
 
+  const guessAnnotations = () => {
+    if ( !data.filepath ) { return }
+    fetchAnnotations(data.filepath, data.sheetName)
+    .then(guessedAnnotations => {
+      setAnnotations(guessedAnnotations)
+    })
+  }
+
   return (
     <Grid className={classes.content}>
       <Header
         project={project}
         setProject={setProject}
         darkTheme={darkTheme}
+        guessAnnotations={guessAnnotations}
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {data && data.table ? (
         <div className={classes.wrapper}>

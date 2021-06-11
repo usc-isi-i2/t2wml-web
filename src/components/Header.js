@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 
+import ViewQuiltIcon from '@material-ui/icons/ViewQuilt'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 
@@ -19,6 +20,7 @@ const Header = ({
   darkTheme,
   switchTheme,
   toggleSettings,
+  guessAnnotations,
 }) => {
 
   const classes = useStyles()
@@ -46,6 +48,17 @@ const Header = ({
     )
   }
 
+  const renderAnnotationsButton = () => {
+    return (
+      <Tooltip arrow title="guess annotations">
+        <IconButton edge="end" color="inherit"
+          onClick={() => guessAnnotations()}>
+          <ViewQuiltIcon size="large" />
+        </IconButton>
+      </Tooltip>
+    )
+  }
+
   const renderThemeButton = () => {
     return (
       <Tooltip arrow title="toggle light/dark theme">
@@ -63,6 +76,7 @@ const Header = ({
         {renderProjectMenu()}
         {renderProjectInfo()}
         {renderSpacer()}
+        {renderAnnotationsButton()}
         {renderThemeButton()}
       </Toolbar>
     </AppBar>
