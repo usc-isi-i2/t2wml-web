@@ -35,7 +35,7 @@ const ProjectMenu = () => {
   const renderButton = () => {
     return (
       <IconButton
-        edge="end"
+        edge="start"
         color="inherit"
         onClick={openProjectMenu}>
         <MoreVertIcon />
