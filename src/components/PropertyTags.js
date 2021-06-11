@@ -18,8 +18,8 @@ import { TAGS } from '../content/tag-options'
 const useStyles = makeStyles(theme => ({
   menu: {
     position: 'absolute',
-    top: theme.spacing(12),
-    left: theme.spacing(8),
+    top: theme.spacing(4),
+    right: theme.spacing(80),
   },
 }))
 
