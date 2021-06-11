@@ -67,7 +67,10 @@ const Output = ({ data, filename }) => {
                       placement="top"
                       title={`select the ${data[0][i]} next`}
                       open={!!activeCol && data[0][i] === activeCol}
-                      classes={{ tooltipPlacementTop: classes.tooltipTop }}
+                      classes={{
+                        popper: classes.popper,
+                        tooltipPlacementTop: classes.tooltipTop,
+                      }}
                       PopperProps={{
                         popperOptions: {
                           modifiers: {

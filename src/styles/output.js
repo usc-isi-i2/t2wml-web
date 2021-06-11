@@ -145,6 +145,9 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
+  popper: {
+    zIndex: 1000,
+  },
   tooltipTop: {
     marginTop: '10px',
   },
