@@ -622,7 +622,7 @@ const Table = ({
   useEffect(() => {
     updateAnnotationBlocks()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [annotationBlocks])
+  }, [qnodes, annotationBlocks])
 
   const removeAnnotationBlock = (annotationBlock) => {
     const rows = tableElement.current.querySelectorAll('tr')
@@ -673,6 +673,13 @@ const Table = ({
           while ( row && colIndex <= rightCol ) {
             const cell = row.children[colIndex]
             if ( !!cell ) {
+
+              qnodes.forEach(qnode => {
+                if ( qnode[0] === rowIndex-1 && qnode[1] === colIndex-1 ) {
+                  classNames.push('wikified')
+                }
+              })
+
               selectCell(
                 row.children[colIndex],
                 rowIndex,
