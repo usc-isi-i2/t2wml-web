@@ -15,6 +15,7 @@ import useStyles from '../styles/header'
 
 const Header = ({
   project,
+  setProject,
   darkTheme,
   switchTheme,
   toggleSettings,
@@ -31,9 +32,12 @@ const Header = ({
   }
 
   const renderProjectMenu = () => {
-    if ( !!project ) {
-      return <ProjectMenu project={project} />
-    }
+    if ( !project ) { return }
+    return (
+      <ProjectMenu
+        project={project}
+        setProject={setProject} />
+    )
   }
 
   const renderSpacer = () => {

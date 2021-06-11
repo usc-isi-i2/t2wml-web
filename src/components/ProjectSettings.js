@@ -12,6 +12,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
 
 import DraggablePaper from './DraggablePaper'
+import uploadSettings from '../utils/uploadSettings'
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,6 +26,7 @@ const useStyles = makeStyles(theme => ({
 
 const ProjectSettings = ({
   project,
+  setProject,
   hideProjectSettings,
 }) => {
 
@@ -44,7 +46,15 @@ const ProjectSettings = ({
     })
   }, [project])
 
-  const handleOnSubmit = () => {}
+  const handleOnSubmit = () => {
+    const settings = {
+      title: formState.projectTitle,
+      description: formState.projectDescription,
+      url: formState.projectDataSource,
+    }
+    uploadSettings(settings)
+      .then(updatedProject => setProject(updatedProject))
+  }
 
   const handleOnChange = event => {
     const value = event.target.value

@@ -54,6 +54,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
     <Grid className={classes.content}>
       <Header
         project={project}
+        setProject={setProject}
         darkTheme={darkTheme}
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {data && data.table ? (
