@@ -120,12 +120,18 @@ const useStyles = makeStyles(theme => ({
           '&.highlight': {
             background: theme.palette.type === 'dark' ? '#54a1c5' : '#a0cbdf',
           },
+          '&.wikified': {
+            color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
+          },
         },
         '&.role-dependentVar': {
           background: theme.palette.type === 'dark' ? '#3bab75' : '#D9F2E6',
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
           '&.highlight': {
             background: theme.palette.type === 'dark' ? '#68cb9b' : '#a0dfc1',
+          },
+          '&.wikified': {
+            color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
           },
         },
         '&.role-qualifier': {
@@ -134,12 +140,18 @@ const useStyles = makeStyles(theme => ({
           '&.highlight': {
             background: theme.palette.type === 'dark' ? '#5e5396' : '#aaa0df',
           },
+          '&.wikified': {
+            color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
+          },
         },
         '&.role-property': {
           background: theme.palette.type === 'dark' ? '#bb670f' : '#fbe5ce',
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
           '&.highlight': {
             background: theme.palette.type === 'dark' ? '#ee8e29' : '#f5bf87',
+          },
+          '&.wikified': {
+            color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
           },
         },
         '&.role-metadata': {
@@ -148,12 +160,18 @@ const useStyles = makeStyles(theme => ({
           '&.highlight': {
             background: theme.palette.type === 'dark' ? '#6984a3' : '#a9b8ca',
           },
+          '&.wikified': {
+            color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
+          },
         },
         '&.role-unit': {
           background: theme.palette.type === 'dark' ? '#ce9700' : '#fff2ce',
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
           '&.highlight': {
             background: theme.palette.type === 'dark' ? '#ffc21c' : '#ffde82',
+          },
+          '&.wikified': {
+            color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
           },
         },
         '& div.cell-border-top': {
