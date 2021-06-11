@@ -26,6 +26,7 @@ const Table = ({
   const tableElement = useRef(null)
   const prevDirection = useRef(null)
 
+  const [qnodes, setQnodes] = useState([])
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
   const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
@@ -100,6 +101,16 @@ const Table = ({
               setSelectedAnnotationBlock(selectedBlock)
             }
             updatePartialCSV()
+
+            // update list of qnodes with new qnodeIndices
+            if ( !!data.layers.qnode.entries.length ) {
+              let qnodeIndices = []
+              data.layers.qnode.entries.forEach(qnode => {
+                qnodeIndices = qnodeIndices.concat(qnode.indices)
+              })
+              console.log(qnodeIndices)
+              setQnodes(qnodeIndices)
+            }
           })
         })
         .catch(error => console.log(error))
