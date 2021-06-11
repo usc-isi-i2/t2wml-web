@@ -57,6 +57,7 @@ const PropertyInput = ({
   const timeoutID = useRef(null)
 
   const [tags, setTags] = useState([])
+  const [loading, setLoading] = useState(false)
   const [selected, setSelected] = useState(selectedProperty)
   const [selectedPropertyCells, setSelectedPropertyCells] = useState('')
   const [properties, setProperties] = useState([])
@@ -71,12 +72,15 @@ const PropertyInput = ({
     const value = event.target.value
     if ( !value ) {
       setProperties([])
+      setLoading(false)
     } else {
+      setLoading(true)
       clearTimeout(timeoutID.current)
       timeoutID.current = setTimeout(() => {
         fetchProperties(value)
         .then(data => {
           setProperties(data)
+          setLoading(false)
         })
         .catch(error => console.log(error))
       }, 250)
