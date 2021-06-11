@@ -1,6 +1,7 @@
 import React from 'react'
 
 import AppBar from '@material-ui/core/AppBar'
+import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -51,10 +52,10 @@ const Header = ({
   const renderAnnotationsButton = () => {
     return (
       <Tooltip arrow title="guess annotations">
-        <IconButton edge="end" color="inherit"
-          onClick={() => guessAnnotations()}>
-          <ViewQuiltIcon size="large" />
-        </IconButton>
+        <Button startIcon={<ViewQuiltIcon />}
+          onClick={guessAnnotations}>
+          Suggest Annotations
+        </Button>
       </Tooltip>
     )
   }
@@ -63,7 +64,7 @@ const Header = ({
     return (
       <Tooltip arrow title="toggle light/dark theme">
         <IconButton edge="end" color="inherit"
-          onClick={() => switchTheme()}>
+          onClick={switchTheme}>
           {darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
       </Tooltip>
