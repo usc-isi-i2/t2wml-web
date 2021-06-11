@@ -351,7 +351,14 @@ const Table = ({
   useEffect(() => {
     // show the annotation blocks for the suggested/guessed annotations
     setAnnotationBlocks(suggestedAnnotations)
-  }, [suggestedAnnotations])
+
+    // update output data with partial csv
+    if ( !!suggestedAnnotations.length ) {
+      fetchPartialCSV(file, sheet)
+      .then(data => setOutputData(data.cells))
+      .catch(error => console.log(error))
+    }
+  }, [suggestedAnnotations, file, sheet, setOutputData])
 
   useEffect(() => {
     setSelectedAnnotationBlock(selectedAnnotation => {
