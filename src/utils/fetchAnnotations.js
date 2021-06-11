@@ -13,7 +13,7 @@ const fetchAnnotations = (file, sheet) => {
         if ( !!response.error ) {
           reject(response.error)
         }
-        resolve(response.data)
+        resolve(response.annotations)
       })
   })
 }
