@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
     display: 'inline-block',
   },
+  autocompletePaper: {
+    maxHeight: '350px',
+  },
   removeButton: {
     marginTop: -1 * theme.spacing(2),
     '&:hover': {
@@ -211,6 +214,7 @@ const PropertyInput = ({
           onChange={selectProperty}
           getOptionLabel={property => property.label}
           noOptionsText={'Enter a search term to search for properties'}
+          classes={{ paper: classes.autocompletePaper }}
           renderOption={property => (
             <Typography variant="body1">
               <b>{`${property.label} (${property.id})`}</b>
