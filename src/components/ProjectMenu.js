@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const ProjectMenu = ({ project, setProject }) => {
+const ProjectMenu = ({ project, setProject, guessAnnotations }) => {
 
   const classes = useStyles()
 
@@ -63,6 +63,7 @@ const ProjectMenu = ({ project, setProject }) => {
         anchorEl={anchorElement}
         onClose={hideProjectMenu}>
         <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
+        <MenuItem onClick={guessAnnotations}>Guess Annotations</MenuItem>
       </Menu>
     )
   }

@@ -39,7 +39,8 @@ const Header = ({
     return (
       <ProjectMenu
         project={project}
-        setProject={setProject} />
+        setProject={setProject}
+        guessAnnotations={guessAnnotations} />
     )
   }
 
