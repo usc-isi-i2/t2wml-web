@@ -169,7 +169,7 @@ const AnnotationMenu = ({
   }
 
   const getFormValue = field => {
-    if ( !!formState[field] ) {
+    if ( !!formState[field] || typeof formState[field] === 'undefined' ) {
       return formState[field]
     }
 
