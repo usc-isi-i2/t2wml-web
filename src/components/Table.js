@@ -28,7 +28,7 @@ const Table = ({
 
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
-  const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
+  const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState({})
   const [suggestedAnnotation, setSuggestedAnnotation] = useState()
 
   const [selectedTab, setSelectedTab] = useState('block')
