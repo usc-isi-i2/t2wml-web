@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
 import TextField from '@material-ui/core/TextField'
@@ -48,7 +46,6 @@ const QnodeInput = ({
   const [qnodes, setQnodes] = useState([])
   const [loading, setLoading] = useState(false)
   const [selected, setSelected] = useState(selectedQnode)
-  const [anchorElement, setAnchorElement] = useState()
   const [showCreateQnode, setShowCreateQnode] = useState()
 
   useEffect(() => {
@@ -66,19 +63,12 @@ const QnodeInput = ({
       timeoutID.current = setTimeout(() => {
         fetchQnodes(value)
         .then(data => {
-          if ( data.length ) {
-            setAnchorElement(event.target)
-          }
           setQnodes(data)
           setLoading(false)
         })
         .catch(error => console.log(error))
       }, 250)
     }
-  }
-
-  const handleCloseMenu = () => {
-    setAnchorElement()
   }
 
   const handleOnSelectQnode = (event, qnode) => {
@@ -88,7 +78,6 @@ const QnodeInput = ({
   const selectQnode = qnode => {
     onSelectQnode(qnode)
     setSelected(qnode)
-    setAnchorElement()
     setQnodes([])
   }
 
