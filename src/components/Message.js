@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import Snackbar from '@material-ui/core/Snackbar'
 import Alert from '@material-ui/lab/Alert'
+import AlertTitle from '@material-ui/lab/AlertTitle'
 import { makeStyles } from '@material-ui/core/styles'
 
 
@@ -44,6 +45,9 @@ const Message = ({ message }) => {
         className={classes.alert}
         severity={message.type}
         onClose={handleClose}>
+        {!!message.title && (
+          <AlertTitle>{message.title}</AlertTitle>
+        )}
         {message.text}
       </Alert>
     </Snackbar>
