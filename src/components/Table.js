@@ -109,7 +109,6 @@ const Table = ({
               data.layers.qnode.entries.forEach(qnode => {
                 qnodeIndices = qnodeIndices.concat(qnode.indices)
               })
-              console.log(qnodeIndices)
               setQnodes(qnodeIndices)
             }
           })
@@ -381,7 +380,13 @@ const Table = ({
     if ( !!suggestedAnnotations.length ) {
       fetchPartialCSV(file, sheet)
       .then(data => setOutputData(data.cells))
-      .catch(error => console.log(error))
+      .catch(error => {
+        setMessage({
+          type: 'error',
+          title: `${error.errorCode} - ${error.errorTitle}`,
+          text: error.errorDescription,
+        })
+      })
     }
   }, [suggestedAnnotations, file, sheet, setOutputData])
 
@@ -718,7 +723,13 @@ const Table = ({
     // update output data with partial csv
     fetchPartialCSV(file, sheet)
     .then(data => setOutputData(data.cells))
-    .catch(error => console.log(error))
+    .catch(error => {
+      setMessage({
+        type: 'error',
+        title: `${error.errorCode} - ${error.errorTitle}`,
+        text: error.errorDescription,
+      })
+    })
   }
 
   const updateAnnotation = (annotations, deletedAnnotationBlock=null) => {
