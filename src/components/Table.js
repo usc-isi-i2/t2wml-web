@@ -674,11 +674,11 @@ const Table = ({
             const cell = row.children[colIndex]
             if ( !!cell ) {
 
-              qnodes.forEach(qnode => {
+              for ( const qnode of qnodes ) {
                 if ( qnode[0] === rowIndex-1 && qnode[1] === colIndex-1 ) {
                   classNames.push('wikified')
                 }
-              })
+              }
 
               selectCell(
                 row.children[colIndex],
