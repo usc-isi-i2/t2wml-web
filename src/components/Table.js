@@ -388,7 +388,7 @@ const Table = ({
         })
       })
     }
-  }, [suggestedAnnotations, file, sheet, setOutputData])
+  }, [suggestedAnnotations, file, sheet, setOutputData, setMessage])
 
   useEffect(() => {
     setSelectedAnnotationBlock(selectedAnnotation => {
