@@ -76,6 +76,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
               file={data.filepath}
               sheet={data.sheetName}
               data={data.table.cells}
+              setMessage={setMessage}
               suggestedAnnotations={annotations}
               setOutputData={setOutputData} />
           </div>

@@ -14,6 +14,7 @@ const Table = ({
   file,
   sheet,
   data,
+  setMessage,
   suggestedAnnotations,
   setOutputData,
 }) => {
@@ -112,8 +113,21 @@ const Table = ({
               setQnodes(qnodeIndices)
             }
           })
+          .catch(error => {
+            setMessage({
+              type: 'error',
+              title: `${error.errorCode} - ${error.errorTitle}`,
+              text: error.errorDescription,
+            })
+          })
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          setMessage({
+            type: 'error',
+            title: `${error.errorCode} - ${error.errorTitle}`,
+            text: error.errorDescription,
+          })
+        })
       }
     } else {
 
