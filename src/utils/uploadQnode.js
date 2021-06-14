@@ -24,7 +24,7 @@ const uploadQnode = (file, sheet, qnode) => {
       }
       if ( !!data.entity ) {
         resolve({
-          qnode: data.entity.id,
+          id: data.entity.id,
           label: [data.entity.label],
           description: [data.entity.description],
         })
