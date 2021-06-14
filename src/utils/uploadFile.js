@@ -8,7 +8,11 @@ const uploadFile = (file, onProgress) => {
     xhr.onload = () => {
       try {
         const response = JSON.parse(xhr.responseText)
-        resolve(response)
+        if ( 'error' in response ) {
+          reject(response.error)
+        } else {
+          resolve(response)
+        }
       } catch (error) {
         reject(error)
       }
