@@ -57,10 +57,11 @@ const FileDrop = ({ onSuccess, setMessage }) => {
     })
   }
 
-  function onUploadError() {
+  function onUploadError(error) {
     setMessage({
       type: 'error',
-      text: 'Err! Unable to upload file',
+      title: `${error.errorCode} - ${error.errorTitle}`,
+      text: error.errorDescription,
     })
   }
 
