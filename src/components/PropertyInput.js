@@ -117,7 +117,7 @@ const PropertyInput = ({
     return (
       <Grid item xs={12}>
         <Typography variant="body1">
-          <b>{!!selected ? 'Selected property' : 'Select property'}</b>
+          <b>{!!selected ? 'Property' : 'Select property'}</b>
         </Typography>
       </Grid>
     )
@@ -143,7 +143,7 @@ const PropertyInput = ({
             )}
           </Grid>
           <Grid item xs={2}>
-            <Tooltip arrow placement="top" title={'remove selected property'}>
+            <Tooltip arrow placement="top" title={'remove property'}>
               <IconButton className={classes.removeButton}
                 onClick={removeSelected}>
                 <CloseIcon />
