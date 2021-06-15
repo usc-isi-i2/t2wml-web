@@ -27,7 +27,6 @@ const Table = ({
   const tableElement = useRef(null)
   const prevDirection = useRef(null)
 
-  const [qnodes, setQnodes] = useState([])
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
   const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
@@ -102,15 +101,6 @@ const Table = ({
               setSelectedAnnotationBlock(selectedBlock)
             }
             updatePartialCSV()
-
-            // update list of qnodes with new qnodeIndices
-            if ( !!data.layers.qnode.entries.length ) {
-              let qnodeIndices = []
-              data.layers.qnode.entries.forEach(qnode => {
-                qnodeIndices = qnodeIndices.concat(qnode.indices)
-              })
-              setQnodes(qnodeIndices)
-            }
           })
           .catch(error => {
             setMessage({
@@ -638,11 +628,6 @@ const Table = ({
     }
   }
 
-  useEffect(() => {
-    updateAnnotationBlocks()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [qnodes, annotationBlocks])
-
   const removeAnnotationBlock = (annotationBlock) => {
     const rows = tableElement.current.querySelectorAll('tr')
     const { x1, x2, y1, y2 } = annotationBlock.selection
@@ -692,12 +677,6 @@ const Table = ({
           while ( row && colIndex <= rightCol ) {
             const cell = row.children[colIndex]
             if ( !!cell ) {
-
-              for ( const qnode of qnodes ) {
-                if ( qnode[0] === rowIndex-1 && qnode[1] === colIndex-1 ) {
-                  classNames.push('wikified')
-                }
-              }
 
               selectCell(
                 row.children[colIndex],
