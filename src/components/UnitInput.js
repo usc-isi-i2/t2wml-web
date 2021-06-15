@@ -12,8 +12,10 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import CloseIcon from '@material-ui/icons/Close'
 import DoneIcon from '@material-ui/icons/Done'
+import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/styles'
 
+import CreateUnit from './CreateUnit'
 import fetchUnits from '../utils/fetchUnits'
 import * as utils from '../utils/table'
 
@@ -57,6 +59,7 @@ const UnitInput = ({
   const [selected, setSelected] = useState(selectedUnit)
   const [selectedUnitCells, setSelectedUnitCells] = useState('')
   const [units, setUnits] = useState([])
+  const [showCreateUnit, setShowCreateUnit] = useState(false)
 
   useEffect(() => {
     setSelected(selectedUnit)
@@ -244,12 +247,35 @@ const UnitInput = ({
     )
   }
 
+  const renderUnitCreate = () => {
+    if ( !!selected ) { return }
+    return (
+      <Grid item xs={12}>
+        <Button
+          color="primary"
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={() => setShowCreateUnit(true)}>
+          Add a new unit
+        </Button>
+        {showCreateUnit && (
+          <CreateUnit
+            file={file}
+            sheet={sheet}
+            selectUnit={selectUnit}
+            hideMenu={() => setShowCreateUnit(false)} />
+        )}
+      </Grid>
+    )
+  }
+
   return (
     <Grid container spacing={3}>
       {renderTitle()}
       {renderSelectedUnit()}
       {renderUnitCellSelection()}
       {renderUnitSearch()}
+      {renderUnitCreate()}
     </Grid>
   )
 }
