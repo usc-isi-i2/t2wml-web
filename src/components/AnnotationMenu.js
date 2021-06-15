@@ -409,7 +409,7 @@ const AnnotationMenu = ({
               <Button
                 onClick={handleOnDelete}
                 className={classes.deleteButton}>
-                DELETE
+                DELETE THIS ANNOTATION
               </Button>
             )}
           </Grid>
