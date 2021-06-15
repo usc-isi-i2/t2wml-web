@@ -42,6 +42,7 @@ const OverlayMenu = ({
   onSelectionChange,
   updateAnnotation,
   hideOverlayMenu,
+  setMessage,
 }) => {
 
   const classes = useStyles()
@@ -84,7 +85,8 @@ const OverlayMenu = ({
             suggestedAnnotation={suggestedAnnotation}
             onSelectionChange={onSelectionChange}
             updateAnnotation={updateAnnotation}
-            hideOverlayMenu={hideOverlayMenu} />
+            hideOverlayMenu={hideOverlayMenu}
+            setMessage={setMessage} />
         </TabPanel>
         <TabPanel value={selectedTab} index={'cell'}>
           <WikificationMenu

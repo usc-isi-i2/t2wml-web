@@ -29,6 +29,7 @@ const AnnotationMenu = ({
   onSelectionChange,
   selectedAnnotation,
   suggestedAnnotation,
+  setMessage,
 }) => {
 
   const classes = useStyles()
@@ -121,7 +122,14 @@ const AnnotationMenu = ({
 
     uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
       updateAnnotation(data.annotations)
-    }).catch(error => console.log(error))
+      .catch(error => {
+        setMessage({
+          type: 'error',
+          title: `${error.errorCode} - ${error.errorTitle}`,
+          text: error.errorDescription,
+        })
+      })
+    })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState])
@@ -138,6 +146,11 @@ const AnnotationMenu = ({
       hideOverlayMenu()
     }).catch(error => {
       hideOverlayMenu()
+      setMessage({
+        type: 'error',
+        title: `${error.errorCode} - ${error.errorTitle}`,
+        text: error.errorDescription,
+      })
     })
   }
 
@@ -148,7 +161,13 @@ const AnnotationMenu = ({
     })
     uploadAnnotations(file, sheet, annotations, () => {}).then(data => {
       updateAnnotation(data.annotations)
-    }).catch(error => console.log(error))
+    }).catch(error => {
+      setMessage({
+        type: 'error',
+        title: `${error.errorCode} - ${error.errorTitle}`,
+        text: error.errorDescription,
+      })
+    })
   }
 
   const handleOnChange = event => {
