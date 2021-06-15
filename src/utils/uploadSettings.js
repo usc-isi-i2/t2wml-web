@@ -1,4 +1,4 @@
-const uploadQnode = (settings) => {
+const uploadSettings = (settings) => {
   let url = 'api/project/settings?project_folder=/proj'
 
   const requestData = {
@@ -26,4 +26,4 @@ const uploadQnode = (settings) => {
 }
 
 
-export default uploadQnode
+export default uploadSettings
