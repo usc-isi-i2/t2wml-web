@@ -12,6 +12,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 import WikifyButton from './WikifyButton'
 import PropertyInput from './PropertyInput'
+import UnitInput from './UnitInput'
 import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
 import useStyles from '../styles/annotationMenu'
@@ -158,6 +159,22 @@ const AnnotationMenu = ({
     annotations.push({
       selection: {...selection},
       role: 'property',
+    })
+    uploadAnnotations(file, sheet, annotations, () => {}).then(data => {
+      updateAnnotation(data.annotations)
+    }).catch(error => {
+      setMessage({
+        type: 'error',
+        title: `${error.errorCode} - ${error.errorTitle}`,
+        text: error.errorDescription,
+      })
+    })
+  }
+
+  const handleOnSubmitUnitCells = selection => {
+    annotations.push({
+      selection: {...selection},
+      role: 'unit',
     })
     uploadAnnotations(file, sheet, annotations, () => {}).then(data => {
       updateAnnotation(data.annotations)
@@ -353,6 +370,13 @@ const AnnotationMenu = ({
     })
   }
 
+  const handleOnSelectUnit = node => {
+    setFormState({
+      ...formState,
+      unit: node,
+    })
+  }
+
   const renderAdditionalInputs = () => {
     const currentType = getFormValue('type')
 
@@ -384,6 +408,26 @@ const AnnotationMenu = ({
           }
 
           if ( showAdditionalInputs ) {
+
+            if ( option.value === 'unit' ) {
+              return (
+                <Grid item xs={12} key={option.value}>
+                  <Grid container>
+                    <Grid item xs={1}>
+                    </Grid>
+                    <Grid item xs={11}>
+                      <UnitInput
+                        file={file}
+                        sheet={sheet}
+                        selectedUnit={getFormValue('unit')}
+                        onSelectUnit={handleOnSelectUnit}
+                        onSubmitUnitCells={handleOnSubmitUnitCells} />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              )
+            }
+
             return (
               <Grid item xs={12} key={option.value}>
                 <Grid container>
