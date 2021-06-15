@@ -119,15 +119,15 @@ const AnnotationMenu = ({
       unit: unit,
       id: id,
     })
-
-    uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
+    uploadAnnotations(file, sheet, filteredAnnotations, () => {})
+    .then(data => {
       updateAnnotation(data.annotations)
-      .catch(error => {
-        setMessage({
-          type: 'error',
-          title: `${error.errorCode} - ${error.errorTitle}`,
-          text: error.errorDescription,
-        })
+    })
+    .catch(error => {
+      setMessage({
+        type: 'error',
+        title: `${error.errorCode} - ${error.errorTitle}`,
+        text: error.errorDescription,
       })
     })
 
@@ -265,7 +265,15 @@ const AnnotationMenu = ({
             </MenuItem>
           ))}
         </TextField>
-        {showWikifyButton && <WikifyButton />}
+        {showWikifyButton && (
+          <WikifyButton
+            file={file}
+            sheet={sheet}
+            selection={selection}
+            isProperty={false}
+            dataType={'string'}
+            setMessage={setMessage} />
+        )}
       </Grid>
     )
   }
@@ -307,7 +315,15 @@ const AnnotationMenu = ({
             </MenuItem>
           ))}
         </TextField>
-        {showWikifyButton && <WikifyButton />}
+        {showWikifyButton && (
+          <WikifyButton
+            file={file}
+            sheet={sheet}
+            selection={selection}
+            isProperty={false}
+            dataType={'string'}
+            setMessage={setMessage} />
+        )}
       </Grid>
     )
   }
