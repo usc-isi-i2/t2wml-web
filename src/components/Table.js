@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Paper } from '@material-ui/core'
 
@@ -651,7 +651,7 @@ const Table = ({
     }
   }
 
-  const updateAnnotationBlocks = () => {
+  const updateAnnotationBlocks = useCallback(() => {
     setAnnotationBlocks(annotationBlocks => {
       for ( const block of annotationBlocks ) {
         const { role, type, selection } = block
@@ -696,7 +696,7 @@ const Table = ({
       }
       return annotationBlocks
     })
-  }
+  }, [])
 
   useEffect(() => {
     updateAnnotationBlocks()
