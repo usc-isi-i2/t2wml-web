@@ -698,6 +698,10 @@ const Table = ({
     })
   }
 
+  useEffect(() => {
+    updateAnnotationBlocks()
+  }, [annotationBlocks, updateAnnotationBlocks])
+
   const updatePartialCSV = () => {
     // update output data with partial csv
     fetchPartialCSV(file, sheet)
