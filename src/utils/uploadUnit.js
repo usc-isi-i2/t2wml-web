@@ -4,6 +4,7 @@ const uploadUnit = (file, sheet, unit) => {
   url += `&sheet_name=${sheet}`
 
   const requestData = {
+    key: 'P31',
     is_property: false,
     label: unit.unitLabel,
     description: unit.unitDescription,
