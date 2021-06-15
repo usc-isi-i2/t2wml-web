@@ -13,7 +13,6 @@ import Header from './Header'
 import Output from './Output'
 import Table from './Table'
 
-import fetchProject from '../utils/fetchProject'
 import fetchAnnotations from '../utils/fetchAnnotations'
 
 
@@ -47,9 +46,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const handleFileUpload = data => {
     setData(data)
-    fetchProject().then(project => {
-      setProject(project)
-    })
+    setProject(data.project)
   }
 
   const guessAnnotations = () => {
