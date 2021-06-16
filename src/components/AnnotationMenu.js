@@ -149,7 +149,7 @@ const AnnotationMenu = ({
     })
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formState, getFormValue])
+  }, [formState])
 
   const handleOnDelete = () => {
     if ( !annotation.role ) { return }
