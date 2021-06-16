@@ -80,7 +80,7 @@ const FileDrop = ({ onSuccess, setMessage }) => {
       ))}
       <Grid item>
         <div {...getRootProps({ className: `${classes.dropzone} ${isDragActive ? 'active' : ''}` })}>
-          <input {...getInputProps()} />
+          <input {...getInputProps()} autoFocus="true" tabIndex="0" />
           <UploadIcon width='256' height='256' />
         </div>
       </Grid>

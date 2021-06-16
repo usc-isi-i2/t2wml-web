@@ -67,7 +67,7 @@ const Header = ({
   const renderThemeButton = () => {
     return (
       <Tooltip arrow title="toggle light/dark theme">
-        <IconButton edge="end" color="inherit"
+        <IconButton edge="end" color="inherit" tabIndex="-1"
           onClick={switchTheme}>
           {darkTheme ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
