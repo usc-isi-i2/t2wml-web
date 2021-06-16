@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
@@ -87,6 +87,22 @@ const AnnotationMenu = ({
     })
   }, [selectedAnnotation])
 
+  const getFormValue = useCallback(field => {
+    if ( !!formState[field] || typeof formState[field] === 'undefined' ) {
+      return formState[field]
+    }
+
+    if ( !!annotation[field] && !userChangedFormState ) {
+      return annotation[field]
+    }
+
+    if ( !!suggestion[field] && !userChangedFormState ) {
+      return suggestion[field]
+    }
+
+    return ''
+  }, [annotation, formState, suggestion, userChangedFormState])
+
   useEffect(() => {
 
     // skip if the form state is empty (on init)
@@ -132,8 +148,7 @@ const AnnotationMenu = ({
       })
     })
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formState])
+  }, [formState, file, sheet, annotations, annotation.id, getFormValue, selectedAnnotation, selection, setMessage, updateAnnotation])
 
   const handleOnDelete = () => {
     if ( !annotation.role ) { return }
@@ -202,22 +217,6 @@ const AnnotationMenu = ({
         onSelectionChange(newSelection)
       }
     }
-  }
-
-  const getFormValue = field => {
-    if ( !!formState[field] || typeof formState[field] === 'undefined' ) {
-      return formState[field]
-    }
-
-    if ( !!annotation[field] && !userChangedFormState ) {
-      return annotation[field]
-    }
-
-    if ( !!suggestion[field] && !userChangedFormState ) {
-      return suggestion[field]
-    }
-
-    return ''
   }
 
   const renderFormInstructions = () => {
