@@ -103,6 +103,53 @@ const AnnotationMenu = ({
     return ''
   }, [annotation, formState, suggestion, userChangedFormState])
 
+  useEffect(() => {
+
+    // skip if the form state is empty (on init)
+    if ( Object.keys(formState).map(key => !!formState[key]).every(x => !x) ) {
+      return
+    }
+
+    const filteredAnnotations = annotations.filter(
+      annotation => annotation !== selectedAnnotation
+    )
+
+    const role = getFormValue('role')
+    const type = getFormValue('type')
+    const property = getFormValue('property')
+    const language = getFormValue('language')
+    const precision = getFormValue('precision')
+    const calendar = getFormValue('calendar')
+    const format = getFormValue('format')
+    const unit = getFormValue('unit')
+    const id = annotation.id
+
+    filteredAnnotations.push({
+      selection: {...selection},
+      role: role,
+      type: type,
+      property: property,
+      language: language,
+      precision: precision,
+      calendar: calendar,
+      format: format,
+      unit: unit,
+      id: id,
+    })
+    uploadAnnotations(file, sheet, filteredAnnotations, () => {})
+    .then(data => {
+      updateAnnotation(data.annotations)
+    })
+    .catch(error => {
+      setMessage({
+        type: 'error',
+        title: `${error.errorCode} - ${error.errorTitle}`,
+        text: error.errorDescription,
+      })
+    })
+
+  }, [formState, file, sheet, annotations, annotation.id, getFormValue, selectedAnnotation, selection, setMessage, updateAnnotation])
+
   const handleOnDelete = () => {
     if ( !annotation.role ) { return }
 
@@ -155,49 +202,6 @@ const AnnotationMenu = ({
     })
   }
 
-  const submitChanges = () => {
-
-    // Filter the current annotation out of the main list
-    const filteredAnnotations = annotations.filter(
-      a => a.id !== selectedAnnotation.id
-    )
-
-    const role = getFormValue('role')
-    const type = getFormValue('type')
-    const property = getFormValue('property')
-    const language = getFormValue('language')
-    const precision = getFormValue('precision')
-    const calendar = getFormValue('calendar')
-    const format = getFormValue('format')
-    const unit = getFormValue('unit')
-    const id = annotation.id
-
-    filteredAnnotations.push({
-      selection: {...selection},
-      role: role,
-      type: type,
-      property: property,
-      language: language,
-      precision: precision,
-      calendar: calendar,
-      format: format,
-      unit: unit,
-      id: id,
-    })
-    uploadAnnotations(file, sheet, filteredAnnotations, () => {})
-    .then(data => {
-      updateAnnotation(data.annotations)
-    })
-    .catch(error => {
-      setMessage({
-        type: 'error',
-        title: `${error.errorCode} - ${error.errorTitle}`,
-        text: error.errorDescription,
-      })
-    })
-
-  }
-
   const handleOnChange = event => {
     const value = event.target.value
     setFormState({
@@ -213,7 +217,6 @@ const AnnotationMenu = ({
         onSelectionChange(newSelection)
       }
     }
-    submitChanges()
   }
 
   const renderFormInstructions = () => {
