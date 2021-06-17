@@ -770,6 +770,17 @@ const Table = ({
     }
   }
 
+  const renderTableHeader = () => {
+    if ( !tableData ) { return }
+    return Object.keys(tableData[0]).map((r, i) => (
+      <th scope="col" key={i}>
+        <div onDoubleClick={handleOnClickHeader}>
+          {utils.columnToLetter(i + 1)}
+        </div>
+      </th>
+    ))
+  }
+
   const renderTable = () => {
     return (
       <Paper>
@@ -780,13 +791,7 @@ const Table = ({
             <thead>
               <tr>
                 <th scope="col"></th>
-                {!!tableData && Object.keys(tableData[0]).map((r, i) => (
-                  <th scope="col" key={i}>
-                    <div onDoubleClick={handleOnClickHeader}>
-                      {utils.columnToLetter(i + 1)}
-                    </div>
-                  </th>
-                ))}
+                {renderTableHeader()}
               </tr>
             </thead>
             <tbody>
