@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Paper } from '@material-ui/core'
 
+import TableCell from './TableCell'
 import OverlayMenu from './OverlayMenu'
 import useStyles from '../styles/table'
 import * as utils from '../utils/table'
 import fetchPartialCSV from '../utils/fetchPartialCSV'
 import fetchSuggestions from '../utils/fetchSuggestions'
 import uploadAnnotations from '../utils/uploadAnnotations'
-
 
 const Table = ({
   file,
@@ -786,9 +786,9 @@ const Table = ({
     return Object.entries(tableData).map((row, i) => (
       <tr key={`row-${i}`}>
         <td>{i + 1}</td>
-        {Object.entries(tableData[i]).map((cell, j) => {
-          return <td key={`cell-${j}`}>{tableData[i][j].value}</td>
-        })}
+        {Object.entries(tableData[i]).map((cell, j) => (
+          <TableCell key={`cell-${j}`} data={tableData[i][j]} />
+        ))}
       </tr>
     ))
   }
