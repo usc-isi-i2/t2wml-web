@@ -700,6 +700,7 @@ const Table = ({
 
     // Initialize the previous element with the one selected
     prevElement.current = element
+    updateSelections()
   }
 
   const handleOnMouseMove = event => {
