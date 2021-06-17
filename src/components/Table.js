@@ -326,44 +326,64 @@ const Table = ({
           activeCorner: false,
         }
 
+        // moving to the right
         if ( prevSelection.x1 < x1 ) {
-          let index = prevSelection.x1
-          while ( index < x1 ) {
-            tableData[prevSelection.y1 - 1][index - 1] = {
-              ...tableData[prevSelection.y1 - 1][index - 1],
-              ...defaultCellState,
+          let colIndex = prevSelection.x1
+          while ( colIndex < x1 ) {
+            let rowIndex = prevSelection.y1
+            while ( rowIndex < prevSelection.y2 ) {
+              tableData[rowIndex - 1][colIndex - 1] = {
+                ...tableData[rowIndex - 1][colIndex - 1],
+                ...defaultCellState,
+              }
+              rowIndex += 1
             }
-            index += 1
+            colIndex += 1
           }
         }
+
         if ( prevSelection.x2 > x2 ) {
-          let index = prevSelection.x2
-          while ( index > x2 ) {
-            tableData[prevSelection.y2 - 1][index - 1] = {
-              ...tableData[prevSelection.y2 - 1][index - 1],
-              ...defaultCellState,
+          let colIndex = prevSelection.x2
+          while ( colIndex > x2 ) {
+            let rowIndex = prevSelection.y1
+            while ( rowIndex < prevSelection.y2 ) {
+              tableData[rowIndex - 1][colIndex - 1] = {
+                ...tableData[rowIndex - 1][colIndex - 1],
+                ...defaultCellState,
+              }
+              rowIndex += 1
             }
-            index -= 1
+            colIndex -= 1
           }
         }
+
         if ( prevSelection.y1 < y1 ) {
-          let index = prevSelection.y1
-          while ( index < y1 ) {
-            tableData[index - 1][prevSelection.x1 - 1] = {
-              ...tableData[index - 1][prevSelection.x1 - 1],
-              ...defaultCellState,
+          let rowIndex = prevSelection.y1
+          while ( rowIndex < y1 ) {
+            let colIndex = prevSelection.x1
+            while ( colIndex < prevSelection.x2 ) {
+              tableData[rowIndex - 1][colIndex - 1] = {
+                ...tableData[rowIndex - 1][colIndex - 1],
+                ...defaultCellState,
+              }
+              colIndex += 1
             }
-            index += 1
+            rowIndex += 1
           }
         }
+
         if ( prevSelection.y2 > y2 ) {
-          let index = prevSelection.y2
-          while ( index > y2 ) {
-            tableData[index - 1][prevSelection.x2 - 1] = {
-              ...tableData[index - 1][prevSelection.x2 - 1],
-              ...defaultCellState,
+          let rowIndex = prevSelection.y2
+          while ( rowIndex > y2 ) {
+            let colIndex = prevSelection.x1
+            while ( colIndex < prevSelection.x2 ) {
+              tableData[rowIndex - 1][colIndex - 1] = {
+                ...tableData[rowIndex - 1][colIndex - 1],
+                ...defaultCellState,
+              }
+              colIndex += 1
             }
-            index -= 1
+            rowIndex -= 1
           }
         }
       }
