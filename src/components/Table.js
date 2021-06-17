@@ -299,7 +299,7 @@ const Table = ({
     resetSelections()
   }, [resetSelections])
 
-  const updateSelections = useCallback(() => {
+  const updateSelections = useCallback(prevSelection => {
     if ( !selection.current ) { return }
 
     setTableData(prevTableData => {
@@ -314,6 +314,60 @@ const Table = ({
       }
 
       const { x1, x2, y1, y2 } = selection.current
+
+      if ( !!prevSelection ) {
+
+        const defaultCellState = {
+          active: false,
+          activeTop: false,
+          activeLeft: false,
+          activeRight: false,
+          activeBottom: false,
+          activeCorner: false,
+        }
+
+        if ( prevSelection.x1 < x1 ) {
+          let index = prevSelection.x1
+          while ( index < x1 ) {
+            tableData[prevSelection.y1 - 1][index - 1] = {
+              ...tableData[prevSelection.y1 - 1][index - 1],
+              ...defaultCellState,
+            }
+            index += 1
+          }
+        }
+        if ( prevSelection.x2 > x2 ) {
+          let index = prevSelection.x2
+          while ( index > x2 ) {
+            tableData[prevSelection.y2 - 1][index - 1] = {
+              ...tableData[prevSelection.y2 - 1][index - 1],
+              ...defaultCellState,
+            }
+            index -= 1
+          }
+        }
+        if ( prevSelection.y1 < y1 ) {
+          let index = prevSelection.y1
+          while ( index < y1 ) {
+            tableData[index - 1][prevSelection.x1 - 1] = {
+              ...tableData[index - 1][prevSelection.x1 - 1],
+              ...defaultCellState,
+            }
+            index += 1
+          }
+        }
+        if ( prevSelection.y2 > y2 ) {
+          let index = prevSelection.y2
+          while ( index > y2 ) {
+            tableData[index - 1][prevSelection.x2 - 1] = {
+              ...tableData[index - 1][prevSelection.x2 - 1],
+              ...defaultCellState,
+            }
+            index -= 1
+          }
+        }
+      }
+
       const leftCol = Math.min(x1 - 1, x2 - 1)
       const rightCol = Math.max(x1 - 1, x2 - 1)
       const topRow = Math.min(y1 - 1, y2 - 1)
@@ -365,7 +419,7 @@ const Table = ({
     })
   }, [selectedAnnotationBlock])
 
-  const handleOnKeyDown = useCallback((event) => {
+  const handleOnKeyDown = useCallback(event => {
 
     // Close annotation menu with ESC key
     if ( event.code === 'Escape' ) {
@@ -739,17 +793,19 @@ const Table = ({
     if ( userSelecting && !event.shiftKey ) {
       if ( !selection.current ) { return }
 
+      const prevSelection = {...selection.current}
+
       // Update the last x and y coordinates of the selection
-      const newCellIndex = element.cellIndex
+      const newColIndex = element.cellIndex
       const newRowIndex = element.parentElement.rowIndex
       selection.current = {
         ...selection.current,
-        x2: newCellIndex,
+        x2: newColIndex,
         y2: newRowIndex,
       }
 
       // Update Selections
-      updateSelections()
+      updateSelections(prevSelection)
 
       // Update selected annotation block area when resizing
       if ( prevElement.current.nodeName === 'TD' ) {
@@ -867,8 +923,9 @@ const Table = ({
   }
 
   const handleOnSelectionChange = newSelection => {
+    const prevSelection = {...selection.current}
     selection.current = {...newSelection}
-    updateSelections()
+    updateSelections(prevSelection)
 
     // trigger a re-render of the annotation menu with the updated selection
     setAnnotationBlocks(annotationBlocks => ([...annotationBlocks]))
