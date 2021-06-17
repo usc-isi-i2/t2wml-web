@@ -780,7 +780,7 @@ const Table = ({
             <thead>
               <tr>
                 <th scope="col"></th>
-                {cols.map((r, i) => (
+                {!!tableData && Object.keys(tableData[0]).map((r, i) => (
                   <th scope="col" key={i}>
                     <div onDoubleClick={handleOnClickHeader}>
                       {utils.columnToLetter(i + 1)}
@@ -790,15 +790,11 @@ const Table = ({
               </tr>
             </thead>
             <tbody>
-              {rows.map((e, i) => (
+              {!! tableData && Object.entries(tableData).map((row, i) => (
                 <tr key={`row-${i}`}>
                   <td>{i + 1}</td>
-                  {cols.map((r, j) => {
-                    if ( i < data.length && j < data[i].length && data[i][j] ) {
-                      return <td key={`cell-${j}`}>{data[i][j]}</td>
-                    } else {
-                      return <td key={`cell-${j}`} />
-                    }
+                  {Object.entries(tableData[i]).map((cell, j) => {
+                    return <td key={`cell-${j}`}>{tableData[i][j].value}</td>
                   })}
                 </tr>
               ))}
