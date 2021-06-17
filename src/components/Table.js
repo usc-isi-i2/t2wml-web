@@ -200,49 +200,75 @@ const Table = ({
   }, [])
 
   const updateAnnotationBlocks = useCallback(() => {
-    setAnnotationBlocks(annotationBlocks => {
-      for ( const block of annotationBlocks ) {
-        const { role, type, selection } = block
+    setTableData(prevTableData => {
+      const tableData = {...prevTableData}
 
-        const classNames = []
-        if ( role ) {
-          classNames.push(`role-${role}`)
-        }
-        if ( type ) {
-          classNames.push(`type-${type}`)
-        }
+      setAnnotationBlocks(annotationBlocks => {
+        for ( const block of annotationBlocks ) {
+          const { role, type, selection } = block
 
-        const rows = tableElement.current.querySelectorAll('tr')
-        const { x1, y1, x2, y2 } = selection
-        const leftCol = Math.min(x1, x2)
-        const rightCol = Math.max(x1, x2)
-        const topRow = Math.min(y1, y2)
-        const bottomRow = Math.max(y1, y2)
-        let rowIndex = topRow
-        while ( rowIndex <= bottomRow ) {
-          let colIndex = leftCol
-          const row = rows[rowIndex]
-          while ( row && colIndex <= rightCol ) {
-            const cell = row.children[colIndex]
-            if ( !!cell ) {
-
-              selectCell(
-                row.children[colIndex],
-                rowIndex,
-                colIndex,
-                topRow,
-                leftCol,
-                rightCol,
-                bottomRow,
-                classNames,
-              )
-            }
-            colIndex += 1
+          const classNames = []
+          if ( role ) {
+            classNames.push(`role-${role}`)
           }
-          rowIndex += 1
+          if ( type ) {
+            classNames.push(`type-${type}`)
+          }
+
+          const rows = tableElement.current.querySelectorAll('tr')
+          const { x1, y1, x2, y2 } = selection
+          const leftCol = Math.min(x1 - 1, x2 - 1)
+          const rightCol = Math.max(x1 - 1, x2 - 1)
+          const topRow = Math.min(y1 - 1, y2 - 1)
+          const bottomRow = Math.max(y1 - 1, y2 - 1)
+          let rowIndex = topRow
+          while ( rowIndex <= bottomRow ) {
+            let colIndex = leftCol
+            while ( colIndex <= rightCol ) {
+              const cellData = tableData[rowIndex][colIndex]
+              cellData.classNames = classNames
+              cellData.active = true
+              cellData.activeTop = false
+              cellData.activeLeft = false
+              cellData.activeRight = false
+              cellData.activeBottom = false
+              cellData.activeCorner = false
+
+              // Add a top border to the cells at the top of the selection
+              if ( rowIndex === topRow ) {
+                cellData.activeTop = true
+              }
+
+              // Add a left border to the cells on the left of the selection
+              if ( colIndex === leftCol ) {
+                cellData.activeLeft = true
+              }
+
+              // Add a right border to the cells on the right of the selection
+              if ( colIndex === rightCol ) {
+                cellData.activeRight = true
+              }
+
+              // Add a bottom border to the cells at the bottom of the selection
+              if ( rowIndex === bottomRow ) {
+                cellData.activeBottom = true
+              }
+
+              // Add resize corner to the active selection areas
+              if (rowIndex === bottomRow && colIndex === rightCol) {
+                cellData.activeCorner = true
+              }
+              tableData[rowIndex][colIndex] = {...cellData}
+
+              colIndex += 1
+            }
+            rowIndex += 1
+          }
         }
-      }
-      return annotationBlocks
+        return annotationBlocks
+      })
+
+      return tableData
     })
   }, [selectCell])
 
