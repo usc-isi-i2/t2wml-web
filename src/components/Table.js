@@ -779,7 +779,7 @@ const Table = ({
       <tr key={`row-${i}`}>
         <td>{i + 1}</td>
         {Object.entries(tableData[i]).map((cell, j) => (
-          <TableCell key={`cell-${j}`} data={tableData[i][j]} />
+          <TableCell key={`row-${i}-cell-${j}`} data={tableData[i][j]} />
         ))}
       </tr>
     ))
