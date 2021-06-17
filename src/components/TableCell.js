@@ -3,7 +3,7 @@ import React from 'react'
 
 const TableCell = ({ data }) => {
   return (
-    <td className={[...data.classNames]}>
+    <td className={data.classNames.join(' ')}>
       {data.value}
       {data.activeTop && <div className="cell-border-top" />}
       {data.activeLeft && <div className="cell-border-left" />}
