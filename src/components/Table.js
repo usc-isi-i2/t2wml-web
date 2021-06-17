@@ -70,12 +70,21 @@ const Table = ({
           if ( !!data[rowIndex] ) {
             const cellValue = data[rowIndex][colIndex]
             if ( !!cellValue ) {
-              tableData[rowIndex][colIndex] = {value: cellValue}
+              tableData[rowIndex][colIndex] = {
+                value: cellValue,
+                classNames: [],
+              }
             } else {
-              tableData[rowIndex][colIndex] = {value: ''}
+              tableData[rowIndex][colIndex] = {
+                value: '',
+                classNames: [],
+              }
             }
           } else {
-            tableData[rowIndex][colIndex] = {value: ''}
+            tableData[rowIndex][colIndex] = {
+              value: '',
+              classNames: [],
+            }
           }
         })
       })
