@@ -73,6 +73,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
               file={data.filepath}
               sheet={data.sheetName}
               data={data.table.cells}
+              dimensions={data.table.dims}
               setMessage={setMessage}
               suggestedAnnotations={annotations}
               setOutputData={setOutputData} />

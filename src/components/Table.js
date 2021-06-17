@@ -14,6 +14,7 @@ const Table = ({
   file,
   sheet,
   data,
+  dimensions,
   setMessage,
   suggestedAnnotations,
   setOutputData,
@@ -64,20 +65,28 @@ const Table = ({
   useEffect(() => {
     if ( tableDataInitialized ) { return }
     setTableData(prev => {
-      const tableData = {}
-      data.forEach((row, i) => {
-        tableData[i] = {}
-        row.forEach((cell, j) => {
-          tableData[i][j] = {
-            value: cell,
-          }
-        })
-      })
-      setTableDataInitialized(true)
+      const rows = [...Array(Math.max(dimensions[0], 100))] // at least 100 rows
+      const cols = [...Array(Math.max(dimensions[1], 26))]  // at least 26 cols
 
-      // update proportions of the table data
-      setNumRows([...Array(tableData.length)])
-      setNumCols([...Array(tableData[0].length)])
+      const tableData = {} // empty table data
+
+      for ( const [rowIndex, rowItem] of rows.entries() ) {
+        tableData[rowIndex] = {}
+        for ( const [colIndex, colItem] of cols.entries() ) {
+          if ( !!data[rowIndex] ) {
+            const cellValue = data[rowIndex][colIndex]
+            if ( !!cellValue ) {
+              tableData[rowIndex][colIndex] = {value: cellValue}
+            } else {
+              tableData[rowIndex][colIndex] = {value: ''}
+            }
+          } else {
+            tableData[rowIndex][colIndex] = {value: ''}
+          }
+        }
+      }
+      setTableDataInitialized(true)
+      console.log(tableData)
 
       return tableData
     })
