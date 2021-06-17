@@ -638,10 +638,10 @@ const Table = ({
     } else if ( element.nodeName !== 'TD' ) { return }
 
     // Set both coordinates to the same cell
-    const x1 = element.cellIndex
-    const x2 = element.cellIndex
-    const y1 = element.parentElement.rowIndex
-    const y2 = element.parentElement.rowIndex
+    const x1 = element.cellIndex - 1
+    const x2 = element.cellIndex - 1
+    const y1 = element.parentElement.rowIndex - 1
+    const y2 = element.parentElement.rowIndex - 1
     const newSelection = { x1, x2, y1, y2 }
     setTargetSelection(newSelection)
 
@@ -713,8 +713,8 @@ const Table = ({
       if ( !selection.current ) { return }
 
       // Update the last x and y coordinates of the selection
-      const newCellIndex = element.cellIndex
-      const newRowIndex = element.parentElement.rowIndex
+      const newCellIndex = element.cellIndex - 1
+      const newRowIndex = element.parentElement.rowIndex - 1
       selection.current = {
         ...selection.current,
         x2: newCellIndex,
