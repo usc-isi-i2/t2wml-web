@@ -819,7 +819,9 @@ const Table = ({
     return (
       <Paper>
         <div className={classes.tableWrapper}>
-          <table ref={element => tableElement.current = element}
+          <table
+            ref={element => tableElement.current = element}
+            className={userSelecting ? 'active': ''}
             onMouseDown={handleOnMouseDown}
             onMouseMove={handleOnMouseMove}>
             <thead>
