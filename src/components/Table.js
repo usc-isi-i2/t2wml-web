@@ -27,6 +27,9 @@ const Table = ({
   const tableElement = useRef(null)
   const prevDirection = useRef(null)
 
+  const [tableData, setTableData] = useState({})
+  const [tableDataInitialized, setTableDataInitialized] = useState(false)
+
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
   const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
@@ -55,6 +58,23 @@ const Table = ({
 
     element.setAttribute('style', `width: ${maxWidth}px`)
   }
+
+  useEffect(() => {
+    if ( tableDataInitialized ) { return }
+    setTableData(prev => {
+      const tableData = {}
+      data.forEach((row, i) => {
+        tableData[i] = {}
+        row.forEach((cell, j) => {
+          tableData[i][j] = {
+            value: cell,
+          }
+        })
+      })
+      setTableDataInitialized(true)
+      return tableData
+    })
+  }, [data])
 
   useEffect(() => {
 
