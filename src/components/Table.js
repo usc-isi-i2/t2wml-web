@@ -82,7 +82,7 @@ const Table = ({
       setTableDataInitialized(true)
       return tableData
     })
-  }, [data, tableDataInitialized])
+  }, [data, dimensions, tableDataInitialized])
 
   useEffect(() => {
 
