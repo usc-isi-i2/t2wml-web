@@ -314,10 +314,10 @@ const Table = ({
       }
 
       const { x1, x2, y1, y2 } = selection.current
-      const leftCol = Math.min(x1, x2)
-      const rightCol = Math.max(x1, x2)
-      const topRow = Math.min(y1, y2)
-      const bottomRow = Math.max(y1, y2)
+      const leftCol = Math.min(x1 - 1, x2 - 1)
+      const rightCol = Math.max(x1 - 1, x2 - 1)
+      const topRow = Math.min(y1 - 1, y2 - 1)
+      const bottomRow = Math.max(y1 - 1, y2 - 1)
       let rowIndex = topRow
       while ( rowIndex <= bottomRow ) {
         let colIndex = leftCol
