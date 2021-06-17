@@ -29,6 +29,8 @@ const Table = ({
 
   const [tableData, setTableData] = useState({})
   const [tableDataInitialized, setTableDataInitialized] = useState(false)
+  const [numRows, setNumRows] = useState([...Array(100)]) // at least 100 rows
+  const [numCols, setNumCols] = useState([...Array(26)]) // at least 26 cols
 
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
@@ -72,9 +74,14 @@ const Table = ({
         })
       })
       setTableDataInitialized(true)
+
+      // update proportions of the table data
+      setNumRows([...Array(tableData.length)])
+      setNumCols([...Array(tableData[0].length)])
+
       return tableData
     })
-  }, [data])
+  }, [data, tableDataInitialized])
 
   useEffect(() => {
 
