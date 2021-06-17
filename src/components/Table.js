@@ -781,6 +781,18 @@ const Table = ({
     ))
   }
 
+  const renderTableBody = () => {
+    if ( !tableData ) { return }
+    return Object.entries(tableData).map((row, i) => (
+      <tr key={`row-${i}`}>
+        <td>{i + 1}</td>
+        {Object.entries(tableData[i]).map((cell, j) => {
+          return <td key={`cell-${j}`}>{tableData[i][j].value}</td>
+        })}
+      </tr>
+    ))
+  }
+
   const renderTable = () => {
     return (
       <Paper>
@@ -795,14 +807,7 @@ const Table = ({
               </tr>
             </thead>
             <tbody>
-              {!! tableData && Object.entries(tableData).map((row, i) => (
-                <tr key={`row-${i}`}>
-                  <td>{i + 1}</td>
-                  {Object.entries(tableData[i]).map((cell, j) => {
-                    return <td key={`cell-${j}`}>{tableData[i][j].value}</td>
-                  })}
-                </tr>
-              ))}
+              {renderTableBody()}
             </tbody>
           </table>
         </div>
