@@ -30,8 +30,6 @@ const Table = ({
 
   const [tableData, setTableData] = useState(null)
   const [tableDataInitialized, setTableDataInitialized] = useState(false)
-  const [numRows, setNumRows] = useState([...Array(100)]) // at least 100 rows
-  const [numCols, setNumCols] = useState([...Array(26)]) // at least 26 cols
 
   const [userSelecting, setUserSelecting] = useState(false)
   const [annotationBlocks, setAnnotationBlocks] = useState([])
@@ -41,10 +39,6 @@ const Table = ({
   const [selectedTab, setSelectedTab] = useState('block')
   const [showOverlayMenu, setShowOverlayMenu] = useState(false)
   const [targetSelection, setTargetSelection] = useState(false)
-
-  const MIN_NUM_ROWS = 100
-  const rows = [...Array(Math.max(data.length, MIN_NUM_ROWS))]
-  const cols = [...Array(Math.max(data[0].length, 26))]
 
   const handleOnClickHeader = event => {
     const element = event.target
@@ -86,8 +80,6 @@ const Table = ({
         })
       })
       setTableDataInitialized(true)
-      console.log(tableData)
-
       return tableData
     })
   }, [data, tableDataInitialized])
