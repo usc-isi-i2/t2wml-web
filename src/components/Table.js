@@ -28,7 +28,7 @@ const Table = ({
   const tableElement = useRef(null)
   const prevDirection = useRef(null)
 
-  const [tableData, setTableData] = useState({})
+  const [tableData, setTableData] = useState(null)
   const [tableDataInitialized, setTableDataInitialized] = useState(false)
   const [numRows, setNumRows] = useState([...Array(100)]) // at least 100 rows
   const [numCols, setNumCols] = useState([...Array(26)]) // at least 26 cols
@@ -70,9 +70,9 @@ const Table = ({
 
       const tableData = {} // empty table data
 
-      for ( const [rowIndex, rowItem] of rows.entries() ) {
+      Object.entries(rows).forEach((rowItem, rowIndex) => {
         tableData[rowIndex] = {}
-        for ( const [colIndex, colItem] of cols.entries() ) {
+        Object.entries(cols).forEach((colItem, colIndex) => {
           if ( !!data[rowIndex] ) {
             const cellValue = data[rowIndex][colIndex]
             if ( !!cellValue ) {
@@ -83,8 +83,8 @@ const Table = ({
           } else {
             tableData[rowIndex][colIndex] = {value: ''}
           }
-        }
-      }
+        })
+      })
       setTableDataInitialized(true)
       console.log(tableData)
 
