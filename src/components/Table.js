@@ -246,6 +246,31 @@ const Table = ({
     })
   }, [selectCell])
 
+  const resetSelections = useCallback(() => {
+    setTableData(prevTableData => {
+      const defaultCellState = {
+        active: false,
+        activeTop: false,
+        activeLeft: false,
+        activeRight: false,
+        activeBottom: false,
+        activeCorner: false,
+      }
+      const tableData = {...prevTableData}
+      for ( const rowIndex of Object.keys(tableData) ) {
+        for ( const colIndex of Object.keys(tableData[rowIndex]) ) {
+          if ( tableData[rowIndex][colIndex]['active'] ) {
+            tableData[rowIndex][colIndex] = {
+              ...tableData[rowIndex][colIndex],
+              ...defaultCellState,
+            }
+          }
+        }
+      }
+      return tableData
+    })
+  }, [])
+
   const resetSelection = useCallback(() => {
     if ( !tableElement.current ) { return }
     tableElement.current.classList.remove('active')
@@ -271,8 +296,8 @@ const Table = ({
     setSelectedAnnotationBlock(undefined)
     setTargetSelection(undefined)
     selection.current = null
-    resetSelection()
-  }, [resetSelection])
+    resetSelections()
+  }, [resetSelections])
 
   const updateSelections = useCallback(() => {
     if ( !selection.current ) { return }
@@ -600,7 +625,7 @@ const Table = ({
             setSelectedAnnotationBlock(undefined)
             setTargetSelection(undefined)
             selection.current = null
-            resetSelection()
+            resetSelections()
           } else {
             setShowOverlayMenu(true)
           }
@@ -610,7 +635,7 @@ const Table = ({
       })
     }
     setUserSelecting(false)
-  }, [resetSelection])
+  }, [resetSelections])
 
   useEffect(() => {
     // component did mount
@@ -660,6 +685,7 @@ const Table = ({
 
     // Activate the selection mode
     setUserSelecting(true)
+    resetSelections()
 
     // Extend the previous selection if user is holding down Shift key
     if ( event.shiftKey && selection.current ) {
