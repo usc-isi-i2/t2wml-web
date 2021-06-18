@@ -238,7 +238,8 @@ const Table = ({
             while ( colIndex <= rightCol ) {
               const cellData = tableData[rowIndex][colIndex]
               cellData.classNames = classNames
-              cellData.active = true
+              cellData.annotation = true
+              cellData.active = false
               cellData.activeTop = false
               cellData.activeLeft = false
               cellData.activeRight = false
@@ -281,7 +282,7 @@ const Table = ({
 
       return tableData
     })
-  }, [selectCell])
+  }, [])
 
   const resetSelections = useCallback(() => {
     setTableData(prevTableData => {
@@ -289,9 +290,18 @@ const Table = ({
       for ( const rowIndex of Object.keys(tableData) ) {
         for ( const colIndex of Object.keys(tableData[rowIndex]) ) {
           if ( tableData[rowIndex][colIndex]['active'] ) {
-            tableData[rowIndex][colIndex] = {
-              ...tableData[rowIndex][colIndex],
-              ...DEFAULT_CELL_STATE,
+            console.log(tableData[rowIndex][colIndex])
+            if ( tableData[rowIndex][colIndex]['annotation'] ) {
+              tableData[rowIndex][colIndex] = {
+                ...tableData[rowIndex][colIndex],
+                active: false,
+              }
+            console.log(tableData[rowIndex][colIndex])
+            } else {
+              tableData[rowIndex][colIndex] = {
+                ...tableData[rowIndex][colIndex],
+                ...DEFAULT_CELL_STATE,
+              }
             }
           }
         }
@@ -775,6 +785,11 @@ const Table = ({
     // check if the user is selecting an annotation block
     const selectedBlock = utils.checkSelectedAnnotationBlocks(newSelection, annotationBlocks)
     if ( selectedBlock ) {
+
+      // remove previous selection
+      if ( !selectedAnnotationBlock ) {
+        resetSelections()
+      }
 
       // Reset annotation menu
       if ( selectedBlock !== selectedAnnotationBlock ) {
