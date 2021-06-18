@@ -675,10 +675,12 @@ const Table = ({
   }, [targetSelection])
 
   useEffect(() => {
-    updateSelections()
+    updateAnnotationBlocks()
+  }, [annotationBlocks, updateAnnotationBlocks])
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedAnnotationBlock, selection.current])
+  useEffect(() => {
+    updateSelections()
+  }, [selectedAnnotationBlock, updateSelections])
 
   useEffect(() => {
     // show the annotation blocks for the suggested/guessed annotations
@@ -892,10 +894,6 @@ const Table = ({
       rowIndex += 1
     }
   }
-
-  useEffect(() => {
-    updateAnnotationBlocks()
-  }, [annotationBlocks, updateAnnotationBlocks])
 
   const updatePartialCSV = () => {
     // update output data with partial csv
