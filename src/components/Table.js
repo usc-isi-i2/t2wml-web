@@ -606,6 +606,7 @@ const Table = ({
           } else {
             setSelectedAnnotationBlock(undefined)
             selection.current = nextSelection
+            resetSelections()
           }
           updateSelections()
           return annotationBlocks
