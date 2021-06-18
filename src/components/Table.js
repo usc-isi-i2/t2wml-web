@@ -952,8 +952,8 @@ const Table = ({
     return Object.entries(tableData).map((row, i) => (
       <tr key={`row-${i}`}>
         <td>{i + 1}</td>
-        {Object.entries(tableData[i]).map((cell, j) => (
-          <TableCell key={`row-${i}-cell-${j}`} data={tableData[i][j]} />
+        {Object.entries(row[1]).map((cell, j) => (
+          <TableCell key={`row-${i}-cell-${j}`} data={cell[1]} />
         ))}
       </tr>
     ))
