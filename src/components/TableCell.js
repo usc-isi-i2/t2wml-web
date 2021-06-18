@@ -3,6 +3,13 @@ import React from 'react'
 
 const TableCell = ({ data }) => {
 
+  if ( data.highlight && !data.classNames.includes('highlight') ) {
+    data.classNames.push('highlight')
+  }
+  if ( !data.highlight ) {
+    data.classNames.splice(1, data.classNames.indexOf('highlight'))
+  }
+
   if ( data.active && !data.classNames.includes('active') ) {
     data.classNames.push('active')
   }

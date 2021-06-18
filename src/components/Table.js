@@ -18,6 +18,7 @@ const DEFAULT_CELL_STATE = {
   activeRight: false,
   activeBottom: false,
   activeCorner: false,
+  highlight: false,
 }
 
 
@@ -294,6 +295,7 @@ const Table = ({
             if ( tableData[rowIndex][colIndex]['annotation'] ) {
               tableData[rowIndex][colIndex] = {
                 ...tableData[rowIndex][colIndex],
+                highlight: false,
                 active: false,
               }
             console.log(tableData[rowIndex][colIndex])
@@ -352,8 +354,17 @@ const Table = ({
         }
       }
 
+      // highlight the target selection when updating
+      if ( !!targetSelection ) {
+        tableData[targetSelection.y1 - 1][targetSelection.x1 - 1] = {
+          ...tableData[targetSelection.y1 - 1][targetSelection.x1 - 1],
+          highlight: true,
+        }
+      }
+
       const { x1, x2, y1, y2 } = selection.current
 
+      // Reset any of the empty cells after resizing
       if ( !!prevSelection ) {
 
         // Standardize the previous selection
@@ -670,20 +681,6 @@ const Table = ({
       rowIndex = rowIndex - 1
     }
   }
-
-  useEffect(() => {
-    // remove any previous highlights from the table cells
-    tableElement.current.querySelectorAll('td.highlight').forEach(e => {
-      e.classList.remove('highlight')
-    })
-
-    // highlight original target selection (cell)
-    if ( !targetSelection || !tableElement.current ) { return }
-    const {x1, y1} = targetSelection
-    const rows = tableElement.current.querySelectorAll('tr')
-    const element = rows[y1].children[x1]
-    element.classList.add('highlight')
-  }, [targetSelection])
 
   useEffect(() => {
     updateAnnotationBlocks()
