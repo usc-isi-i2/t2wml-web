@@ -1,24 +1,15 @@
 import React from 'react'
 
+import classNames from '../utils/classNames'
+
 
 const TableCell = ({ data }) => {
 
-  if ( data.highlight && !data.classNames.includes('highlight') ) {
-    data.classNames.push('highlight')
-  }
-  if ( !data.highlight ) {
-    data.classNames.splice(1, data.classNames.indexOf('highlight'))
-  }
-
-  if ( data.active && !data.classNames.includes('active') ) {
-    data.classNames.push('active')
-  }
-  if ( !data.active ) {
-    data.classNames.splice(1, data.classNames.indexOf('active'))
-  }
-
   return (
-    <td className={data.classNames.join(' ')}>
+    <td className={classNames(data.classNames.join(' '), {
+      'active': data.active,
+      'highlight': data.highlight,
+    })}>
       {data.value}
       {data.activeTop && <div className="cell-border-top" />}
       {data.activeLeft && <div className="cell-border-left" />}
