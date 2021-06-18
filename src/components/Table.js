@@ -161,56 +161,6 @@ const Table = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showOverlayMenu])
 
-  const selectCell = useCallback((cell, rowIndex, colIndex, topRow, leftCol, rightCol, bottomRow, classNames = []) => {
-
-    // remove any remaining role or type classes from the cell/element
-    cell.classList.forEach(className => {
-      if ( className.startsWith('role-') || className.startsWith('type-') ) {
-        cell.classList.remove(className)
-      }
-    })
-
-    // Apply class names to the selected cell
-    classNames.map(className => cell.classList.add(className))
-
-    // Add a top border to the cells at the top of the selection
-    if ( rowIndex === topRow ) {
-      const borderTop = document.createElement('div')
-      borderTop.classList.add('cell-border-top')
-      cell.appendChild(borderTop)
-    }
-
-    // Add a left border to the cells on the left of the selection
-    if ( colIndex === leftCol ) {
-      const borderLeft = document.createElement('div')
-      borderLeft.classList.add('cell-border-left')
-      cell.appendChild(borderLeft)
-    }
-
-    // Add a right border to the cells on the right of the selection
-    if ( colIndex === rightCol ) {
-      const borderRight = document.createElement('div')
-      borderRight.classList.add('cell-border-right')
-      cell.appendChild(borderRight)
-    }
-
-    // Add a bottom border to the cells at the bottom of the selection
-    if ( rowIndex === bottomRow ) {
-      const borderBottom = document.createElement('div')
-      borderBottom.classList.add('cell-border-bottom')
-      cell.appendChild(borderBottom)
-    }
-
-    // Add resize corner to the active selection areas
-    if ( classNames.includes('active') ) {
-      if (rowIndex === bottomRow && colIndex === rightCol) {
-        const resizeCorner = document.createElement('div')
-        resizeCorner.classList.add('cell-resize-corner')
-        cell.appendChild(resizeCorner)
-      }
-    }
-  }, [])
-
   const updateAnnotationBlocks = useCallback(() => {
     setTableData(prevTableData => {
       const tableData = {...prevTableData}
@@ -839,7 +789,6 @@ const Table = ({
       setSelectedAnnotationBlock(undefined)
 
       // Activate the element on click
-      selectCell(element, y1, x1, y1, x1, x1, y1, ['active'])
       selection.current = { x1, x2, y1, y2 }
     }
 
