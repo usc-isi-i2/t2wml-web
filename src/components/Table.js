@@ -217,7 +217,7 @@ const Table = ({
 
       setAnnotationBlocks(annotationBlocks => {
         for ( const block of annotationBlocks ) {
-          const { role, type, selection } = block
+          const { role, type } = block
 
           const classNames = []
           if ( role ) {
@@ -227,8 +227,7 @@ const Table = ({
             classNames.push(`type-${type}`)
           }
 
-          const rows = tableElement.current.querySelectorAll('tr')
-          const { x1, y1, x2, y2 } = selection
+          const { x1, y1, x2, y2 } = block.selection
           const leftCol = Math.min(x1 - 1, x2 - 1)
           const rightCol = Math.max(x1 - 1, x2 - 1)
           const topRow = Math.min(y1 - 1, y2 - 1)
@@ -237,10 +236,12 @@ const Table = ({
           while ( rowIndex <= bottomRow ) {
             let colIndex = leftCol
             while ( colIndex <= rightCol ) {
+
               const cellData = tableData[rowIndex][colIndex]
               cellData.classNames = classNames
               cellData.annotation = true
-              cellData.active = false
+              cellData.active = block.selection === selection.current
+              cellData.highlight = false
               cellData.activeTop = false
               cellData.activeLeft = false
               cellData.activeRight = false
@@ -626,7 +627,7 @@ const Table = ({
         return nextSelection
       })
     }
-  }, [hideOverlayMenu, selectedAnnotationBlock, updateSelections])
+  }, [hideOverlayMenu, updateSelections, resetSelections, selectedAnnotationBlock])
 
   const handleOnKeyUp = useCallback(() => {
     clearTimeout(timeoutID.current)
@@ -684,12 +685,12 @@ const Table = ({
 
   useEffect(() => {
     updateAnnotationBlocks()
-  }, [annotationBlocks, updateAnnotationBlocks])
+  }, [selectedAnnotationBlock, annotationBlocks, updateAnnotationBlocks])
 
   useEffect(() => {
     resetSelections()
     updateSelections()
-  }, [selectedAnnotationBlock, resetSelections, updateSelections])
+  }, [resetSelections, updateSelections])
 
   useEffect(() => {
     // show the annotation blocks for the suggested/guessed annotations
@@ -789,7 +790,10 @@ const Table = ({
       if ( selectedBlock !== selectedAnnotationBlock ) {
         setSelectedAnnotationBlock(selectedBlock)
         selection.current = selectedBlock.selection
+      } else {
+        updateAnnotationBlocks()
       }
+      updateSelections()
 
       return
     }
