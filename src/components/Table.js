@@ -343,6 +343,9 @@ const Table = ({
 
       if ( !!prevSelection ) {
 
+        // Standardize the previous selection
+        prevSelection = utils.standardizeSelection(prevSelection)
+
         const defaultCellState = {
           active: false,
           activeTop: false,
@@ -352,12 +355,12 @@ const Table = ({
           activeCorner: false,
         }
 
-        // moving to the right
+        // moving right
         if ( prevSelection.x1 < x1 ) {
           let colIndex = prevSelection.x1
           while ( colIndex < x1 ) {
             let rowIndex = prevSelection.y1
-            while ( rowIndex < prevSelection.y2 ) {
+            while ( rowIndex <= prevSelection.y2 ) {
               tableData[rowIndex - 1][colIndex - 1] = {
                 ...tableData[rowIndex - 1][colIndex - 1],
                 ...defaultCellState,
@@ -368,11 +371,12 @@ const Table = ({
           }
         }
 
+        // moving left
         if ( prevSelection.x2 > x2 ) {
           let colIndex = prevSelection.x2
           while ( colIndex > x2 ) {
             let rowIndex = prevSelection.y1
-            while ( rowIndex < prevSelection.y2 ) {
+            while ( rowIndex <= prevSelection.y2 ) {
               tableData[rowIndex - 1][colIndex - 1] = {
                 ...tableData[rowIndex - 1][colIndex - 1],
                 ...defaultCellState,
@@ -383,11 +387,12 @@ const Table = ({
           }
         }
 
+        // moving up
         if ( prevSelection.y1 < y1 ) {
           let rowIndex = prevSelection.y1
           while ( rowIndex < y1 ) {
             let colIndex = prevSelection.x1
-            while ( colIndex < prevSelection.x2 ) {
+            while ( colIndex <= prevSelection.x2 ) {
               tableData[rowIndex - 1][colIndex - 1] = {
                 ...tableData[rowIndex - 1][colIndex - 1],
                 ...defaultCellState,
@@ -398,11 +403,12 @@ const Table = ({
           }
         }
 
+        // moving down
         if ( prevSelection.y2 > y2 ) {
           let rowIndex = prevSelection.y2
           while ( rowIndex > y2 ) {
             let colIndex = prevSelection.x1
-            while ( colIndex < prevSelection.x2 ) {
+            while ( colIndex <= prevSelection.x2 ) {
               tableData[rowIndex - 1][colIndex - 1] = {
                 ...tableData[rowIndex - 1][colIndex - 1],
                 ...defaultCellState,
