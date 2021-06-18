@@ -866,7 +866,6 @@ const Table = ({
         x2: newColIndex,
         y2: newRowIndex,
       }
-      selection.current = utils.standardizeSelection(selection.current)
 
       // Update Selections
       updateSelections(prevSelection)
