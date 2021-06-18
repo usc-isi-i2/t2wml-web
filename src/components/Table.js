@@ -771,26 +771,29 @@ const Table = ({
   }
 
   const removeAnnotationBlock = (annotationBlock) => {
-    const rows = tableElement.current.querySelectorAll('tr')
-    const { x1, x2, y1, y2 } = annotationBlock.selection
-    const leftCol = Math.min(x1, x2)
-    const rightCol = Math.max(x1, x2)
-    const topRow = Math.min(y1, y2)
-    const bottomRow = Math.max(y1, y2)
-    let rowIndex = topRow
-    while ( rowIndex <= bottomRow ) {
-      let colIndex = leftCol
-      while ( colIndex <= rightCol ) {
-        const element = rows[rowIndex].children[colIndex]
-        element.classList.forEach(className => {
-          if ( className.startsWith('role-') || className.startsWith('type-') ) {
-            element.classList.remove(className)
+    setTableData(prevTableData => {
+      const tableData = {...prevTableData}
+      const { x1, x2, y1, y2 } = annotationBlock.selection
+      const leftCol = Math.min(x1, x2)
+      const rightCol = Math.max(x1, x2)
+      const topRow = Math.min(y1, y2)
+      const bottomRow = Math.max(y1, y2)
+      let rowIndex = topRow
+      while ( rowIndex <= bottomRow ) {
+        let colIndex = leftCol
+        while ( colIndex <= rightCol ) {
+          tableData[rowIndex - 1][colIndex - 1] = {
+            ...tableData[rowIndex - 1][colIndex - 1],
+            ...DEFAULT_CELL_STATE,
+            annotation: false,
+            classNames: [],
           }
-        })
-        colIndex += 1
+          colIndex += 1
+        }
+        rowIndex += 1
       }
-      rowIndex += 1
-    }
+      return tableData
+    })
   }
 
   const updatePartialCSV = () => {
