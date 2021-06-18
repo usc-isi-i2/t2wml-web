@@ -2,6 +2,14 @@ import React from 'react'
 
 
 const TableCell = ({ data }) => {
+
+  if ( data.active && !data.classNames.includes('active') ) {
+    data.classNames.push('active')
+  }
+  if ( !data.active ) {
+    data.classNames.splice(1, data.classNames.indexOf('active'))
+  }
+
   return (
     <td className={data.classNames.join(' ')}>
       {data.value}

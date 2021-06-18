@@ -344,7 +344,7 @@ const Table = ({
     setTableData(prevTableData => {
       const tableData = {...prevTableData}
 
-      const classNames = ['active']
+      const classNames = []
       if ( selectedAnnotationBlock ) {
         const { role } = selectedAnnotationBlock
         if ( role ) {
