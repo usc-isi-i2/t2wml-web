@@ -689,8 +689,9 @@ const Table = ({
   }, [annotationBlocks, updateAnnotationBlocks])
 
   useEffect(() => {
+    resetSelections()
     updateSelections()
-  }, [selectedAnnotationBlock, updateSelections])
+  }, [selectedAnnotationBlock, resetSelections, updateSelections])
 
   useEffect(() => {
     // show the annotation blocks for the suggested/guessed annotations
@@ -785,11 +786,6 @@ const Table = ({
     // check if the user is selecting an annotation block
     const selectedBlock = utils.checkSelectedAnnotationBlocks(newSelection, annotationBlocks)
     if ( selectedBlock ) {
-
-      // remove previous selection
-      if ( !selectedAnnotationBlock ) {
-        resetSelections()
-      }
 
       // Reset annotation menu
       if ( selectedBlock !== selectedAnnotationBlock ) {
