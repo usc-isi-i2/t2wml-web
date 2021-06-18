@@ -275,26 +275,6 @@ const Table = ({
     })
   }, [])
 
-  const resetSelection = useCallback(() => {
-    if ( !tableElement.current ) { return }
-    tableElement.current.classList.remove('active')
-    tableElement.current.querySelectorAll('.active .cell-border-top').forEach(e => e.remove())
-    tableElement.current.querySelectorAll('.active .cell-border-left').forEach(e => e.remove())
-    tableElement.current.querySelectorAll('.active .cell-border-right').forEach(e => e.remove())
-    tableElement.current.querySelectorAll('.active .cell-border-bottom').forEach(e => e.remove())
-    tableElement.current.querySelectorAll('.active .cell-resize-corner').forEach(e => e.remove())
-    tableElement.current.querySelectorAll('td[class*="active"]').forEach(e => {
-      e.classList.forEach(className => {
-        if (className.startsWith('active')) {
-          e.classList.remove(className)
-        }
-      })
-    })
-
-    // reset the borders on the annotation blocks
-    updateAnnotationBlocks()
-  }, [updateAnnotationBlocks])
-
   const hideOverlayMenu = useCallback(() => {
     setShowOverlayMenu(false)
     setSelectedAnnotationBlock(undefined)
@@ -589,53 +569,6 @@ const Table = ({
       setShowOverlayMenu(true)
     }, 350)
   }, [])
-
-  const resetEmptyCells = (x1, x2, y1, y2) => {
-    if ( !selection.current ) { return }
-
-    const rows = tableElement.current.querySelectorAll('tr')
-    rows.forEach((row, index) => {
-      if ( selection.current.y1 < selection.current.y2 ) {
-        if ( index >= selection.current.y1 && index <= selection.current.y2 ) {
-          // reset cell class names on the vertical axes
-          let colIndex = x1
-          while ( colIndex > x2 ) {
-            row.children[colIndex].className = ''
-            colIndex = colIndex - 1
-          }
-        }
-      } else {
-        if ( index >= selection.current.y2 && index <= selection.current.y1 ) {
-          // reset cell class names on the vertical axes
-          let colIndex = x1
-          while ( colIndex > x2 ) {
-            row.children[colIndex].className = ''
-            colIndex = colIndex - 1
-          }
-        }
-      }
-    })
-
-    // reset cell class names on the horizontal axes
-    let rowIndex = y1
-    while ( rowIndex > y2 ) {
-      const row = rows[rowIndex]
-      if ( selection.current.x1 < selection.current.x2 ) {
-        let colIndex = selection.current.x1
-        while ( colIndex <= selection.current.x2 ) {
-          row.children[colIndex].className = ''
-          colIndex = colIndex + 1
-        }
-      } else {
-        let colIndex = selection.current.x2
-        while ( colIndex <= selection.current.x1 ) {
-          row.children[colIndex].className = ''
-          colIndex = colIndex + 1
-        }
-      }
-      rowIndex = rowIndex - 1
-    }
-  }
 
   useEffect(() => {
     updateAnnotationBlocks()
