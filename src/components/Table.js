@@ -235,7 +235,6 @@ const Table = ({
       setTargetSelection(targetSelection => {
         // highlight the target selection when updating
         if ( !!targetSelection ) {
-          console.log('updating target selection', targetSelection)
           tableData[targetSelection.y1 - 1][targetSelection.x1 - 1] = {
             ...tableData[targetSelection.y1 - 1][targetSelection.x1 - 1],
             highlight: true,
@@ -254,14 +253,12 @@ const Table = ({
       for ( const rowIndex of Object.keys(tableData) ) {
         for ( const colIndex of Object.keys(tableData[rowIndex]) ) {
           if ( tableData[rowIndex][colIndex]['active'] ) {
-            console.log(tableData[rowIndex][colIndex])
             if ( tableData[rowIndex][colIndex]['annotation'] ) {
               tableData[rowIndex][colIndex] = {
                 ...tableData[rowIndex][colIndex],
                 highlight: false,
                 active: false,
               }
-            console.log(tableData[rowIndex][colIndex])
             } else {
               tableData[rowIndex][colIndex] = {
                 ...tableData[rowIndex][colIndex],
