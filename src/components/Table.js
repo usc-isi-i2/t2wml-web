@@ -282,6 +282,18 @@ const Table = ({
         return annotationBlocks
       })
 
+      setTargetSelection(targetSelection => {
+        // highlight the target selection when updating
+        if ( !!targetSelection ) {
+          console.log('updating target selection', targetSelection)
+          tableData[targetSelection.y1 - 1][targetSelection.x1 - 1] = {
+            ...tableData[targetSelection.y1 - 1][targetSelection.x1 - 1],
+            highlight: true,
+          }
+        }
+        return targetSelection
+      })
+
       return tableData
     })
   }, [])
@@ -352,14 +364,6 @@ const Table = ({
         const { role } = selectedAnnotationBlock
         if ( role ) {
           classNames.push(`role-${role}`)
-        }
-      }
-
-      // highlight the target selection when updating
-      if ( !!targetSelection ) {
-        tableData[targetSelection.y1 - 1][targetSelection.x1 - 1] = {
-          ...tableData[targetSelection.y1 - 1][targetSelection.x1 - 1],
-          highlight: true,
         }
       }
 
