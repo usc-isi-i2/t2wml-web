@@ -10,6 +10,17 @@ import fetchPartialCSV from '../utils/fetchPartialCSV'
 import fetchSuggestions from '../utils/fetchSuggestions'
 import uploadAnnotations from '../utils/uploadAnnotations'
 
+
+const DEFAULT_CELL_STATE = {
+  active: false,
+  activeTop: false,
+  activeLeft: false,
+  activeRight: false,
+  activeBottom: false,
+  activeCorner: false,
+}
+
+
 const Table = ({
   file,
   sheet,
@@ -274,21 +285,13 @@ const Table = ({
 
   const resetSelections = useCallback(() => {
     setTableData(prevTableData => {
-      const defaultCellState = {
-        active: false,
-        activeTop: false,
-        activeLeft: false,
-        activeRight: false,
-        activeBottom: false,
-        activeCorner: false,
-      }
       const tableData = {...prevTableData}
       for ( const rowIndex of Object.keys(tableData) ) {
         for ( const colIndex of Object.keys(tableData[rowIndex]) ) {
           if ( tableData[rowIndex][colIndex]['active'] ) {
             tableData[rowIndex][colIndex] = {
               ...tableData[rowIndex][colIndex],
-              ...defaultCellState,
+              ...DEFAULT_CELL_STATE,
             }
           }
         }
@@ -346,15 +349,6 @@ const Table = ({
         // Standardize the previous selection
         prevSelection = utils.standardizeSelection(prevSelection)
 
-        const defaultCellState = {
-          active: false,
-          activeTop: false,
-          activeLeft: false,
-          activeRight: false,
-          activeBottom: false,
-          activeCorner: false,
-        }
-
         // moving right
         if ( prevSelection.x1 < x1 ) {
           let colIndex = prevSelection.x1
@@ -363,7 +357,7 @@ const Table = ({
             while ( rowIndex <= prevSelection.y2 ) {
               tableData[rowIndex - 1][colIndex - 1] = {
                 ...tableData[rowIndex - 1][colIndex - 1],
-                ...defaultCellState,
+                ...DEFAULT_CELL_STATE,
               }
               rowIndex += 1
             }
@@ -379,7 +373,7 @@ const Table = ({
             while ( rowIndex <= prevSelection.y2 ) {
               tableData[rowIndex - 1][colIndex - 1] = {
                 ...tableData[rowIndex - 1][colIndex - 1],
-                ...defaultCellState,
+                ...DEFAULT_CELL_STATE,
               }
               rowIndex += 1
             }
@@ -395,7 +389,7 @@ const Table = ({
             while ( colIndex <= prevSelection.x2 ) {
               tableData[rowIndex - 1][colIndex - 1] = {
                 ...tableData[rowIndex - 1][colIndex - 1],
-                ...defaultCellState,
+                ...DEFAULT_CELL_STATE,
               }
               colIndex += 1
             }
@@ -411,7 +405,7 @@ const Table = ({
             while ( colIndex <= prevSelection.x2 ) {
               tableData[rowIndex - 1][colIndex - 1] = {
                 ...tableData[rowIndex - 1][colIndex - 1],
-                ...defaultCellState,
+                ...DEFAULT_CELL_STATE,
               }
               colIndex += 1
             }
