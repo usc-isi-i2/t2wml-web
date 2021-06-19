@@ -3,11 +3,11 @@ import { makeStyles } from '@material-ui/styles'
 
 const useStyles = makeStyles(theme => ({
   tableWrapper: {
-    width: '100%',
+    flex: '1',
+    width: '100vw',
     height: '95vh',
-    overflow: 'scroll',
     position: 'relative',
-    '& table': {
+    '& .ReactVirtualized__Table': {
       tableLayout: 'fixed',
       transform:'rotateX(0deg)',
       border: '1px solid #c7c7c7',
@@ -17,12 +17,14 @@ const useStyles = makeStyles(theme => ({
       userSelect: 'none',
       position: 'relative',
       cursor: 'crosshair',
-      '& th:nth-child(1)': {
+      '& .ReactVirtualized__Table__headerColumn:nth-child(1)': {
         padding: '0.15em 0.5em',
         textAlign: 'center',
         background: theme.palette.type === 'dark' ? '#333' : '#f9f9f9',
         color: theme.palette.type === 'dark' ? '#fefefe' : '#777',
-        minWidth: '1em',
+        minWidth: '50px',
+        maxWidth: '50px',
+        width: '50px',
         position: 'sticky',
         zIndex: '5',
         left: '-1px',
@@ -33,20 +35,21 @@ const useStyles = makeStyles(theme => ({
           content: '""',
           position: 'absolute',
           bottom: '2px',
-          right: '2px',
+          right: '3px',
           width: '0',
           height: '0',
-          borderLeft: '1.25em solid transparent',
+          borderLeft: '25px solid transparent',
           borderRight: theme.palette.type === 'dark' ? (
-            '1.25em solid #fefefe'
+            '25px solid #fefefe'
           ) : (
-            '1.25em solid #ddd'
+            '25px solid #ddd'
           ),
-          borderTop: '1.25em solid transparent',
+          borderTop: '25px solid transparent',
           pointerEvents: 'none',
         },
       },
-      '& thead tr th': {
+      '& .ReactVirtualized__Table__headerColumn': {
+        display: 'inline-block',
         border: '1px solid #c7c7c7',
         whiteSpace: 'nowrap',
         minWidth: '75px',
@@ -58,7 +61,7 @@ const useStyles = makeStyles(theme => ({
         width: '75px',
         top: '-1px',
       },
-      '& thead tr th::after': {
+      '& .ReactVirtualized__Table__headerColumn::after': {
         content: '""',
         display: 'block',
         left: '0',
@@ -68,29 +71,30 @@ const useStyles = makeStyles(theme => ({
         position: 'absolute',
         background: '#c7c7c7',
       },
-      '& thead tr th > div': {
+      '& .ReactVirtualized__Table__headerColumn > div': {
         padding: '0.15em 0.5em',
         marginRight: '1px',
         width: '75px',
         minWidth: '75px',
-        height: '1.25em',
         overflow: 'hidden',
-        resize: 'horizontal',
         display: 'inline-block',
-        cursor: 'col-resize',
+        //resize: 'horizontal',
+        //cursor: 'col-resize',
       },
-      '& tr td:nth-child(1)': {
+      '& .ReactVirtualized__Table__row .ReactVirtualized__Table__rowColumn:nth-child(1)': {
         textAlign: 'center',
         background: theme.palette.type === 'dark' ? '#333' : '#f9f9f9',
         color: theme.palette.type === 'dark' ? '#fefefe' : '#777',
         padding: '0.15em 0.5em',
-        minWidth: '1em',
+        minWidth: '50px',
+        maxWidth: '50px',
+        width: '50px',
         position: 'sticky',
         zIndex: '3',
         left: '-1px',
         pointerEvents: 'none',
       },
-      '& tr td:nth-child(1)::after': {
+      '& .ReactVirtualized__Table__row .ReactVirtualized__Table__rowColumn:nth-child(1)::after': {
         content: '""',
         display: 'block',
         top: '0',
@@ -101,20 +105,21 @@ const useStyles = makeStyles(theme => ({
         background: '#c7c7c7',
         pointerEvents: 'none',
       },
-      '& tr td': {
+      '& .ReactVirtualized__Table__row .ReactVirtualized__Table__rowColumn': {
+        display: 'inline-block',
         color: theme.palette.type === 'dark' ? '#ddd' : '#111',
         border: '1px solid #c7c7c7',
         padding: '0.15em 0.5em',
-        lineHeight: '1.25em',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
         position: 'relative',
         minWidth: '75px',
         maxWidth: '75px',
+        height: '25px',
         width: '75px',
         zIndex: '1',
-        '&.role-mainSubject': {
+        '& .role-mainSubject': {
           background: theme.palette.type === 'dark' ? '#347898' : '#D9EAF2',
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
           '&.highlight': {
@@ -124,7 +129,7 @@ const useStyles = makeStyles(theme => ({
             color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
           },
         },
-        '&.role-dependentVar': {
+        '& .role-dependentVar': {
           background: theme.palette.type === 'dark' ? '#3bab75' : '#D9F2E6',
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
           '&.highlight': {
@@ -134,7 +139,7 @@ const useStyles = makeStyles(theme => ({
             color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
           },
         },
-        '&.role-qualifier': {
+        '& .role-qualifier': {
           background: theme.palette.type === 'dark' ? '#3f3865' : '#DDD9F2',
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
           '&.highlight': {
@@ -144,7 +149,7 @@ const useStyles = makeStyles(theme => ({
             color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
           },
         },
-        '&.role-property': {
+        '& .role-property': {
           background: theme.palette.type === 'dark' ? '#bb670f' : '#fbe5ce',
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
           '&.highlight': {
@@ -154,7 +159,7 @@ const useStyles = makeStyles(theme => ({
             color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
           },
         },
-        '&.role-metadata': {
+        '& .role-metadata': {
           background: theme.palette.type === 'dark' ? '#495e77' : '#d8dfe7',
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
           '&.highlight': {
@@ -164,7 +169,7 @@ const useStyles = makeStyles(theme => ({
             color: theme.palette.type === 'dark' ? '#99ddff' : '#006699',
           },
         },
-        '&.role-unit': {
+        '& .role-unit': {
           background: theme.palette.type === 'dark' ? '#ce9700' : '#fff2ce',
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
           '&.highlight': {
@@ -185,25 +190,25 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#fefefe' : '#555',
           zIndex: '5',
         },
-        '&.active div.cell-border-top': {
+        '& .active div.cell-border-top': {
           height: '2px',
         },
-        '&.role-mainSubject div.cell-border-top': {
+        '& .role-mainSubject div.cell-border-top': {
           background: theme.palette.type === 'dark' ? '#99ddff' : '#499bc1',
         },
-        '&.role-dependentVar div.cell-border-top': {
+        '& .role-dependentVar div.cell-border-top': {
           background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
-        '&.role-qualifier div.cell-border-top': {
+        '& .role-qualifier div.cell-border-top': {
           background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
-        '&.role-property div.cell-border-top': {
+        '& .role-property div.cell-border-top': {
           background: theme.palette.type === 'dark' ? '#fbe5ce' : '#f1a655',
         },
-        '&.role-metadata div.cell-border-top': {
+        '& .role-metadata div.cell-border-top': {
           background: theme.palette.type === 'dark' ? '#d8dfe7' : '#556e8b',
         },
-        '&.role-unit div.cell-border-top': {
+        '& .role-unit div.cell-border-top': {
           background: theme.palette.type === 'dark' ? '#fff2ce' : '#ffca38',
         },
         '& div.cell-border-left': {
@@ -217,25 +222,25 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#fefefe' : '#555',
           zIndex: '5',
         },
-        '&.active div.cell-border-left': {
+        '& .active div.cell-border-left': {
           width: '2px',
         },
-        '&.role-mainSubject div.cell-border-left': {
+        '& .role-mainSubject div.cell-border-left': {
           background: theme.palette.type === 'dark' ? '#99ddff' : '#499bc1',
         },
-        '&.role-dependentVar div.cell-border-left': {
+        '& .role-dependentVar div.cell-border-left': {
           background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
-        '&.role-qualifier div.cell-border-left': {
+        '& .role-qualifier div.cell-border-left': {
           background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
-        '&.role-property div.cell-border-left': {
+        '& .role-property div.cell-border-left': {
           background: theme.palette.type === 'dark' ? '#fbe5ce' : '#f1a655',
         },
-        '&.role-metadata div.cell-border-left': {
+        '& .role-metadata div.cell-border-left': {
           background: theme.palette.type === 'dark' ? '#d8dfe7' : '#556e8b',
         },
-        '&.role-unit div.cell-border-left': {
+        '& .role-unit div.cell-border-left': {
           background: theme.palette.type === 'dark' ? '#fff2ce' : '#ffca38',
         },
         '& div.cell-border-right': {
@@ -249,25 +254,25 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#fefefe' : '#555',
           zIndex: '5',
         },
-        '&.active div.cell-border-right': {
+        '& .active div.cell-border-right': {
           width: '2px',
         },
-        '&.role-mainSubject div.cell-border-right': {
+        '& .role-mainSubject div.cell-border-right': {
           background: theme.palette.type === 'dark' ? '#99ddff' : '#499bc1',
         },
-        '&.role-dependentVar div.cell-border-right': {
+        '& .role-dependentVar div.cell-border-right': {
           background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
-        '&.role-qualifier div.cell-border-right': {
+        '& .role-qualifier div.cell-border-right': {
           background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
-        '&.role-property div.cell-border-right': {
+        '& .role-property div.cell-border-right': {
           background: theme.palette.type === 'dark' ? '#fbe5ce' : '#f1a655',
         },
-        '&.role-metadata div.cell-border-right': {
+        '& .role-metadata div.cell-border-right': {
           background: theme.palette.type === 'dark' ? '#d8dfe7' : '#556e8b',
         },
-        '&.role-unit div.cell-border-right': {
+        '& .role-unit div.cell-border-right': {
           background: theme.palette.type === 'dark' ? '#fff2ce' : '#ffca38',
         },
         '& div.cell-border-bottom': {
@@ -281,25 +286,25 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#fefefe' : '#555',
           zIndex: '5',
         },
-        '&.active div.cell-border-bottom': {
+        '& .active div.cell-border-bottom': {
           height: '2px',
         },
-        '&.role-mainSubject div.cell-border-bottom': {
+        '& .role-mainSubject div.cell-border-bottom': {
           background: theme.palette.type === 'dark' ? '#99ddff' : '#499bc1',
         },
-        '&.role-dependentVar div.cell-border-bottom': {
+        '& .role-dependentVar div.cell-border-bottom': {
           background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
-        '&.role-qualifier div.cell-border-bottom': {
+        '& .role-qualifier div.cell-border-bottom': {
           background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
-        '&.role-property div.cell-border-bottom': {
+        '& .role-property div.cell-border-bottom': {
           background: theme.palette.type === 'dark' ? '#fbe5ce' : '#f1a655',
         },
-        '&.role-metadata div.cell-border-bottom': {
+        '& .role-metadata div.cell-border-bottom': {
           background: theme.palette.type === 'dark' ? '#d8dfe7' : '#556e8b',
         },
-        '&.role-unit div.cell-border-bottom': {
+        '& .role-unit div.cell-border-bottom': {
           background: theme.palette.type === 'dark' ? '#fff2ce' : '#ffca38',
         },
         '& div.cell-resize-corner': {
@@ -314,26 +319,26 @@ const useStyles = makeStyles(theme => ({
           border: theme.palette.type === 'dark' ? '1px solid #555' : '1px solid #fefefe',
           zIndex: '25',
         },
-        '&.role-mainSubject div.cell-resize-corner': {
+        '& .role-mainSubject div.cell-resize-corner': {
           background: theme.palette.type === 'dark' ? '#99ddff' : '#499bc1',
         },
-        '&.role-dependentVar div.cell-resize-corner': {
+        '& .role-dependentVar div.cell-resize-corner': {
           background: theme.palette.type === 'dark' ? '#D9F2E6' : '#3bab75',
         },
-        '&.role-qualifier div.cell-resize-corner': {
+        '& .role-qualifier div.cell-resize-corner': {
           background: theme.palette.type === 'dark' ? '#8368b9' : '#8867cb',
         },
-        '&.role-property div.cell-resize-corner': {
+        '& .role-property div.cell-resize-corner': {
           background: theme.palette.type === 'dark' ? '#fbe5ce' : '#f1a655',
         },
-        '&.role-metadata div.cell-resize-corner': {
+        '& .role-metadata div.cell-resize-corner': {
           background: theme.palette.type === 'dark' ? '#d8dfe7' : '#556e8b',
         },
-        '&.role-unit div.cell-resize-corner': {
+        '& .role-unit div.cell-resize-corner': {
           background: theme.palette.type === 'dark' ? '#fff2ce' : '#ffca38',
         },
       },
-      '&.active tr td': {
+      '& .active .ReactVirtualized__Table__row .ReactVirtualized__Table__rowColumn': {
         opacity: '0.5',
         '&.active': {
            opacity: '1',
