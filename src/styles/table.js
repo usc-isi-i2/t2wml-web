@@ -19,8 +19,10 @@ const useStyles = makeStyles(theme => ({
       userSelect: 'none',
       position: 'relative',
       cursor: 'crosshair',
+      '& .ReactVirtualized__Grid.ReactVirtualized__Table__Grid': {
+        outline: 'none',
+      },
       '& .ReactVirtualized__Table__headerColumn:nth-child(1)': {
-        padding: '0.15em 0.5em',
         textAlign: 'center',
         background: theme.palette.type === 'dark' ? '#333' : '#f9f9f9',
         color: theme.palette.type === 'dark' ? '#fefefe' : '#777',
@@ -36,17 +38,17 @@ const useStyles = makeStyles(theme => ({
         '&::before': {
           content: '""',
           position: 'absolute',
-          bottom: '2px',
+          bottom: '7px',
           right: '3px',
           width: '0',
           height: '0',
-          borderLeft: '25px solid transparent',
+          borderLeft: '20px solid transparent',
           borderRight: theme.palette.type === 'dark' ? (
-            '25px solid #fefefe'
+            '20px solid #fefefe'
           ) : (
-            '25px solid #ddd'
+            '20px solid #ddd'
           ),
-          borderTop: '25px solid transparent',
+          borderTop: '20px solid transparent',
           pointerEvents: 'none',
         },
       },
@@ -78,6 +80,7 @@ const useStyles = makeStyles(theme => ({
         marginRight: '1px',
         width: '75px',
         minWidth: '75px',
+        maxWidth: '75px',
         overflow: 'hidden',
         display: 'inline-block',
         //resize: 'horizontal',
@@ -87,14 +90,17 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center',
         background: theme.palette.type === 'dark' ? '#333' : '#f9f9f9',
         color: theme.palette.type === 'dark' ? '#fefefe' : '#777',
-        padding: '0.15em 0.5em',
         minWidth: '50px',
         maxWidth: '50px',
         width: '50px',
+        height: '25px',
         position: 'sticky',
-        zIndex: '3',
         left: '-1px',
+        zIndex: '3',
         pointerEvents: 'none',
+      },
+      '& .ReactVirtualized__Table__row .ReactVirtualized__Table__rowColumn:nth-child(1) > div': {
+        padding: '0.15em 0.5em',
       },
       '& .ReactVirtualized__Table__row .ReactVirtualized__Table__rowColumn:nth-child(1)::after': {
         content: '""',
@@ -111,7 +117,6 @@ const useStyles = makeStyles(theme => ({
         display: 'inline-block',
         color: theme.palette.type === 'dark' ? '#ddd' : '#111',
         border: '1px solid #c7c7c7',
-        padding: '0.15em 0.5em',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
@@ -121,6 +126,9 @@ const useStyles = makeStyles(theme => ({
         height: '25px',
         width: '75px',
         zIndex: '1',
+        '&>div': {
+          padding: '0.15em 0.5em',
+        },
         '& .role-mainSubject': {
           background: theme.palette.type === 'dark' ? '#347898' : '#D9EAF2',
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
@@ -312,8 +320,8 @@ const useStyles = makeStyles(theme => ({
         '& div.cell-resize-corner': {
           display: 'block',
           position: 'absolute',
-          right: '-2px',
-          bottom: '-2px',
+          right: '-1px',
+          bottom: '-1px',
           width: '9px',
           height: '9px',
           cursor: 'pointer',
