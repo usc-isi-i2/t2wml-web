@@ -6,7 +6,7 @@ import classNames from '../utils/classNames'
 const TableCell = ({ data }) => {
 
   return (
-    <td className={classNames(data.classNames.join(' '), {
+    <div className={classNames(data.classNames.join(' '), {
       'active': data.active,
       'highlight': data.highlight,
     })}>
@@ -16,7 +16,7 @@ const TableCell = ({ data }) => {
       {data.activeRight && <div className="cell-border-right" />}
       {data.activeBottom && <div className="cell-border-bottom" />}
       {data.activeCorner && <div className="cell-resize-corner" />}
-    </td>
+    </div>
   )
 }
 

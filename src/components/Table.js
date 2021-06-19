@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
+import { AutoSizer, Column, Table as VirtualizedTable } from 'react-virtualized'
+
 import { Paper } from '@material-ui/core'
 
 import TableCell from './TableCell'
@@ -842,24 +844,59 @@ const Table = ({
   }
 
   const renderTable = () => {
+    if ( !tableData ) { return }
     return (
       <Paper>
         <div className={classes.tableWrapper}>
-          <table
-            ref={element => tableElement.current = element}
-            className={userSelecting ? 'active': ''}
-            onMouseDown={handleOnMouseDown}
-            onMouseMove={handleOnMouseMove}>
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                {renderTableHeader()}
-              </tr>
-            </thead>
-            <tbody>
-              {renderTableBody()}
-            </tbody>
-          </table>
+          <AutoSizer>
+            {({ height, width }) => (
+              <VirtualizedTable
+                width={width}
+                height={height}
+                headerHeight={25}
+                rowHeight={25}
+                onMouseDown={handleOnMouseDown}
+                onMouseMove={handleOnMouseMove}
+                ref={element => tableElement.current = element}
+                rowCount={Object.keys(tableData).length}
+                rowGetter={({ index }) => Object.entries(tableData[index])}>
+                <Column
+                  label=''
+                  dataKey=''
+                  headerRenderer={data => <div>&nbsp;</div>}
+                  width={50}
+                  cellDataGetter={data => {
+                    return data.rowData[data.dataKey]
+                  }}
+                  cellRenderer={data => {
+                    return <div>{data.rowIndex + 1}</div>
+                  }}
+                />
+                {Object.keys(tableData[0]).map((r, i) => (
+                  <Column
+                    label={utils.columnToLetter(i + 1)}
+                    dataKey={i}
+                    headerRenderer={data => {
+                      return (
+                        <div onDoubleClick={handleOnClickHeader}>
+                          {data.label}
+                        </div>
+                      )
+                    }}
+                    width={100}
+                    cellDataGetter={data => {
+                      return data.rowData[data.dataKey]
+                    }}
+                    cellRenderer={data => {
+                      return (
+                        <TableCell data={data.cellData[1]} />
+                      )
+                    }}
+                  />
+                ))}
+              </VirtualizedTable>
+            )}
+          </AutoSizer>
         </div>
       </Paper>
     )
