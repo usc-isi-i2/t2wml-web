@@ -23,7 +23,8 @@ const useStyles = makeStyles(theme => ({
   inputWrapper: {
     flex: '0 0 auto',
     position: 'relative',
-    overflow: 'scroll',
+    overflowX: 'scroll',
+    overflowY: 'hidden',
     width: '1150px',
     display: 'flex',
   },
