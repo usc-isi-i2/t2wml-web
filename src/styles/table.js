@@ -6,6 +6,8 @@ const useStyles = makeStyles(theme => ({
     flex: '1',
     width: '100vw',
     height: '95vh',
+    overflowX: 'scroll',
+    overflowY: 'hidden',
     position: 'relative',
     '& .ReactVirtualized__Table': {
       tableLayout: 'fixed',
