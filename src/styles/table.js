@@ -14,6 +14,7 @@ const useStyles = makeStyles(theme => ({
       transform:'rotateX(0deg)',
       border: '1px solid #c7c7c7',
       borderCollapse: 'collapse',
+      display: 'table',
       borderSpacing: '0',
       fontWeight: '400',
       userSelect: 'none',
@@ -53,7 +54,7 @@ const useStyles = makeStyles(theme => ({
         },
       },
       '& .ReactVirtualized__Table__headerColumn': {
-        display: 'inline-block',
+        display: 'table-cell',
         border: '1px solid #c7c7c7',
         whiteSpace: 'nowrap',
         minWidth: '75px',
@@ -78,15 +79,19 @@ const useStyles = makeStyles(theme => ({
       '& .ReactVirtualized__Table__headerColumn > div': {
         padding: '0.15em 0.5em',
         marginRight: '1px',
-        width: '75px',
-        minWidth: '75px',
-        maxWidth: '75px',
+        width: '73px',
+        minWidth: '73px',
+        maxWidth: '73px',
         overflow: 'hidden',
         display: 'inline-block',
         //resize: 'horizontal',
         //cursor: 'col-resize',
       },
+      '& .ReactVirtualized__Table__row': {
+        display: 'table-row',
+      },
       '& .ReactVirtualized__Table__row .ReactVirtualized__Table__rowColumn:nth-child(1)': {
+        display: 'table-cell',
         textAlign: 'center',
         background: theme.palette.type === 'dark' ? '#333' : '#f9f9f9',
         color: theme.palette.type === 'dark' ? '#fefefe' : '#777',
@@ -114,7 +119,7 @@ const useStyles = makeStyles(theme => ({
         pointerEvents: 'none',
       },
       '& .ReactVirtualized__Table__row .ReactVirtualized__Table__rowColumn': {
-        display: 'inline-block',
+        display: 'table-cell',
         color: theme.palette.type === 'dark' ? '#ddd' : '#111',
         border: '1px solid #c7c7c7',
         overflow: 'hidden',
