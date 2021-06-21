@@ -847,7 +847,9 @@ const Table = ({
     if ( !tableData ) { return }
     return (
       <Paper>
-        <div className={classes.tableWrapper}>
+        <div className={classes.tableWrapper}
+          onMouseDown={handleOnMouseDown}
+          onMouseMove={handleOnMouseMove}>
           <AutoSizer>
             {({ height, width }) => (
               <VirtualizedTable
@@ -855,8 +857,6 @@ const Table = ({
                 height={height}
                 headerHeight={25}
                 rowHeight={25}
-                onMouseDown={handleOnMouseDown}
-                onMouseMove={handleOnMouseMove}
                 ref={element => tableElement.current = element}
                 rowCount={Object.keys(tableData).length}
                 rowGetter={({ index }) => Object.entries(tableData[index])}>
