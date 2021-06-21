@@ -850,7 +850,7 @@ const Table = ({
                   }}
                 />
                 {Object.keys(tableData[0]).map((r, i) => (
-                  <Column
+                  <Column key={`col-${i}`}
                     label={utils.columnToLetter(i + 1)}
                     dataKey={i}
                     headerRenderer={data => {
