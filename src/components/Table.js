@@ -661,10 +661,10 @@ const Table = ({
     } else if ( element.nodeName !== 'TD' ) { return }
 
     // Set both coordinates to the same cell
-    const x1 = element.cellIndex
-    const x2 = element.cellIndex
-    const y1 = element.parentElement.rowIndex
-    const y2 = element.parentElement.rowIndex
+    const x1 = parseInt(element.parentElement.ariaColIndex - 1)
+    const x2 = parseInt(element.parentElement.ariaColIndex - 1)
+    const y1 = parseInt(element.parentElement.parentElement.ariaRowIndex)
+    const y2 = parseInt(element.parentElement.parentElement.ariaRowIndex)
     const newSelection = { x1, x2, y1, y2 }
     setTargetSelection(newSelection)
 
