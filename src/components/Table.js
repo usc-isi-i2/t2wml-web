@@ -820,29 +820,6 @@ const Table = ({
     }
   }
 
-  const renderTableHeader = () => {
-    if ( !tableData ) { return }
-    return Object.keys(tableData[0]).map((r, i) => (
-      <th scope="col" key={i}>
-        <div onDoubleClick={handleOnClickHeader}>
-          {utils.columnToLetter(i + 1)}
-        </div>
-      </th>
-    ))
-  }
-
-  const renderTableBody = () => {
-    if ( !tableData ) { return }
-    return Object.entries(tableData).map((row, i) => (
-      <tr key={`row-${i}`}>
-        <td>{i + 1}</td>
-        {Object.entries(row[1]).map((cell, j) => (
-          <TableCell key={`row-${i}-cell-${j}`} data={cell[1]} />
-        ))}
-      </tr>
-    ))
-  }
-
   const renderTable = () => {
     if ( !tableData ) { return }
     return (
