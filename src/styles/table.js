@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme => ({
         minWidth: '50px',
         maxWidth: '50px',
         width: '50px',
+        height: '25px',
         position: 'sticky',
         zIndex: '5',
         left: '-1px',
@@ -133,6 +134,11 @@ const useStyles = makeStyles(theme => ({
         zIndex: '1',
         '&>div': {
           padding: '0.15em 0.5em',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
         },
         '& .role-mainSubject': {
           background: theme.palette.type === 'dark' ? '#347898' : '#D9EAF2',
