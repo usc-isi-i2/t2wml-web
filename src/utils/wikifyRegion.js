@@ -1,4 +1,4 @@
-const wikifyMainSubject = (file, sheet) => {
+const wikifyRegion = (file, sheet) => {
   let url = '/api/web/wikify_region'
   url += `?project_folder=/proj`
   url += `&data_file=${file}`
@@ -28,4 +28,4 @@ const wikifyMainSubject = (file, sheet) => {
 }
 
 
-export default wikifyMainSubject
+export default wikifyRegion
