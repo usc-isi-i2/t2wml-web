@@ -3,7 +3,9 @@ import React from 'react'
 import classNames from '../utils/classNames'
 
 
-const TableCell = ({ data }) => {
+const TableCell = ({ cellData }) => {
+
+  const data = cellData[1]
 
   return (
     <div className={classNames(data.classNames.join(' '), {

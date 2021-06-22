@@ -866,7 +866,7 @@ const Table = ({
                     }}
                     cellRenderer={data => {
                       return (
-                        <TableCell data={data.cellData[1]} />
+                        <TableCell {...data} />
                       )
                     }}
                   />
