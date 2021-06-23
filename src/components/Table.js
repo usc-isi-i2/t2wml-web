@@ -661,10 +661,11 @@ const Table = ({
     } else if ( element.nodeName !== 'TD' ) { return }
 
     // Set both coordinates to the same cell
-    const x1 = parseInt(element.parentElement.ariaColIndex - 1)
-    const x2 = parseInt(element.parentElement.ariaColIndex - 1)
-    const y1 = parseInt(element.parentElement.parentElement.ariaRowIndex)
-    const y2 = parseInt(element.parentElement.parentElement.ariaRowIndex)
+    const x1 = parseInt(element.dataset.colIndex)
+    const x2 = parseInt(element.dataset.colIndex)
+    const y1 = parseInt(element.dataset.rowIndex)
+    const y2 = parseInt(element.dataset.rowIndex)
+    if ( !x1 || !x2 || !y1 || !y2 ) { return }
     const newSelection = { x1, x2, y1, y2 }
     setTargetSelection(newSelection)
 
@@ -742,8 +743,8 @@ const Table = ({
       const prevSelection = {...selection.current}
 
       // Update the last x and y coordinates of the selection
-      const newColIndex = element.cellIndex
-      const newRowIndex = element.parentElement.rowIndex
+      const newColIndex = parseInt(element.dataset.colIndex)
+      const newRowIndex = parseInt(element.dataset.rowIndex)
       selection.current = {
         ...selection.current,
         x2: newColIndex,
