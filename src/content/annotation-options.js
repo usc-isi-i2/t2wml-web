@@ -42,7 +42,7 @@ export const TYPES = [{
     'value': 'property',
   }],
 }, {
-  'label': 'Wikidata Item',
+  'label': 'Country',
   'value': 'wikibaseitem',
   'wikify': true,
   'children': [{
