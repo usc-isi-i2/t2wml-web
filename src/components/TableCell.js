@@ -3,7 +3,7 @@ import React from 'react'
 import classNames from '../utils/classNames'
 
 
-const TableCell = ({ cellData }) => {
+const TableCell = ({ cellData, rowIndex, columnIndex }) => {
 
   const data = cellData[1]
 
@@ -11,7 +11,7 @@ const TableCell = ({ cellData }) => {
     <div className={classNames(data.classNames.join(' '), {
       'active': data.active,
       'highlight': data.highlight,
-    })}>
+    })} data-row-index={rowIndex+1} data-col-index={columnIndex}>
       {data.value}
       {data.activeTop && <div className="cell-border-top" />}
       {data.activeLeft && <div className="cell-border-left" />}
