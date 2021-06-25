@@ -10,7 +10,6 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
-import WikifyButton from './WikifyButton'
 import PropertyInput from './PropertyInput'
 import UnitInput from './UnitInput'
 import { ROLES, TYPES } from '../content/annotation-options'
@@ -258,9 +257,6 @@ const AnnotationMenu = ({
   const renderSelectedRoleInput = () => {
     const currentRole = getFormValue('role')
 
-    // check if the selected role can be wikified
-    const showWikifyButton = utils.isWikifyable({role: currentRole})
-
     return (
       <Grid item xs={12}>
         <TextField
@@ -282,15 +278,6 @@ const AnnotationMenu = ({
             </MenuItem>
           ))}
         </TextField>
-        {showWikifyButton && (
-          <WikifyButton
-            file={file}
-            sheet={sheet}
-            selection={selection}
-            isProperty={false}
-            dataType={'string'}
-            setMessage={setMessage} />
-        )}
       </Grid>
     )
   }
@@ -305,9 +292,6 @@ const AnnotationMenu = ({
         option.value === currentRole
       ))
     }
-
-    // check if the selected type can be wikified
-    const showWikifyButton = utils.isWikifyable({type: currentType})
 
     if ( !ROLE || !ROLE.children ) { return }
 
@@ -332,15 +316,6 @@ const AnnotationMenu = ({
             </MenuItem>
           ))}
         </TextField>
-        {showWikifyButton && (
-          <WikifyButton
-            file={file}
-            sheet={sheet}
-            selection={selection}
-            isProperty={false}
-            dataType={'string'}
-            setMessage={setMessage} />
-        )}
       </Grid>
     )
   }
