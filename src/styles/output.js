@@ -8,6 +8,7 @@ const useStyles = makeStyles(theme => ({
     overflow: 'scroll',
     position: 'relative',
     '& table': {
+      marginTop: '-1px',
       tableLayout: 'fixed',
       transform:'rotateX(0deg)',
       border: '1px solid #c7c7c7',
@@ -25,6 +26,7 @@ const useStyles = makeStyles(theme => ({
         minWidth: '3em',
         maxWidth: '3em',
         width: '3em',
+        height: '25px',
         position: 'sticky',
         zIndex: '5',
         left: '-1px',
@@ -34,17 +36,17 @@ const useStyles = makeStyles(theme => ({
         '&::before': {
           content: '""',
           position: 'absolute',
-          bottom: '2px',
-          right: '2px',
+          bottom: '3px',
+          right: '3px',
           width: '0',
           height: '0',
-          borderLeft: '1.25em solid transparent',
+          borderLeft: '20px solid transparent',
           borderRight: theme.palette.type === 'dark' ? (
-            '1.25em solid #fefefe'
+            '20px solid #fefefe'
           ) : (
-            '1.25em solid #ddd'
+            '20px solid #ddd'
           ),
-          borderTop: '1.25em solid transparent',
+          borderTop: '20px solid transparent',
           pointerEvents: 'none',
         },
       },
@@ -117,6 +119,7 @@ const useStyles = makeStyles(theme => ({
         minWidth: '75px',
         maxWidth: '75px',
         width: '75px',
+        height: '25px',
         zIndex: '1',
         '&.active': {
           animationName: 'blink',

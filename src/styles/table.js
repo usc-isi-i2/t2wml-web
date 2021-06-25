@@ -12,7 +12,6 @@ const useStyles = makeStyles(theme => ({
     '& .ReactVirtualized__Table': {
       tableLayout: 'fixed',
       transform:'rotateX(0deg)',
-      border: '1px solid #c7c7c7',
       borderCollapse: 'collapse',
       display: 'table',
       borderSpacing: '0',
@@ -78,7 +77,7 @@ const useStyles = makeStyles(theme => ({
         display: 'block',
         left: '0',
         right: '0',
-        bottom: '0',
+        bottom: '5px',
         height: '1px',
         position: 'absolute',
         background: '#c7c7c7',
