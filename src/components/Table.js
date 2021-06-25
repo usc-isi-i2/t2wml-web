@@ -451,7 +451,6 @@ const Table = ({
 
         let nextSelection = targetSelection
         const { x1, x2, y1, y2 } = targetSelection
-        const rows = tableElement.current.querySelectorAll('tr')
 
         // arrow up
         if ( event.code === 'ArrowUp' && y1 > 1 ) {
@@ -471,13 +470,11 @@ const Table = ({
             }
           } else {
             nextSelection = {'x1': x1, 'x2': x1, 'y1': y1 - 1, 'y2': y1 - 1}
-            const nextElement = rows[y1 - 1].children[x1]
-            prevElement.current = nextElement
           }
         }
 
         // arrow down
-        if ( event.code === 'ArrowDown' && y1 < rows.length - 1 ) {
+        if ( event.code === 'ArrowDown' && y1 < rows.current.length ) {
           if ( event.shiftKey ) {
             if ( y1 === y2 ) {
               selection.current = {'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2 + 1}
@@ -492,8 +489,6 @@ const Table = ({
             }
           } else {
             nextSelection = {'x1': x1, 'x2': x1, 'y1': y1 + 1, 'y2': y1 + 1}
-            const nextElement = rows[y1 + 1].children[x1]
-            prevElement.current = nextElement
           }
         }
 
@@ -513,13 +508,11 @@ const Table = ({
             }
           } else {
             nextSelection = {'x1': x1 - 1, 'x2': x1 - 1, 'y1': y1, 'y2': y1}
-            const nextElement = rows[y1].children[x1 - 1]
-            prevElement.current = nextElement
           }
         }
 
         // arrow right
-        if ( event.code === 'ArrowRight' && x1 < rows[y1].children.length - 1 ) {
+        if ( event.code === 'ArrowRight' && x1 < cols.current.length ) {
           if ( event.shiftKey ) {
             if ( x1 === x2 ) {
               selection.current = {'x1': x1, 'x2': x2 + 1, 'y1': y1, 'y2': y2}
@@ -534,8 +527,6 @@ const Table = ({
             }
           } else {
             nextSelection = {'x1': x1 + 1, 'x2': x1 + 1, 'y1': y1, 'y2': y1}
-            const nextElement = rows[y1].children[x1 + 1]
-            prevElement.current = nextElement
           }
         }
 
