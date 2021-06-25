@@ -850,7 +850,10 @@ const Table = ({
                     dataKey={i}
                     headerRenderer={data => {
                       return (
-                        <div onDoubleClick={handleOnClickHeader}>
+                        <div
+                          data-row-index={0}
+                          data-col-index={i+1}
+                          onDoubleClick={handleOnClickHeader}>
                           {data.label}
                         </div>
                       )
