@@ -92,7 +92,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
           setMessage={setMessage}
           onSuccess={handleFileUpload} />
       )}
-      {!!outputData && outputData.length > 1 && (
+      {!!outputData && outputData.length >= 1 && (
         <Download
           filename={data.filepath}
           sheetname={data.sheetName} />
