@@ -766,17 +766,6 @@ const Table = ({
       // Update Selections
       updateSelections(prevSelection)
 
-      // Update selected annotation block area when resizing
-      if ( prevElement.current.nodeName === 'TD' ) {
-        if ( selectedAnnotationBlock ) {
-          const oldCellIndex = prevElement.current.cellIndex
-          const oldRowIndex = prevElement.current.parentElement.rowIndex
-          if ( newCellIndex <= oldCellIndex || newRowIndex <= oldRowIndex ) {
-            resetEmptyCells(oldCellIndex, newCellIndex, oldRowIndex, newRowIndex)
-          }
-        }
-      }
-
       // Update reference to the previous element
       prevElement.current = element
     }
