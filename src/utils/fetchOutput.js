@@ -1,5 +1,5 @@
 const fetchOutput = (file, sheet, fileType) => {
-  let url = '/api/project/download/'
+  let url = '/api/causx/project/download/'
   url += `${fileType}?project_folder=/proj`
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`

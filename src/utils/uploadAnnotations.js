@@ -1,5 +1,5 @@
 const uploadAnnotations = (file, sheet, annotations, onProgress) => {
-  let url = '/api/annotation?project_folder=/proj'
+  let url = '/api/causx/annotation?project_folder=/proj'
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
 

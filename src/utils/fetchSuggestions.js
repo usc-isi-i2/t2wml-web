@@ -1,5 +1,5 @@
 const fetchSuggestions = (file, sheet, selection, annotations) => {
-  let url = 'api/annotation/suggest?project_folder=/proj'
+  let url = '/api/causx/annotation/suggest?project_folder=/proj'
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
 

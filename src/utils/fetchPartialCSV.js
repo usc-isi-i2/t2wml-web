@@ -1,5 +1,5 @@
 const fetchPartialCSV = (file, sheet) => {
-  let url = '/api/partialcsv'
+  let url = '/api/causx/partialcsv'
   url += `?project_folder=/proj`
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`

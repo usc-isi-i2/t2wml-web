@@ -1,5 +1,5 @@
 const uploadQnode = (file, sheet, qnode) => {
-  let url = 'api/create_node?project_folder=/proj'
+  let url = '/api/causx/create_node?project_folder=/proj'
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
 

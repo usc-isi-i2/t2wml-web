@@ -1,5 +1,5 @@
 const fetchProject = () => {
-  let url = '/api/project/settings'
+  let url = '/api/causx/project/settings'
   url += `?project_folder=/proj`
 
   return new Promise((resolve, reject) => {

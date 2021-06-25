@@ -1,5 +1,5 @@
 const wikifyRegion = (file, sheet) => {
-  let url = '/api/web/wikify_region'
+  let url = '/api/causx/web/wikify_region'
   url += `?project_folder=/proj`
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`

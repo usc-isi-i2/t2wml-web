@@ -1,5 +1,5 @@
 const fetchAnnotations = (file, sheet) => {
-  let url = '/api/annotation/guess-blocks'
+  let url = '/api/causx/annotation/guess-blocks'
   url += `?project_folder=/proj`
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`

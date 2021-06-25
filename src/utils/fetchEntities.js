@@ -1,5 +1,5 @@
 const fetchEntities = (file, sheet) => {
-  let url = '/api/project/entities?project_folder=/proj'
+  let url = '/api/causx/project/entities?project_folder=/proj'
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
 

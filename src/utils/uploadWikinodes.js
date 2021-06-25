@@ -1,5 +1,5 @@
 const uploadWikinodes = (file, sheet, selection, isProperty, dataType) => {
-  let url = 'api/auto_wikinodes?project_folder=/proj'
+  let url = '/api/causx/auto_wikinodes?project_folder=/proj'
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
 

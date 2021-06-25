@@ -1,5 +1,5 @@
 const uploadSettings = (settings) => {
-  let url = 'api/project/settings?project_folder=/proj'
+  let url = '/api/causx/project/settings?project_folder=/proj'
 
   const requestData = {
     title: settings.title,
