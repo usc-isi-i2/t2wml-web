@@ -731,8 +731,12 @@ const Table = ({
     const element = event.target
     if ( element === prevElement.current ) { return }
 
-    // Don't allow out-of-bounds resizing
-    if ( element.nodeName !== 'TD' ) { return }
+    const newColIndex = parseInt(element.dataset.colIndex)
+    const newRowIndex = parseInt(element.dataset.rowIndex)
+
+    // Don't allow out-of-bounds selecting / resizing
+    if ( !newColIndex || newColIndex === 0 ) { return }
+    if ( !newRowIndex || newRowIndex === 0 ) { return }
 
     if ( userSelecting && !event.shiftKey ) {
       if ( !selection.current ) { return }
@@ -740,8 +744,6 @@ const Table = ({
       const prevSelection = {...selection.current}
 
       // Update the last x and y coordinates of the selection
-      const newColIndex = parseInt(element.dataset.colIndex)
-      const newRowIndex = parseInt(element.dataset.rowIndex)
       selection.current = {
         ...selection.current,
         x2: newColIndex,
