@@ -65,7 +65,7 @@ const Table = ({
       const tableData = {...prevTableData}
 
       Object.entries(tableData).forEach(data => {
-        const [rowIndex, rowData] = data
+        const rowIndex = data[0]
         tableData[rowIndex][colIndex - 1] = {
           ...tableData[rowIndex][colIndex - 1],
           maxWidth: true,
