@@ -205,7 +205,8 @@ const Table = ({
               cellData.activeBottom = false
               cellData.activeCorner = false
 
-              if ( block.selection.x1 === selection.current.x1 &&
+              if ( !!selection.current &&
+                block.selection.x1 === selection.current.x1 &&
                 block.selection.x2 === selection.current.x2 &&
                 block.selection.y1 === selection.current.y1 &&
                 block.selection.y2 === selection.current.y2 ) {
