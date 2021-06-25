@@ -368,12 +368,6 @@ const useStyles = makeStyles(theme => ({
           background: theme.palette.type === 'dark' ? '#fff2ce' : '#ffca38',
         },
       },
-      '& .active .ReactVirtualized__Table__row .ReactVirtualized__Table__rowColumn': {
-        opacity: '0.5',
-        '&.active': {
-           opacity: '1',
-        },
-      },
     },
   },
 }))
