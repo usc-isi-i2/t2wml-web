@@ -328,6 +328,7 @@ const Table = ({
               tableData[rowIndex - 1][colIndex - 1] = {
                 ...tableData[rowIndex - 1][colIndex - 1],
                 ...DEFAULT_CELL_STATE,
+                classNames: [],
               }
               rowIndex += 1
             }
@@ -344,6 +345,7 @@ const Table = ({
               tableData[rowIndex - 1][colIndex - 1] = {
                 ...tableData[rowIndex - 1][colIndex - 1],
                 ...DEFAULT_CELL_STATE,
+                classNames: [],
               }
               rowIndex += 1
             }
@@ -360,6 +362,7 @@ const Table = ({
               tableData[rowIndex - 1][colIndex - 1] = {
                 ...tableData[rowIndex - 1][colIndex - 1],
                 ...DEFAULT_CELL_STATE,
+                classNames: [],
               }
               colIndex += 1
             }
@@ -376,6 +379,7 @@ const Table = ({
               tableData[rowIndex - 1][colIndex - 1] = {
                 ...tableData[rowIndex - 1][colIndex - 1],
                 ...DEFAULT_CELL_STATE,
+                classNames: [],
               }
               colIndex += 1
             }
