@@ -832,6 +832,7 @@ const Table = ({
                 height={height}
                 headerHeight={25}
                 rowHeight={25}
+                className={userSelecting ? 'active': ''}
                 ref={element => tableElement.current = element}
                 rowCount={Object.keys(tableData).length}
                 rowGetter={({ index }) => Object.entries(tableData[index])}>

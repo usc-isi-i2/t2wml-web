@@ -20,6 +20,12 @@ const useStyles = makeStyles(theme => ({
       userSelect: 'none',
       position: 'relative',
       cursor: 'crosshair',
+      '&.active .ReactVirtualized__Grid .ReactVirtualized__Table__row .ReactVirtualized__Table__rowColumn>div': {
+        opacity: '0.5',
+      },
+      '&.active .ReactVirtualized__Grid .ReactVirtualized__Table__row .ReactVirtualized__Table__rowColumn>.active': {
+        opacity: '1',
+      },
       '& .ReactVirtualized__Grid.ReactVirtualized__Table__Grid': {
         outline: 'none',
       },
