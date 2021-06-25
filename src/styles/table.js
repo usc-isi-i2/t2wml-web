@@ -139,6 +139,9 @@ const useStyles = makeStyles(theme => ({
           left: 0,
           right: 0,
           bottom: 0,
+          '&.maxWidth': {
+            background: '#efefef',
+          },
         },
         '& .role-mainSubject': {
           background: theme.palette.type === 'dark' ? '#347898' : '#D9EAF2',

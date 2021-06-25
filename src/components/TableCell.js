@@ -11,6 +11,7 @@ const TableCell = ({ cellData, rowIndex, columnIndex }) => {
     <div className={classNames(data.classNames.join(' '), {
       'active': data.active,
       'highlight': data.highlight,
+      'maxWidth': data.maxWidth,
     })} data-row-index={rowIndex+1} data-col-index={columnIndex}>
       {data.value}
       {data.activeTop && <div className="cell-border-top" />}

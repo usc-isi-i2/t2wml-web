@@ -59,18 +59,21 @@ const Table = ({
 
   const handleOnClickHeader = event => {
     const element = event.target
-    const index = element.parentElement.cellIndex
+    const colIndex = parseInt(element.dataset.colIndex)
 
-    const rows = tableElement.current.querySelectorAll('tr')
+    setTableData(prevTableData => {
+      const tableData = {...prevTableData}
 
-    let maxWidth = 0
-    rows.forEach(row => {
-      if ( row.children[index].scrollWidth > maxWidth ) {
-        maxWidth = row.children[index].scrollWidth
-      }
+      Object.entries(tableData).forEach(data => {
+        const [rowIndex, rowData] = data
+        tableData[rowIndex][colIndex - 1] = {
+          ...tableData[rowIndex][colIndex - 1],
+          maxWidth: true,
+        }
+      })
+
+      return tableData
     })
-
-    element.setAttribute('style', `width: ${maxWidth}px`)
   }
 
   useEffect(() => {
