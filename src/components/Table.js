@@ -198,13 +198,21 @@ const Table = ({
               const cellData = tableData[rowIndex][colIndex]
               cellData.classNames = classNames
               cellData.annotation = true
-              cellData.active = block.selection === selection.current
               cellData.highlight = false
               cellData.activeTop = false
               cellData.activeLeft = false
               cellData.activeRight = false
               cellData.activeBottom = false
               cellData.activeCorner = false
+
+              if ( block.selection.x1 === selection.current.x1 &&
+                block.selection.x2 === selection.current.x2 &&
+                block.selection.y1 === selection.current.y1 &&
+                block.selection.y2 === selection.current.y2 ) {
+                cellData.active = true
+              } else {
+                cellData.active = false
+              }
 
               // Add a top border to the cells at the top of the selection
               if ( rowIndex === topRow ) {
