@@ -36,6 +36,9 @@ const Table = ({
 
   const classes = useStyles()
 
+  const rows = useRef(null)
+  const cols = useRef(null)
+
   const selection = useRef(null)
   const timeoutID = useRef(null)
   const prevElement = useRef(null)
@@ -73,14 +76,14 @@ const Table = ({
   useEffect(() => {
     if ( tableDataInitialized ) { return }
     setTableData(prev => {
-      const rows = [...Array(Math.max(dimensions[0], 100))] // at least 100 rows
-      const cols = [...Array(Math.max(dimensions[1], 26))]  // at least 26 cols
+      rows.current = [...Array(Math.max(dimensions[0], 100))] // at least 100 rows
+      cols.current = [...Array(Math.max(dimensions[1], 26))]  // at least 26 cols
 
       const tableData = {} // empty table data
 
-      Object.entries(rows).forEach((rowItem, rowIndex) => {
+      Object.entries(rows.current).forEach((rowItem, rowIndex) => {
         tableData[rowIndex] = {}
-        Object.entries(cols).forEach((colItem, colIndex) => {
+        Object.entries(cols.current).forEach((colItem, colIndex) => {
           if ( !!data[rowIndex] ) {
             const cellValue = data[rowIndex][colIndex]
             if ( !!cellValue ) {
