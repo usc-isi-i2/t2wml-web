@@ -18,7 +18,7 @@ const Output = ({ data, filename }) => {
   const [activeCol, setActiveCol] = useState()
 
   const MIN_NUM_ROWS = 100
-  const MIN_NUM_COLS = 10
+  const MIN_NUM_COLS = 26
 
   useEffect(() => {
     setRows([...Array(Math.max(data.length, MIN_NUM_ROWS))])
