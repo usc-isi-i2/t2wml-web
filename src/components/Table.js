@@ -655,7 +655,7 @@ const Table = ({
       setShowOverlayMenu(false)
       setUserSelecting(true)
       return
-    } else if ( element.nodeName !== 'TD' ) { return }
+    }
 
     // Set both coordinates to the same cell
     const x1 = parseInt(element.dataset.colIndex)
