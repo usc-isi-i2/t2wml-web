@@ -16,39 +16,25 @@ const downloadFile = (file, sheet, fileType) => {
   url += `&mapping_file=web.annotation`
   url += `&mapping_type=Annotation`
 
-
-  if ( fileType === 'zip' || fileType === 't2wmlz' ) {
-    return new Promise((resolve, reject) => {
-      fetch(url, {method: 'GET'})
-      .then(response => response.blob())
-      .then(blob => {
-        if (navigator.msSaveBlob) { // IE 10+
-            navigator.msSaveBlob(blob, file)
-        } else {
-          const link = document.createElement('a')
-          if ( link.download !== undefined ) { // feature detection
-            link.setAttribute('href', URL.createObjectURL(blob))
-            link.setAttribute('download', `${file}_output.${fileType}`)
-            link.style.visibility = 'hidden'
-            document.body.appendChild(link)
-            link.click()
-            document.body.removeChild(link)
-          }
+  return new Promise((resolve, reject) => {
+    fetch(url, {method: 'GET'})
+    .then(response => response.blob())
+    .then(blob => {
+      if (navigator.msSaveBlob) { // IE 10+
+          navigator.msSaveBlob(blob, file)
+      } else {
+        const link = document.createElement('a')
+        if ( link.download !== undefined ) { // feature detection
+          link.setAttribute('href', URL.createObjectURL(blob))
+          link.setAttribute('download', `${file}_output.${fileType}`)
+          link.style.visibility = 'hidden'
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
         }
-      })
+      }
     })
-  } else {
-    return new Promise((resolve, reject) => {
-      fetch(url, {method: 'GET'})
-      .then((response) => response.json())
-      .then((response) => {
-        if ( !!response.error ) {
-          reject(response.error)
-        }
-        resolve(response.data)
-      })
-    })
-  }
+  })
 }
 
 
