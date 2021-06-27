@@ -22,7 +22,7 @@ const wikifyRegion = (file, sheet, selection) => {
       if ( !!data.error ) {
         reject(data.error)
       }
-      resolve(data)
+      resolve(data.layers)
     })
   })
 }
