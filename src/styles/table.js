@@ -148,6 +148,9 @@ const useStyles = makeStyles(theme => ({
             background: '#efefef',
           },
         },
+        '& .qnode': {
+          color: theme.palette.type === 'dark' ? '#99ddff !important' : '#006699 !important',
+        },
         '& .role-mainSubject': {
           background: theme.palette.type === 'dark' ? '#347898' : '#D9EAF2',
           color: theme.palette.type === 'dark' ? '#fefefe' : '#111',
