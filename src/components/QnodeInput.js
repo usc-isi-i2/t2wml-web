@@ -1,21 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link'
 import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
-import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Autocomplete from '@material-ui/lab/Autocomplete'
 import CloseIcon from '@material-ui/icons/Close'
 import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/styles'
 
 import CreateQnode from './CreateQnode'
-import fetchQnodes from '../utils/fetchQnodes'
 
 const useStyles = makeStyles(theme => ({
   link: {
@@ -41,45 +37,12 @@ const QnodeInput = ({
 
   const classes = useStyles()
 
-  const timeoutID = useRef(null)
-
-  const [qnodes, setQnodes] = useState([])
-  const [loading, setLoading] = useState(false)
   const [selected, setSelected] = useState(selectedQnode)
   const [showCreateQnode, setShowCreateQnode] = useState()
 
   useEffect(() => {
     setSelected(selectedQnode)
   }, [selectedQnode])
-
-  const handleOnChange = event => {
-    const value = event.target.value
-    if ( !value ) {
-      setQnodes([])
-      setLoading(false)
-    } else {
-      setLoading(true)
-      clearTimeout(timeoutID.current)
-      timeoutID.current = setTimeout(() => {
-        fetchQnodes(value)
-        .then(data => {
-          setQnodes(data)
-          setLoading(false)
-        })
-        .catch(error => console.log(error))
-      }, 250)
-    }
-  }
-
-  const handleOnSelectQnode = (event, qnode) => {
-    selectQnode(qnode)
-  }
-
-  const selectQnode = qnode => {
-    onSelectQnode(qnode)
-    setSelected(qnode)
-    setQnodes([])
-  }
 
   const removeSelected = () => {
     onSelectQnode()
@@ -149,55 +112,6 @@ const QnodeInput = ({
     )
   }
 
-  const renderQnodeSearch = () => {
-    if ( !!selected ) { return }
-    return (
-      <Grid item xs={12}>
-        <Autocomplete
-          id="qnode-menu"
-          fullWidth={true}
-          clearOnBlur={false}
-          selectOnFocus={false}
-          options={qnodes}
-          onChange={handleOnSelectQnode}
-          getOptionLabel={property => property.label}
-          noOptionsText={'Enter a search term to search for Wikidata items'}
-          renderOption={property => (
-            <Typography variant="body1">
-              <b>{`${property.label} (${property.id})`}</b>
-              <br/>
-              {property.description}
-            </Typography>
-          )}
-          renderInput={params => (
-            <TextField {...params}
-              fullWidth
-              variant="outlined"
-              autoCorrect="off"
-              autoComplete="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              label={'Search for Wikidata items'}
-              id={'selectedQnode'}
-              name={'selectedQnode'}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <React.Fragment>
-                    {loading ? (
-                      <CircularProgress color="inherit" size={20} />
-                    ) : null }
-                    {params.InputProps.endAdornment}
-                  </React.Fragment>
-                ),
-              }}
-              onChange={handleOnChange} />
-          )}
-        />
-      </Grid>
-    )
-  }
-
   const renderQnodeCreate = () => {
     if ( !!selected ) { return }
     return (
@@ -225,7 +139,6 @@ const QnodeInput = ({
       {renderTitle()}
       {renderSelectedQnode()}
       {renderInstructions()}
-      {renderQnodeSearch()}
       {renderQnodeCreate()}
     </Grid>
   )
