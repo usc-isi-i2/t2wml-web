@@ -71,7 +71,7 @@ const PropertyInput = ({
     return (
       <Grid item xs={12}>
         <Typography variant="body1">
-          <b>{!!selected ? 'Property' : 'Select property'}</b>
+          <b>Property</b>
         </Typography>
       </Grid>
     )

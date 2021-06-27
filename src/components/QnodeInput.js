@@ -55,7 +55,7 @@ const QnodeInput = ({
     return (
       <Grid item xs={12}>
         <Typography variant="body1">
-          <b>{!!selected ? 'Selected Wikidata Item' : 'Select Wikidata Item'}</b>
+          <b>Wikidata Item</b>
         </Typography>
       </Grid>
     )
