@@ -11,7 +11,7 @@ const uploadWikinodes = (file, sheet, selection, isProperty, dataType) => {
 
   return new Promise((resolve, reject) => {
     fetch(url, {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
