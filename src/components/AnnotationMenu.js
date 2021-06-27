@@ -14,6 +14,7 @@ import PropertyInput from './PropertyInput'
 import UnitInput from './UnitInput'
 import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
+import uploadWikinodes from '../utils/uploadWikinodes'
 import useStyles from '../styles/annotationMenu'
 import * as utils from '../utils/table'
 
@@ -138,6 +139,7 @@ const AnnotationMenu = ({
     uploadAnnotations(file, sheet, filteredAnnotations, () => {})
     .then(data => {
       updateAnnotation(data.annotations)
+      uploadWikinodes(file, sheet, selection, type === 'property', 'string')
     })
     .catch(error => {
       setMessage({
