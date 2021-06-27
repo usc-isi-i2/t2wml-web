@@ -1,19 +1,53 @@
-const downloadFile = (data, filename, fileType) => {
+const downloadFile = (file, sheet, fileType) => {
 
-  const blob = new Blob([data], {type: 'application/octet-stream'})
-
-  if (navigator.msSaveBlob) { // IE 10+
-      navigator.msSaveBlob(blob, filename)
+  let url
+  if ( fileType === 't2wmlz' ) {
+    url = '/api/causx/download_project'
+  } else if ( fileType === 'zip' ) {
+    url = '/api/causx/download_zip_results'
   } else {
-    const link = document.createElement('a')
-    if ( link.download !== undefined ) { // feature detection
-      link.setAttribute('href', URL.createObjectURL(blob))
-      link.setAttribute('download', `${filename}_output.${fileType}`)
-      link.style.visibility = 'hidden'
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-    }
+    url = '/api/causx/project/download/'
+    url += `${fileType}/${file}_output.${fileType}`
+  }
+
+  url += `?project_folder=/proj`
+  url += `&data_file=${file}`
+  url += `&sheet_name=${sheet}`
+  url += `&mapping_file=web.annotation`
+  url += `&mapping_type=Annotation`
+
+
+  if ( fileType === 'zip' || fileType === 't2wmlz' ) {
+    return new Promise((resolve, reject) => {
+      fetch(url, {method: 'GET'})
+      .then(response => response.blob())
+      .then(blob => {
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, file)
+        } else {
+          const link = document.createElement('a')
+          if ( link.download !== undefined ) { // feature detection
+            link.setAttribute('href', URL.createObjectURL(blob))
+            link.setAttribute('download', `${file}_output.${fileType}`)
+            link.style.visibility = 'hidden'
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+          }
+        }
+      })
+    })
+  } else {
+    return new Promise((resolve, reject) => {
+      fetch(url, {method: 'GET'})
+      .then((response) => response.json())
+      .then((response) => {
+        if ( !!response.error ) {
+          reject(response.error)
+        }
+        resolve(response.data)
+      })
+    })
   }
 }
 
