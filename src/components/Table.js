@@ -941,6 +941,7 @@ const Table = ({
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
         selectedCell={{...targetSelection, value: selectedCellValue}}
+        updateTableDataLayers={updateTableDataLayers}
         selection={selection.current}
         annotations={annotationBlocks}
         suggestedAnnotation={suggestedAnnotation}

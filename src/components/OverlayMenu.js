@@ -41,6 +41,7 @@ const OverlayMenu = ({
   suggestedAnnotation,
   onSelectionChange,
   updateAnnotation,
+  updateTableDataLayers,
   hideOverlayMenu,
   setMessage,
 }) => {
@@ -83,6 +84,7 @@ const OverlayMenu = ({
             annotations={annotations}
             selectedAnnotation={selectedAnnotation}
             suggestedAnnotation={suggestedAnnotation}
+            updateTableDataLayers={updateTableDataLayers}
             onSelectionChange={onSelectionChange}
             updateAnnotation={updateAnnotation}
             hideOverlayMenu={hideOverlayMenu}
