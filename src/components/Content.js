@@ -14,6 +14,7 @@ import Output from './Output'
 import Table from './Table'
 
 import fetchAnnotations from '../utils/fetchAnnotations'
+import fetchPartialCSV from '../utils/fetchPartialCSV'
 
 
 const Content = ({darkTheme, setDarkTheme}) => {
@@ -43,6 +44,22 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const handleProjectUpdate = project => {
+    // update the project
+    setProject(project)
+
+    // update the output preview
+    fetchPartialCSV(data.filepath, data.sheetName)
+    .then(data => setOutputData(data.cells))
+    .catch(error => {
+      setMessage({
+        type: 'error',
+        title: `${error.errorCode} - ${error.errorTitle}`,
+        text: error.errorDescription,
+      })
+    })
+  }
 
   const handleFileUpload = data => {
     setData(data)
