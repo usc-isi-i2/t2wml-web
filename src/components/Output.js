@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import Paper from '@material-ui/core/Paper'
-import Tooltip from '@material-ui/core/Tooltip'
 
 import useStyles from '../styles/output'
 import * as utils from '../utils/table'
@@ -15,7 +14,6 @@ const Output = ({ data, filename }) => {
 
   const [rows, setRows] = useState([])
   const [cols, setCols] = useState([])
-  const [activeCol, setActiveCol] = useState()
 
   const MIN_NUM_ROWS = 100
   const MIN_NUM_COLS = 26
@@ -23,18 +21,6 @@ const Output = ({ data, filename }) => {
   useEffect(() => {
     setRows([...Array(Math.max(data.length, MIN_NUM_ROWS))])
     setCols([...Array(Math.max(data[0].length, MIN_NUM_COLS))])
-
-    if ( !data || !data.length ) { return }
-    let counter = 0
-    while ( counter < data[0].length ) {
-      if ( !data[1] || !data[1][counter] ) {
-        setActiveCol(data[0][counter])
-        break
-      } else {
-        setActiveCol(undefined)
-      }
-      counter += 1
-    }
   }, [data])
 
   const handleOnClickHeader = event => {
@@ -63,25 +49,9 @@ const Output = ({ data, filename }) => {
                 <th scope="col"></th>
                 {cols.map((r, i) => (
                   <th scope="col" key={i}>
-                    <Tooltip arrow
-                      placement="top"
-                      title={`select the ${data[0][i]} next`}
-                      open={!!activeCol && data[0][i] === activeCol}
-                      classes={{
-                        popper: classes.popper,
-                        tooltipPlacementTop: classes.tooltipTop,
-                      }}
-                      PopperProps={{
-                        popperOptions: {
-                          modifiers: {
-                            flip: { enabled: false },
-                          }
-                        }
-                      }}>
-                      <div onDoubleClick={handleOnClickHeader}>
-                        {utils.columnToLetter(i + 1)}
-                      </div>
-                    </Tooltip>
+                    <div onDoubleClick={handleOnClickHeader}>
+                      {utils.columnToLetter(i + 1)}
+                    </div>
                   </th>
                 ))}
               </tr>
@@ -91,18 +61,14 @@ const Output = ({ data, filename }) => {
                 <tr key={`row-${i}`}>
                   <td>{i + 1}</td>
                   {cols.map((r, j) => {
-                    let classNames = ''
-                    if ( !!activeCol && data[0][j] === activeCol ) {
-                      classNames = `active ${activeCol}`
-                    }
                     if ( i < data.length && j < data[i].length && data[i][j] ) {
                       return (
-                        <td key={`cell-${j}`} className={classNames}>
+                        <td key={`cell-${j}`}>
                           {data[i][j]}
                         </td>
                       )
                     } else {
-                      return <td key={`cell-${j}`} className={classNames} />
+                      return <td key={`cell-${j}`}/>
                     }
                   })}
                 </tr>

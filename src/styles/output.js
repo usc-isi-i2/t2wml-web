@@ -121,38 +121,8 @@ const useStyles = makeStyles(theme => ({
         width: '75px',
         height: '25px',
         zIndex: '1',
-        '&.active': {
-          animationName: 'blink',
-          animationDuration: '10s',
-          animationTimingFunction: 'ease-in-out',
-          animationIterationCount: 'infinite',
-          background: 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #eee 25%, #eee 50%, #fff 50%) top left fixed',
-          backgroundSize: '30px 30px',
-          '&.subject': {
-            background: theme.palette.type === 'dark' ? 'repeating-linear-gradient(-45deg, #4d4d4d, #4d4d4d 25%, #347898 25%, #347898 50%, #4d4d4d 50%) top left fixed' : 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #D9EAF2 25%, #D9EAF2 50%, #fff 50%) top left fixed',
-            backgroundSize: '30px 30px',
-          },
-          '&.property': {
-            background: theme.palette.type === 'dark' ? 'repeating-linear-gradient(-45deg, #4d4d4d, #4d4d4d 25%, #bb670f 25%, #bb670f 50%, #4d4d4d 50%) top left fixed' : 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #fbe5ce 25%, #fbe5ce 50%, #fff 50%) top left fixed',
-            backgroundSize: '30px 30px',
-          },
-          '&.value': {
-            background: theme.palette.type === 'dark' ? 'repeating-linear-gradient(-45deg, #4d4d4d, #4d4d4d 25%, #3bab75 25%, #3bab75 50%, #4d4d4d 50%) top left fixed' : 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #D9F2E6 25%, #D9F2E6 50%, #fff 50%) top left fixed',
-            backgroundSize: '30px 30px',
-          },
-          '&.unit': {
-            background: theme.palette.type === 'dark' ? 'repeating-linear-gradient(-45deg, #4d4d4d, #4d4d4d 25%, #333 25%, #333 50%, #4d4d4d 50%) top left fixed' : 'repeating-linear-gradient(-45deg, #fff, #fff 25%, #ddd 25%, #ddd 50%, #fff 50%) top left fixed',
-            backgroundSize: '30px 30px',
-          },
-        },
       },
     },
-  },
-  popper: {
-    zIndex: 1000,
-  },
-  tooltipTop: {
-    marginTop: '10px',
   },
 }))
 
