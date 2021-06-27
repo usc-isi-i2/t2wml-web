@@ -132,6 +132,7 @@ const PropertyInput = ({
   }
 
   const renderPropertyTags = () => {
+    if ( !selected || !selected.label ) { return }
     return (
       <Grid item xs={12}>
         <Button
