@@ -22,6 +22,7 @@ const WikificationMenu = ({
   hideMenu,
   selection,
   selectedCell,
+  targetSelection,
   selectedAnnotation,
 }) => {
 
@@ -33,7 +34,7 @@ const WikificationMenu = ({
     return (
       <Grid item xs={12}>
         <Typography variant="body1">
-          {utils.humanReadableSelection(selectedCell)}: {selectedCell.value}
+          {utils.humanReadableSelection(targetSelection)}: {selectedCell.value}
         </Typography>
       </Grid>
     )
@@ -47,7 +48,7 @@ const WikificationMenu = ({
         <QnodeInput
           file={file}
           sheet={sheet}
-          selectedQnode={null}
+          selectedQnode={selectedCell.qnode}
           onSelectQnode={handleOnSelectQnode} />
       </Grid>
     )

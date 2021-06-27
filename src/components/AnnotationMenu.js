@@ -23,7 +23,6 @@ import * as utils from '../utils/table'
 const AnnotationMenu = ({
   file,
   sheet,
-  selectedCell,
   selection,
   annotations,
   hideOverlayMenu,

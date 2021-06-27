@@ -930,17 +930,15 @@ const Table = ({
 
   const renderOverlayMenu = () => {
     if ( !targetSelection || !selection.current || !showOverlayMenu ) { return }
-    let selectedCellValue = ''
-    if ( !!data[targetSelection.y1-1] ) {
-      selectedCellValue = data[targetSelection.y1-1][targetSelection.x1-1]
-    }
+    const selectedCell = {...tableData[targetSelection.y1-1][targetSelection.x1-1]}
     return (
       <OverlayMenu
         file={file}
         sheet={sheet}
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
-        selectedCell={{...targetSelection, value: selectedCellValue}}
+        selectedCell={selectedCell}
+        targetSelection={{...targetSelection}}
         updateTableDataLayers={updateTableDataLayers}
         selection={selection.current}
         annotations={annotationBlocks}

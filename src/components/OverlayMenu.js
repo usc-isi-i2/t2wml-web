@@ -35,6 +35,7 @@ const OverlayMenu = ({
   selectedTab,
   setSelectedTab,
   selectedCell,
+  targetSelection,
   selection,
   annotations,
   selectedAnnotation,
@@ -54,7 +55,7 @@ const OverlayMenu = ({
 
   const renderTitle = () => {
     const blockTabLabel = `Block ${utils.humanReadableSelection(selection)}`
-    const cellTabLabel = `Cell ${utils.humanReadableSelection(selectedCell)}`
+    const cellTabLabel = `Cell ${utils.humanReadableSelection(targetSelection)}`
     return (
       <React.Fragment>
         <Tabs
@@ -79,7 +80,6 @@ const OverlayMenu = ({
           <AnnotationMenu
             file={file}
             sheet={sheet}
-            selectedCell={selectedCell}
             selection={selection}
             annotations={annotations}
             selectedAnnotation={selectedAnnotation}
@@ -96,6 +96,7 @@ const OverlayMenu = ({
             sheet={sheet}
             selection={selection}
             selectedCell={selectedCell}
+            targetSelection={targetSelection}
             selectedAnnotation={selectedAnnotation} />
         </TabPanel>
       </React.Fragment>
