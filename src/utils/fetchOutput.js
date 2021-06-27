@@ -1,13 +1,6 @@
 const fetchOutput = (file, sheet, fileType) => {
-  let url
-  if ( fileType === 't2wmlz' ) {
-    url = '/api/causx/download_project'
-  } else if ( fileType === 'zip' ) {
-    url = '/api/causx/download_zip_results'
-  } else {
-    url = '/api/causx/project/download/'
-    url += `${fileType}/${file}_output.${fileType}`
-  }
+  let url = '/api/causx/project/download/'
+  url += `${fileType}/${file}_output.${fileType}`
   url += `?project_folder=/proj`
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
