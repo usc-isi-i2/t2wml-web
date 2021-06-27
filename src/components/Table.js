@@ -12,6 +12,7 @@ import fetchPartialCSV from '../utils/fetchPartialCSV'
 import fetchSuggestions from '../utils/fetchSuggestions'
 import uploadAnnotations from '../utils/uploadAnnotations'
 import uploadWikinodes from '../utils/uploadWikinodes'
+import wikifyRegion from '../utils/wikifyRegion'
 
 
 const DEFAULT_CELL_STATE = {
@@ -143,7 +144,13 @@ const Table = ({
               const selectedBlock = utils.checkSelectedAnnotationBlocks(selection.current, data.annotations)
               setSelectedAnnotationBlock(selectedBlock)
             }
-            uploadWikinodes(file, sheet, newAnnotation.selection, newAnnotation.type === 'property', 'string')
+            if ( utils.isWikifyable({role: newAnnotation.role}) ) {
+              if ( newAnnotation.role === 'mainSubject' ) {
+                wikifyRegion(file, sheet, newAnnotation.selection)
+              } else {
+                uploadWikinodes(file, sheet, newAnnotation.selection, newAnnotation.type === 'property', 'string')
+              }
+            }
             updatePartialCSV()
           })
           .catch(error => {

@@ -15,6 +15,7 @@ import UnitInput from './UnitInput'
 import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
 import uploadWikinodes from '../utils/uploadWikinodes'
+import wikifyRegion from '../utils/wikifyRegion'
 import useStyles from '../styles/annotationMenu'
 import * as utils from '../utils/table'
 
@@ -139,7 +140,13 @@ const AnnotationMenu = ({
     uploadAnnotations(file, sheet, filteredAnnotations, () => {})
     .then(data => {
       updateAnnotation(data.annotations)
-      uploadWikinodes(file, sheet, selection, type === 'property', 'string')
+      if ( utils.isWikifyable({role: getFormValue('role')}) ) {
+        if ( getFormValue('role') === 'mainSubject' ) {
+          wikifyRegion(file, sheet, selection)
+        } else {
+          uploadWikinodes(file, sheet, selection, type === 'property', 'string')
+        }
+      }
     })
     .catch(error => {
       setMessage({
