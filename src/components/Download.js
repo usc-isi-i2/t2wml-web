@@ -9,7 +9,6 @@ import GetAppIcon from '@material-ui/icons/GetApp'
 import { makeStyles } from '@material-ui/styles'
 
 import downloadFile from '../utils/downloadFile'
-import fetchOutput from '../utils/fetchOutput'
 import classNames from '../utils/classNames'
 
 
@@ -81,8 +80,7 @@ const Download = ({ filename, sheetname }) => {
   const [active, setActive] = useState(false)
 
   const handleOnClick = fileType => {
-    fetchOutput(filename, sheetname, fileType)
-    .then(data => downloadFile(data, filename, fileType))
+    downloadFile(filename, sheetname, fileType)
   }
 
   const renderDownloadOptions = () => {
