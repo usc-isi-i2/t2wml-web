@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 
 const ProjectSettings = ({
   project,
-  setProject,
+  updateProject,
   hideProjectSettings,
 }) => {
 
@@ -53,7 +53,7 @@ const ProjectSettings = ({
       url: formState.projectDataSource,
     }
     uploadSettings(settings)
-      .then(updatedProject => setProject(updatedProject))
+      .then(updatedProject => updateProject(updatedProject))
   }
 
   const handleOnChange = event => {

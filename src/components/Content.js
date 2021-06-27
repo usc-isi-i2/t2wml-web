@@ -78,9 +78,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
     <Grid className={classes.content}>
       <Header
         project={project}
-        setProject={setProject}
         darkTheme={darkTheme}
         guessAnnotations={guessAnnotations}
+        updateProject={handleProjectUpdate}
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {data && data.table ? (
         <div className={classes.wrapper}>
@@ -98,7 +98,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
           <Divider setColWidth={setColWidth} />
           <div className={classes.outputWrapper}>
             {!!outputData ? (
-              <Output filename={data.filepath} data={outputData} />
+              <Output
+                filename={data.filepath}
+                data={outputData} />
             ) : (
               <Instructions />
             )}

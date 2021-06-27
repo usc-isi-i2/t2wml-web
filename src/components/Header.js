@@ -17,7 +17,7 @@ import useStyles from '../styles/header'
 
 const Header = ({
   project,
-  setProject,
+  updateProject,
   darkTheme,
   switchTheme,
   toggleSettings,
@@ -39,7 +39,7 @@ const Header = ({
     return (
       <ProjectMenu
         project={project}
-        setProject={setProject}
+        updateProject={updateProject}
         guessAnnotations={guessAnnotations} />
     )
   }

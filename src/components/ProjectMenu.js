@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const ProjectMenu = ({ project, setProject, guessAnnotations }) => {
+const ProjectMenu = ({ project, updateProject, guessAnnotations }) => {
 
   const classes = useStyles()
 
@@ -77,7 +77,7 @@ const ProjectMenu = ({ project, setProject, guessAnnotations }) => {
       return (
         <ProjectSettings
           project={project}
-          setProject={setProject}
+          updateProject={updateProject}
           hideProjectSettings={hideProjectSettings} />
       )
     }
