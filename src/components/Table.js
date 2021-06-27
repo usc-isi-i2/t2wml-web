@@ -11,6 +11,7 @@ import * as utils from '../utils/table'
 import fetchPartialCSV from '../utils/fetchPartialCSV'
 import fetchSuggestions from '../utils/fetchSuggestions'
 import uploadAnnotations from '../utils/uploadAnnotations'
+import uploadWikinodes from '../utils/uploadWikinodes'
 
 
 const DEFAULT_CELL_STATE = {
@@ -142,6 +143,7 @@ const Table = ({
               const selectedBlock = utils.checkSelectedAnnotationBlocks(selection.current, data.annotations)
               setSelectedAnnotationBlock(selectedBlock)
             }
+            uploadWikinodes(file, sheet, newAnnotation.selection, newAnnotation.type === 'property', 'string')
             updatePartialCSV()
           })
           .catch(error => {
