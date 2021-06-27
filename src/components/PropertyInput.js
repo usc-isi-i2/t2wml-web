@@ -146,6 +146,7 @@ const PropertyInput = ({
           <PropertyTags
             tags={tags}
             setTags={setTags}
+            property={selected}
             hideMenu={() => setShowPropertyTags(false)} />
         )}
       </Grid>

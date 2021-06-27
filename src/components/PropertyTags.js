@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const PropertyTags = ({ tags, setTags, hideMenu }) => {
+const PropertyTags = ({ tags, setTags, property, hideMenu }) => {
 
   const classes = useStyles()
 
