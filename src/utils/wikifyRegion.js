@@ -1,11 +1,11 @@
-const wikifyRegion = (file, sheet) => {
-  let url = '/api/causx/web/wikify_region'
+const wikifyRegion = (file, sheet, selection) => {
+  let url = '/api/causx/wikify_region'
   url += `?project_folder=/proj`
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
 
   const requestData = {
-    selection: {x1: 1, x2: 1, y1: 4, y2: 19},
+    selection: selection,
     overwrite: true,
   }
 
