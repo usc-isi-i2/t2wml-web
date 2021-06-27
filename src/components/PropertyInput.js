@@ -4,19 +4,15 @@ import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link'
 import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
-import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
-import FormHelperText from '@material-ui/core/FormHelperText'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 import CloseIcon from '@material-ui/icons/Close'
-import DoneIcon from '@material-ui/icons/Done'
 import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/styles'
 
 import CreateProperty from './CreateProperty'
 import PropertyTags from './PropertyTags'
-import * as utils from '../utils/table'
 
 
 const useStyles = makeStyles(theme => ({
@@ -54,23 +50,12 @@ const PropertyInput = ({
 
   const [tags, setTags] = useState([])
   const [selected, setSelected] = useState(selectedProperty)
-  const [selectedPropertyCells, setSelectedPropertyCells] = useState('')
   const [showCreateProperty, setShowCreateProperty] = useState(false)
   const [showPropertyTags, setShowPropertyTags] = useState(false)
 
   useEffect(() => {
     setSelected(selectedProperty)
   }, [selectedProperty])
-
-  const handleOnChangePropertyCells = event => {
-    const value = event.target.value
-    setSelectedPropertyCells(value)
-  }
-
-  const submitPropertyCells = () => {
-    const parsedCorrectly = utils.parseSelectedRangeInput(selectedPropertyCells)
-    onSubmitPropertyCells(parsedCorrectly)
-  }
 
   const selectProperty = property => {
     onSelectProperty(property)
@@ -124,53 +109,6 @@ const PropertyInput = ({
     )
   }
 
-  const renderPropertyCellSelection = () => {
-    if ( !!selected ) { return }
-    const parsedCorrectly = utils.parseSelectedRangeInput(selectedPropertyCells)
-    return (
-      <Grid item xs={12}>
-        <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              autoCorrect="off"
-              autoComplete="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              id={'selectedPropertyCells'}
-              name={'selectedPropertyCells'}
-              label={'Select property cell(s)'}
-              value={selectedPropertyCells}
-              error={!!selectedPropertyCells && !parsedCorrectly}
-              helperText={selectedPropertyCells && !parsedCorrectly ? (
-                'format: [col][row](:[col][row])?'
-              ) : ''}
-              onChange={handleOnChangePropertyCells} />
-          </Grid>
-          <Grid item xs={6}>
-            { parsedCorrectly ? (
-              <Button
-                fullWidth
-                size="large"
-                color="primary"
-                variant="contained"
-                style={{height: '100%'}}
-                startIcon={<DoneIcon />}
-                onClick={submitPropertyCells}>
-                Submit {selectedPropertyCells}
-              </Button>
-            ) : (
-              <FormHelperText component="p" style={{marginTop: '0'}}>
-                You can select property cells in the table or search Wikidata for a property in the search box below
-              </FormHelperText>
-            )}
-          </Grid>
-        </Grid>
-      </Grid>
-    )
-  }
-
   const renderPropertyCreate = () => {
     if ( !!selected ) { return }
     return (
@@ -217,7 +155,6 @@ const PropertyInput = ({
     <Grid container spacing={3}>
       {renderTitle()}
       {renderSelectedProperty()}
-      {renderPropertyCellSelection()}
       {renderPropertyCreate()}
       {renderPropertyTags()}
     </Grid>
