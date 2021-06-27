@@ -15,6 +15,7 @@ import Table from './Table'
 
 import fetchAnnotations from '../utils/fetchAnnotations'
 import fetchPartialCSV from '../utils/fetchPartialCSV'
+import fetchEntities from '../utils/fetchEntities'
 
 
 const Content = ({darkTheme, setDarkTheme}) => {
@@ -23,6 +24,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const [data, setData] = useState()
   const [project, setProject] = useState()
+  const [entities, setEntities] = useState({})
   const [annotations, setAnnotations] = useState([])
   const [message, setMessage] = useState({})
   const [outputData, setOutputData] = useState()
@@ -64,6 +66,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const handleFileUpload = data => {
     setData(data)
     setProject(data.project)
+    fetchEntities().then(setEntities)
   }
 
   const guessAnnotations = () => {
