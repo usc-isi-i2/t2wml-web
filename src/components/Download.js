@@ -27,6 +27,10 @@ const OPTIONS = [{
   title: '.json',
 }, {
   label: 'ZIP',
+  value: 'zip',
+  title: '.zip',
+}, {
+  label: 'T2WML',
   value: 't2wmlz',
   title: '.t2wmlz',
 }]
@@ -52,12 +56,15 @@ const useStyles = makeStyles(theme => ({
       marginRight: theme.spacing(1),
     },
     '&.csv': {
-      bottom: theme.spacing(35),
+      bottom: theme.spacing(43),
     },
     '&.tsv': {
-      bottom: theme.spacing(27),
+      bottom: theme.spacing(35),
     },
     '&.json': {
+      bottom: theme.spacing(27),
+    },
+    '&.zip': {
       bottom: theme.spacing(19),
     },
     '&.t2wmlz': {
