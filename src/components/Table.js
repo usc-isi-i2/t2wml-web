@@ -115,6 +115,29 @@ const Table = ({
     })
   }, [data, dimensions, tableDataInitialized])
 
+  const updateTableDataLayers = layers => {
+    setTableData(prevTableData => {
+      const tableData = {...prevTableData}
+      layers.qnode.entries.forEach(qnode => {
+        qnode.indices.forEach(([rowIndex, colIndex]) => {
+          tableData[rowIndex][colIndex] = {
+            ...tableData[rowIndex][colIndex],
+            qnode: {
+              id: qnode.id,
+              label: qnode.label,
+              value: qnode.value,
+              description: qnode.description,
+              data_type: qnode.data_type,
+              url: qnode.url,
+            },
+          }
+          console.log(tableData[rowIndex][colIndex])
+        })
+      })
+      return tableData
+    })
+  }
+
   useEffect(() => {
 
     // user is opening the annotation menu with a selection
@@ -147,8 +170,10 @@ const Table = ({
             if ( utils.isWikifyable({role: newAnnotation.role}) ) {
               if ( newAnnotation.role === 'mainSubject' ) {
                 wikifyRegion(file, sheet, newAnnotation.selection)
+                .then(layers => updateTableDataLayers(layers))
               } else {
                 uploadWikinodes(file, sheet, newAnnotation.selection, newAnnotation.type === 'property', 'string')
+                .then(layers => updateTableDataLayers(layers))
               }
             }
             updatePartialCSV()
