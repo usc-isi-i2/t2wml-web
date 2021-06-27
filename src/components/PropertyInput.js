@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link'
@@ -8,8 +8,6 @@ import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Autocomplete from '@material-ui/lab/Autocomplete'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 import CloseIcon from '@material-ui/icons/Close'
 import DoneIcon from '@material-ui/icons/Done'
@@ -18,7 +16,6 @@ import { makeStyles } from '@material-ui/styles'
 
 import CreateProperty from './CreateProperty'
 import PropertyTags from './PropertyTags'
-import fetchProperties from '../utils/fetchProperties'
 import * as utils from '../utils/table'
 
 
@@ -55,38 +52,15 @@ const PropertyInput = ({
 
   const classes = useStyles()
 
-  const timeoutID = useRef(null)
-
   const [tags, setTags] = useState([])
-  const [loading, setLoading] = useState(false)
   const [selected, setSelected] = useState(selectedProperty)
   const [selectedPropertyCells, setSelectedPropertyCells] = useState('')
-  const [properties, setProperties] = useState([])
   const [showCreateProperty, setShowCreateProperty] = useState(false)
   const [showPropertyTags, setShowPropertyTags] = useState(false)
 
   useEffect(() => {
     setSelected(selectedProperty)
   }, [selectedProperty])
-
-  const handleOnChangePropertySearch = event => {
-    const value = event.target.value
-    if ( !value ) {
-      setProperties([])
-      setLoading(false)
-    } else {
-      setLoading(true)
-      clearTimeout(timeoutID.current)
-      timeoutID.current = setTimeout(() => {
-        fetchProperties(value)
-        .then(data => {
-          setProperties(data)
-          setLoading(false)
-        })
-        .catch(error => console.log(error))
-      }, 250)
-    }
-  }
 
   const handleOnChangePropertyCells = event => {
     const value = event.target.value
@@ -98,14 +72,9 @@ const PropertyInput = ({
     onSubmitPropertyCells(parsedCorrectly)
   }
 
-  const handleOnSelectProperty = (event, property) => {
-    selectProperty(property)
-  }
-
   const selectProperty = property => {
     onSelectProperty(property)
     setSelected(property)
-    setProperties([])
   }
 
   const removeSelected = () => {
@@ -202,55 +171,6 @@ const PropertyInput = ({
     )
   }
 
-  const renderPropertySearch = () => {
-    if ( !!selected ) { return }
-    return (
-      <Grid item xs={12}>
-        <Autocomplete
-          id="properties-menu"
-          fullWidth={true}
-          clearOnBlur={false}
-          selectOnFocus={false}
-          options={properties}
-          onChange={handleOnSelectProperty}
-          getOptionLabel={property => property.label}
-          noOptionsText={'Enter a search term to search for properties'}
-          renderOption={property => (
-            <Typography variant="body1">
-              <b>{`${property.label} (${property.id})`}</b>
-              <br/>
-              {property.description}
-            </Typography>
-          )}
-          renderInput={params => (
-            <TextField {...params}
-              fullWidth
-              variant="outlined"
-              autoCorrect="off"
-              autoComplete="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              label={'Search for properties on Wikidata'}
-              id={'selectedProperty'}
-              name={'selectedProperty'}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <React.Fragment>
-                    {loading ? (
-                      <CircularProgress color="inherit" size={20} />
-                    ) : null }
-                    {params.InputProps.endAdornment}
-                  </React.Fragment>
-                ),
-              }}
-              onChange={handleOnChangePropertySearch} />
-          )}
-        />
-      </Grid>
-    )
-  }
-
   const renderPropertyCreate = () => {
     if ( !!selected ) { return }
     return (
@@ -298,7 +218,6 @@ const PropertyInput = ({
       {renderTitle()}
       {renderSelectedProperty()}
       {renderPropertyCellSelection()}
-      {renderPropertySearch()}
       {renderPropertyCreate()}
       {renderPropertyTags()}
     </Grid>
