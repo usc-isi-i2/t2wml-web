@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     bottom: 0,
     zIndex: 100,
     '&.active': {
-      height: theme.spacing(30),
+      height: theme.spacing(50),
     },
   },
   button: {
