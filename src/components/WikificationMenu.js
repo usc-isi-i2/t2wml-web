@@ -49,6 +49,7 @@ const WikificationMenu = ({
           file={file}
           sheet={sheet}
           selectedQnode={selectedCell.qnode}
+          selectedAnnotation={selectedAnnotation}
           onSelectQnode={handleOnSelectQnode} />
       </Grid>
     )

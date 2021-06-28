@@ -33,6 +33,7 @@ const QnodeInput = ({
   sheet,
   selectedQnode,
   onSelectQnode,
+  selectedAnnotation,
 }) => {
 
   const classes = useStyles()
@@ -55,7 +56,7 @@ const QnodeInput = ({
     return (
       <Grid item xs={12}>
         <Typography variant="body1">
-          <b>Wikidata Item</b>
+          <b>{selectedAnnotation.role === 'property' ? 'Property' : 'Wikidata Item'}</b>
         </Typography>
       </Grid>
     )
