@@ -50,8 +50,6 @@ const QnodeInput = ({
     setSelected()
   }
 
-  const applyToBlock = () => {}
-
   const renderTitle = () => {
     return (
       <Grid item xs={12}>
@@ -88,14 +86,6 @@ const QnodeInput = ({
                 <CloseIcon />
               </IconButton>
             </Tooltip>
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={applyToBlock}>
-              Apply to block
-            </Button>
           </Grid>
         </Grid>
       </Grid>
