@@ -626,6 +626,14 @@ const Table = ({
     // show the annotation blocks for the suggested/guessed annotations
     setAnnotationBlocks(suggestedAnnotations)
 
+    // submit main subject for automatic wikifiaction
+    suggestedAnnotations.forEach(annotation => {
+      if ( annotation.role === 'mainSubject' ) {
+        wikifyRegion(file, sheet, annotation.selection)
+        .then(layers => updateTableDataLayers(layers))
+      }
+    })
+
     // update output data with partial csv
     if ( !!suggestedAnnotations.length ) {
       fetchPartialCSV(file, sheet)
