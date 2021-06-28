@@ -145,7 +145,7 @@ const AnnotationMenu = ({
           wikifyRegion(file, sheet, selection)
           .then(layers => updateTableDataLayers(layers))
         } else {
-          uploadWikinodes(file, sheet, selection, type === 'property', 'string')
+          uploadWikinodes(file, sheet, selection, role === 'property', 'string')
           .then(layers => updateTableDataLayers(layers))
         }
       }
