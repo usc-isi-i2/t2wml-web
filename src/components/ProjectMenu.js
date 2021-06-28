@@ -67,7 +67,7 @@ const ProjectMenu = ({ project, updateProject, guessAnnotations }) => {
         anchorEl={anchorElement}
         onClose={hideProjectMenu}>
         <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
-        <MenuItem onClick={guessAnnotations}>Guess Annotations</MenuItem>
+        <MenuItem onClick={guessAnnotations}>Suggest Annotations</MenuItem>
       </Menu>
     )
   }
