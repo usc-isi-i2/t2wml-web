@@ -1,5 +1,5 @@
-# pull official base image
-FROM node:13.12.0-alpine
+# First stage - build the output
+FROM node:16
 
 # create app directory
 RUN mkdir /app
@@ -23,3 +23,9 @@ RUN npm install serve@11.3.2 -g --silent
 
 # build app
 RUN npm run build
+
+# Second stage - serve it
+FROM nginx:latest
+
+COPY --from=0 /app/build /usr/share/nginx/html
+
