@@ -23,9 +23,3 @@ RUN npm install serve@11.3.2 -g --silent
 
 # build app
 RUN npm run build
-
-# Second stage - serve it
-FROM nginx:latest
-
-COPY --from=0 /app/build /usr/share/nginx/html
-
