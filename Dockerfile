@@ -19,7 +19,6 @@ COPY package.json /app
 COPY package-lock.json /app
 RUN npm install --silent
 RUN npm install react-scripts@3.4.1 -g --silent
-RUN npm install serve@11.3.2 -g --silent
 
 # set the backend url environment variable
 ARG REACT_APP_BACKEND_URL=http://0.0.0.0:13000
