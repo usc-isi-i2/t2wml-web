@@ -1,8 +1,0 @@
-# First stage - base image
-FROM t2wml-web:base
-
-# Second stage - serve it
-FROM nginx:latest
-
-COPY --from=0 /app/build /usr/share/nginx/html
-

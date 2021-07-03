@@ -27,3 +27,9 @@ ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 
 # build app
 RUN npm run build
+
+# Second stage - serve it
+FROM nginx:latest
+
+COPY --from=0 /app/build /usr/share/nginx/html
+

@@ -21,9 +21,7 @@ services:
         container_name: t2wml-backend
 
     t2wml-web:
-        build:
-            context: .
-            dockerfile: Dockerfile-nginx
+        build: .
         expose:
             - "80"
         ports:
