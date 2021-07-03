@@ -3,6 +3,10 @@ const fetchEntities = (file, sheet) => {
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
 
+  if ( process.env.REACT_APP_BACKEND_URL ) {
+    url = `${process.env.REACT_APP_BACKEND_URL}${url}`
+  }
+
   return new Promise((resolve, reject) => {
     fetch(url, {
       method: 'GET',

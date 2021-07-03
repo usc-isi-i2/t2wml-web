@@ -3,6 +3,10 @@ const uploadProperty = (file, sheet, property) => {
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
 
+  if ( process.env.REACT_APP_BACKEND_URL ) {
+    url = `${process.env.REACT_APP_BACKEND_URL}${url}`
+  }
+
   const requestData = {
     is_property: true,
     label: property.qnodeLabel,

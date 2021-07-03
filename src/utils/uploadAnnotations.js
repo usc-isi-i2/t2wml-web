@@ -3,6 +3,10 @@ const uploadAnnotations = (file, sheet, annotations, onProgress) => {
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
 
+  if ( process.env.REACT_APP_BACKEND_URL ) {
+    url = `${process.env.REACT_APP_BACKEND_URL}${url}`
+  }
+
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
 

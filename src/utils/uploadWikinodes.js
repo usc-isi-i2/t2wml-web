@@ -3,6 +3,10 @@ const uploadWikinodes = (file, sheet, selection, isProperty, dataType) => {
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
 
+  if ( process.env.REACT_APP_BACKEND_URL ) {
+    url = `${process.env.REACT_APP_BACKEND_URL}${url}`
+  }
+
   const requestData = {selection}
   requestData['is_property'] = isProperty
   if ( isProperty ) {

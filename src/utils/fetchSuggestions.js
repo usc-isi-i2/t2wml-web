@@ -3,6 +3,10 @@ const fetchSuggestions = (file, sheet, selection, annotations) => {
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
 
+  if ( process.env.REACT_APP_BACKEND_URL ) {
+    url = `${process.env.REACT_APP_BACKEND_URL}${url}`
+  }
+
   const requestData = {
     annotations,
     selection,

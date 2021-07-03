@@ -3,6 +3,10 @@ const uploadUnit = (file, sheet, unit) => {
   url += `&data_file=${file}`
   url += `&sheet_name=${sheet}`
 
+  if ( process.env.REACT_APP_BACKEND_URL ) {
+    url = `${process.env.REACT_APP_BACKEND_URL}${url}`
+  }
+
   const requestData = {
     key: 'P31',
     is_property: false,

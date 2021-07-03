@@ -6,6 +6,10 @@ const fetchPartialCSV = (file, sheet) => {
   url += `&mapping_file=web.annotation`
   url += `&mapping_type=Annotation`
 
+  if ( process.env.REACT_APP_BACKEND_URL ) {
+    url = `${process.env.REACT_APP_BACKEND_URL}${url}`
+  }
+
   return new Promise((resolve, reject) => {
     fetch(url, {method: 'GET'})
       .then((response) => response.json())

@@ -1,5 +1,8 @@
 const uploadFile = (file, onProgress) => {
-  const url = '/api/causx/upload/data?project_folder=/proj'
+  let url = '/api/causx/upload/data?project_folder=/proj'
+  if ( process.env.REACT_APP_BACKEND_URL ) {
+    url = `${process.env.REACT_APP_BACKEND_URL}${url}`
+  }
 
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
