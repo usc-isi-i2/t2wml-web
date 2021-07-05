@@ -18,6 +18,7 @@ const uploadQnode = (file, sheet, qnode) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authentication': localStorage.getItem('token'),
       },
       body: JSON.stringify(requestData),
     })

@@ -16,6 +16,7 @@ const uploadSettings = (settings) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'Authentication': localStorage.getItem('token'),
       },
       body: JSON.stringify(requestData),
     })

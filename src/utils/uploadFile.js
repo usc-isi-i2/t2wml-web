@@ -8,6 +8,8 @@ const uploadFile = (file, onProgress) => {
     const xhr = new XMLHttpRequest()
     xhr.open('POST', url)
 
+    xhr.setRequestHeader('Authentication', localStorage.getItem('token'))
+
     xhr.onload = () => {
       try {
         const response = JSON.parse(xhr.responseText)

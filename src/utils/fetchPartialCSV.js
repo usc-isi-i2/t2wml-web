@@ -11,7 +11,12 @@ const fetchPartialCSV = (file, sheet) => {
   }
 
   return new Promise((resolve, reject) => {
-    fetch(url, {method: 'GET'})
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authentication': localStorage.getItem('token'),
+      },
+    })
       .then((response) => response.json())
       .then((response) => {
         if ( !!response.error ) {

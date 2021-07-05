@@ -21,7 +21,12 @@ const downloadFile = (file, sheet, fileType) => {
   }
 
   return new Promise((resolve, reject) => {
-    fetch(url, {method: 'GET'})
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authentication': localStorage.getItem('token'),
+      },
+    })
     .then(response => response.blob())
     .then(blob => {
       if (navigator.msSaveBlob) { // IE 10+

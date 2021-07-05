@@ -12,6 +12,7 @@ const fetchEntities = (file, sheet) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'Authentication': localStorage.getItem('token'),
       },
     })
     .then(response => response.json())

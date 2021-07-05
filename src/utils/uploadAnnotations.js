@@ -13,6 +13,7 @@ const uploadAnnotations = (file, sheet, annotations, onProgress) => {
     xhr.open('POST', url)
 
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+    xhr.setRequestHeader('Authentication', localStorage.getItem('token'))
 
     xhr.onload = () => {
       try {
