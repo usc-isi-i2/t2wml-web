@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { createMuiTheme } from '@material-ui/core/styles'
@@ -6,6 +6,7 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles'
 
 import Content from './components/Content'
+import fetchToken from './utils/fetchToken'
 
 
 const styles = theme => ({
@@ -229,6 +230,11 @@ const App = () => {
       },
     },
   })
+
+  useEffect(() => {
+    // fetch the authentication token from the backend
+    fetchToken().then(token => localStorage.setItem('token', token))
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
