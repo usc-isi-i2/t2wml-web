@@ -131,7 +131,6 @@ const Table = ({
               url: qnode.url,
             },
           }
-          console.log(tableData[rowIndex][colIndex])
         })
       })
       return tableData
