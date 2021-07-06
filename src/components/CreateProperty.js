@@ -33,9 +33,6 @@ const DATA_TYPES = [{
   label: 'String',
   value: 'string',
 }, {
-  label: 'Monolingual Text',
-  value: 'monolingualtext',
-}, {
   label: 'Url',
   value: 'url',
 }, {

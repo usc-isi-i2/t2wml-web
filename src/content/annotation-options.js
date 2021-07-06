@@ -6,16 +6,6 @@ export const TYPES = [{
     'value': 'property',
   }],
 }, {
-  'label': 'Monolingual String',
-  'value': 'monolingualtext',
-  'children': [{
-    'label': 'Language',
-    'value': 'language',
-  }, {
-    'label': 'Property',
-    'value': 'property',
-  }],
-}, {
   'label': 'Quantity',
   'value': 'quantity',
   'children': [{
