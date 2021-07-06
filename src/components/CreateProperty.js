@@ -18,11 +18,8 @@ import uploadProperty from '../utils/uploadProperty'
 
 
 const DATA_TYPES = [{
-  label: 'Wikibase Item',
+  label: 'Country',
   value: 'wikibaseitem',
-}, {
-  label: 'Wikibase Property',
-  value: 'wikibaseproperty',
 }, {
   label: 'Quantity',
   value: 'quantity',

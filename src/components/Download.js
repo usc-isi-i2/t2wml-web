@@ -15,11 +15,11 @@ import classNames from '../utils/classNames'
 const OPTIONS = [{
   label: 'ZIP',
   value: 'zip',
-  title: '.zip',
+  title: 'Zipped Results',
 }, {
   label: 'T2WML',
   value: 't2wmlz',
-  title: '.t2wmlz',
+  title: 'Saved Project',
 }]
 
 
