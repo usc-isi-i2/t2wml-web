@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const PropertyTags = ({ file, sheet, entity, setEntity, qnode, hideMenu }) => {
+const PropertyTags = ({ file, sheet, entity, setEntity, property, hideMenu }) => {
 
   const classes = useStyles()
 
@@ -64,7 +64,7 @@ const PropertyTags = ({ file, sheet, entity, setEntity, qnode, hideMenu }) => {
       key: formState.newTagKey,
       value: formState.newTagValue,
     })
-    uploadEntity(entity, tags, qnode, file, sheet)
+    uploadEntity(entity, tags, property, file, sheet)
     .then(entity => {
       setEntity(entity)
       setFormState({
@@ -85,14 +85,14 @@ const PropertyTags = ({ file, sheet, entity, setEntity, qnode, hideMenu }) => {
     }
 
     // convert all tags to strings with key and value separated by a colon
-    uploadEntity(entity, tags, qnode, file, sheet)
+    uploadEntity(entity, tags, property, file, sheet)
     .then(entity => setEntity(entity))
   }
 
   const renderTitle = () => {
     return (
       <React.Fragment>
-        Variable Tags - {qnode.id}
+        Variable Tags - {property.id}
         <IconButton onClick={hideMenu}>
           <CloseIcon />
         </IconButton>

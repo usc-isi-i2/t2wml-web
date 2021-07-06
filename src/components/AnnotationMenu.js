@@ -201,6 +201,15 @@ const AnnotationMenu = ({
     }
   }
 
+  const openPropertyTagsMenu = () => {
+    const property = getFormValue('property')
+    if ( !property ) { return }
+    fetchEntity(property, file, sheet).then(entity => {
+      setEntity(entity)
+      setShowPropertyTagsMenu(true)
+    })
+  }
+
   const renderFormInstructions = () => {
     return (
       <Grid item xs={12}>
@@ -260,39 +269,6 @@ const AnnotationMenu = ({
             </MenuItem>
           ))}
         </TextField>
-      </Grid>
-    )
-  }
-
-  const openPropertyTagsMenu = () => {
-    fetchEntity(selectedCell.qnode, file, sheet).then(entity => {
-      setEntity(entity)
-      setShowPropertyTagsMenu(true)
-    })
-  }
-
-  const renderPropertyTagsMenu = () => {
-    const currentRole = getFormValue('role')
-    if ( currentRole !== 'property' ) { return }
-    if ( !selectedCell.qnode ) { return }
-    return (
-      <Grid item xs={12}>
-        <Button
-          color="primary"
-          variant="contained"
-          startIcon={<ListAltIcon />}
-          onClick={openPropertyTagsMenu}>
-          Show Variable Tags
-        </Button>
-        {showPropertyTagsMenu && (
-          <PropertyTags
-            file={file}
-            sheet={sheet}
-            entity={entity}
-            setEntity={setEntity}
-            qnode={selectedCell.qnode}
-            hideMenu={() => setShowPropertyTagsMenu(false)} />
-        )}
       </Grid>
     )
   }
@@ -363,6 +339,7 @@ const AnnotationMenu = ({
   const renderAdditionalInputs = () => {
     const currentRole = getFormValue('role')
     const currentType = getFormValue('type')
+    const property = getFormValue('property')
 
     let TYPE = undefined
     if ( currentType ) {
@@ -387,6 +364,24 @@ const AnnotationMenu = ({
                   selectedAnnotation={selectedAnnotation}
                   selectedProperty={getFormValue('property')}
                   onSelectProperty={handleOnSelectProperty} />
+                <br />
+                {currentRole === 'dependentVar' && !!property && (
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    startIcon={<ListAltIcon />}
+                    onClick={openPropertyTagsMenu}>
+                    Show Variable Tags
+                  </Button>
+                )}
+              </Grid>
+            )
+          }
+
+          if ( currentRole === 'dependentVar' ) {
+            debugger
+            return (
+              <Grid item xs={12}>
               </Grid>
             )
           }
@@ -422,6 +417,21 @@ const AnnotationMenu = ({
     )
   }
 
+  const renderPropertyTagsMenu = () => {
+    if ( !showPropertyTagsMenu ) { return }
+    const property = getFormValue('property')
+    if ( !property ) { return }
+    return (
+      <PropertyTags
+        file={file}
+        sheet={sheet}
+        entity={entity}
+        property={property}
+        setEntity={setEntity}
+        hideMenu={() => setShowPropertyTagsMenu(false)} />
+    )
+  }
+
   const renderActionButtons = () => {
     return (
       <Grid item xs={12}>
@@ -448,9 +458,9 @@ const AnnotationMenu = ({
       {renderFormInstructions()}
       {renderSelectedRangeInput()}
       {renderSelectedRoleInput()}
-      {renderPropertyTagsMenu()}
       {renderSelectedTypeInput()}
       {renderAdditionalInputs()}
+      {renderPropertyTagsMenu()}
       {renderActionButtons()}
     </Grid>
   )

@@ -1,5 +1,5 @@
-const uploadEntity = (entity, tags, qnode, file, sheet) => {
-  let url = `/api/causx/entity/${qnode.id}`
+const uploadEntity = (entity, tags, property, file, sheet) => {
+  let url = `/api/causx/entity/${property.id}`
   url += `?data_file=${file}`
   url += `&sheet_name=${sheet}`
 
