@@ -189,7 +189,7 @@ const UnitInput = ({
               </Button>
             ) : (
               <FormHelperText component="p" style={{marginTop: '0'}}>
-                You can select unit cells in the table or search Wikidata for a unit in the search box below
+                You can select unit cells in the table or search for a unit in the search box below
               </FormHelperText>
             )}
           </Grid>
@@ -226,7 +226,7 @@ const UnitInput = ({
               autoComplete="off"
               autoCapitalize="off"
               spellCheck="false"
-              label={'Search for units on Wikidata'}
+              label={'Search for units'}
               id={'selectedUnit'}
               name={'selectedUnit'}
               InputProps={{

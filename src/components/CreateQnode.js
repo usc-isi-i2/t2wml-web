@@ -58,7 +58,7 @@ const CreateQnode = ({ file, sheet, selectQnode, hideMenu }) => {
   const renderTitle = () => {
     return (
       <React.Fragment>
-        Create a new Wikidata Item
+        Create a new country
         <IconButton onClick={hideMenu}>
           <CloseIcon />
         </IconButton>
@@ -70,7 +70,7 @@ const CreateQnode = ({ file, sheet, selectQnode, hideMenu }) => {
     return (
       <Grid item xs={12}>
         <FormHelperText component="p">
-          Use this form to create a new Wikidata Item
+          Use this form to create a new country
         </FormHelperText>
       </Grid>
     )

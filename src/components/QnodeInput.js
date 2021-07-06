@@ -54,7 +54,7 @@ const QnodeInput = ({
     return (
       <Grid item xs={12}>
         <Typography variant="body1">
-          <b>{selectedAnnotation.role === 'property' ? 'Property' : 'Wikidata Item'}</b>
+          <b>{selectedAnnotation.role === 'property' ? 'Property' : 'Country'}</b>
         </Typography>
       </Grid>
     )
@@ -80,7 +80,7 @@ const QnodeInput = ({
             )}
           </Grid>
           <Grid item xs={2}>
-            <Tooltip arrow placement="top" title={'remove selected Wikidata Item'}>
+            <Tooltip arrow placement="top" title={'remove selected country'}>
               <IconButton className={classes.removeButton}
                 onClick={removeSelected}>
                 <CloseIcon />
@@ -97,7 +97,7 @@ const QnodeInput = ({
     return (
       <Grid item xs={12}>
         <FormHelperText component="p">
-          Use this form to connect the cell value to items in Wikidata
+          Use this form to connect the cell value to a country
         </FormHelperText>
       </Grid>
     )
@@ -112,7 +112,7 @@ const QnodeInput = ({
           variant="contained"
           startIcon={<AddIcon />}
           onClick={() => setShowCreateQnode(true)}>
-          Add a new Wikidata Item
+          Add a new country
         </Button>
         {showCreateQnode && (
           <CreateQnode
