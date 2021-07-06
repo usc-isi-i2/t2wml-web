@@ -26,6 +26,7 @@ const AnnotationMenu = ({
   sheet,
   selection,
   annotations,
+  selectedCell,
   hideOverlayMenu,
   updateAnnotation,
   onSelectionChange,
@@ -265,6 +266,7 @@ const AnnotationMenu = ({
   const renderPropertyTagsMenu = () => {
     const currentRole = getFormValue('role')
     if ( currentRole !== 'property' ) { return }
+    if ( !selectedCell.qnode ) { return }
     return (
       <Grid item xs={12}>
         <Button

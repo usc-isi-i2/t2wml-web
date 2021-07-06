@@ -82,6 +82,7 @@ const OverlayMenu = ({
             sheet={sheet}
             selection={selection}
             annotations={annotations}
+            selectedCell={selectedCell}
             selectedAnnotation={selectedAnnotation}
             suggestedAnnotation={suggestedAnnotation}
             updateTableDataLayers={updateTableDataLayers}
