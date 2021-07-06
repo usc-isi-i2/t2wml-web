@@ -6,13 +6,11 @@ import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
-import ListAltIcon from '@material-ui/icons/ListAlt'
 import CloseIcon from '@material-ui/icons/Close'
 import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/styles'
 
 import CreateProperty from './CreateProperty'
-import PropertyTags from './PropertyTags'
 
 
 const useStyles = makeStyles(theme => ({
@@ -48,10 +46,8 @@ const PropertyInput = ({
 
   const classes = useStyles()
 
-  const [tags, setTags] = useState([])
   const [selected, setSelected] = useState(selectedProperty)
   const [showCreateProperty, setShowCreateProperty] = useState(false)
-  const [showPropertyTags, setShowPropertyTags] = useState(false)
 
   useEffect(() => {
     setSelected(selectedProperty)
@@ -131,34 +127,11 @@ const PropertyInput = ({
     )
   }
 
-  const renderPropertyTags = () => {
-    if ( !selected || !selected.label ) { return }
-    return (
-      <Grid item xs={12}>
-        <Button
-          color="primary"
-          variant="contained"
-          startIcon={<ListAltIcon />}
-          onClick={() => setShowPropertyTags(true)}>
-          Show Variable Tags
-        </Button>
-        {showPropertyTags && (
-          <PropertyTags
-            tags={tags}
-            setTags={setTags}
-            property={selected}
-            hideMenu={() => setShowPropertyTags(false)} />
-        )}
-      </Grid>
-    )
-  }
-
   return (
     <Grid container spacing={3}>
       {renderTitle()}
       {renderSelectedProperty()}
       {renderPropertyCreate()}
-      {renderPropertyTags()}
     </Grid>
   )
 }
