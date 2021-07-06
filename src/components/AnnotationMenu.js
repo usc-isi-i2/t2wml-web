@@ -65,7 +65,7 @@ const AnnotationMenu = ({
   const [userChangedFormState, setUserChangedFormState] = useState(false)
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false)
   const [showPropertyTagsMenu, setShowPropertyTagsMenu] = useState(false)
-  const [tags, setTags] = useState([])
+  const [entity, setEntity] = useState([])
 
   useEffect(() => {
     if ( !suggestedAnnotation ) { return }
@@ -266,6 +266,7 @@ const AnnotationMenu = ({
 
   const openPropertyTagsMenu = () => {
     fetchEntity(selectedCell.qnode, file, sheet).then(entity => {
+      setEntity(entity)
       setShowPropertyTagsMenu(true)
     })
   }
@@ -285,8 +286,10 @@ const AnnotationMenu = ({
         </Button>
         {showPropertyTagsMenu && (
           <PropertyTags
-            tags={tags}
-            setTags={setTags}
+            file={file}
+            sheet={sheet}
+            entity={entity}
+            qnode={selectedCell.qnode}
             hideMenu={() => setShowPropertyTagsMenu(false)} />
         )}
       </Grid>

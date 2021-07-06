@@ -24,17 +24,18 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const PropertyTags = ({ tags, setTags, property, hideMenu }) => {
+const PropertyTags = ({ file, sheet, entity, qnode, hideMenu }) => {
 
   const classes = useStyles()
 
+  const [tags, setTags] = useState([])
   const [formState, setFormState] = useState({
     newTagKey: '',
     newTagValue: '',
   })
 
   const handleOnSubmit = () => {
-    setTags(tags)
+    // TODO: update the entity here
     hideMenu()
   }
 
@@ -53,10 +54,7 @@ const PropertyTags = ({ tags, setTags, property, hideMenu }) => {
 
   const saveNewTag = () => {
     if ( !formState.newTagKey || !formState.newTagValue ) { return }
-    setTags(tags => [...tags, {
-      key: formState.newTagKey,
-      value: formState.newTagValue,
-    }])
+    // TODO: update entity with the new tag here
     setFormState({
       newTagKey: '',
       newTagValue: '',
@@ -67,7 +65,6 @@ const PropertyTags = ({ tags, setTags, property, hideMenu }) => {
     if ( !tag.key && !tag.value ) {
       tags.splice(tags.indexOf(tag), 1)
     }
-    setTags(tags)
   }
 
   const renderTitle = () => {
