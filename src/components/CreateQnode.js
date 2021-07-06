@@ -101,6 +101,8 @@ const CreateQnode = ({ file, sheet, selectQnode, hideMenu }) => {
       <Grid item xs={12}>
         <TextField
           fullWidth
+          multiline
+          rows={4}
           id="qnodeDescription"
           name="qnodeDescription"
           label="Description"
