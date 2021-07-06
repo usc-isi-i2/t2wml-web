@@ -494,6 +494,7 @@ const Table = ({
       if ( event.target.nodeName === 'INPUT' ) { return }
 
       // Don't allow moving around when users are selecting in menus
+      if ( event.target.classList.contains('MuiSelect-select') ) { return }
       if ( event.target.nodeName === 'LI' ) { return }
 
       // Prevent scroll with arrow keys
