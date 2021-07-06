@@ -92,7 +92,7 @@ const PropertyInput = ({
             )}
           </Grid>
           <Grid item xs={2}>
-            <Tooltip arrow placement="top" title={'remove property'}>
+            <Tooltip arrow placement="top" title={'remove variable'}>
               <IconButton className={classes.removeButton}
                 onClick={removeSelected}>
                 <CloseIcon />
