@@ -337,12 +337,15 @@ const Table = ({
       const tableData = {...prevTableData}
 
       const classNames = []
-      if ( selectedAnnotationBlock ) {
-        const { role } = selectedAnnotationBlock
-        if ( role ) {
-          classNames.push(`role-${role}`)
+      setSelectedAnnotationBlock(selectedAnnotationBlock => {
+        if ( selectedAnnotationBlock ) {
+          const { role } = selectedAnnotationBlock
+          if ( role ) {
+            classNames.push(`role-${role}`)
+          }
         }
-      }
+        return selectedAnnotationBlock
+      })
 
       const { x1, x2, y1, y2 } = selection.current
 
