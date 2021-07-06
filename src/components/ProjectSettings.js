@@ -111,6 +111,8 @@ const ProjectSettings = ({
       <Grid item xs={12}>
         <TextField
           fullWidth
+          multiline
+          rows={4}
           id="projectDescription"
           name="projectDescription"
           label="Description"
