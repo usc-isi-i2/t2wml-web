@@ -109,7 +109,8 @@ const AnnotationMenu = ({
   useEffect(() => {
 
     // skip if the form state is empty (on init)
-    if ( Object.keys(formState).map(key => !!formState[key]).every(x => !x) ) {
+    if ( Object.keys(formState).map(key => !!formState[key]).every(x => !x) &&
+      Object.keys(annotation).map(key => !!annotation[key]).every(x => !x) ) {
       return
     }
 
