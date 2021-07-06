@@ -473,7 +473,7 @@ const Table = ({
       }
       return tableData
     })
-  }, [selectedAnnotationBlock])
+  }, [])
 
   const handleOnKeyDown = useCallback(event => {
 
@@ -611,7 +611,7 @@ const Table = ({
         return nextSelection
       })
     }
-  }, [hideOverlayMenu, updateSelections, resetSelections, selectedAnnotationBlock])
+  }, [hideOverlayMenu, updateSelections, resetSelections, selectedAnnotationBlock, updateAnnotationBlocks])
 
   const handleOnKeyUp = useCallback(() => {
     clearTimeout(timeoutID.current)
