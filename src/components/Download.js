@@ -13,18 +13,6 @@ import classNames from '../utils/classNames'
 
 
 const OPTIONS = [{
-  label: 'CSV',
-  value: 'csv',
-  title: 'canonical spreadsheet (.csv)',
-}, {
-  label: 'TSV',
-  value: 'tsv',
-  title: 'kgtk (.tsv)',
-}, {
-  label: 'JSON',
-  value: 'json',
-  title: '.json',
-}, {
   label: 'ZIP',
   value: 'zip',
   title: '.zip',
