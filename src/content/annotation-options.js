@@ -2,14 +2,14 @@ export const TYPES = [{
   'label': 'String',
   'value': 'string',
   'children': [{
-    'label': 'Property',
+    'label': 'Variable',
     'value': 'property',
   }],
 }, {
   'label': 'Quantity',
   'value': 'quantity',
   'children': [{
-    'label': 'Property',
+    'label': 'Variable',
     'value': 'property',
   }],
 }, {
@@ -25,7 +25,7 @@ export const TYPES = [{
     'label': 'Format',
     'value': 'format',
   }, {
-    'label': 'Property',
+    'label': 'Variable',
     'value': 'property',
   }],
 }, {
@@ -33,22 +33,22 @@ export const TYPES = [{
   'value': 'wikibaseitem',
   'wikify': true,
   'children': [{
-    'label': 'Property',
+    'label': 'Variable',
     'value': 'property',
   }],
 }]
 
 
 export const ROLES = [{
-  'label': 'Main Subject',
+  'label': 'Country',
   'value': 'mainSubject',
   'wikify': true,
 }, {
-  'label': 'Dependent Variable',
+  'label': 'Value',
   'value': 'dependentVar',
   'children': TYPES,
 }, {
-  'label': 'Property',
+  'label': 'Variable',
   'value': 'property',
   'wikify': true,
 }, {

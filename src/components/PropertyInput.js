@@ -71,7 +71,7 @@ const PropertyInput = ({
     return (
       <Grid item xs={12}>
         <Typography variant="body1">
-          <b>Property</b>
+          <b>Variable</b>
         </Typography>
       </Grid>
     )
@@ -118,7 +118,7 @@ const PropertyInput = ({
           variant="contained"
           startIcon={<AddIcon />}
           onClick={() => setShowCreateProperty(true)}>
-          Add a new property
+          Add a new variable
         </Button>
         {showCreateProperty && (
           <CreateProperty
@@ -140,7 +140,7 @@ const PropertyInput = ({
           variant="contained"
           startIcon={<ListAltIcon />}
           onClick={() => setShowPropertyTags(true)}>
-          Show Property Tags
+          Show Variable Tags
         </Button>
         {showPropertyTags && (
           <PropertyTags
