@@ -363,6 +363,7 @@ const AnnotationMenu = ({
   }
 
   const renderAdditionalInputs = () => {
+    const currentRole = getFormValue('role')
     const currentType = getFormValue('type')
 
     let TYPE = undefined
@@ -379,7 +380,7 @@ const AnnotationMenu = ({
         {TYPE.children.length > 1 && renderAdditionalInputsToggle()}
         {TYPE.children.map(option => {
 
-          if ( option.value === 'property' ) {
+          if ( currentRole !== 'property' && option.value === 'property' ) {
             return (
               <Grid item xs={12} key={option.value}>
                 <PropertyInput
