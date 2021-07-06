@@ -72,7 +72,7 @@ const PropertyTags = ({ file, sheet, entity, qnode, hideMenu }) => {
   const renderTitle = () => {
     return (
       <React.Fragment>
-        Variable Tags
+        Variable Tags - {qnode.id}
         <IconButton onClick={hideMenu}>
           <CloseIcon />
         </IconButton>
