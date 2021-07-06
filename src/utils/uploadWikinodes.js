@@ -1,6 +1,6 @@
 const uploadWikinodes = (file, sheet, selection, isProperty, dataType) => {
-  let url = '/api/causx/auto_wikinodes?project_folder=/proj'
-  url += `&data_file=${file}`
+  let url = '/api/causx/auto_wikinodes'
+  url += `?data_file=${file}`
   url += `&sheet_name=${sheet}`
 
   if ( process.env.REACT_APP_BACKEND_URL ) {

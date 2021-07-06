@@ -1,7 +1,6 @@
 const wikifyRegion = (file, sheet, selection) => {
   let url = '/api/causx/wikify_region'
-  url += `?project_folder=/proj`
-  url += `&data_file=${file}`
+  url += `?data_file=${file}`
   url += `&sheet_name=${sheet}`
 
   if ( process.env.REACT_APP_BACKEND_URL ) {

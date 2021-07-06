@@ -1,6 +1,6 @@
 const uploadUnit = (file, sheet, unit) => {
-  let url = '/api/causx/create_node?project_folder=/proj'
-  url += `&data_file=${file}`
+  let url = '/api/causx/create_node'
+  url += `?data_file=${file}`
   url += `&sheet_name=${sheet}`
 
   if ( process.env.REACT_APP_BACKEND_URL ) {

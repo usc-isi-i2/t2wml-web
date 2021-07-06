@@ -1,5 +1,5 @@
 const uploadSettings = (settings) => {
-  let url = '/api/causx/project/settings?project_folder=/proj'
+  let url = '/api/causx/project/settings'
 
   if ( process.env.REACT_APP_BACKEND_URL ) {
     url = `${process.env.REACT_APP_BACKEND_URL}${url}`

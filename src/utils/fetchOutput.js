@@ -1,8 +1,7 @@
 const fetchOutput = (file, sheet, fileType) => {
   let url = '/api/causx/project/download/'
   url += `${fileType}/${file}_output.${fileType}`
-  url += `?project_folder=/proj`
-  url += `&data_file=${file}`
+  url += `?data_file=${file}`
   url += `&sheet_name=${sheet}`
   url += `&mapping_file=web.annotation`
   url += `&mapping_type=Annotation`

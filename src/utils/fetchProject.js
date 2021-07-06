@@ -1,6 +1,5 @@
 const fetchProject = () => {
   let url = '/api/causx/project/settings'
-  url += `?project_folder=/proj`
 
   if ( process.env.REACT_APP_BACKEND_URL ) {
     url = `${process.env.REACT_APP_BACKEND_URL}${url}`

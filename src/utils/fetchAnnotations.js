@@ -1,7 +1,6 @@
 const fetchAnnotations = (file, sheet) => {
   let url = '/api/causx/annotation/guess-blocks'
-  url += `?project_folder=/proj`
-  url += `&data_file=${file}`
+  url += `?data_file=${file}`
   url += `&sheet_name=${sheet}`
   url += `&mapping_file=web.annotation`
   url += `&mapping_type=Annotation`

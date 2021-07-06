@@ -1,6 +1,6 @@
 const fetchEntities = (file, sheet) => {
-  let url = '/api/causx/project/entities?project_folder=/proj'
-  url += `&data_file=${file}`
+  let url = '/api/causx/project/entities'
+  url += `?data_file=${file}`
   url += `&sheet_name=${sheet}`
 
   if ( process.env.REACT_APP_BACKEND_URL ) {
