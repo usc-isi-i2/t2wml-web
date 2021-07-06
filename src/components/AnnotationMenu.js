@@ -44,7 +44,6 @@ const AnnotationMenu = ({
     precision: '',
     calendar: '',
     format: '',
-    unit: '',
   })
 
   const [suggestion, setSuggestion] = useState({
@@ -121,7 +120,6 @@ const AnnotationMenu = ({
     const precision = getFormValue('precision')
     const calendar = getFormValue('calendar')
     const format = getFormValue('format')
-    const unit = getFormValue('unit')
     const id = annotation.id
 
     filteredAnnotations.push({
@@ -133,7 +131,6 @@ const AnnotationMenu = ({
       precision: precision,
       calendar: calendar,
       format: format,
-      unit: unit,
       id: id,
     })
     uploadAnnotations(file, sheet, filteredAnnotations, () => {})
@@ -184,22 +181,6 @@ const AnnotationMenu = ({
     annotations.push({
       selection: {...selection},
       role: 'property',
-    })
-    uploadAnnotations(file, sheet, annotations, () => {}).then(data => {
-      updateAnnotation(data.annotations)
-    }).catch(error => {
-      setMessage({
-        type: 'error',
-        title: `${error.errorCode} - ${error.errorTitle}`,
-        text: error.errorDescription,
-      })
-    })
-  }
-
-  const handleOnSubmitUnitCells = selection => {
-    annotations.push({
-      selection: {...selection},
-      role: 'unit',
     })
     uploadAnnotations(file, sheet, annotations, () => {}).then(data => {
       updateAnnotation(data.annotations)
@@ -352,13 +333,6 @@ const AnnotationMenu = ({
     setFormState({
       ...formState,
       property: node,
-    })
-  }
-
-  const handleOnSelectUnit = node => {
-    setFormState({
-      ...formState,
-      unit: node,
     })
   }
 
