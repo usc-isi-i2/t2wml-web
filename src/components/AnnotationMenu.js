@@ -9,7 +9,9 @@ import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import ListAltIcon from '@material-ui/icons/ListAlt'
 
+import PropertyTags from './PropertyTags'
 import PropertyInput from './PropertyInput'
 import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
@@ -60,6 +62,8 @@ const AnnotationMenu = ({
 
   const [userChangedFormState, setUserChangedFormState] = useState(false)
   const [showAdditionalInputs, setShowAdditionalInputs] = useState(false)
+  const [showPropertyTagsMenu, setShowPropertyTagsMenu] = useState(false)
+  const [tags, setTags] = useState([])
 
   useEffect(() => {
     if ( !suggestedAnnotation ) { return }
@@ -273,6 +277,28 @@ const AnnotationMenu = ({
     )
   }
 
+  const renderPropertyTagsMenu = () => {
+    const currentRole = getFormValue('role')
+    if ( currentRole !== 'property' ) { return }
+    return (
+      <Grid item xs={12}>
+        <Button
+          color="primary"
+          variant="contained"
+          startIcon={<ListAltIcon />}
+          onClick={() => setShowPropertyTagsMenu(true)}>
+          Show Variable Tags
+        </Button>
+        {showPropertyTagsMenu && (
+          <PropertyTags
+            tags={tags}
+            setTags={setTags}
+            hideMenu={() => setShowPropertyTagsMenu(false)} />
+        )}
+      </Grid>
+    )
+  }
+
   const renderSelectedTypeInput = () => {
     const currentRole = getFormValue('role')
     const currentType = getFormValue('type')
@@ -359,6 +385,7 @@ const AnnotationMenu = ({
                 <PropertyInput
                   file={file}
                   sheet={sheet}
+                  selectedAnnotation={selectedAnnotation}
                   selectedProperty={getFormValue('property')}
                   onSelectProperty={handleOnSelectProperty}
                   onSubmitPropertyCells={handleOnSubmitPropertyCells} />
@@ -423,6 +450,7 @@ const AnnotationMenu = ({
       {renderFormInstructions()}
       {renderSelectedRangeInput()}
       {renderSelectedRoleInput()}
+      {renderPropertyTagsMenu()}
       {renderSelectedTypeInput()}
       {renderAdditionalInputs()}
       {renderActionButtons()}
