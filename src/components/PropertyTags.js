@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Dialog from '@material-ui/core/Dialog'
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const PropertyTags = ({ file, sheet, entity, qnode, hideMenu }) => {
+const PropertyTags = ({ file, sheet, entity, setEntity, qnode, hideMenu }) => {
 
   const classes = useStyles()
 
@@ -35,10 +35,15 @@ const PropertyTags = ({ file, sheet, entity, qnode, hideMenu }) => {
     newTagValue: '',
   })
 
-  const handleOnSubmit = () => {
-    // TODO: update the entity here
-    hideMenu()
-  }
+  useEffect(() => {
+    if ( !!entity.tags ) {
+      setTags(entity.tags.map(tag => {
+        const key = tag.split(':')[0]
+        const value = tag.split(':')[1]
+        return {key, value}
+      }))
+    }
+  }, [entity])
 
   const handleOnChange = event => {
     const value = event.target.value
@@ -55,18 +60,33 @@ const PropertyTags = ({ file, sheet, entity, qnode, hideMenu }) => {
 
   const saveNewTag = () => {
     if ( !formState.newTagKey || !formState.newTagValue ) { return }
-    // TODO: update entity with the new tag here
-    setFormState({
-      newTagKey: '',
-      newTagValue: '',
+    tags.push({
+      key: formState.newTagKey,
+      value: formState.newTagValue,
+    })
+    uploadEntity(entity, tags, qnode, file, sheet)
+    .then(entity => {
+      setEntity(entity)
+      setFormState({
+        newTagKey: '',
+        newTagValue: '',
+      })
     })
   }
 
   const updateTag = tag => {
+    // if both key and value are empty, remove this tag
     if ( !tag.key && !tag.value ) {
       tags.splice(tags.indexOf(tag), 1)
+    } else {
+      if ( tags.indexOf(tag) < 0 ) {
+        tags.push(tag)
+      }
     }
-    uploadEntity(entity, [`${tag.key}:${tag.value}`], qnode, file, sheet)
+
+    // convert all tags to strings with key and value separated by a colon
+    uploadEntity(entity, tags, qnode, file, sheet)
+    .then(entity => setEntity(entity))
   }
 
   const renderTitle = () => {
@@ -217,16 +237,12 @@ const PropertyTags = ({ file, sheet, entity, qnode, hideMenu }) => {
 
   const renderContent = () => {
     return (
-      <form noValidate autoComplete="off"
-        className={classes.form}
-        onSubmit={handleOnSubmit}>
-        <Grid container spacing={3}>
-          {renderFormInstructions()}
-          {renderDefaultTags()}
-          {renderPropertyTags()}
-          {renderNewTagInputs()}
-        </Grid>
-      </form>
+      <Grid container spacing={3}>
+        {renderFormInstructions()}
+        {renderDefaultTags()}
+        {renderPropertyTags()}
+        {renderNewTagInputs()}
+      </Grid>
     )
   }
 

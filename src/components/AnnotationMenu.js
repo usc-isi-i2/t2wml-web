@@ -289,6 +289,7 @@ const AnnotationMenu = ({
             file={file}
             sheet={sheet}
             entity={entity}
+            setEntity={setEntity}
             qnode={selectedCell.qnode}
             hideMenu={() => setShowPropertyTagsMenu(false)} />
         )}
