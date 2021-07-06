@@ -603,6 +603,11 @@ const Table = ({
           return annotationBlocks
         })
 
+        // make sure we update the target selection highlight
+        if ( nextSelection.x1 === targetSelection.x1 ) {
+          updateAnnotationBlocks()
+        }
+
         return nextSelection
       })
     }
