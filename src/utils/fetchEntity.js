@@ -20,7 +20,7 @@ const fetchEntity = (qnode, file, sheet) => {
       if ( !!data.error ) {
         reject(data.error)
       }
-      resolve(data)
+      resolve(data.entity)
     })
     .catch(error => reject(error))
   })
