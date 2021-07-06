@@ -379,7 +379,6 @@ const AnnotationMenu = ({
           }
 
           if ( currentRole === 'dependentVar' ) {
-            debugger
             return (
               <Grid item xs={12}>
               </Grid>
