@@ -73,7 +73,7 @@ const PropertyTags = ({ tags, setTags, property, hideMenu }) => {
   const renderTitle = () => {
     return (
       <React.Fragment>
-        Property Tags
+        Variable Tags
         <IconButton onClick={hideMenu}>
           <CloseIcon />
         </IconButton>
@@ -85,7 +85,7 @@ const PropertyTags = ({ tags, setTags, property, hideMenu }) => {
     return (
       <Grid item xs={12}>
         <FormHelperText component="p">
-          Use this form to edit property tags
+          Use this form to edit variable tags
         </FormHelperText>
       </Grid>
     )
