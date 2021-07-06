@@ -17,6 +17,7 @@ import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
 import uploadWikinodes from '../utils/uploadWikinodes'
 import wikifyRegion from '../utils/wikifyRegion'
+import fetchEntity from '../utils/fetchEntity'
 import useStyles from '../styles/annotationMenu'
 import * as utils from '../utils/table'
 
@@ -263,6 +264,12 @@ const AnnotationMenu = ({
     )
   }
 
+  const openPropertyTagsMenu = () => {
+    fetchEntity(selectedCell.qnode, file, sheet).then(entity => {
+      setShowPropertyTagsMenu(true)
+    })
+  }
+
   const renderPropertyTagsMenu = () => {
     const currentRole = getFormValue('role')
     if ( currentRole !== 'property' ) { return }
@@ -273,7 +280,7 @@ const AnnotationMenu = ({
           color="primary"
           variant="contained"
           startIcon={<ListAltIcon />}
-          onClick={() => setShowPropertyTagsMenu(true)}>
+          onClick={openPropertyTagsMenu}>
           Show Variable Tags
         </Button>
         {showPropertyTagsMenu && (
