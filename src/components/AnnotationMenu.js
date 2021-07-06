@@ -181,22 +181,6 @@ const AnnotationMenu = ({
     })
   }
 
-  const handleOnSubmitPropertyCells = selection => {
-    annotations.push({
-      selection: {...selection},
-      role: 'property',
-    })
-    uploadAnnotations(file, sheet, annotations, () => {}).then(data => {
-      updateAnnotation(data.annotations)
-    }).catch(error => {
-      setMessage({
-        type: 'error',
-        title: `${error.errorCode} - ${error.errorTitle}`,
-        text: error.errorDescription,
-      })
-    })
-  }
-
   const handleOnChange = event => {
     const value = event.target.value
     setFormState({
@@ -388,8 +372,7 @@ const AnnotationMenu = ({
                   sheet={sheet}
                   selectedAnnotation={selectedAnnotation}
                   selectedProperty={getFormValue('property')}
-                  onSelectProperty={handleOnSelectProperty}
-                  onSubmitPropertyCells={handleOnSubmitPropertyCells} />
+                  onSelectProperty={handleOnSelectProperty} />
               </Grid>
             )
           }

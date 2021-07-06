@@ -41,7 +41,6 @@ const PropertyInput = ({
   sheet,
   selectedProperty,
   onSelectProperty,
-  onSubmitPropertyCells,
 }) => {
 
   const classes = useStyles()
