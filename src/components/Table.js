@@ -337,12 +337,15 @@ const Table = ({
       const tableData = {...prevTableData}
 
       const classNames = []
-      if ( selectedAnnotationBlock ) {
-        const { role } = selectedAnnotationBlock
-        if ( role ) {
-          classNames.push(`role-${role}`)
+      setSelectedAnnotationBlock(selectedAnnotationBlock => {
+        if ( selectedAnnotationBlock ) {
+          const { role } = selectedAnnotationBlock
+          if ( role ) {
+            classNames.push(`role-${role}`)
+          }
         }
-      }
+        return selectedAnnotationBlock
+      })
 
       const { x1, x2, y1, y2 } = selection.current
 
@@ -470,7 +473,7 @@ const Table = ({
       }
       return tableData
     })
-  }, [selectedAnnotationBlock])
+  }, [])
 
   const handleOnKeyDown = useCallback(event => {
 
@@ -600,10 +603,15 @@ const Table = ({
           return annotationBlocks
         })
 
+        // make sure we update the target selection highlight
+        if ( nextSelection.x1 === targetSelection.x1 ) {
+          updateAnnotationBlocks()
+        }
+
         return nextSelection
       })
     }
-  }, [hideOverlayMenu, updateSelections, resetSelections, selectedAnnotationBlock])
+  }, [hideOverlayMenu, updateSelections, resetSelections, selectedAnnotationBlock, updateAnnotationBlocks])
 
   const handleOnKeyUp = useCallback(() => {
     clearTimeout(timeoutID.current)
