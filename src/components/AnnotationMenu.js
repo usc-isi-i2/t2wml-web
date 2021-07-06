@@ -11,7 +11,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 import PropertyInput from './PropertyInput'
-import UnitInput from './UnitInput'
 import { ROLES, TYPES } from '../content/annotation-options'
 import uploadAnnotations from '../utils/uploadAnnotations'
 import uploadWikinodes from '../utils/uploadWikinodes'
@@ -394,26 +393,6 @@ const AnnotationMenu = ({
           }
 
           if ( showAdditionalInputs ) {
-
-            if ( option.value === 'unit' ) {
-              return (
-                <Grid item xs={12} key={option.value}>
-                  <Grid container>
-                    <Grid item xs={1}>
-                    </Grid>
-                    <Grid item xs={11}>
-                      <UnitInput
-                        file={file}
-                        sheet={sheet}
-                        selectedUnit={getFormValue('unit')}
-                        onSelectUnit={handleOnSelectUnit}
-                        onSubmitUnitCells={handleOnSubmitUnitCells} />
-                    </Grid>
-                  </Grid>
-                </Grid>
-              )
-            }
-
             return (
               <Grid item xs={12} key={option.value}>
                 <Grid container>

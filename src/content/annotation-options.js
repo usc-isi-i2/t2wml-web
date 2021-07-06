@@ -9,9 +9,6 @@ export const TYPES = [{
   'label': 'Quantity',
   'value': 'quantity',
   'children': [{
-    'label': 'Unit',
-    'value': 'unit',
-  }, {
     'label': 'Property',
     'value': 'property',
   }],
@@ -61,8 +58,4 @@ export const ROLES = [{
 }, {
   'label': 'Metadata',
   'value': 'metadata',
-}, {
-  'label': 'Unit',
-  'value': 'unit',
-  'wikify': true,
 }]
