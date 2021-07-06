@@ -12,6 +12,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
 
 import DraggablePaper from './DraggablePaper'
+import uploadEntity from '../utils/uploadEntity'
 import { TAGS } from '../content/tag-options'
 
 
@@ -65,6 +66,7 @@ const PropertyTags = ({ file, sheet, entity, qnode, hideMenu }) => {
     if ( !tag.key && !tag.value ) {
       tags.splice(tags.indexOf(tag), 1)
     }
+    uploadEntity(entity, [`${tag.key}:${tag.value}`], qnode, file, sheet)
   }
 
   const renderTitle = () => {
