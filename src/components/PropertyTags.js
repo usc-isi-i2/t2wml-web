@@ -196,7 +196,7 @@ const PropertyTags = ({ file, sheet, entity, setEntity, property, hideMenu }) =>
 
   const renderPropertyTags = () => {
     return tags.map(tag => (
-      <Grid item xs={12}>
+      <Grid item xs={12} key={tag.key}>
         <Grid container spacing={1}>
           <Grid item xs={6}>
             <TextField
