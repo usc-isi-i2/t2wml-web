@@ -49,6 +49,22 @@ const WikificationMenu = ({
     )
   }
 
+  const renderAnnotationType = () => {
+    if ( !selectedAnnotation ) { return }
+    return (
+      <Grid item xs={12}>
+        <Typography variant="body1">
+          <b>Annotation role:</b> {selectedAnnotation.role}
+        </Typography>
+        {!!selectedAnnotation.type && (
+          <Typography variant="body1">
+            <b>Annotation type:</b> {selectedAnnotation.type}
+          </Typography>
+        )}
+      </Grid>
+    )
+  }
+
   const renderSelectedQnode = () => {
     if ( !selectedAnnotation ) { return }
     if ( !selectedCell.qnode ) { return }
@@ -115,6 +131,7 @@ const WikificationMenu = ({
     <Grid container spacing={3}
       className={classes.wrapper}>
       {renderCellContent()}
+      {renderAnnotationType()}
       {renderSelectedQnode()}
       {renderPropertyTagsMenu()}
     </Grid>
