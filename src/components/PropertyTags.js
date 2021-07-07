@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const PropertyTags = ({ file, sheet, entity, setEntity, property, hideMenu }) => {
+const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
 
   const classes = useStyles()
 
@@ -86,14 +86,14 @@ const PropertyTags = ({ file, sheet, entity, setEntity, property, hideMenu }) =>
     }
 
     // convert all tags to strings with key and value separated by a colon
-    uploadEntity(entity, tags, property, file, sheet)
+    uploadEntity(entity, tags, file, sheet)
     .then(entity => setEntity(entity))
   }
 
   const renderTitle = () => {
     return (
       <React.Fragment>
-        Property Tags - {property.id}
+        Property Tags - {entity.label}
         <IconButton onClick={hideMenu}>
           <CloseIcon />
         </IconButton>

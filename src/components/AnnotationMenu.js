@@ -419,14 +419,11 @@ const AnnotationMenu = ({
 
   const renderPropertyTagsMenu = () => {
     if ( !showPropertyTagsMenu ) { return }
-    const property = getFormValue('property')
-    if ( !property ) { return }
     return (
       <PropertyTags
         file={file}
         sheet={sheet}
         entity={entity}
-        property={property}
         setEntity={setEntity}
         hideMenu={() => setShowPropertyTagsMenu(false)} />
     )
