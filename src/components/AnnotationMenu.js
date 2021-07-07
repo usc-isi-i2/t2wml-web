@@ -97,7 +97,7 @@ const AnnotationMenu = ({
         property: selectedAnnotation.property,
       }
     })
-  }, [selectedAnnotation])
+  }, [selectedAnnotation, defaultFormState])
 
   const getFormValue = useCallback(field => {
     if ( !!formState[field] || typeof formState[field] === 'undefined' ) {
