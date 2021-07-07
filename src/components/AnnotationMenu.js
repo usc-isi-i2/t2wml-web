@@ -22,6 +22,18 @@ import useStyles from '../styles/annotationMenu'
 import * as utils from '../utils/table'
 
 
+const DEFAULT_FORMSTATE = {
+    range: '',
+    role: '',
+    type: '',
+    property: '',
+    language: '',
+    precision: '',
+    calendar: '',
+    format: '',
+}
+
+
 const AnnotationMenu = ({
   file,
   sheet,
@@ -39,18 +51,7 @@ const AnnotationMenu = ({
 
   const classes = useStyles()
 
-  const defaultFormState = {
-      range: '',
-      role: '',
-      type: '',
-      property: '',
-      language: '',
-      precision: '',
-      calendar: '',
-      format: '',
-  }
-
-  const [formState, setFormState] = useState(defaultFormState)
+  const [formState, setFormState] = useState(DEFAULT_FORMSTATE)
 
   const [suggestion, setSuggestion] = useState({
     role: '',
@@ -86,7 +87,7 @@ const AnnotationMenu = ({
 
     // user selected a different annotation block, reset form state
     setUserChangedFormState(false)
-    setFormState(defaultFormState)
+    setFormState(DEFAULT_FORMSTATE)
 
     setAnnotation(annotation => {
       return {
@@ -97,7 +98,7 @@ const AnnotationMenu = ({
         property: selectedAnnotation.property,
       }
     })
-  }, [selectedAnnotation, defaultFormState])
+  }, [selectedAnnotation])
 
   const getFormValue = useCallback(field => {
     if ( !!formState[field] || typeof formState[field] === 'undefined' ) {
