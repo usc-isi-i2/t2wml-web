@@ -39,16 +39,18 @@ const AnnotationMenu = ({
 
   const classes = useStyles()
 
-  const [formState, setFormState] = useState({
-    range: '',
-    role: '',
-    type: '',
-    property: '',
-    language: '',
-    precision: '',
-    calendar: '',
-    format: '',
-  })
+  const defaultFormState = {
+      range: '',
+      role: '',
+      type: '',
+      property: '',
+      language: '',
+      precision: '',
+      calendar: '',
+      format: '',
+  }
+
+  const [formState, setFormState] = useState(defaultFormState)
 
   const [suggestion, setSuggestion] = useState({
     role: '',
@@ -81,6 +83,11 @@ const AnnotationMenu = ({
 
   useEffect(() => {
     if ( !selectedAnnotation ) { return }
+
+    // user selected a different annotation block, reset form state
+    setUserChangedFormState(false)
+    setFormState(defaultFormState)
+
     setAnnotation(annotation => {
       return {
         ...annotation,
