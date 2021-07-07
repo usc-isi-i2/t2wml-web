@@ -15,7 +15,6 @@ import * as utils from '../utils/table'
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
-    minHeight: '250px',
     marginTop: theme.spacing(1),
   },
 }))
@@ -44,7 +43,7 @@ const WikificationMenu = ({
     return (
       <Grid item xs={12}>
         <Typography variant="body1">
-          {utils.humanReadableSelection(targetSelection)}: {selectedCell.value}
+          <b>Selected cell:</b> {utils.humanReadableSelection(targetSelection)} ({selectedCell.value})
         </Typography>
       </Grid>
     )
