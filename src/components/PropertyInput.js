@@ -68,16 +68,12 @@ const PropertyInput = ({
     if ( !selected || !selected.label ) { return }
     return (
       <Grid item xs={12}>
-        <Link
-          variant="body1"
-          className={classes.link}
-          target="_blank" rel="noopener noreferrer"
-          href={`https://ringgaard.com/kb/${selected.id}`}>
-          {`${selected.label} (${selected.id})`}
-        </Link>
+        <Typography variant="body1">
+          <b>Variable:</b> {selected.label}
+        </Typography>
         {!!selected.description && (
           <Typography variant="body1">
-            {selected.description}
+            <b>Description:</b> {selected.description}
           </Typography>
         )}
       </Grid>
