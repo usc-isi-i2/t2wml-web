@@ -38,9 +38,10 @@ const PropertyTags = ({ file, sheet, entity, setEntity, property, hideMenu }) =>
   useEffect(() => {
     if ( !!entity.tags ) {
       setTags(entity.tags.map(tag => {
-        const key = tag.split(':')[0]
-        const value = tag.split(':')[1]
-        return {key, value}
+        return {
+          key: tag.substring(0, tag.indexOf(':')),
+          value: tag.substring(tag.indexOf(':') + 1),
+        }
       }))
     }
   }, [entity])
