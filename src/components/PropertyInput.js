@@ -59,7 +59,7 @@ const PropertyInput = ({
     return (
       <Grid item xs={12}>
         <Typography variant="body1">
-          <b>Variable:</b> {selected.label}
+          <b>Property:</b> {selected.label}
         </Typography>
         {!!selected.description && (
           <Typography variant="body1">
@@ -79,7 +79,7 @@ const PropertyInput = ({
           variant="contained"
           startIcon={<AddIcon />}
           onClick={() => setShowCreateProperty(true)}>
-          Add a new variable
+          Add a new property
         </Button>
         {showCreateProperty && (
           <CreateProperty

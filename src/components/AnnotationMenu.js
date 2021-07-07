@@ -371,7 +371,7 @@ const AnnotationMenu = ({
                     variant="contained"
                     startIcon={<ListAltIcon />}
                     onClick={openPropertyTagsMenu}>
-                    Show Variable Tags
+                    Show Property Tags
                   </Button>
                 )}
               </Grid>

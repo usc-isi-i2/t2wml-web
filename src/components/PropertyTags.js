@@ -92,7 +92,7 @@ const PropertyTags = ({ file, sheet, entity, setEntity, property, hideMenu }) =>
   const renderTitle = () => {
     return (
       <React.Fragment>
-        Variable Tags - {property.id}
+        Property Tags - {property.id}
         <IconButton onClick={hideMenu}>
           <CloseIcon />
         </IconButton>
@@ -104,7 +104,7 @@ const PropertyTags = ({ file, sheet, entity, setEntity, property, hideMenu }) =>
     return (
       <Grid item xs={12}>
         <FormHelperText component="p">
-          Use this form to edit variable tags
+          Use this form to edit property tags
         </FormHelperText>
       </Grid>
     )

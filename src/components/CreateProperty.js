@@ -84,7 +84,7 @@ const CreateProperty = ({ file, sheet, selectProperty, hideMenu }) => {
   const renderTitle = () => {
     return (
       <React.Fragment>
-        Create a new variable
+        Create a new property
         <IconButton onClick={hideMenu}>
           <CloseIcon />
         </IconButton>
@@ -96,7 +96,7 @@ const CreateProperty = ({ file, sheet, selectProperty, hideMenu }) => {
     return (
       <Grid item xs={12}>
         <FormHelperText component="p">
-          Use this form to create a new variable
+          Use this form to create a new property
         </FormHelperText>
       </Grid>
     )
