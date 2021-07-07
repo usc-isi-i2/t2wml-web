@@ -13,6 +13,10 @@ import classNames from '../utils/classNames'
 
 
 const OPTIONS = [{
+  label: 'TSV',
+  value: 'tsv',
+  title: 'kgtk (.tsv)',
+}, {
   label: 'ZIP',
   value: 'zip',
   title: 'Zipped Results',
