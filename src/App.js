@@ -145,6 +145,11 @@ const App = () => {
           },
         },
       },
+      MuiDialogContent: {
+        root: {
+          overflowY: 'initial',
+        },
+      },
       MuiMenu: {
         paper: {
           padding: 0,
