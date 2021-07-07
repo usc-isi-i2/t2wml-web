@@ -32,10 +32,6 @@ export const TYPES = [{
   'label': 'Country',
   'value': 'wikibaseitem',
   'wikify': true,
-  'children': [{
-    'label': 'Variable',
-    'value': 'property',
-  }],
 }]
 
 
