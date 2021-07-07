@@ -361,6 +361,7 @@ const AnnotationMenu = ({
                 <PropertyInput
                   file={file}
                   sheet={sheet}
+                  dataType={currentType}
                   selectedAnnotation={selectedAnnotation}
                   selectedProperty={getFormValue('property')}
                   onSelectProperty={handleOnSelectProperty} />

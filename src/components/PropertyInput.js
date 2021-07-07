@@ -11,6 +11,7 @@ import CreateProperty from './CreateProperty'
 const PropertyInput = ({
   file,
   sheet,
+  dataType,
   selectedProperty,
   onSelectProperty,
 }) => {
@@ -58,6 +59,7 @@ const PropertyInput = ({
           <CreateProperty
             file={file}
             sheet={sheet}
+            dataType={dataType}
             selectProperty={selectProperty}
             hideMenu={() => setShowCreateProperty(false)} />
         )}

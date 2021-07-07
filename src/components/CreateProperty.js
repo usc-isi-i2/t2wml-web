@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const CreateProperty = ({ file, sheet, selectProperty, hideMenu }) => {
+const CreateProperty = ({ file, sheet, dataType, selectProperty, hideMenu }) => {
 
   const classes = useStyles()
 
@@ -67,7 +67,7 @@ const CreateProperty = ({ file, sheet, selectProperty, hideMenu }) => {
 
   const handleOnSubmit = () => {
     if ( !formState.qnodeLabel ) { return }
-    uploadProperty(file, sheet, formState).then(property => {
+    uploadProperty(file, sheet, formState, dataType).then(property => {
       selectProperty(property)
       hideMenu()
     })
