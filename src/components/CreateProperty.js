@@ -8,37 +8,12 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
 
 import DraggablePaper from './DraggablePaper'
 import uploadProperty from '../utils/uploadProperty'
-
-
-const DATA_TYPES = [{
-  label: 'Country',
-  value: 'wikibaseitem',
-}, {
-  label: 'Quantity',
-  value: 'quantity',
-}, {
-  label: 'Time',
-  value: 'time',
-}, {
-  label: 'String',
-  value: 'string',
-}, {
-  label: 'Url',
-  value: 'url',
-}, {
-  label: 'External ID',
-  value: 'externalid',
-}, {
-  label: 'Globe Coordinates',
-  value: 'globecoordinate',
-}]
 
 
 const useStyles = makeStyles(theme => ({
@@ -62,7 +37,6 @@ const CreateProperty = ({ file, sheet, dataType, selectProperty, hideMenu }) => 
   const [formState, setFormState] = useState({
     qnodeLabel: '',
     qnodeDescription: '',
-    qnodeType: '',
   })
 
   const handleOnSubmit = () => {
@@ -144,32 +118,6 @@ const CreateProperty = ({ file, sheet, dataType, selectProperty, hideMenu }) => 
     )
   }
 
-  const renderPropertyTypeInput = () => {
-    return (
-      <Grid item xs={12}>
-        <TextField
-          select
-          fullWidth
-          id="qnodeType"
-          name="qnodeType"
-          label="Data Type"
-          variant="outlined"
-          autoCorrect="off"
-          autoComplete="off"
-          autoCapitalize="off"
-          spellCheck="false"
-          onChange={handleOnChange}
-          value={formState.qnodeType}>
-          {DATA_TYPES.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-      </Grid>
-    )
-  }
-
   const renderContent = () => {
     return (
       <form noValidate autoComplete="off"
@@ -179,7 +127,6 @@ const CreateProperty = ({ file, sheet, dataType, selectProperty, hideMenu }) => 
           {renderFormInstructions()}
           {renderLabelInput()}
           {renderDescriptionInput()}
-          {renderPropertyTypeInput()}
         </Grid>
       </form>
     )
