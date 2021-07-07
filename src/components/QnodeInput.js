@@ -3,11 +3,8 @@ import React, { useEffect, useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link'
 import Button from '@material-ui/core/Button'
-import Tooltip from '@material-ui/core/Tooltip'
-import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
-import CloseIcon from '@material-ui/icons/Close'
 import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/styles'
 
@@ -45,11 +42,6 @@ const QnodeInput = ({
     setSelected(selectedQnode)
   }, [selectedQnode])
 
-  const removeSelected = () => {
-    onSelectQnode()
-    setSelected()
-  }
-
   const renderTitle = () => {
     return (
       <Grid item xs={12}>
@@ -64,30 +56,18 @@ const QnodeInput = ({
     if ( !selected || !selected.label ) { return }
     return (
       <Grid item xs={12}>
-        <Grid container spacing={3}>
-          <Grid item xs={10}>
-            <Link
-              variant="body1"
-              className={classes.link}
-              target="_blank" rel="noopener noreferrer"
-              href={`https://ringgaard.com/kb/${selected.id}`}>
-              {`${selected.label} (${selected.id})`}
-            </Link>
-            {!!selected.description && (
-              <Typography variant="body1">
-                {selected.description}
-              </Typography>
-            )}
-          </Grid>
-          <Grid item xs={2}>
-            <Tooltip arrow placement="top" title={'remove selected country'}>
-              <IconButton className={classes.removeButton}
-                onClick={removeSelected}>
-                <CloseIcon />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-        </Grid>
+        <Link
+          variant="body1"
+          className={classes.link}
+          target="_blank" rel="noopener noreferrer"
+          href={`https://ringgaard.com/kb/${selected.id}`}>
+          {`${selected.label} (${selected.id})`}
+        </Link>
+        {!!selected.description && (
+          <Typography variant="body1">
+            {selected.description}
+          </Typography>
+        )}
       </Grid>
     )
   }
