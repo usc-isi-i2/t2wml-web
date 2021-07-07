@@ -101,16 +101,6 @@ const UnitInput = ({
     setUnits([])
   }
 
-  const renderTitle = () => {
-    return (
-      <Grid item xs={12}>
-        <Typography variant="body1">
-          <b>{!!selected ? 'Unit' : 'Select Unit'}</b>
-        </Typography>
-      </Grid>
-    )
-  }
-
   const renderSelectedUnit = () => {
     if ( !selected || !selected.label ) { return }
     return (
@@ -247,7 +237,6 @@ const UnitInput = ({
 
   return (
     <Grid container spacing={3}>
-      {renderTitle()}
       {renderSelectedUnit()}
       {renderUnitCellSelection()}
       {renderUnitSearch()}

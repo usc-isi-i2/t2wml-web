@@ -54,16 +54,6 @@ const PropertyInput = ({
     setSelected(property)
   }
 
-  const renderTitle = () => {
-    return (
-      <Grid item xs={12}>
-        <Typography variant="body1">
-          <b>Variable</b>
-        </Typography>
-      </Grid>
-    )
-  }
-
   const renderSelectedProperty = () => {
     if ( !selected || !selected.label ) { return }
     return (
@@ -104,7 +94,6 @@ const PropertyInput = ({
 
   return (
     <Grid container spacing={3}>
-      {renderTitle()}
       {renderSelectedProperty()}
       {renderPropertyCreate()}
     </Grid>

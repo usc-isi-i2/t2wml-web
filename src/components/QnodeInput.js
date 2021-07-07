@@ -42,16 +42,6 @@ const QnodeInput = ({
     setSelected(selectedQnode)
   }, [selectedQnode])
 
-  const renderTitle = () => {
-    return (
-      <Grid item xs={12}>
-        <Typography variant="body1">
-          <b>{selectedAnnotation.role === 'property' ? 'Variable' : 'Country'}</b>
-        </Typography>
-      </Grid>
-    )
-  }
-
   const renderSelectedQnode = () => {
     if ( !selected || !selected.label ) { return }
     return (
@@ -110,7 +100,6 @@ const QnodeInput = ({
 
   return (
     <Grid container spacing={3}>
-      {renderTitle()}
       {renderSelectedQnode()}
       {renderInstructions()}
       {renderQnodeCreate()}
