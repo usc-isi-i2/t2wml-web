@@ -87,6 +87,7 @@ const WikificationMenu = ({
   }
 
   const renderPropertyTagsMenu = () => {
+    if ( !selectedAnnotation ) { return }
     if ( selectedAnnotation.role !== 'property' ) { return }
     if ( !selectedCell.qnode ) { return }
     return (
