@@ -65,7 +65,7 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
       key: formState.newTagKey,
       value: formState.newTagValue,
     })
-    uploadEntity(entity, tags, property, file, sheet)
+    uploadEntity(entity, tags, file, sheet)
     .then(entity => {
       setEntity(entity)
       setFormState({
