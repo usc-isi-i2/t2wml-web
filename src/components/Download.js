@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     bottom: 0,
     zIndex: 100,
     '&.active': {
-      height: theme.spacing(50),
+      height: theme.spacing(40),
     },
   },
   button: {
@@ -46,17 +46,16 @@ const useStyles = makeStyles(theme => ({
     '& svg': {
       marginRight: theme.spacing(1),
     },
-    '&.csv': {
-      bottom: theme.spacing(43),
-    },
+  },
+  fab: {
+    position: 'absolute',
+    right: theme.spacing(3),
+    padding: theme.spacing(4),
     '&.tsv': {
-      bottom: theme.spacing(35),
-    },
-    '&.json': {
-      bottom: theme.spacing(27),
+      bottom: theme.spacing(31),
     },
     '&.zip': {
-      bottom: theme.spacing(19),
+      bottom: theme.spacing(21),
     },
     '&.t2wmlz': {
       bottom: theme.spacing(11),
@@ -82,7 +81,7 @@ const Download = ({ filename, sheetname }) => {
         timeout={100 * (OPTIONS.length - i)}>
         <Tooltip arrow placement="left" title={option.title}>
           <Fab
-            className={[classes.button, option.value]}
+            className={[classes.fab, option.value]}
             onClick={() => handleOnClick(option.value)}>
             {option.label}
           </Fab>
