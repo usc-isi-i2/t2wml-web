@@ -138,6 +138,7 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
   }
 
   const renderPropertyTags = () => {
+    const DEFAULT_KEYS = DEFAULT_TAGS.map(tag => tag.key)
     return Object.entries(tags).map(tag => {
       const key = tag[0]
       const value = tag[1]
@@ -156,6 +157,9 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
                 autoCapitalize="off"
                 spellCheck="false"
                 inputProps={{'data-lpignore': 'true'}}
+                InputProps={{
+                  readOnly: DEFAULT_KEYS.includes(key),
+                }}
                 onChange={event => handleOnTagChange(event, key)}
                 onBlur={() => updateTag(key, value)}
                 defaultValue={key} />
