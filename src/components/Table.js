@@ -8,7 +8,6 @@ import TableCell from './TableCell'
 import OverlayMenu from './OverlayMenu'
 import useStyles from '../styles/table'
 import * as utils from '../utils/table'
-import fetchPartialCSV from '../utils/fetchPartialCSV'
 import fetchSuggestions from '../utils/fetchSuggestions'
 import uploadAnnotations from '../utils/uploadAnnotations'
 import uploadWikinodes from '../utils/uploadWikinodes'
@@ -33,7 +32,7 @@ const Table = ({
   dimensions,
   setMessage,
   suggestedAnnotations,
-  setOutputData,
+  updateOutputPreview,
 }) => {
 
   const classes = useStyles()
@@ -175,7 +174,7 @@ const Table = ({
                 .then(layers => updateTableDataLayers(layers))
               }
             }
-            updatePartialCSV()
+            updateOutputPreview()
           })
           .catch(error => {
             setMessage({
@@ -644,17 +643,9 @@ const Table = ({
 
     // update output data with partial csv
     if ( !!suggestedAnnotations.length ) {
-      fetchPartialCSV(file, sheet)
-      .then(data => setOutputData(data.cells))
-      .catch(error => {
-        setMessage({
-          type: 'error',
-          title: `${error.errorCode} - ${error.errorTitle}`,
-          text: error.errorDescription,
-        })
-      })
+      updateOutputPreview()
     }
-  }, [suggestedAnnotations, file, sheet, setOutputData, setMessage])
+  }, [suggestedAnnotations, file, sheet, updateOutputPreview, setMessage])
 
   useEffect(() => {
     setSelectedAnnotationBlock(selectedAnnotation => {
@@ -847,19 +838,6 @@ const Table = ({
     })
   }
 
-  const updatePartialCSV = () => {
-    // update output data with partial csv
-    fetchPartialCSV(file, sheet)
-    .then(data => setOutputData(data.cells))
-    .catch(error => {
-      setMessage({
-        type: 'error',
-        title: `${error.errorCode} - ${error.errorTitle}`,
-        text: error.errorDescription,
-      })
-    })
-  }
-
   const updateAnnotation = (annotations, deletedAnnotationBlock=null) => {
     if ( annotations && annotations instanceof Array ) {
       setAnnotationBlocks(annotationBlocks => {
@@ -868,7 +846,7 @@ const Table = ({
         }
         return annotations
       })
-      updatePartialCSV()
+      updateOutputPreview()
     }
   }
 

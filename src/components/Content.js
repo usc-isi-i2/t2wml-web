@@ -45,11 +45,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleProjectUpdate = project => {
-    // update the project
-    setProject(project)
-
-    // update the output preview
+  const updateOutputPreview = () => {
     fetchPartialCSV(data.filepath, data.sheetName)
     .then(data => setOutputData(data.cells))
     .catch(error => {
@@ -59,6 +55,14 @@ const Content = ({darkTheme, setDarkTheme}) => {
         text: error.errorDescription,
       })
     })
+  }
+
+  const handleProjectUpdate = project => {
+    // update the project
+    setProject(project)
+
+    // update the output preview
+    updateOutputPreview()
   }
 
   const handleFileUpload = data => {
@@ -93,7 +97,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
               dimensions={data.table.dims}
               setMessage={setMessage}
               suggestedAnnotations={annotations}
-              setOutputData={setOutputData} />
+              updateOutputPreview={updateOutputPreview} />
           </div>
           <Divider setColWidth={setColWidth} />
           <div className={classes.outputWrapper}>
