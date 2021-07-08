@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import DraggablePaper from './DraggablePaper'
 import uploadEntity from '../utils/uploadEntity'
-import { TAGS } from '../content/tag-options'
+import { DEFAULT_TAGS } from '../content/tag-options'
 
 
 const useStyles = makeStyles(theme => ({
@@ -23,15 +23,6 @@ const useStyles = makeStyles(theme => ({
     right: theme.spacing(80),
   },
 }))
-
-
-export const DEFAULT_TAGS = [
-  'FactorClass',
-  'Relevance',
-  'Normalizer',
-  'Units',
-  'DocID',
-]
 
 
 const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
