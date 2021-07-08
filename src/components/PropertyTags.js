@@ -13,7 +13,6 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import DraggablePaper from './DraggablePaper'
 import uploadEntity from '../utils/uploadEntity'
-import { TAGS } from '../content/tag-options'
 
 
 const useStyles = makeStyles(theme => ({
