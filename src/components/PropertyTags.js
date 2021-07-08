@@ -37,12 +37,7 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
 
   useEffect(() => {
     if ( !!entity.tags ) {
-      setTags(entity.tags.map(tag => {
-        return {
-          key: tag.substring(0, tag.indexOf(':')),
-          value: tag.substring(tag.indexOf(':') + 1),
-        }
-      }))
+      setTags(entity.tags)
     }
   }, [entity])
 
@@ -78,11 +73,11 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
   const updateTag = tag => {
     // if both key and value are empty, remove this tag
     if ( !tag.key && !tag.value ) {
-      tags.splice(tags.indexOf(tag), 1)
-    } else {
-      if ( tags.indexOf(tag) < 0 ) {
-        tags.push(tag)
+      if (tags.hasKey(tag.key)){
+          tags.delete(tag.key)
       }
+    } else {
+      tags[tag.key]=tag.value
     }
 
     // convert all tags to strings with key and value separated by a colon
@@ -196,8 +191,15 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
   }
 
   const renderPropertyTags = () => {
-    return tags.map(tag => (
-      <Grid item xs={12} key={tag.key}>
+    console.log("Tags", tags)
+    if (Array.isArray(tags)){return;}
+    debugger
+    const arr= []
+
+    for (const key in tags)
+
+    arr.push(
+      <Grid item xs={12} key={key}>
         <Grid container spacing={1}>
           <Grid item xs={6}>
             <TextField
@@ -211,9 +213,9 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
               autoCapitalize="off"
               spellCheck="false"
               inputProps={{'data-lpignore': 'true'}}
-              onChange={event => handleOnTagChange(event, tag)}
-              onBlur={() => updateTag(tag)}
-              defaultValue={tag.key} />
+              onChange={event => handleOnTagChange(event, {key: key, value: tags[key]})}
+              onBlur={() => updateTag({key: key, value: tags[key]})}
+              defaultValue={key} />
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -227,13 +229,13 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
               autoCapitalize="off"
               spellCheck="false"
               inputProps={{'data-lpignore': 'true'}}
-              onChange={event => handleOnTagChange(event, tag)}
-              onBlur={() => updateTag(tag)}
-              defaultValue={tag.value} />
+              onChange={event => handleOnTagChange(event, {key: key, value: tags[key]})}
+              onBlur={() => updateTag({key: key, value: tags[key]})}
+              defaultValue={tags[key]} />
           </Grid>
         </Grid>
       </Grid>
-    ))
+    )
   }
 
   const renderContent = () => {

@@ -10,7 +10,6 @@ const uploadEntity = (entity, tags, file, sheet) => {
   const requestData = {
     updated_entry: {
       ...entity,
-      tags: tags.map(tag => `${tag.key}:${tag.value}`),
     },
   }
 
