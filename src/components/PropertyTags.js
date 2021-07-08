@@ -6,6 +6,8 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
@@ -51,7 +53,19 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
 
   const handleOnTagChange = (event, key) => {
     const value = event.target.value
-    tags[key] = value
+    setTags(tags => {
+      tags[key] = value
+      return tags
+    })
+  }
+
+  const handleOnSelectTagValue = (key, value) => {
+    setTags(tags => {
+      tags[key] = value || ''
+      uploadEntity(entity, tags, file, sheet)
+      .then(entity => setEntity(entity))
+      return tags
+    })
   }
 
   const saveNewTag = () => {
@@ -68,7 +82,6 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
   }
 
   const updateTag = (key, value) => {
-    // convert all tags to strings with key and value separated by a colon
     uploadEntity(entity, tags, file, sheet)
     .then(entity => setEntity(entity))
   }
@@ -138,7 +151,6 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
   }
 
   const renderPropertyTags = () => {
-    const DEFAULT_KEYS = DEFAULT_TAGS.map(tag => tag.key)
     return Object.entries(tags).map(tag => {
       const key = tag[0]
       const value = tag[1]
@@ -158,27 +170,64 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
                 spellCheck="false"
                 inputProps={{'data-lpignore': 'true'}}
                 InputProps={{
-                  readOnly: DEFAULT_KEYS.includes(key),
+                  readOnly: key in DEFAULT_TAGS,
                 }}
                 onChange={event => handleOnTagChange(event, key)}
                 onBlur={() => updateTag(key, value)}
                 defaultValue={key} />
             </Grid>
             <Grid item xs={6}>
-              <TextField
-                fullWidth
-                size="small"
-                name="value"
-                label="Value"
-                variant="outlined"
-                autoCorrect="off"
-                autoComplete="off"
-                autoCapitalize="off"
-                spellCheck="false"
-                inputProps={{'data-lpignore': 'true'}}
-                onChange={event => handleOnTagChange(event, key)}
-                onBlur={() => updateTag(key, value)}
-                defaultValue={value} />
+              {key in DEFAULT_TAGS && !!DEFAULT_TAGS[key].length ? (
+                <Autocomplete
+                  fullWidth={true}
+                  clearOnBlur={false}
+                  selectOnFocus={false}
+                  options={DEFAULT_TAGS[key]}
+                  onChange={(event, option) => handleOnSelectTagValue(key, option)}
+                  noOptionsText={'No options available'}
+                  defaultValue={value}
+                  renderOption={option => (
+                    <Typography variant="body1">
+                      {option}
+                    </Typography>
+                  )}
+                  renderInput={params => (
+                    <TextField {...params}
+                      fullWidth
+                      size="small"
+                      name="value"
+                      label="Value"
+                      variant="outlined"
+                      autoCorrect="off"
+                      autoComplete="off"
+                      autoCapitalize="off"
+                      spellCheck="false"
+                      InputProps={{
+                        ...params.InputProps,
+                        endAdornment: (
+                          <React.Fragment>
+                            {params.InputProps.endAdornment}
+                          </React.Fragment>
+                        ),
+                      }} />
+                  )}
+                />
+              ) : (
+                <TextField
+                  fullWidth
+                  size="small"
+                  name="value"
+                  label="Value"
+                  variant="outlined"
+                  autoCorrect="off"
+                  autoComplete="off"
+                  autoCapitalize="off"
+                  spellCheck="false"
+                  inputProps={{'data-lpignore': 'true'}}
+                  onChange={event => handleOnTagChange(event, key)}
+                  onBlur={() => updateTag(key, value)}
+                  defaultValue={value} />
+              )}
             </Grid>
           </Grid>
         </Grid>
