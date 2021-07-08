@@ -1,6 +1,5 @@
-export const DEFAULT_TAGS = [{
-  key: 'FactorClass',
-  options: [
+export const DEFAULT_TAGS = {
+  'FactorClass': [
     "AgriculturalIndustry",
     "AirPollutionLevels",
     "AirTransportation",
@@ -40,25 +39,19 @@ export const DEFAULT_TAGS = [{
     "WaterTransportation",
     "WealthInequality",
   ],
-}, {
-  key: 'Relevance',
-  options: [
-    -1.0,
-    -0.5,
-    0.5,
-    0.75,
-    1.0,
+  'Relevance': [
+    '-1.0',
+    '-0.5',
+    '0.5',
+    '0.75',
+    '1.0',
   ],
-}, {
-  key: 'Normalizer',
-  options: [
+  'Normalizer': [
     "Longitudinal",
     "Simple",
     "Standard",
   ],
-}, {
-  key: 'Units',
-  options: [
+  'Units': [
     "%",
     "% of Electricity Output",
     "% of GDP",
@@ -94,6 +87,5 @@ export const DEFAULT_TAGS = [{
     "[1=extremely underdeveloped to 7=well developed and efficient by international standards]",
     "kWh",
   ],
-}, {
-  key: 'DocID',
-}]
+  'DocID': {},
+}
