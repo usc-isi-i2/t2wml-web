@@ -25,11 +25,20 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
+export const DEFAULT_TAGS = [
+  'FactorClass',
+  'Relevance',
+  'Normalizer',
+  'Units',
+  'DocID',
+]
+
+
 const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
 
   const classes = useStyles()
 
-  const [tags, setTags] = useState([])
+  const [tags, setTags] = useState({})
   const [formState, setFormState] = useState({
     newTagKey: '',
     newTagValue: '',
@@ -49,17 +58,14 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
     })
   }
 
-  const handleOnTagChange = (event, tag) => {
+  const handleOnTagChange = (event, key) => {
     const value = event.target.value
-    tag[event.target.name] = value
+    tags[key] = value
   }
 
   const saveNewTag = () => {
     if ( !formState.newTagKey || !formState.newTagValue ) { return }
-    tags.push({
-      key: formState.newTagKey,
-      value: formState.newTagValue,
-    })
+    tags[formState.newTagKey] = formState.newTagValue
     uploadEntity(entity, tags, file, sheet)
     .then(entity => {
       setEntity(entity)
@@ -70,16 +76,7 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
     })
   }
 
-  const updateTag = tag => {
-    // if both key and value are empty, remove this tag
-    if ( !tag.key && !tag.value ) {
-      if (tags.hasKey(tag.key)){
-          tags.delete(tag.key)
-      }
-    } else {
-      tags[tag.key]=tag.value
-    }
-
+  const updateTag = (key, value) => {
     // convert all tags to strings with key and value separated by a colon
     uploadEntity(entity, tags, file, sheet)
     .then(entity => setEntity(entity))
@@ -149,100 +146,55 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
     )
   }
 
-  const renderDefaultTags = () => {
-    return TAGS.map(tag => (
-      <Grid item xs={12} key={tag.key}>
-        <Grid container spacing={1}>
-          <Grid item xs={6}>
-            <TextField
-              fullWidth
-              size="small"
-              name="key"
-              label="Key"
-              variant="outlined"
-              autoCorrect="off"
-              autoComplete="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              inputProps={{'data-lpignore': 'true'}}
-              onChange={event => handleOnTagChange(event, tag)}
-              onBlur={() => updateTag(tag)}
-              defaultValue={tag.key} />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              fullWidth
-              size="small"
-              name="value"
-              label="Value"
-              variant="outlined"
-              autoCorrect="off"
-              autoComplete="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              inputProps={{'data-lpignore': 'true'}}
-              onChange={event => handleOnTagChange(event, tag)}
-              onBlur={() => updateTag(tag)}
-              defaultValue={tag.value} />
-          </Grid>
-        </Grid>
-      </Grid>
-    ))
-  }
-
   const renderPropertyTags = () => {
-    console.log("Tags", tags)
-    if (Array.isArray(tags)){return;}
-    debugger
-    const arr= []
-
-    for (const key in tags)
-
-    arr.push(
-      <Grid item xs={12} key={key}>
-        <Grid container spacing={1}>
-          <Grid item xs={6}>
-            <TextField
-              fullWidth
-              size="small"
-              name="key"
-              label="Key"
-              variant="outlined"
-              autoCorrect="off"
-              autoComplete="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              inputProps={{'data-lpignore': 'true'}}
-              onChange={event => handleOnTagChange(event, {key: key, value: tags[key]})}
-              onBlur={() => updateTag({key: key, value: tags[key]})}
-              defaultValue={key} />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              fullWidth
-              size="small"
-              name="value"
-              label="Value"
-              variant="outlined"
-              autoCorrect="off"
-              autoComplete="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              inputProps={{'data-lpignore': 'true'}}
-              onChange={event => handleOnTagChange(event, {key: key, value: tags[key]})}
-              onBlur={() => updateTag({key: key, value: tags[key]})}
-              defaultValue={tags[key]} />
+    return Object.entries(tags).map(tag => {
+      const key = tag[0]
+      const value = tag[1]
+      return (
+        <Grid item xs={12} key={tag.key}>
+          <Grid container spacing={1}>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                size="small"
+                name="key"
+                label="Key"
+                variant="outlined"
+                autoCorrect="off"
+                autoComplete="off"
+                autoCapitalize="off"
+                spellCheck="false"
+                inputProps={{'data-lpignore': 'true'}}
+                onChange={event => handleOnTagChange(event, key)}
+                onBlur={() => updateTag(key, value)}
+                defaultValue={key} />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                size="small"
+                name="value"
+                label="Value"
+                variant="outlined"
+                autoCorrect="off"
+                autoComplete="off"
+                autoCapitalize="off"
+                spellCheck="false"
+                inputProps={{'data-lpignore': 'true'}}
+                onChange={event => handleOnTagChange(event, key)}
+                onBlur={() => updateTag(key, value)}
+                defaultValue={value} />
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    )
+      )
+    })
   }
 
   const renderContent = () => {
     return (
       <Grid container spacing={3}>
         {renderFormInstructions()}
-        {renderDefaultTags()}
         {renderPropertyTags()}
         {renderNewTagInputs()}
       </Grid>
