@@ -171,7 +171,7 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
       const key = tag[0]
       const value = tag[1]
       return (
-        <Grid item xs={12} key={tag.key}>
+        <Grid item xs={12} key={key}>
           <Grid container spacing={1}>
             <Grid item xs={6}>
               <TextField
@@ -203,7 +203,7 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
                   noOptionsText={'No options available'}
                   defaultValue={value}
                   renderOption={option => (
-                    <Typography variant="body1">
+                    <Typography variant="body1" key={option}>
                       {option}
                     </Typography>
                   )}
