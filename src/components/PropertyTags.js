@@ -86,6 +86,10 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
     if ( validateInput(key, tags[key]) ) {
       uploadEntity(entity, tags, file, sheet)
       .then(entity => updateEntity(entity))
+    } else {
+      if ( key === 'Relevance' ) {
+        delete tags[key]
+      }
     }
   }
 
