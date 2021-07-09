@@ -170,8 +170,13 @@ const Table = ({
                 wikifyRegion(file, sheet, newAnnotation.selection)
                 .then(layers => updateTableDataLayers(layers))
               } else {
-                uploadWikinodes(file, sheet, newAnnotation.selection, newAnnotation.type === 'property', 'string')
-                .then(layers => updateTableDataLayers(layers))
+                uploadWikinodes(
+                  file,
+                  sheet,
+                  newAnnotation.selection,
+                  newAnnotation.role === 'property' || newAnnotation.type === 'property',
+                  'string',
+                ).then(layers => updateTableDataLayers(layers))
               }
             }
             updateOutputPreview()
