@@ -150,6 +150,17 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
     )
   }
 
+  const validateInput = (key, value) => {
+    if ( key === 'Relevance' ) {
+      const floatValue = parseFloat(value)
+      if ( floatValue >= -1 && floatValue <= 1) {
+        return true
+      }
+      return false
+    }
+    return true
+  }
+
   const renderPropertyTags = () => {
     return Object.entries(tags).map(tag => {
       const key = tag[0]
@@ -226,6 +237,10 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
                   inputProps={{'data-lpignore': 'true'}}
                   onChange={event => handleOnTagChange(event, key)}
                   onBlur={() => updateTag(key, value)}
+                  error={!validateInput(key, value)}
+                  helperText={key === 'Relevance' ? (
+                    'value must be greater than or equal to -1 and less than or equal to 1'
+                  ) : ''}
                   defaultValue={value} />
               )}
             </Grid>
