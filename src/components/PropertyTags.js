@@ -20,6 +20,7 @@ import { DEFAULT_TAGS } from '../content/tag-options'
 
 const useStyles = makeStyles(theme => ({
   menu: {
+    minWidth: '550px',
     position: 'absolute',
     top: theme.spacing(4),
     right: theme.spacing(80),
@@ -127,7 +128,7 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
     return (
       <Grid item xs={12}>
         <Grid container spacing={1}>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <TextField
               fullWidth
               size="small"
@@ -144,7 +145,7 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
               onBlur={saveNewTag}
               value={formState.newTagKey} />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={8}>
             <TextField
               fullWidth
               size="small"
@@ -173,7 +174,7 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
       return (
         <Grid item xs={12} key={key}>
           <Grid container spacing={1}>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <TextField
                 fullWidth
                 size="small"
@@ -192,7 +193,7 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
                 onBlur={() => updateTag(key)}
                 defaultValue={key} />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={8}>
               {key in DEFAULT_TAGS && !!DEFAULT_TAGS[key].length ? (
                 <Autocomplete
                   fullWidth={true}
