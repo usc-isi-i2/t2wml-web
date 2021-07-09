@@ -39,13 +39,7 @@ export const DEFAULT_TAGS = {
     "WaterTransportation",
     "WealthInequality",
   ],
-  'Relevance': [
-    '-1.0',
-    '-0.5',
-    '0.5',
-    '0.75',
-    '1.0',
-  ],
+  'Relevance': [],
   'Normalizer': [
     "Longitudinal",
     "Simple",
