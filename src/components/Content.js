@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 
@@ -45,17 +45,20 @@ const Content = ({darkTheme, setDarkTheme}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const updateOutputPreview = () => {
-    fetchPartialCSV(data.filepath, data.sheetName)
-    .then(data => setOutputData(data.cells))
-    .catch(error => {
-      setMessage({
-        type: 'error',
-        title: `${error.errorCode} - ${error.errorTitle}`,
-        text: error.errorDescription,
+  const updateOutputPreview = useCallback(() => {
+    setData(data => {
+      fetchPartialCSV(data.filepath, data.sheetName)
+      .then(output => setOutputData(output.cells))
+      .catch(error => {
+        setMessage({
+          type: 'error',
+          title: `${error.errorCode} - ${error.errorTitle}`,
+          text: error.errorDescription,
+        })
       })
+      return data
     })
-  }
+  }, [])
 
   const handleProjectUpdate = project => {
     // update the project
