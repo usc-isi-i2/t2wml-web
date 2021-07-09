@@ -28,12 +28,18 @@ const WikificationMenu = ({
   selectedCell,
   targetSelection,
   selectedAnnotation,
+  updateOutputPreview,
 }) => {
 
   const classes = useStyles()
 
   const [showPropertyTagsMenu, setShowPropertyTagsMenu] = useState(false)
   const [entity, setEntity] = useState([])
+
+  const updateEntity = entity => {
+    setEntity(entity)
+    updateOutputPreview()
+  }
 
   const handleOnSelectQnode = () => {}
 
@@ -119,7 +125,7 @@ const WikificationMenu = ({
             file={file}
             sheet={sheet}
             entity={entity}
-            setEntity={setEntity}
+            updateEntity={updateEntity}
             property={selectedCell.qnode}
             hideMenu={() => setShowPropertyTagsMenu(false)} />
         )}

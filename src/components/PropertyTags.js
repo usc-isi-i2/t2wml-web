@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
+const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
 
   const classes = useStyles()
 
@@ -63,7 +63,7 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
     setTags(tags => {
       tags[key] = value || ''
       uploadEntity(entity, tags, file, sheet)
-      .then(entity => setEntity(entity))
+      .then(entity => updateEntity(entity))
       return tags
     })
   }
@@ -73,7 +73,7 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
     tags[formState.newTagKey] = formState.newTagValue
     uploadEntity(entity, tags, file, sheet)
     .then(entity => {
-      setEntity(entity)
+      updateEntity(entity)
       setFormState({
         newTagKey: '',
         newTagValue: '',
@@ -81,9 +81,11 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
     })
   }
 
-  const updateTag = (key, value) => {
-    uploadEntity(entity, tags, file, sheet)
-    .then(entity => setEntity(entity))
+  const updateTag = key => {
+    if ( validateInput(key, tags[key]) ) {
+      uploadEntity(entity, tags, file, sheet)
+      .then(entity => updateEntity(entity))
+    }
   }
 
   const renderTitle = () => {
@@ -184,7 +186,7 @@ const PropertyTags = ({ file, sheet, entity, setEntity, hideMenu }) => {
                   readOnly: key in DEFAULT_TAGS,
                 }}
                 onChange={event => handleOnTagChange(event, key)}
-                onBlur={() => updateTag(key, value)}
+                onBlur={() => updateTag(key)}
                 defaultValue={key} />
             </Grid>
             <Grid item xs={6}>

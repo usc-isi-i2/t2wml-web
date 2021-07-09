@@ -45,6 +45,7 @@ const AnnotationMenu = ({
   onSelectionChange,
   selectedAnnotation,
   suggestedAnnotation,
+  updateOutputPreview,
   updateTableDataLayers,
   setMessage,
 }) => {
@@ -206,6 +207,11 @@ const AnnotationMenu = ({
         onSelectionChange(newSelection)
       }
     }
+  }
+
+  const updateEntity = entity => {
+    setEntity(entity)
+    updateOutputPreview()
   }
 
   const openPropertyTagsMenu = () => {
@@ -431,7 +437,7 @@ const AnnotationMenu = ({
         file={file}
         sheet={sheet}
         entity={entity}
-        setEntity={setEntity}
+        updateEntity={updateEntity}
         hideMenu={() => setShowPropertyTagsMenu(false)} />
     )
   }

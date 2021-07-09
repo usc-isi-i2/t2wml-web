@@ -43,6 +43,7 @@ const OverlayMenu = ({
   onSelectionChange,
   updateAnnotation,
   updateTableDataLayers,
+  updateOutputPreview,
   hideOverlayMenu,
   setMessage,
 }) => {
@@ -86,6 +87,7 @@ const OverlayMenu = ({
             selectedAnnotation={selectedAnnotation}
             suggestedAnnotation={suggestedAnnotation}
             updateTableDataLayers={updateTableDataLayers}
+            updateOutputPreview={updateOutputPreview}
             onSelectionChange={onSelectionChange}
             updateAnnotation={updateAnnotation}
             hideOverlayMenu={hideOverlayMenu}
@@ -98,7 +100,8 @@ const OverlayMenu = ({
             selection={selection}
             selectedCell={selectedCell}
             targetSelection={targetSelection}
-            selectedAnnotation={selectedAnnotation} />
+            selectedAnnotation={selectedAnnotation}
+            updateOutputPreview={updateOutputPreview} />
         </TabPanel>
       </React.Fragment>
     )

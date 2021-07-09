@@ -939,6 +939,7 @@ const Table = ({
         suggestedAnnotation={suggestedAnnotation}
         selectedAnnotation={selectedAnnotationBlock}
         onSelectionChange={handleOnSelectionChange}
+        updateOutputPreview={updateOutputPreview}
         updateAnnotation={updateAnnotation}
         hideOverlayMenu={hideOverlayMenu}
         setMessage={setMessage} />
