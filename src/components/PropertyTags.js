@@ -154,6 +154,9 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
 
   const validateInput = (key, value) => {
     if ( key === 'Relevance' ) {
+      if ( !value ) {
+        return true
+      }
       const floatValue = parseFloat(value)
       if ( floatValue >= -1 && floatValue <= 1) {
         return true
