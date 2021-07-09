@@ -46,18 +46,20 @@ const Content = ({darkTheme, setDarkTheme}) => {
   }, [])
 
   const updateOutputPreview = useCallback(() => {
-    setData(data => {
-      fetchPartialCSV(data.filepath, data.sheetName)
-      .then(output => setOutputData(output.cells))
-      .catch(error => {
-        setMessage({
-          type: 'error',
-          title: `${error.errorCode} - ${error.errorTitle}`,
-          text: error.errorDescription,
+    setTimeout(() => {
+      setData(data => {
+        fetchPartialCSV(data.filepath, data.sheetName)
+        .then(output => setOutputData(output.cells))
+        .catch(error => {
+          setMessage({
+            type: 'error',
+            title: `${error.errorCode} - ${error.errorTitle}`,
+            text: error.errorDescription,
+          })
         })
+        return data
       })
-      return data
-    })
+    }, 250)
   }, [])
 
   const handleProjectUpdate = project => {
