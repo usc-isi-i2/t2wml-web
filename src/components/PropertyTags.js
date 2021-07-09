@@ -82,13 +82,20 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
     })
   }
 
-  const updateTag = key => {
-    if ( validateInput(key, tags[key]) ) {
+  const updateTag = (event, key) => {
+    const value = event.target.value
+    if ( !value && !tags[key] && !(key in DEFAULT_TAGS) ) {
+      delete tags[key]
       uploadEntity(entity, tags, file, sheet)
       .then(entity => updateEntity(entity))
     } else {
-      if ( key === 'Relevance' ) {
-        delete tags[key]
+      if ( validateInput(key, tags[key]) ) {
+        uploadEntity(entity, tags, file, sheet)
+        .then(entity => updateEntity(entity))
+      } else {
+        if ( key === 'Relevance' ) {
+          delete tags[key]
+        }
       }
     }
   }
@@ -194,7 +201,7 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
                   readOnly: key in DEFAULT_TAGS,
                 }}
                 onChange={event => handleOnTagChange(event, key)}
-                onBlur={() => updateTag(key)}
+                onBlur={event => updateTag(event, key)}
                 defaultValue={key} />
             </Grid>
             <Grid item xs={8}>
@@ -246,7 +253,7 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
                   spellCheck="false"
                   inputProps={{'data-lpignore': 'true'}}
                   onChange={event => handleOnTagChange(event, key)}
-                  onBlur={() => updateTag(key, value)}
+                  onBlur={event => updateTag(event, key)}
                   error={!validateInput(key, value)}
                   helperText={key === 'Relevance' ? (
                     'value must be greater than or equal to -1 and less than or equal to 1'
