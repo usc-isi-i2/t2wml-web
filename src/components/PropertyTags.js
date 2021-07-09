@@ -202,7 +202,7 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
                   options={DEFAULT_TAGS[key]}
                   onChange={(event, option) => handleOnSelectTagValue(key, option)}
                   noOptionsText={'No options available'}
-                  defaultValue={value}
+                  value={value || null}
                   renderOption={option => (
                     <Typography variant="body1" key={option}>
                       {option}
