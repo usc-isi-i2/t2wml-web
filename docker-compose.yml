@@ -1,11 +1,6 @@
 # This file runs the t2wml Web application through Docker, and exposes it on port 8080.
 #
-# To run it, you need to clone two projects: t2wml-web (this project) and t2wml - side by side. The
-# directory structure should look like this:
-#
-# top-dir
-#    t2wml (clone of https://github.com/usc-isi-i2/t2wml, use the causx branch)
-#    t2wml-web (this repo, use the develop branch)
+# t2wml-web (this repo, use the develop branch)
 #
 # To run, just run `docker-compose up`
 
@@ -13,7 +8,9 @@ version: '3.7'
 
 services:
     t2wml-backend:
-        build: ../t2wml/backend
+        build:
+          context: .
+          dockerfile: Dockerfile-backend
         expose:
             - "13000"
         ports:
