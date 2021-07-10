@@ -122,6 +122,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
       )}
       {!!outputData && outputData.length >= 1 && (
         <Download
+          project={data.project}
           filename={data.filepath}
           sheetname={data.sheetName} />
       )}

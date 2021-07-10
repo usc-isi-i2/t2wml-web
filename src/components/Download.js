@@ -64,14 +64,14 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const Download = ({ filename, sheetname }) => {
+const Download = ({ project, filename, sheetname }) => {
 
   const classes = useStyles()
 
   const [active, setActive] = useState(false)
 
   const handleOnClick = fileType => {
-    downloadFile(filename, sheetname, fileType)
+    downloadFile(project, filename, sheetname, fileType)
   }
 
   const renderDownloadOptions = () => {

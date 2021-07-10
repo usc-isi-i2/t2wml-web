@@ -1,4 +1,4 @@
-const downloadFile = (file, sheet, fileType) => {
+const downloadFile = (project, file, sheet, fileType) => {
 
   let url
   if ( fileType === 't2wmlz' ) {
@@ -19,6 +19,8 @@ const downloadFile = (file, sheet, fileType) => {
     url = `${process.env.REACT_APP_BACKEND_URL}${url}`
   }
 
+  const filename = `${project.title}_${Date.now()}.${fileType}`
+
   return new Promise((resolve, reject) => {
     fetch(url, {
       method: 'GET',
@@ -34,7 +36,7 @@ const downloadFile = (file, sheet, fileType) => {
         const link = document.createElement('a')
         if ( link.download !== undefined ) { // feature detection
           link.setAttribute('href', URL.createObjectURL(blob))
-          link.setAttribute('download', `${file}_output.${fileType}`)
+          link.setAttribute('download', filename)
           link.style.visibility = 'hidden'
           document.body.appendChild(link)
           link.click()
