@@ -1,0 +1,17 @@
+FROM python:3.7-stretch
+
+RUN git clone https://github.com/usc-isi-i2/t2wml.git && cd t2wml && git checkout 69199397cb301c48653e3abd40ee70def44fb155
+
+RUN mkdir /src
+RUN cp /t2wml/backend/requirements.txt /src/requirements.txt
+
+RUN git clone https://github.com/usc-isi-i2/t2wml-api.git
+RUN pip install -e ./t2wml-api
+
+RUN pip install -r /src/requirements.txt
+
+RUN cp -r /t2wml/backend/* /src
+
+WORKDIR /src
+EXPOSE 13000
+ENTRYPOINT python t2wml-server.py --public-server --causx
