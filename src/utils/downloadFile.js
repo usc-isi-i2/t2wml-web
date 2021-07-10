@@ -27,6 +27,7 @@ const downloadFile = (project, file, sheet, fileType) => {
       headers: {
         'Authentication': localStorage.getItem('token'),
       },
+      cache: 'no-store',
     })
     .then(response => response.blob())
     .then(blob => {
