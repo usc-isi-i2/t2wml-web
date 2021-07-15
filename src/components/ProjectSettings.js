@@ -56,6 +56,24 @@ const ProjectSettings = ({
       .then(updatedProject => updateProject(updatedProject))
   }
 
+  const handleOnKeyDown = event => {
+
+    // submit changes when users hit the Enter or NumpadEnter keys
+    if ( event.code === 'Enter' || event.code === 'NumpadEnter' ) {
+      handleOnSubmit()
+    }
+  }
+
+  useEffect(() => {
+    // component did mount
+    document.addEventListener('keydown', handleOnKeyDown)
+
+    // component will unmount
+    return () => {
+      document.removeEventListener('keydown', handleOnKeyDown)
+    }
+  })
+
   const handleOnChange = event => {
     const value = event.target.value
     setFormState({
