@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Dialog from '@material-ui/core/Dialog'
@@ -31,6 +31,8 @@ const ProjectSettings = ({
 }) => {
 
   const classes = useStyles()
+
+  const timeoutID = useRef(null)
 
   const [formState, setFormState] = useState({
     projectTitle: '',
@@ -84,6 +86,12 @@ const ProjectSettings = ({
       ...formState,
       [event.target.name]: value,
     })
+
+    // submit changes after a 250ms timeout
+    clearTimeout(timeoutID.current)
+    timeoutID.current = setTimeout(() => {
+      handleOnSubmit()
+    }, 250)
   }
 
   const renderTitle = () => {
