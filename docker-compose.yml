@@ -1,6 +1,6 @@
 # This file runs the t2wml Web application through Docker, and exposes it on port 8080.
 #
-# t2wml-web (this repo, use the develop branch)
+# t2wml-web (this repo, use the main branch)
 #
 # To run, just run `docker-compose up`
 
