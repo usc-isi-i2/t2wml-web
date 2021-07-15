@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Dialog from '@material-ui/core/Dialog'
@@ -32,6 +32,8 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
 
   const classes = useStyles()
 
+  const timeoutID = useRef(null)
+
   const [tags, setTags] = useState({})
   const [formState, setFormState] = useState({
     newTagKey: '',
@@ -58,6 +60,12 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
       tags[key] = value
       return tags
     })
+
+    // submit changes after a 250ms timeout
+    clearTimeout(timeoutID.current)
+    timeoutID.current = setTimeout(() => {
+      updateTags()
+    }, 250)
   }
 
   const handleOnSelectTagValue = (key, value) => {
