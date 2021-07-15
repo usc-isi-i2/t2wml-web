@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Dialog from '@material-ui/core/Dialog'
@@ -48,7 +48,7 @@ const ProjectSettings = ({
     })
   }, [project])
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = useCallback(() => {
     setFormState(formState => {
       const settings = {
         title: formState.projectTitle,
@@ -59,9 +59,9 @@ const ProjectSettings = ({
         .then(updatedProject => updateProject(updatedProject))
       return formState
     })
-  }
+  }, [updateProject])
 
-  const handleOnKeyDown = event => {
+  const handleOnKeyDown = useCallback(event => {
 
     // submit changes when users hit the Enter or NumpadEnter keys
     if ( event.code === 'Enter' || event.code === 'NumpadEnter' ) {
@@ -71,7 +71,7 @@ const ProjectSettings = ({
         handleOnSubmit()
       }
     }
-  }
+  }, [handleOnSubmit])
 
   useEffect(() => {
     // component did mount
@@ -81,7 +81,7 @@ const ProjectSettings = ({
     return () => {
       document.removeEventListener('keydown', handleOnKeyDown)
     }
-  })
+  }, [handleOnKeyDown])
 
   const handleOnChange = event => {
     const value = event.target.value
