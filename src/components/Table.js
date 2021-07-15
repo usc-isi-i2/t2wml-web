@@ -834,6 +834,7 @@ const Table = ({
             ...DEFAULT_CELL_STATE,
             annotation: false,
             classNames: [],
+            qnode: null,
           }
           colIndex += 1
         }
