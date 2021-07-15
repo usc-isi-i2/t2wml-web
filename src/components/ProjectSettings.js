@@ -60,7 +60,11 @@ const ProjectSettings = ({
 
     // submit changes when users hit the Enter or NumpadEnter keys
     if ( event.code === 'Enter' || event.code === 'NumpadEnter' ) {
-      handleOnSubmit()
+
+      // but only for single line input fields
+      if ( event.target.nodeName !== 'TEXTAREA' ) {
+        handleOnSubmit()
+      }
     }
   }
 
