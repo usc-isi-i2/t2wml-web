@@ -49,13 +49,16 @@ const ProjectSettings = ({
   }, [project])
 
   const handleOnSubmit = () => {
-    const settings = {
-      title: formState.projectTitle,
-      description: formState.projectDescription,
-      url: formState.projectDataSource,
-    }
-    uploadSettings(settings)
-      .then(updatedProject => updateProject(updatedProject))
+    setFormState(formState => {
+      const settings = {
+        title: formState.projectTitle,
+        description: formState.projectDescription,
+        url: formState.projectDataSource,
+      }
+      uploadSettings(settings)
+        .then(updatedProject => updateProject(updatedProject))
+      return formState
+    })
   }
 
   const handleOnKeyDown = event => {
