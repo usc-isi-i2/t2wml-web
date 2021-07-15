@@ -73,16 +73,19 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
     if ( !!formState.newTagKey && !!formState.newTagValue ) {
       tags[formState.newTagKey] = formState.newTagValue
     }
-    uploadEntity(entity, tags, file, sheet)
-    .then(entity => {
-      updateEntity(entity)
-      if ( !!formState.newTagKey && !!formState.newTagValue ) {
-        setFormState({
-          newTagKey: '',
-          newTagValue: '',
-        })
-      }
-    })
+
+    if ( validateInput('Relevance', tags['Relevance']) ) {
+      uploadEntity(entity, tags, file, sheet)
+      .then(entity => {
+        updateEntity(entity)
+        if ( !!formState.newTagKey && !!formState.newTagValue ) {
+          setFormState({
+            newTagKey: '',
+            newTagValue: '',
+          })
+        }
+      })
+    }
   }, [entity, tags, file, sheet, formState, updateEntity])
 
   const updateTag = (event, key) => {
