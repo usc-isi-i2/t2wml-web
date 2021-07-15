@@ -88,6 +88,25 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
     }
   }, [entity, tags, file, sheet, formState, updateEntity])
 
+  const handleOnKeyDown = useCallback(event => {
+
+    // submit changes when users hit the Enter or NumpadEnter keys
+    if ( event.code === 'Enter' || event.code === 'NumpadEnter' ) {
+
+      updateTags()
+    }
+  }, [updateTags])
+
+  useEffect(() => {
+    // component did mount
+    document.addEventListener('keydown', handleOnKeyDown)
+
+    // component will unmount
+    return () => {
+      document.removeEventListener('keydown', handleOnKeyDown)
+    }
+  }, [handleOnKeyDown])
+
   const updateTag = (event, key) => {
     const value = event.target.value
     if ( !value && !tags[key] && !(key in DEFAULT_TAGS) ) {
