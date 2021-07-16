@@ -17,7 +17,7 @@ RUN npm install --silent
 RUN npm install react-scripts@3.4.1 -g --silent
 
 # set the backend url environment variable
-ARG REACT_APP_BACKEND_URL=http://0.0.0.0:13000
+ARG REACT_APP_BACKEND_URL=
 ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 
 # copy the source over
