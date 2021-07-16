@@ -24,6 +24,7 @@ services:
         ports:
             - "8080:80"
         container_name: t2wml-web
-        depends_on: t2wml-backend
+        depends_on:
+            - t2wml-backend
         environment:
             - "REACT_APP_BACKEND_URL=t2wml-backend"
