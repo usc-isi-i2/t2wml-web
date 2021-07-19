@@ -16,6 +16,10 @@ services:
         ports:
             - "13000:13000"
         container_name: t2wml-backend
+        logging:
+            options:
+                max-size: "10m"
+                max-file: "3"
 
     t2wml-web:
         build: .
@@ -26,3 +30,7 @@ services:
         container_name: t2wml-web
         depends_on:
             - t2wml-backend
+        logging:
+            options:
+                max-size: "10m"
+                max-file: "3"
