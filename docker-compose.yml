@@ -9,8 +9,8 @@ version: '3.7'
 services:
     t2wml-backend:
         build:
-          context: .
-          dockerfile: Dockerfile-backend
+           context: .
+           dockerfile: Dockerfile-backend
         expose:
             - "13000"
         ports:
@@ -26,5 +26,3 @@ services:
         container_name: t2wml-web
         depends_on:
             - t2wml-backend
-        environment:
-            - "REACT_APP_BACKEND_URL=t2wml-backend"
