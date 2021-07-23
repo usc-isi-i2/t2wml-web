@@ -96,7 +96,6 @@ const Content = ({darkTheme, setDarkTheme}) => {
           <div className={classes.inputWrapper}
             style={{ width: `${colWidth}px` }}>
             <Table
-              colWidth={colWidth}
               file={data.filepath}
               sheet={data.sheetName}
               data={data.table.cells}
