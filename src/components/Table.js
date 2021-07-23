@@ -228,9 +228,9 @@ const Table = ({
           const topRow = Math.min(y1 - 1, y2 - 1)
           const bottomRow = Math.max(y1 - 1, y2 - 1)
           let rowIndex = topRow
-          while ( rowIndex <= bottomRow && rowIndex < rows.current.length ) {
+          while ( rowIndex <= bottomRow && rowIndex >= 0 && rowIndex < rows.current.length ) {
             let colIndex = leftCol
-            while ( colIndex <= rightCol && colIndex < cols.current.length ) {
+            while ( colIndex <= rightCol && colIndex >= 0 && colIndex < cols.current.length ) {
 
               const cellData = tableData[rowIndex][colIndex]
               cellData.classNames = classNames
@@ -433,9 +433,9 @@ const Table = ({
       const topRow = Math.min(y1 - 1, y2 - 1)
       const bottomRow = Math.max(y1 - 1, y2 - 1)
       let rowIndex = topRow
-      while ( rowIndex <= bottomRow && rowIndex < rows.current.length ) {
+      while ( rowIndex <= bottomRow && rowIndex >= 0 && rowIndex < rows.current.length ) {
         let colIndex = leftCol
-        while ( colIndex <= rightCol && colIndex < cols.current.length ) {
+        while ( colIndex <= rightCol && colIndex >= 0 && colIndex < cols.current.length ) {
           const cellData = tableData[rowIndex][colIndex]
           cellData.classNames = classNames
           cellData.active = true
