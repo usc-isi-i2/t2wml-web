@@ -867,7 +867,7 @@ const Table = ({
           <AutoSizer>
             {({ height, width }) => (
               <VirtualizedTable
-                width={width}
+                width={cols.current.length * 100}
                 height={height}
                 headerHeight={25}
                 rowHeight={25}
