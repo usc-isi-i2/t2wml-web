@@ -29,6 +29,7 @@ const Table = ({
   file,
   sheet,
   data,
+  colWidth,
   dimensions,
   setMessage,
   suggestedAnnotations,
@@ -859,7 +860,7 @@ const Table = ({
   const renderTable = () => {
     if ( !tableData ) { return }
     return (
-      <Paper>
+      <Paper style={{ width: `${colWidth}px`, overflowX: 'auto' }}>
         <div className={classes.tableWrapper}
           onMouseDown={handleOnMouseDown}
           onMouseMove={handleOnMouseMove}>
