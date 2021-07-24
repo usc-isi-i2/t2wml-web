@@ -199,6 +199,12 @@ const AnnotationMenu = ({
     const newSelection = utils.parseSelectedRangeInput(value)
     if ( newSelection ) {
       onSelectionChange(newSelection)
+
+      // update selected range on the form state
+      setFormState({
+        ...formState,
+        [event.target.name]: value,
+      })
     }
   }
 
