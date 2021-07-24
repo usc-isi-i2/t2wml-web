@@ -239,17 +239,6 @@ const AnnotationMenu = ({
     if ( event.target.name === 'role' ) {
       setUserChangedFormState(true)
     }
-    if ( event.target.name === 'range' ) {
-      const newSelection = utils.parseSelectedRangeInput(value)
-      if ( newSelection ) {
-
-        // submit changes after a 7500ms timeout
-        clearTimeout(timeoutID.current)
-        timeoutID.current = setTimeout(() => {
-          onSelectionChange(newSelection)
-        }, 750)
-      }
-    }
   }
 
   const updateEntity = entity => {
@@ -291,8 +280,7 @@ const AnnotationMenu = ({
           autoCapitalize="off"
           spellCheck="false"
           inputProps={{'data-lpignore': 'true'}}
-          onChange={handleOnChange}
-          value={formState.range || defaultValue}
+          defaultValue={formState.range || defaultValue}
           onBlur={handleOnChangeSelectedRange}
           error={!!formState.range && !parsedCorrectly}
           helperText={formState.range && !parsedCorrectly ? (
