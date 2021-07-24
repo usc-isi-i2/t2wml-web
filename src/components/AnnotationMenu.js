@@ -23,14 +23,14 @@ import * as utils from '../utils/table'
 
 
 const DEFAULT_FORMSTATE = {
-    range: '',
-    role: '',
-    type: '',
-    property: '',
-    language: '',
-    precision: '',
-    calendar: '',
-    format: '',
+  range: '',
+  role: '',
+  type: '',
+  property: '',
+  language: '',
+  precision: '',
+  calendar: '',
+  format: '',
 }
 
 
