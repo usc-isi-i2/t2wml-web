@@ -192,7 +192,7 @@ const AnnotationMenu = ({
     })
   }
 
-  const handleOnChangeSelectedRange = event => {
+  const handleOnChangeSelectedRange = useCallback(event => {
     const value = event.target.value
     const newSelection = utils.parseSelectedRangeInput(value)
     if ( newSelection ) {
@@ -204,7 +204,7 @@ const AnnotationMenu = ({
         [event.target.name]: value,
       })
     }
-  }
+  }, [formState, onSelectionChange])
 
   const handleOnKeyDown = useCallback(event => {
 
