@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
@@ -51,8 +51,6 @@ const AnnotationMenu = ({
 }) => {
 
   const classes = useStyles()
-
-  const timeoutID = useRef(null)
 
   const [formState, setFormState] = useState(DEFAULT_FORMSTATE)
 
