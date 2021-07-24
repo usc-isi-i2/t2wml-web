@@ -922,6 +922,7 @@ const Table = ({
   const handleOnSelectionChange = newSelection => {
     const prevSelection = {...selection.current}
     selection.current = {...newSelection}
+    resetSelections()
     updateSelections(prevSelection)
 
     // trigger a re-render of the annotation menu with the updated selection
