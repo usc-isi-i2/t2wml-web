@@ -194,6 +194,32 @@ const AnnotationMenu = ({
     })
   }
 
+  const handleOnKeyDown = useCallback(event => {
+
+    // submit changes when users hit the Enter or NumpadEnter keys
+    if ( event.code === 'Enter' || event.code === 'NumpadEnter' ) {
+
+      // but only for the range selection input
+      if ( event.target.name === 'range' ) {
+        const value = event.target.value
+        const newSelection = utils.parseSelectedRangeInput(value)
+        if ( newSelection ) {
+          onSelectionChange(newSelection)
+        }
+      }
+    }
+  }, [onSelectionChange])
+
+  useEffect(() => {
+    // component did mount
+    document.addEventListener('keydown', handleOnKeyDown)
+
+    // component will unmount
+    return () => {
+      document.removeEventListener('keydown', handleOnKeyDown)
+    }
+  }, [handleOnKeyDown])
+
   const handleOnChange = event => {
     const value = event.target.value
     setFormState({
