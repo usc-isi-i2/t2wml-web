@@ -194,6 +194,14 @@ const AnnotationMenu = ({
     })
   }
 
+  const handleOnChangeSelectedRange = event => {
+    const value = event.target.value
+    const newSelection = utils.parseSelectedRangeInput(value)
+    if ( newSelection ) {
+      onSelectionChange(newSelection)
+    }
+  }
+
   const handleOnKeyDown = useCallback(event => {
 
     // submit changes when users hit the Enter or NumpadEnter keys
@@ -201,14 +209,10 @@ const AnnotationMenu = ({
 
       // but only for the range selection input
       if ( event.target.name === 'range' ) {
-        const value = event.target.value
-        const newSelection = utils.parseSelectedRangeInput(value)
-        if ( newSelection ) {
-          onSelectionChange(newSelection)
-        }
+        handleOnChangeSelectedRange(event)
       }
     }
-  }, [onSelectionChange])
+  }, [handleOnChangeSelectedRange])
 
   useEffect(() => {
     // component did mount
@@ -283,6 +287,7 @@ const AnnotationMenu = ({
           inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
           value={formState.range || defaultValue}
+          onBlur={handleOnChangeSelectedRange}
           error={!!formState.range && !parsedCorrectly}
           helperText={formState.range && !parsedCorrectly ? (
             'format: [col][row](:[col][row])?'
