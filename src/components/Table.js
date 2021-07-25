@@ -669,27 +669,40 @@ const Table = ({
   const handleOnMouseUp = useCallback(() => {
     if ( selection.current ) {
       selection.current = utils.standardizeSelection(selection.current)
-      setAnnotationBlocks(annotationBlocks => {
-        setSelectedAnnotationBlock(selectedAnnotationBlock => {
-          if ( !selectedAnnotationBlock && utils.checkOverlaps(
-            selection.current,
-            annotationBlocks.map(block => block.selection),
-          ) ) {
-            setShowOverlayMenu(false)
-            setSelectedAnnotationBlock(undefined)
-            setTargetSelection(undefined)
-            selection.current = null
-            resetSelections()
-          } else {
-            setShowOverlayMenu(true)
-          }
-          return selectedAnnotationBlock
+      setShowOverlayMenu(showOverlayMenu => {
+        setAnnotationBlocks(annotationBlocks => {
+          setSelectedAnnotationBlock(selectedAnnotationBlock => {
+
+            const allSelections = annotationBlocks.map(block => block.selection)
+            const collisionDetected = utils.checkOverlaps(
+              selection.current,
+              allSelections,
+            )
+
+            // user is creating a new annotation block
+            if ( !selectedAnnotationBlock && !showOverlayMenu && !collisionDetected ) {
+              setShowOverlayMenu(true)
+            }
+
+            // user is resizing one of the annotation blocks
+            if ( !!selectedAnnotationBlock && !showOverlayMenu && collisionDetected ) {
+              setShowOverlayMenu(false)
+              setSelectedAnnotationBlock(undefined)
+              setTargetSelection(undefined)
+              updateSelections(selection.current)
+              updateAnnotationBlocks()
+              resetSelections()
+            }
+
+            return selectedAnnotationBlock
+          })
+          return annotationBlocks
         })
-        return annotationBlocks
+        return showOverlayMenu
       })
     }
     setUserSelecting(false)
-  }, [resetSelections])
+  }, [resetSelections, updateSelections, updateAnnotationBlocks])
 
   useEffect(() => {
     // component did mount
