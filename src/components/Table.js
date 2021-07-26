@@ -643,6 +643,7 @@ const Table = ({
   }, [layers])
 
   useEffect(() => {
+    if ( !suggestedAnnotations || !suggestedLayers ) { return }
     // show the annotation blocks for the suggested/guessed annotations
     setAnnotationBlocks(suggestedAnnotations)
 
