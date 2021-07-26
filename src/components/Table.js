@@ -669,38 +669,35 @@ const Table = ({
   const handleOnMouseUp = useCallback(() => {
     if ( selection.current ) {
       selection.current = utils.standardizeSelection(selection.current)
-      setShowOverlayMenu(showOverlayMenu => {
-        setAnnotationBlocks(annotationBlocks => {
-          setSelectedAnnotationBlock(selectedAnnotationBlock => {
+      setAnnotationBlocks(annotationBlocks => {
+        setSelectedAnnotationBlock(selectedAnnotationBlock => {
 
-            const allSelections = annotationBlocks.map(block => block.selection)
-            const collisionDetected = utils.checkOverlaps(
-              selection.current,
-              allSelections,
-            )
+          const allSelections = annotationBlocks.map(block => block.selection)
+          const collisionDetected = utils.checkOverlaps(
+            selection.current,
+            allSelections,
+          )
 
-            // user is creating a new annotation block
-            if ( !selectedAnnotationBlock && !showOverlayMenu && !collisionDetected ) {
-              setShowOverlayMenu(true)
+          // user is creating a new annotation block
+          if ( !selectedAnnotationBlock && !collisionDetected ) {
+            setShowOverlayMenu(true)
+          }
+
+          if ( !!selectedAnnotationBlock && collisionDetected ) {
+            // resizing one of the annotation blocks overlaps another block
+            if ( selection.current !== selectedAnnotationBlock.selection ) {
+              setShowOverlayMenu(false)
+              setSelectedAnnotationBlock(undefined)
+              setTargetSelection(undefined)
+              updateSelections(selection.current)
+              updateAnnotationBlocks()
+              resetSelections()
             }
+          }
 
-            if ( !!selectedAnnotationBlock && collisionDetected ) {
-              // resizing one of the annotation blocks overlaps another block
-              if ( selection.current !== selectedAnnotationBlock.selection ) {
-                setShowOverlayMenu(false)
-                setSelectedAnnotationBlock(undefined)
-                setTargetSelection(undefined)
-                updateSelections(selection.current)
-                updateAnnotationBlocks()
-                resetSelections()
-              }
-            }
-
-            return selectedAnnotationBlock
-          })
-          return annotationBlocks
+          return selectedAnnotationBlock
         })
-        return showOverlayMenu
+        return annotationBlocks
       })
     }
     setUserSelecting(false)
