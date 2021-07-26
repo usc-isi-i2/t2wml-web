@@ -691,11 +691,11 @@ const Table = ({
             allSelections,
           )
 
-          // user is creating a new annotation block
-          if ( !selectedAnnotationBlock && !collisionDetected ) {
-            setShowOverlayMenu(true)
-          }
+          // show the overlay menu when creating a new annotation
+          // show the overlay menu when selecting an existing annotation
+          setShowOverlayMenu(true)
 
+          // hide the overlay meny if users are resizing with overlaps
           if ( !!selectedAnnotationBlock && collisionDetected ) {
             // resizing one of the annotation blocks overlaps another block
             if ( selection.current !== selectedAnnotationBlock.selection ) {
