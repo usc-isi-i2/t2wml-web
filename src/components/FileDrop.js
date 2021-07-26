@@ -42,6 +42,7 @@ const FileDrop = ({ onSuccess, setMessage }) => {
     onDrop,
     accept: [
       '.csv',
+      '.t2wmlz',
       'application/vnd.ms-excel',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     ],
