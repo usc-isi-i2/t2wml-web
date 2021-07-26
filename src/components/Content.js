@@ -73,6 +73,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const handleFileUpload = data => {
     setData(data)
     setProject(data.project)
+    if ( !!data.annotations.length ) {
+      setAnnotations(data.annotations)
+    }
   }
 
   const guessAnnotations = () => {
