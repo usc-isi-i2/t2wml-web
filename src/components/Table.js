@@ -720,14 +720,14 @@ const Table = ({
   }, [handleOnKeyDown, handleOnKeyUp, handleOnMouseUp])
 
   const handleOnMouseDown = event => {
-    const element = event.target
+    let element = event.target
 
     // Allow users to select the resize-corner of the cell
     if ( element.className === 'cell-resize-corner' ) {
       prevElement.current = element.parentElement
       setShowOverlayMenu(false)
       setUserSelecting(true)
-      return
+      element = element.parentElement
     }
 
     // Set both coordinates to the same cell
