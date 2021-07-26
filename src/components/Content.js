@@ -23,6 +23,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const [data, setData] = useState()
   const [project, setProject] = useState()
+  const [layers, setLayers] = useState({})
   const [annotations, setAnnotations] = useState([])
   const [message, setMessage] = useState({})
   const [outputData, setOutputData] = useState()
@@ -76,6 +77,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
     if ( !!data.annotations.length ) {
       setAnnotations(data.annotations)
     }
+    setLayers(data.layers)
   }
 
   const guessAnnotations = () => {
@@ -104,6 +106,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
               data={data.table.cells}
               dimensions={data.table.dims}
               setMessage={setMessage}
+              suggestedLayers={layers}
               suggestedAnnotations={annotations}
               updateOutputPreview={updateOutputPreview} />
           </div>
