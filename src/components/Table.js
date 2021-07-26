@@ -643,26 +643,26 @@ const Table = ({
   }, [layers])
 
   useEffect(() => {
-    setLayers(suggestedLayers)
-  }, [suggestedLayers])
-
-  useEffect(() => {
     // show the annotation blocks for the suggested/guessed annotations
     setAnnotationBlocks(suggestedAnnotations)
 
     // submit main subject for automatic wikifiaction
-    suggestedAnnotations.forEach(annotation => {
-      if ( annotation.role === 'mainSubject' ) {
-        wikifyRegion(file, sheet, annotation.selection)
-        .then(layers => updateTableDataLayers(layers))
-      }
-    })
+    if ( 'qnode' in suggestedLayers && 'entries' in suggestedLayers.qnode ) {
+      setLayers(suggestedLayers)
+    } else {
+      suggestedAnnotations.forEach(annotation => {
+        if ( annotation.role === 'mainSubject' ) {
+          wikifyRegion(file, sheet, annotation.selection)
+          .then(layers => updateTableDataLayers(layers))
+        }
+      })
+    }
 
     // update output data with partial csv
     if ( !!suggestedAnnotations.length ) {
       updateOutputPreview()
     }
-  }, [suggestedAnnotations, file, sheet, updateOutputPreview])
+  }, [suggestedAnnotations, suggestedLayers, file, sheet, updateOutputPreview])
 
   useEffect(() => {
     setSelectedAnnotationBlock(selectedAnnotation => {
