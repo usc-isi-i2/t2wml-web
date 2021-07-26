@@ -702,7 +702,9 @@ const Table = ({
       })
     }
     setUserSelecting(false)
-  }, [resetSelections, updateSelections, updateAnnotationBlocks])
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     // component did mount
