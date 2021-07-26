@@ -684,14 +684,16 @@ const Table = ({
               setShowOverlayMenu(true)
             }
 
-            // user is resizing one of the annotation blocks
-            if ( !!selectedAnnotationBlock && !showOverlayMenu && collisionDetected ) {
-              setShowOverlayMenu(false)
-              setSelectedAnnotationBlock(undefined)
-              setTargetSelection(undefined)
-              updateSelections(selection.current)
-              updateAnnotationBlocks()
-              resetSelections()
+            if ( !!selectedAnnotationBlock && collisionDetected ) {
+              // resizing one of the annotation blocks overlaps another block
+              if ( selection.current !== selectedAnnotationBlock.selection ) {
+                setShowOverlayMenu(false)
+                setSelectedAnnotationBlock(undefined)
+                setTargetSelection(undefined)
+                updateSelections(selection.current)
+                updateAnnotationBlocks()
+                resetSelections()
+              }
             }
 
             return selectedAnnotationBlock
