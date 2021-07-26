@@ -31,6 +31,7 @@ const Table = ({
   data,
   dimensions,
   setMessage,
+  suggestedLayers,
   suggestedAnnotations,
   updateOutputPreview,
 }) => {
@@ -46,6 +47,7 @@ const Table = ({
   const tableElement = useRef(null)
   const prevDirection = useRef(null)
 
+  const [layers, setLayers] = useState({})
   const [tableData, setTableData] = useState(null)
   const [tableDataInitialized, setTableDataInitialized] = useState(false)
 
@@ -633,6 +635,16 @@ const Table = ({
     resetSelections()
     updateSelections()
   }, [resetSelections, updateSelections])
+
+  useEffect(() => {
+    if ( 'qnode' in layers && 'entries' in layers.qnode ) {
+      updateTableDataLayers(layers)
+    }
+  }, [layers])
+
+  useEffect(() => {
+    setLayers(suggestedLayers)
+  }, [suggestedLayers])
 
   useEffect(() => {
     // show the annotation blocks for the suggested/guessed annotations
