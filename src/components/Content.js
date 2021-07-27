@@ -23,7 +23,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const [data, setData] = useState()
   const [project, setProject] = useState()
-  const [layers, setLayers] = useState({})
+  const [layers, setLayers] = useState(null)
   const [annotations, setAnnotations] = useState([])
   const [message, setMessage] = useState({})
   const [outputData, setOutputData] = useState()

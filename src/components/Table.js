@@ -643,20 +643,22 @@ const Table = ({
   }, [layers])
 
   useEffect(() => {
-    if ( !suggestedAnnotations || !suggestedLayers ) { return }
+    if ( !suggestedAnnotations ) { return }
     // show the annotation blocks for the suggested/guessed annotations
     setAnnotationBlocks(suggestedAnnotations)
 
     // submit main subject for automatic wikifiaction
-    if ( 'qnode' in suggestedLayers && 'entries' in suggestedLayers.qnode ) {
-      setLayers(suggestedLayers)
-    } else {
-      suggestedAnnotations.forEach(annotation => {
-        if ( annotation.role === 'mainSubject' ) {
-          wikifyRegion(file, sheet, annotation.selection)
-          .then(layers => updateTableDataLayers(layers))
-        }
-      })
+    if ( !!suggestedLayers ) {
+      if ( 'qnode' in suggestedLayers && 'entries' in suggestedLayers.qnode ) {
+        setLayers(suggestedLayers)
+      } else {
+        suggestedAnnotations.forEach(annotation => {
+          if ( annotation.role === 'mainSubject' ) {
+            wikifyRegion(file, sheet, annotation.selection)
+            .then(layers => updateTableDataLayers(layers))
+          }
+        })
+      }
     }
 
     // update output data with partial csv
