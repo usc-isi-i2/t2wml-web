@@ -88,6 +88,21 @@ const Content = ({darkTheme, setDarkTheme}) => {
     setShowConfirmation(true)
   }
 
+  useEffect(() => {
+
+    // user confirmed to replace annotations with the suggestions
+    if ( confirmation ) {
+      setConfirmation(false)
+      setShowConfirmation(false)
+
+      // fetch suggested annotations and remove any previous annotations
+      fetchAnnotations(projectData.filepath, projectData.sheetName)
+      .then(suggestedAnnotations => {
+        setAnnotations(suggestedAnnotations)
+      })
+    }
+  }, [confirmation, projectData.filepath, projectData.sheetName])
+
   return (
     <Grid className={classes.content}>
       <Header
