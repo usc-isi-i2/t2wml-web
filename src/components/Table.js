@@ -28,7 +28,7 @@ const DEFAULT_CELL_STATE = {
 const Table = ({
   file,
   sheet,
-  data,
+  projectData,
   dimensions,
   setMessage,
   suggestedLayers,
@@ -85,6 +85,7 @@ const Table = ({
       rows.current = [...Array(Math.max(dimensions[0], 100))] // at least 100 rows
       cols.current = [...Array(Math.max(dimensions[1], 26))]  // at least 26 cols
 
+      const data = projectData.table.cells
       const tableData = {} // empty table data
 
       Object.entries(rows.current).forEach((rowItem, rowIndex) => {
@@ -114,7 +115,7 @@ const Table = ({
       setTableDataInitialized(true)
       return tableData
     })
-  }, [data, dimensions, tableDataInitialized])
+  }, [projectData, dimensions, tableDataInitialized])
 
   const updateTableDataLayers = layers => {
     setTableData(prevTableData => {
@@ -144,7 +145,7 @@ const Table = ({
     if ( selection.current && showOverlayMenu && !selectedAnnotationBlock ) {
 
       // check that the selected cells have content
-      if ( utils.selectionHasData(data, selection) ) {
+      if ( utils.selectionHasData(projectData.table.cells, selection) ) {
 
         // call the annotation suggestion endpoint
         fetchSuggestions(file, sheet, selection.current, annotationBlocks)
