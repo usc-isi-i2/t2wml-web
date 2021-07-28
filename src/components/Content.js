@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 
 import useStyles from '../styles/content'
 
+import ConfirmationDialog from './ConfirmationDialog'
 import Instructions from './Instructions'
 import Download from './Download'
 import FileDrop from './FileDrop'
@@ -25,6 +26,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const [annotations, setAnnotations] = useState([])
   const [outputData, setOutputData] = useState()
   const [message, setMessage] = useState({})
+  const [confirmation, setConfirmation] = useState(false)
+  const [confirmationText, setConfirmationText] = useState('')
+  const [showConfirmation, setShowConfirmation] = useState(false)
   const [colWidth, setColWidth] = useState(window.innerWidth * 0.65)
 
   const handleOnUnload = event => {
@@ -79,10 +83,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const guessAnnotations = () => {
     if ( !projectData.filepath ) { return }
-    fetchAnnotations(projectData.filepath, projectData.sheetName)
-    .then(suggestedAnnotations => {
-      setAnnotations(suggestedAnnotations)
-    })
+
+    setConfirmationText('Requesting suggested annotations would overwrite all existing annotations, are you sure you want to continue?')
+    setShowConfirmation(true)
   }
 
   return (
@@ -126,6 +129,11 @@ const Content = ({darkTheme, setDarkTheme}) => {
           sheetname={projectData.sheetName} />
       )}
       <Message message={message} />
+      <ConfirmationDialog
+        open={showConfirmation}
+        text={confirmationText}
+        close={() => setShowConfirmation(false)}
+        onConfirm={() => setConfirmation(true)} />
     </Grid>
   )
 }
