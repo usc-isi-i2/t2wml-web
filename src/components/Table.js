@@ -28,7 +28,6 @@ const DEFAULT_CELL_STATE = {
 const Table = ({
   projectData,
   setMessage,
-  suggestedLayers,
   suggestedAnnotations,
   updateOutputPreview,
 }) => {
@@ -112,6 +111,18 @@ const Table = ({
       setTableDataInitialized(true)
       return tableData
     })
+
+    // update project annotations
+    const annotations = projectData.annotations
+    if ( !!annotations ) {
+      setAnnotationBlocks(annotations)
+    }
+
+    // update project layers
+    const layers = projectData.layers
+    if ( !!layers && 'qnode' in layers && 'entries' in layers.qnode ) {
+      setLayers(layers)
+    }
   }, [projectData, tableDataInitialized])
 
   const updateTableDataLayers = layers => {
@@ -641,29 +652,22 @@ const Table = ({
   }, [layers])
 
   useEffect(() => {
-    if ( !suggestedAnnotations ) { return }
+
     // show the annotation blocks for the suggested/guessed annotations
-    setAnnotationBlocks(suggestedAnnotations)
-
-    // submit main subject for automatic wikifiaction
-    if ( !!suggestedLayers ) {
-      if ( 'qnode' in suggestedLayers && 'entries' in suggestedLayers.qnode ) {
-        setLayers(suggestedLayers)
-      } else {
-        suggestedAnnotations.forEach(annotation => {
-          if ( annotation.role === 'mainSubject' ) {
-            wikifyRegion(projectData.filepath, projectData.sheetName, annotation.selection)
-            .then(layers => updateTableDataLayers(layers))
-          }
-        })
-      }
-    }
-
-    // update output data with partial csv
     if ( !!suggestedAnnotations.length ) {
+      suggestedAnnotations.forEach(annotation => {
+
+        // submit main subject for automatic wikifiaction
+        if ( annotation.role === 'mainSubject' ) {
+          wikifyRegion(projectData.filepath, projectData.sheetName, annotation.selection)
+          .then(layers => updateTableDataLayers(layers))
+        }
+      })
+
+      // update output data with partial csv
       updateOutputPreview()
     }
-  }, [suggestedAnnotations, suggestedLayers, projectData.filepath, projectData.sheetName, updateOutputPreview])
+  }, [suggestedAnnotations, projectData.filepath, projectData.sheetName, updateOutputPreview])
 
   useEffect(() => {
     setSelectedAnnotationBlock(selectedAnnotation => {
