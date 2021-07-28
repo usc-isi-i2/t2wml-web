@@ -5,11 +5,17 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
+import Button from '@material-ui/core/Button'
 
 import DraggablePaper from './DraggablePaper'
 
 
-const ConfirmationDialog = ({ open, close }) => {
+const ConfirmationDialog = ({
+  open,
+  close,
+  text,
+  onConfirm,
+}) => {
 
   const renderTitle = () => {
     return (
@@ -22,9 +28,26 @@ const ConfirmationDialog = ({ open, close }) => {
     )
   }
 
-  const renderContent = () => {}
+  const renderContent = () => {
+    return (
+      <React.Fragment>
+        {text}
+      </React.Fragment>
+    )
+  }
 
-  const renderButtons = () => {}
+  const renderButtons = () => {
+    return (
+      <React.Fragment>
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={onConfirm}>
+          Yes, I'm sure
+        </Button>
+      </React.Fragment>
+    )
+  }
 
   return (
     <Dialog
