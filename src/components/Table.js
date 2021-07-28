@@ -652,11 +652,11 @@ const Table = ({
   }, [layers])
 
   useEffect(() => {
-
     // show the annotation blocks for the suggested/guessed annotations
-    suggestedAnnotations.forEach(annotation => {
+    setAnnotationBlocks(suggestedAnnotations)
 
-      // submit main subject for automatic wikifiaction
+    // submit main subject for automatic wikifiaction
+    suggestedAnnotations.forEach(annotation => {
       if ( annotation.role === 'mainSubject' ) {
         wikifyRegion(projectData.filepath, projectData.sheetName, annotation.selection)
         .then(layers => updateTableDataLayers(layers))
