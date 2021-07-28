@@ -664,7 +664,8 @@ const Table = ({
         }
       })
 
-      // update output data with partial csv
+    // update output data with partial csv
+    if ( !!suggestedAnnotations.length ) {
       updateOutputPreview()
     }
   }, [suggestedAnnotations, projectData.filepath, projectData.sheetName, updateOutputPreview])
