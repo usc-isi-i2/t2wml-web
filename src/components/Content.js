@@ -22,7 +22,6 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const classes = useStyles()
 
   const [data, setData] = useState()
-  const [project, setProject] = useState()
   const [layers, setLayers] = useState(null)
   const [annotations, setAnnotations] = useState([])
   const [message, setMessage] = useState({})
@@ -64,8 +63,12 @@ const Content = ({darkTheme, setDarkTheme}) => {
   }, [])
 
   const handleProjectUpdate = project => {
+
     // update the project
-    setProject(project)
+    setData(data => {
+      data.project = project
+      return data
+    })
 
     // update the output preview
     updateOutputPreview()
@@ -73,9 +76,6 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const handleFileUpload = data => {
     setData(data)
-    setProject(data.project)
-    setLayers(data.layers)
-    setAnnotations(data.annotations)
   }
 
   const guessAnnotations = () => {
@@ -89,7 +89,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
   return (
     <Grid className={classes.content}>
       <Header
-        project={project}
+        project={data.project}
         darkTheme={darkTheme}
         guessAnnotations={guessAnnotations}
         updateProject={handleProjectUpdate}
@@ -101,7 +101,6 @@ const Content = ({darkTheme, setDarkTheme}) => {
             <Table
               projectData={data}
               setMessage={setMessage}
-              suggestedLayers={layers}
               suggestedAnnotations={annotations}
               updateOutputPreview={updateOutputPreview} />
           </div>
