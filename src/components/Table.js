@@ -29,7 +29,6 @@ const Table = ({
   file,
   sheet,
   projectData,
-  dimensions,
   setMessage,
   suggestedLayers,
   suggestedAnnotations,
@@ -82,8 +81,8 @@ const Table = ({
   useEffect(() => {
     if ( tableDataInitialized ) { return }
     setTableData(prev => {
-      rows.current = [...Array(Math.max(dimensions[0], 100))] // at least 100 rows
-      cols.current = [...Array(Math.max(dimensions[1], 26))]  // at least 26 cols
+      rows.current = [...Array(Math.max(projectData.table.dims[0], 100))] // at least 100 rows
+      cols.current = [...Array(Math.max(projectData.table.dims[1], 26))]  // at least 26 cols
 
       const data = projectData.table.cells
       const tableData = {} // empty table data
@@ -115,7 +114,7 @@ const Table = ({
       setTableDataInitialized(true)
       return tableData
     })
-  }, [projectData, dimensions, tableDataInitialized])
+  }, [projectData, tableDataInitialized])
 
   const updateTableDataLayers = layers => {
     setTableData(prevTableData => {
