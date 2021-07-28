@@ -654,15 +654,14 @@ const Table = ({
   useEffect(() => {
 
     // show the annotation blocks for the suggested/guessed annotations
-    if ( !!suggestedAnnotations.length ) {
-      suggestedAnnotations.forEach(annotation => {
+    suggestedAnnotations.forEach(annotation => {
 
-        // submit main subject for automatic wikifiaction
-        if ( annotation.role === 'mainSubject' ) {
-          wikifyRegion(projectData.filepath, projectData.sheetName, annotation.selection)
-          .then(layers => updateTableDataLayers(layers))
-        }
-      })
+      // submit main subject for automatic wikifiaction
+      if ( annotation.role === 'mainSubject' ) {
+        wikifyRegion(projectData.filepath, projectData.sheetName, annotation.selection)
+        .then(layers => updateTableDataLayers(layers))
+      }
+    })
 
     // update output data with partial csv
     if ( !!suggestedAnnotations.length ) {
