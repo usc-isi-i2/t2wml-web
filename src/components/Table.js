@@ -26,8 +26,6 @@ const DEFAULT_CELL_STATE = {
 
 
 const Table = ({
-  file,
-  sheet,
   projectData,
   setMessage,
   suggestedLayers,
@@ -147,7 +145,7 @@ const Table = ({
       if ( utils.selectionHasData(projectData.table.cells, selection) ) {
 
         // call the annotation suggestion endpoint
-        fetchSuggestions(file, sheet, selection.current, annotationBlocks)
+        fetchSuggestions(projectData.file, projectData.sheet, selection.current, annotationBlocks)
         .then(data => {
           setSuggestedAnnotation(data)
 
@@ -161,7 +159,7 @@ const Table = ({
             newAnnotation.property = data.children.property
           }
           annotations.push(newAnnotation)
-          uploadAnnotations(file, sheet, annotations, () => {}).then(data => {
+          uploadAnnotations(projectData.file, projectData.sheet, annotations, () => {}).then(data => {
             setAnnotationBlocks(data.annotations)
             if ( selection.current ) {
               const selectedBlock = utils.checkSelectedAnnotationBlocks(selection.current, data.annotations)
@@ -169,12 +167,12 @@ const Table = ({
             }
             if ( utils.isWikifyable({role: newAnnotation.role}) ) {
               if ( newAnnotation.role === 'mainSubject' ) {
-                wikifyRegion(file, sheet, newAnnotation.selection)
+                wikifyRegion(projectData.file, projectData.sheet, newAnnotation.selection)
                 .then(layers => updateTableDataLayers(layers))
               } else {
                 uploadWikinodes(
-                  file,
-                  sheet,
+                  projectData.file,
+                  projectData.sheet,
                   newAnnotation.selection,
                   newAnnotation.role === 'property' || newAnnotation.type === 'property',
                   'string',
@@ -654,7 +652,7 @@ const Table = ({
       } else {
         suggestedAnnotations.forEach(annotation => {
           if ( annotation.role === 'mainSubject' ) {
-            wikifyRegion(file, sheet, annotation.selection)
+            wikifyRegion(projectData.file, projectData.sheet, annotation.selection)
             .then(layers => updateTableDataLayers(layers))
           }
         })
@@ -665,7 +663,7 @@ const Table = ({
     if ( !!suggestedAnnotations.length ) {
       updateOutputPreview()
     }
-  }, [suggestedAnnotations, suggestedLayers, file, sheet, updateOutputPreview])
+  }, [suggestedAnnotations, suggestedLayers, projectData.file, projectData.sheet, updateOutputPreview])
 
   useEffect(() => {
     setSelectedAnnotationBlock(selectedAnnotation => {
@@ -963,8 +961,8 @@ const Table = ({
     const selectedCell = {...tableData[targetSelection.y1-1][targetSelection.x1-1]}
     return (
       <OverlayMenu
-        file={file}
-        sheet={sheet}
+        file={projectData.file}
+        sheet={projectData.sheet}
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
         selectedCell={selectedCell}

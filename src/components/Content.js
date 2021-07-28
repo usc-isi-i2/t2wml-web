@@ -99,8 +99,6 @@ const Content = ({darkTheme, setDarkTheme}) => {
           <div className={classes.inputWrapper}
             style={{ width: `${colWidth}px` }}>
             <Table
-              file={data.filepath}
-              sheet={data.sheetName}
               projectData={data}
               setMessage={setMessage}
               suggestedLayers={layers}
