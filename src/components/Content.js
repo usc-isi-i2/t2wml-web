@@ -21,11 +21,10 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const classes = useStyles()
 
-  const [data, setData] = useState()
-  const [layers, setLayers] = useState(null)
+  const [projectData, setProjectData] = useState({})
   const [annotations, setAnnotations] = useState([])
-  const [message, setMessage] = useState({})
   const [outputData, setOutputData] = useState()
+  const [message, setMessage] = useState({})
   const [colWidth, setColWidth] = useState(window.innerWidth * 0.65)
 
   const handleOnUnload = event => {
@@ -47,8 +46,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const updateOutputPreview = useCallback(() => {
     setTimeout(() => {
-      setData(data => {
-        fetchPartialCSV(data.filepath, data.sheetName)
+      setProjectData(projectData => {
+        fetchPartialCSV(projectData.filepath, projectData.sheetName)
         .then(output => setOutputData(output.cells))
         .catch(error => {
           setMessage({
@@ -57,7 +56,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
             text: error.errorDescription,
           })
         })
-        return data
+        return projectData
       })
     }, 250)
   }, [])
@@ -65,9 +64,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const handleProjectUpdate = project => {
 
     // update the project
-    setData(data => {
-      data.project = project
-      return data
+    setProjectData(projectData => {
+      projectData.project = project
+      return projectData
     })
 
     // update the output preview
@@ -75,12 +74,12 @@ const Content = ({darkTheme, setDarkTheme}) => {
   }
 
   const handleFileUpload = data => {
-    setData(data)
+    setProjectData(data)
   }
 
   const guessAnnotations = () => {
-    if ( !data.filepath ) { return }
-    fetchAnnotations(data.filepath, data.sheetName)
+    if ( !projectData.filepath ) { return }
+    fetchAnnotations(projectData.filepath, projectData.sheetName)
     .then(suggestedAnnotations => {
       setAnnotations(suggestedAnnotations)
     })
@@ -89,18 +88,18 @@ const Content = ({darkTheme, setDarkTheme}) => {
   return (
     <Grid className={classes.content}>
       <Header
-        project={data.project}
+        project={projectData.project}
         darkTheme={darkTheme}
         guessAnnotations={guessAnnotations}
         updateProject={handleProjectUpdate}
         switchTheme={() => setDarkTheme(!darkTheme)} />
-      {data && data.table ? (
+      {projectData && projectData.table ? (
         <div className={classes.wrapper}>
           <div className={classes.inputWrapper}
             style={{ width: `${colWidth}px` }}>
             <Table
-              projectData={data}
               setMessage={setMessage}
+              projectData={projectData}
               suggestedAnnotations={annotations}
               updateOutputPreview={updateOutputPreview} />
           </div>
@@ -108,7 +107,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
           <div className={classes.outputWrapper}>
             {!!outputData ? (
               <Output
-                filename={data.filepath}
+                filename={projectData.filepath}
                 data={outputData} />
             ) : (
               <Instructions />
@@ -122,9 +121,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
       )}
       {!!outputData && outputData.length >= 1 && (
         <Download
-          project={data.project}
-          filename={data.filepath}
-          sheetname={data.sheetName} />
+          project={projectData.project}
+          filename={projectData.filepath}
+          sheetname={projectData.sheetName} />
       )}
       <Message message={message} />
     </Grid>
