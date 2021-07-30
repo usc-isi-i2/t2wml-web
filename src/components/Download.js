@@ -21,6 +21,10 @@ const OPTIONS = [{
   value: 'zip',
   title: 'Zipped Results',
 }, {
+  label: 'FIDIL',
+  value: 'fidil',
+  title: 'FIDIL',
+}, {
   label: 'T2WML',
   value: 't2wmlz',
   title: 'Saved Project',
@@ -36,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     bottom: 0,
     zIndex: 100,
     '&.active': {
-      height: theme.spacing(40),
+      height: theme.spacing(50),
     },
   },
   button: {
@@ -52,9 +56,12 @@ const useStyles = makeStyles(theme => ({
     right: theme.spacing(3),
     padding: theme.spacing(4),
     '&.tsv': {
-      bottom: theme.spacing(31),
+      bottom: theme.spacing(41),
     },
     '&.zip': {
+      bottom: theme.spacing(31),
+    },
+    '&.fidil': {
       bottom: theme.spacing(21),
     },
     '&.t2wmlz': {
