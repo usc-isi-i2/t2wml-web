@@ -5,6 +5,8 @@ const downloadFile = (project, file, sheet, fileType) => {
     url = '/api/causx/download_project'
   } else if ( fileType === 'zip' ) {
     url = '/api/causx/download_zip_results'
+  } else if ( fileType === 'fidil' ) {
+    url = '/api/causx/project/fidil_json'
   } else {
     url = '/api/causx/project/download/'
     url += `${fileType}/${file}_output.${fileType}`
