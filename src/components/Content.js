@@ -23,7 +23,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const classes = useStyles()
 
   const [projectData, setProjectData] = useState({})
-  const [annotations, setAnnotations] = useState([])
+  const [annotations, setAnnotations] = useState()
   const [outputData, setOutputData] = useState()
   const [message, setMessage] = useState({})
   const [confirmation, setConfirmation] = useState(false)
