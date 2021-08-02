@@ -16,7 +16,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const ProjectMenu = ({ project, updateProject, guessAnnotations }) => {
+const ProjectMenu = ({
+  project,
+  updateProject,
+  guessAnnotations,
+  uploadFidilFile,
+}) => {
 
   const classes = useStyles()
 
@@ -68,6 +73,7 @@ const ProjectMenu = ({ project, updateProject, guessAnnotations }) => {
         onClose={hideProjectMenu}>
         <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
         <MenuItem onClick={guessAnnotations}>Suggest Annotations</MenuItem>
+        <MenuItem onClick={uploadFidilFile}>Upload FIDIL File</MenuItem>
       </Menu>
     )
   }

@@ -88,6 +88,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
     setShowConfirmation(true)
   }
 
+  const uploadFidilFile = () => {
+  }
+
   useEffect(() => {
 
     // user confirmed to replace annotations with the suggestions
@@ -109,6 +112,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
         project={projectData.project}
         darkTheme={darkTheme}
         guessAnnotations={guessAnnotations}
+        uploadFidilFile={uploadFidilFile}
         updateProject={handleProjectUpdate}
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {projectData && projectData.table ? (

@@ -22,6 +22,7 @@ const Header = ({
   switchTheme,
   toggleSettings,
   guessAnnotations,
+  uploadFidilFile,
 }) => {
 
   const classes = useStyles()
@@ -40,7 +41,8 @@ const Header = ({
       <ProjectMenu
         project={project}
         updateProject={updateProject}
-        guessAnnotations={guessAnnotations} />
+        guessAnnotations={guessAnnotations}
+        uploadFidilFile={uploadFidilFile} />
     )
   }
 
