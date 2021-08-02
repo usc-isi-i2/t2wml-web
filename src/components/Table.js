@@ -851,29 +851,31 @@ const Table = ({
     }
   }
 
-  const removeAnnotationBlock = (annotationBlock) => {
+  const removeAnnotationBlocks = annotationBlocks => {
     setTableData(prevTableData => {
       const tableData = {...prevTableData}
-      const { x1, x2, y1, y2 } = annotationBlock.selection
-      const leftCol = Math.min(x1, x2)
-      const rightCol = Math.max(x1, x2)
-      const topRow = Math.min(y1, y2)
-      const bottomRow = Math.max(y1, y2)
-      let rowIndex = topRow
-      while ( rowIndex <= bottomRow ) {
-        let colIndex = leftCol
-        while ( colIndex <= rightCol ) {
-          tableData[rowIndex - 1][colIndex - 1] = {
-            ...tableData[rowIndex - 1][colIndex - 1],
-            ...DEFAULT_CELL_STATE,
-            annotation: false,
-            classNames: [],
-            qnode: null,
+      annotationBlocks.forEach(annotationBlock => {
+        const { x1, x2, y1, y2 } = annotationBlock.selection
+        const leftCol = Math.min(x1, x2)
+        const rightCol = Math.max(x1, x2)
+        const topRow = Math.min(y1, y2)
+        const bottomRow = Math.max(y1, y2)
+        let rowIndex = topRow
+        while ( rowIndex <= bottomRow ) {
+          let colIndex = leftCol
+          while ( colIndex <= rightCol ) {
+            tableData[rowIndex - 1][colIndex - 1] = {
+              ...tableData[rowIndex - 1][colIndex - 1],
+              ...DEFAULT_CELL_STATE,
+              annotation: false,
+              classNames: [],
+              qnode: null,
+            }
+            colIndex += 1
           }
-          colIndex += 1
+          rowIndex += 1
         }
-        rowIndex += 1
-      }
+      })
       return tableData
     })
   }
@@ -882,7 +884,7 @@ const Table = ({
     if ( annotations && annotations instanceof Array ) {
       setAnnotationBlocks(annotationBlocks => {
         if ( deletedAnnotationBlock ) {
-          removeAnnotationBlock(deletedAnnotationBlock)
+          removeAnnotationBlocks([deletedAnnotationBlock])
         }
         return annotations
       })
