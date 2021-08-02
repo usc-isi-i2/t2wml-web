@@ -1,5 +1,5 @@
 const uploadFidilFile = (file, sheet, unit) => {
-  let url = '/api/causx/project/upload/fidil_json'
+  let url = '/api/causx/project/upload_fidil_json/'
   url += `?data_file=${file}`
   url += `&sheet_name=${sheet}`
 
@@ -8,7 +8,7 @@ const uploadFidilFile = (file, sheet, unit) => {
   }
 
   return new Promise((resolve, reject) => {
-    fetch(url, {method: 'GET'})
+    fetch(url, {method: 'PUT'})
     .then(response => response.json())
     .then(response => {
       resolve(response)
