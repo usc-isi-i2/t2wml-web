@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 
 import useStyles from '../styles/content'
 
+import UploadAnnotationsDialog from './UploadAnnotationsDialog'
 import ConfirmationDialog from './ConfirmationDialog'
 import Instructions from './Instructions'
 import Download from './Download'
@@ -90,7 +91,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
     setShowConfirmation(true)
   }
 
-  const uploadAnnotations = () => {
+  const handleAnnotationsUpload = annotations => {
   }
 
   const uploadFidil = () => {
@@ -155,6 +156,10 @@ const Content = ({darkTheme, setDarkTheme}) => {
           sheetname={projectData.sheetName} />
       )}
       <Message message={message} />
+      <UploadAnnotationsDialog
+        open={showUploadAnnotations}
+        close={() => setShowUploadAnnotations(false)}
+        onUpload={handleAnnotationsUpload} />
       <ConfirmationDialog
         open={showConfirmation}
         text={confirmationText}
