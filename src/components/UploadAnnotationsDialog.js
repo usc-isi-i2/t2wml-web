@@ -5,10 +5,17 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
-import Button from '@material-ui/core/Button'
+import { makeStyles } from '@material-ui/core/styles'
 
 import DraggablePaper from './DraggablePaper'
 import FileDrop from './FileDrop'
+
+
+const useStyles = makeStyles(theme => ({
+  uploadAnnotationsMenu: {
+    minWidth: '900px',
+  },
+}))
 
 
 const UploadAnnotationsDialog = ({
@@ -17,6 +24,8 @@ const UploadAnnotationsDialog = ({
   onUpload,
   setMessage,
 }) => {
+
+  const classes = useStyles()
 
   const renderTitle = () => {
     return (
@@ -46,6 +55,7 @@ const UploadAnnotationsDialog = ({
       open={open}
       onClose={close}
       PaperComponent={DraggablePaper}
+      classes={{paper: classes.uploadAnnotationsMenu}}
       PaperProps={{handle: '.draggable-upload-annotations-handle'}}>
       <DialogTitle classes={{ root: 'draggable-upload-annotations-handle' }}>
         {renderTitle()}
