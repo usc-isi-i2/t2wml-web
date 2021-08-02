@@ -76,6 +76,18 @@ const Table = ({
   }
 
   useEffect(() => {
+    // update project annotations
+    const annotations = projectData.annotations
+    if ( !!annotations ) {
+      setAnnotationBlocks(annotations)
+    }
+
+    // update project layers
+    const layers = projectData.layers
+    if ( !!layers && 'qnode' in layers && 'entries' in layers.qnode ) {
+      setLayers(layers)
+    }
+
     if ( tableDataInitialized ) { return }
     setTableData(prev => {
       rows.current = [...Array(Math.max(projectData.table.dims[0], 100))] // at least 100 rows
@@ -112,17 +124,6 @@ const Table = ({
       return tableData
     })
 
-    // update project annotations
-    const annotations = projectData.annotations
-    if ( !!annotations ) {
-      setAnnotationBlocks(annotations)
-    }
-
-    // update project layers
-    const layers = projectData.layers
-    if ( !!layers && 'qnode' in layers && 'entries' in layers.qnode ) {
-      setLayers(layers)
-    }
   }, [projectData, tableDataInitialized])
 
   const updateTableDataLayers = layers => {
