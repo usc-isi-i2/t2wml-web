@@ -91,20 +91,6 @@ const Content = ({darkTheme, setDarkTheme}) => {
     setShowConfirmation(true)
   }
 
-  const handleAnnotationsUpload = data => {
-    setProjectData(projectData => {
-      return {
-        ...projectData,
-        annotations: data.annotations,
-      }
-    })
-    setShowUploadAnnotations(false)
-  }
-
-  const uploadFidil = () => {
-    uploadFidilFile(projectData.filepath, projectData.sheetName)
-  }
-
   useEffect(() => {
 
     // user confirmed to replace annotations with the suggestions
@@ -119,6 +105,20 @@ const Content = ({darkTheme, setDarkTheme}) => {
       })
     }
   }, [confirmation, projectData.filepath, projectData.sheetName])
+
+  const handleAnnotationsUpload = data => {
+    setProjectData(projectData => {
+      return {
+        ...projectData,
+        annotations: data.annotations,
+      }
+    })
+    setShowUploadAnnotations(false)
+  }
+
+  const uploadFidil = () => {
+    uploadFidilFile(projectData.filepath, projectData.sheetName)
+  }
 
   return (
     <Grid className={classes.content}>
