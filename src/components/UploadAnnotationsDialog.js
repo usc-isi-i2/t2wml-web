@@ -8,12 +8,14 @@ import CloseIcon from '@material-ui/icons/Close'
 import Button from '@material-ui/core/Button'
 
 import DraggablePaper from './DraggablePaper'
+import FileDrop from './FileDrop'
 
 
 const UploadAnnotationsDialog = ({
   open,
   close,
   onUpload,
+  setMessage,
 }) => {
 
   const renderTitle = () => {
@@ -30,6 +32,9 @@ const UploadAnnotationsDialog = ({
   const renderContent = () => {
     return (
       <React.Fragment>
+        <FileDrop
+          setMessage={setMessage}
+          onSuccess={onUpload} />
       </React.Fragment>
     )
   }

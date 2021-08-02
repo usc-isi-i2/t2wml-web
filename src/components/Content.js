@@ -158,8 +158,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
       <Message message={message} />
       <UploadAnnotationsDialog
         open={showUploadAnnotations}
-        close={() => setShowUploadAnnotations(false)}
-        onUpload={handleAnnotationsUpload} />
+        setMessage={setMessage}
+        onUpload={handleAnnotationsUpload}
+        close={() => setShowUploadAnnotations(false)} />
       <ConfirmationDialog
         open={showConfirmation}
         text={confirmationText}
