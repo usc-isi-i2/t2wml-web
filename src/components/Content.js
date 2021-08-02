@@ -16,6 +16,7 @@ import Table from './Table'
 
 import fetchAnnotations from '../utils/fetchAnnotations'
 import fetchPartialCSV from '../utils/fetchPartialCSV'
+import uploadFidilFile from '../utils/uploadFidilFile'
 
 
 const Content = ({darkTheme, setDarkTheme}) => {
@@ -88,7 +89,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
     setShowConfirmation(true)
   }
 
-  const uploadFidilFile = () => {
+  const uploadFidil = () => {
+    uploadFidilFile()
   }
 
   useEffect(() => {
@@ -112,7 +114,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
         project={projectData.project}
         darkTheme={darkTheme}
         guessAnnotations={guessAnnotations}
-        uploadFidilFile={uploadFidilFile}
+        uploadFidilFile={uploadFidil}
         updateProject={handleProjectUpdate}
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {projectData && projectData.table ? (
