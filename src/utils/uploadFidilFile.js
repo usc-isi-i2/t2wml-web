@@ -8,7 +8,13 @@ const uploadFidilFile = (file, sheet, unit) => {
   }
 
   return new Promise((resolve, reject) => {
-    fetch(url, {method: 'PUT'})
+    fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authentication': localStorage.getItem('token'),
+      },
+    })
     .then(response => response.json())
     .then(response => {
       resolve(response)
