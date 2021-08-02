@@ -1,5 +1,7 @@
-const uploadAnnotationsFile = (file, onProgress) => {
+const uploadAnnotationsFile = (file, filename, sheetname, onProgress) => {
   let url = '/api/causx/upload/annotation'
+  url += `?data_file=${filename}`
+  url += `&sheet_name=${sheetname}`
 
   if ( process.env.REACT_APP_BACKEND_URL ) {
     url = `${process.env.REACT_APP_BACKEND_URL}${url}`

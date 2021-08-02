@@ -91,7 +91,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
     setShowConfirmation(true)
   }
 
-  const handleAnnotationsUpload = annotations => {
+  const handleAnnotationsUpload = data => {
+    console.log(data.annotations)
   }
 
   const uploadFidil = () => {
@@ -160,6 +161,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
         open={showUploadAnnotations}
         setMessage={setMessage}
         onUpload={handleAnnotationsUpload}
+        filename={projectData.filepath}
+        sheetname={projectData.sheetName} />
         close={() => setShowUploadAnnotations(false)} />
       <ConfirmationDialog
         open={showConfirmation}

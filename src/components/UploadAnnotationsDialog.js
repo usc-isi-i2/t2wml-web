@@ -25,6 +25,8 @@ const UploadAnnotationsDialog = ({
   open,
   close,
   onUpload,
+  filename,
+  sheetname,
   setMessage,
 }) => {
 
@@ -47,6 +49,8 @@ const UploadAnnotationsDialog = ({
         <FileDrop
           onSuccess={onUpload}
           setMessage={setMessage}
+          filename={filename}
+          sheetname={sheetname}
           uploadAnnotations={true} />
       </React.Fragment>
     )

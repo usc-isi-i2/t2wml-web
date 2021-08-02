@@ -4,10 +4,13 @@ import { Grid, LinearProgress } from '@material-ui/core'
 
 import FileHeader from './FileHeader'
 import uploadFile from '../utils/uploadFile'
+import uploadAnnotationsFile from '../utils/uploadAnnotationsFile'
 
 
 const FileUpload = ({
   file,
+  filename,
+  sheetname,
   onUploadSuccess,
   onUploadError,
   onDelete,
@@ -19,7 +22,15 @@ const FileUpload = ({
   useEffect(() => {
     let isMounted = true
     if ( uploadAnnotations ) {
-      alert('thank you')
+      uploadAnnotationsFile(file, filename, sheetname, setProgress).then(data => {
+        if ( isMounted ) {
+          onUploadSuccess(data)
+        }
+      }).catch(error => {
+        if ( isMounted ) {
+          onUploadError(error)
+        }
+      })
     } else {
       uploadFile(file, setProgress).then(data => {
         if ( isMounted ) {

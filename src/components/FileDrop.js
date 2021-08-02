@@ -10,7 +10,13 @@ import UploadIcon from '../icons/Upload'
 import useStyles from '../styles/fileDrop'
 
 
-const FileDrop = ({ onSuccess, setMessage, uploadAnnotations }) => {
+const FileDrop = ({
+  onSuccess,
+  setMessage,
+  filename,
+  sheetname,
+  uploadAnnotations,
+}) => {
 
   const classes = useStyles()
 
@@ -88,6 +94,8 @@ const FileDrop = ({ onSuccess, setMessage, uploadAnnotations }) => {
       {files.map((file, index) => (
         <Grid item key={index}>
           <FileUpload
+            filename={filename}
+            sheetname={sheetname}
             onDelete={onDelete}
             onUploadSuccess={onUploadSuccess}
             onUploadError={onUploadError}
