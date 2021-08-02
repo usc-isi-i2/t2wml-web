@@ -30,6 +30,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const [confirmation, setConfirmation] = useState(false)
   const [confirmationText, setConfirmationText] = useState('')
   const [showConfirmation, setShowConfirmation] = useState(false)
+  const [showUploadAnnotations, setShowUploadAnnotations] = useState(false)
   const [colWidth, setColWidth] = useState(window.innerWidth * 0.65)
 
   const handleOnUnload = event => {
@@ -117,7 +118,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
         project={projectData.project}
         darkTheme={darkTheme}
         guessAnnotations={guessAnnotations}
-        uploadAnnotations={uploadAnnotations}
+        showUploadAnnotations={() => setShowUploadAnnotations(true)}
         uploadFidilFile={uploadFidil}
         updateProject={handleProjectUpdate}
         switchTheme={() => setDarkTheme(!darkTheme)} />

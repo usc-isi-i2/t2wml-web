@@ -20,7 +20,7 @@ const ProjectMenu = ({
   project,
   updateProject,
   guessAnnotations,
-  uploadAnnotations,
+  showUploadAnnotations,
   uploadFidilFile,
 }) => {
 
@@ -74,7 +74,7 @@ const ProjectMenu = ({
         onClose={hideProjectMenu}>
         <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
         <MenuItem onClick={guessAnnotations}>Suggest Annotations</MenuItem>
-        <MenuItem onClick={uploadAnnotations}>Upload Annotations</MenuItem>
+        <MenuItem onClick={showUploadAnnotations}>Upload Annotations</MenuItem>
         <MenuItem onClick={uploadFidilFile}>Upload FIDIL File</MenuItem>
       </Menu>
     )
