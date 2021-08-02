@@ -95,7 +95,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
   }
 
   const uploadFidil = () => {
-    uploadFidilFile()
+    uploadFidilFile(projectData.filepath, projectData.sheetName)
   }
 
   useEffect(() => {

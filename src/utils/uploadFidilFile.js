@@ -1,4 +1,4 @@
-const uploadFidilFile = (file, sheet, unit) => {
+const uploadFidilFile = (file, sheet) => {
   let url = '/api/causx/project/upload_fidil_json/'
   url += `?data_file=${file}`
   url += `&sheet_name=${sheet}`
