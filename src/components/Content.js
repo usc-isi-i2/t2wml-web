@@ -89,6 +89,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
     setShowConfirmation(true)
   }
 
+  const uploadAnnotations = () => {
+  }
+
   const uploadFidil = () => {
     uploadFidilFile()
   }
@@ -114,6 +117,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
         project={projectData.project}
         darkTheme={darkTheme}
         guessAnnotations={guessAnnotations}
+        uploadAnnotations={uploadAnnotations}
         uploadFidilFile={uploadFidil}
         updateProject={handleProjectUpdate}
         switchTheme={() => setDarkTheme(!darkTheme)} />
