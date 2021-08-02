@@ -133,7 +133,7 @@ const App = () => {
       MuiDialog: {
         root: {
           pointerEvents: 'none',
-          '& .MuiDialog-container .MuiPaper-root': {
+          '& .MuiDialog-container .MuiDialog-paper': {
             border: darkTheme ? '1px solid #fefefe' : '1px solid #777',
             pointerEvents: 'all',
             maxHeight: '750px',

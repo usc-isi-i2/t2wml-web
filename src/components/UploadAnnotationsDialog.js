@@ -13,7 +13,10 @@ import FileDrop from './FileDrop'
 
 const useStyles = makeStyles(theme => ({
   uploadAnnotationsMenu: {
-    minWidth: '900px',
+    '&.MuiPaper-root.MuiDialog-paper': {
+      width: '900px',
+      maxWidth: '900px',
+    },
   },
 }))
 
