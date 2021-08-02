@@ -6,21 +6,31 @@ import FileHeader from './FileHeader'
 import uploadFile from '../utils/uploadFile'
 
 
-const FileUpload = ({file, onUploadSuccess, onUploadError, onDelete}) => {
+const FileUpload = ({
+  file,
+  onUploadSuccess,
+  onUploadError,
+  onDelete,
+  uploadAnnotations,
+}) => {
 
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     let isMounted = true
-    uploadFile(file, setProgress).then(data => {
-      if ( isMounted ) {
-        onUploadSuccess(data)
-      }
-    }).catch(error => {
-      if ( isMounted ) {
-        onUploadError(error)
-      }
-    })
+    if ( uploadAnnotations ) {
+      alert('thank you')
+    } else {
+      uploadFile(file, setProgress).then(data => {
+        if ( isMounted ) {
+          onUploadSuccess(data)
+        }
+      }).catch(error => {
+        if ( isMounted ) {
+          onUploadError(error)
+        }
+      })
+    }
     return () => {
       isMounted = false
     }

@@ -42,8 +42,9 @@ const UploadAnnotationsDialog = ({
     return (
       <React.Fragment>
         <FileDrop
+          onSuccess={onUpload}
           setMessage={setMessage}
-          onSuccess={onUpload} />
+          uploadAnnotations={true} />
       </React.Fragment>
     )
   }
