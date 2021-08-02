@@ -50,7 +50,7 @@ const FileDrop = ({ onSuccess, setMessage }) => {
     maxFiles: 1,
   })
 
-  function onUploadSuccess(data) {
+  const onUploadSuccess = data => {
     onSuccess(data)
     setMessage({
       type: 'success',
@@ -58,7 +58,7 @@ const FileDrop = ({ onSuccess, setMessage }) => {
     })
   }
 
-  function onUploadError(error) {
+  const onUploadError = error => {
     setMessage({
       type: 'error',
       title: `${error.errorCode} - ${error.errorTitle}`,
@@ -66,7 +66,7 @@ const FileDrop = ({ onSuccess, setMessage }) => {
     })
   }
 
-  function onDelete(file) {
+  const onDelete = file => {
     setFiles(prevFiles => prevFiles.filter(f => f !== file))
   }
 
