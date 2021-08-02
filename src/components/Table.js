@@ -656,7 +656,13 @@ const Table = ({
     if ( !suggestedAnnotations ) { return }
 
     // show the annotation blocks for the suggested/guessed annotations
-    setAnnotationBlocks(suggestedAnnotations)
+    setAnnotationBlocks(annotationBlocks => {
+
+      // remove any previous annotations
+      removeAnnotationBlocks(annotationBlocks)
+
+      return suggestedAnnotations
+    })
 
     // submit main subject for automatic wikifiaction
     suggestedAnnotations.forEach(annotation => {
