@@ -92,7 +92,13 @@ const Content = ({darkTheme, setDarkTheme}) => {
   }
 
   const handleAnnotationsUpload = data => {
-    console.log(data.annotations)
+    setProjectData(projectData => {
+      return {
+        ...projectData,
+        annotations: data.annotations,
+      }
+    })
+    setShowUploadAnnotations(false)
   }
 
   const uploadFidil = () => {
