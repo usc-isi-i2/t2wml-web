@@ -4,6 +4,7 @@ import { AutoSizer, Column, Table as VirtualizedTable } from 'react-virtualized'
 
 import { Paper } from '@material-ui/core'
 
+import ArrowDown from './ArrowDown'
 import TableCell from './TableCell'
 import OverlayMenu from './OverlayMenu'
 import useStyles from '../styles/table'
@@ -995,10 +996,17 @@ const Table = ({
     )
   }
 
+  const renderArrowDown = () => {
+    return (
+      <ArrowDown />
+    )
+  }
+
   return (
     <React.Fragment>
       {renderTable()}
       {renderOverlayMenu()}
+      {renderArrowDown()}
     </React.Fragment>
   )
 }
