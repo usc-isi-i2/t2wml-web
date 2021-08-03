@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     left: theme.spacing(7),
     bottom: theme.spacing(3),
+    cursor: 'pointer',
     zIndex: 100,
     '& svg': {
       marginRight: theme.spacing(1),
