@@ -22,7 +22,7 @@ const Header = ({
   switchTheme,
   toggleSettings,
   guessAnnotations,
-  showUploadAnnotations,
+  showApplyAnnotations,
   uploadFidilFile,
 }) => {
 
@@ -43,7 +43,7 @@ const Header = ({
         project={project}
         updateProject={updateProject}
         guessAnnotations={guessAnnotations}
-        showUploadAnnotations={showUploadAnnotations}
+        showApplyAnnotations={showApplyAnnotations}
         uploadFidilFile={uploadFidilFile} />
     )
   }
