@@ -996,9 +996,14 @@ const Table = ({
     )
   }
 
+  const scrollToBottom = () => {
+    const numRows = rows.current.length
+    tableElement.current.scrollToRow(numRows)
+  }
+
   const renderArrowDown = () => {
     return (
-      <ArrowDown />
+      <ArrowDown handleOnClick={scrollToBottom} />
     )
   }
 

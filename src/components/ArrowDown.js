@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const ArrowDown = () => {
+const ArrowDown = ({ handleOnClick }) => {
 
   const classes = useStyles()
 
@@ -28,7 +28,9 @@ const ArrowDown = () => {
       direction="up"
       mountOnEnter
       unmountOnExit>
-      <Fab variant="extended" className={classes.button}>
+      <Fab variant="extended"
+        onClick={handleOnClick}
+        className={classes.button}>
         <ArrowDownwardIcon fontSize="default" />
         Scroll To Bottom
       </Fab>
