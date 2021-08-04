@@ -4,6 +4,7 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import Divider from '@material-ui/core/Divider'
 import Collapse from '@material-ui/core/Collapse'
+import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
@@ -16,6 +17,21 @@ import ProjectSettings from './ProjectSettings'
 const useStyles = makeStyles(theme => ({
   icon: {
     marginLeft: -1 * theme.spacing(3),
+  },
+  menu: {
+    '& ul.MuiMenu-list': {
+      width: '250px',
+      maxHeight: '325px',
+      '& > li p.MuiTypography-root': {
+        flex: '1 1 auto',
+      },
+      '& > li svg.MuiSvgIcon-root': {
+        flex: '0 shrink',
+      },
+      '& .MuiCollapse-container li': {
+        paddingLeft: theme.spacing(5),
+      },
+    },
   },
 }))
 
@@ -94,6 +110,7 @@ const ProjectMenu = ({
           vertical: -50,
           horizontal: 0,
         }}
+        className={classes.menu}
         anchorEl={anchorElement}
         onClose={hideProjectMenu}>
         <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
@@ -102,14 +119,14 @@ const ProjectMenu = ({
         <MenuItem onClick={uploadFidil}>Upload FIDIL File</MenuItem>
         <Divider />
         <MenuItem onClick={toggleShowDownloadOptions}>
-          Download Options
+          <Typography>Download Options</Typography>
           {showDownloadOptions ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </MenuItem>
         <Collapse in={showDownloadOptions} timeout="auto" unmountOnExit>
-          <MenuItem onClick={uploadFidil}>KGTK (.tsv)</MenuItem>
-          <MenuItem onClick={uploadFidil}>Zipped (.zip)</MenuItem>
+          <MenuItem onClick={uploadFidil}>Saved Project (.t2wmlz)</MenuItem>
+          <MenuItem onClick={uploadFidil}>Zipped results (.zip)</MenuItem>
           <MenuItem onClick={uploadFidil}>FIDIL (.fidil)</MenuItem>
-          <MenuItem onClick={uploadFidil}>Project (.t2wmlz)</MenuItem>
+          <MenuItem onClick={uploadFidil}>KGTK (.tsv)</MenuItem>
         </Collapse>
       </Menu>
     )
