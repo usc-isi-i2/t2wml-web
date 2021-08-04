@@ -167,12 +167,6 @@ const Content = ({darkTheme, setDarkTheme}) => {
           setMessage={setMessage}
           onSuccess={handleFileUpload} />
       )}
-      {!!outputData && outputData.length >= 1 && (
-        <Download
-          project={projectData.project}
-          filename={projectData.filepath}
-          sheetname={projectData.sheetName} />
-      )}
       <Message message={message} />
       {!!showApplyAnnotations && (
         <UploadAnnotationsDialog
