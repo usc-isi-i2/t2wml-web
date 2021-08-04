@@ -12,6 +12,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { makeStyles } from '@material-ui/core/styles'
 
 import ProjectSettings from './ProjectSettings'
+import { DOWNLOAD_OPTIONS } from '../content/download-options'
+import downloadFile from '../utils/downloadFile'
 
 
 const useStyles = makeStyles(theme => ({
@@ -88,6 +90,10 @@ const ProjectMenu = ({
     setShowDownloadOptions(!showDownloadOptions)
   }
 
+  const handleOnDownload = option => {
+    downloadFile(project, filename, sheetname, option.value)
+  }
+
   const renderButton = () => {
     return (
       <IconButton
@@ -123,10 +129,11 @@ const ProjectMenu = ({
           {showDownloadOptions ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </MenuItem>
         <Collapse in={showDownloadOptions} timeout="auto" unmountOnExit>
-          <MenuItem onClick={uploadFidil}>Saved Project (.t2wmlz)</MenuItem>
-          <MenuItem onClick={uploadFidil}>Zipped results (.zip)</MenuItem>
-          <MenuItem onClick={uploadFidil}>FIDIL (.fidil)</MenuItem>
-          <MenuItem onClick={uploadFidil}>KGTK (.tsv)</MenuItem>
+          {DOWNLOAD_OPTIONS.map(option => (
+            <MenuItem onClick={() => handleOnDownload(option)}>
+              {option.label}
+            </MenuItem>
+          ))}
         </Collapse>
       </Menu>
     )
