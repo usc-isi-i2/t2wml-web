@@ -44,6 +44,8 @@ const Header = ({
     return (
       <ProjectMenu
         project={project}
+        filename={filename}
+        sheetname={sheetname}
         updateProject={updateProject}
         guessAnnotations={guessAnnotations}
         showApplyAnnotations={showApplyAnnotations}
