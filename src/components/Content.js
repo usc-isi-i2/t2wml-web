@@ -131,8 +131,10 @@ const Content = ({darkTheme, setDarkTheme}) => {
   return (
     <Grid className={classes.content}>
       <Header
-        project={projectData.project}
         darkTheme={darkTheme}
+        project={projectData.project}
+        filename={projectData.filepath}
+        sheetname={projectData.sheetName}
         guessAnnotations={guessAnnotations}
         showApplyAnnotations={showApplyAnnotationsDialog}
         uploadFidilFile={uploadFidil}

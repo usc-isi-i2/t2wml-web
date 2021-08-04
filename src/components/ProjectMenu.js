@@ -40,6 +40,8 @@ const useStyles = makeStyles(theme => ({
 
 const ProjectMenu = ({
   project,
+  filename,
+  sheetname,
   updateProject,
   guessAnnotations,
   showApplyAnnotations,

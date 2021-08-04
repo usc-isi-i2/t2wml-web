@@ -16,9 +16,11 @@ import useStyles from '../styles/header'
 
 
 const Header = ({
-  project,
-  updateProject,
   darkTheme,
+  project,
+  filename,
+  sheetname,
+  updateProject,
   switchTheme,
   toggleSettings,
   guessAnnotations,
