@@ -40,6 +40,21 @@ const ProjectMenu = ({
     hideProjectMenu()
   }
 
+  const suggestAnnotations = () => {
+    guessAnnotations()
+    hideProjectMenu()
+  }
+
+  const applyAnnotations = () => {
+    showApplyAnnotations()
+    hideProjectMenu()
+  }
+
+  const uploadFidil = () => {
+    uploadFidilFile()
+    hideProjectMenu()
+  }
+
   const openProjectMenu = event => {
     setAnchorElement(event.target)
   }
@@ -73,9 +88,9 @@ const ProjectMenu = ({
         anchorEl={anchorElement}
         onClose={hideProjectMenu}>
         <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
-        <MenuItem onClick={guessAnnotations}>Suggest Annotations</MenuItem>
-        <MenuItem onClick={showApplyAnnotations}>Apply Annotations</MenuItem>
-        <MenuItem onClick={uploadFidilFile}>Upload FIDIL File</MenuItem>
+        <MenuItem onClick={suggestAnnotations}>Suggest Annotations</MenuItem>
+        <MenuItem onClick={applyAnnotations}>Apply Annotations</MenuItem>
+        <MenuItem onClick={uploadFidil}>Upload FIDIL File</MenuItem>
       </Menu>
     )
   }
