@@ -116,6 +116,14 @@ const Content = ({darkTheme, setDarkTheme}) => {
     setShowApplyAnnotations(false)
   }
 
+  const showApplyAnnotationsDialog = () => {
+    setShowApplyAnnotations(true)
+  }
+
+  const closeApplyAnnotationsDialog = () => {
+    setShowApplyAnnotations(false)
+  }
+
   const uploadFidil = () => {
     uploadFidilFile(projectData.filepath, projectData.sheetName)
   }
@@ -126,7 +134,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
         project={projectData.project}
         darkTheme={darkTheme}
         guessAnnotations={guessAnnotations}
-        showApplyAnnotations={() => setShowApplyAnnotations(true)}
+        showApplyAnnotations={showApplyAnnotationsDialog}
         uploadFidilFile={uploadFidil}
         updateProject={handleProjectUpdate}
         switchTheme={() => setDarkTheme(!darkTheme)} />
@@ -163,13 +171,14 @@ const Content = ({darkTheme, setDarkTheme}) => {
           sheetname={projectData.sheetName} />
       )}
       <Message message={message} />
-      <UploadAnnotationsDialog
-        open={showApplyAnnotations}
-        setMessage={setMessage}
-        onUpload={handleAnnotationsUpload}
-        filename={projectData.filepath}
-        sheetname={projectData.sheetName} />
-        close={() => setShowApplyAnnotations(false)} />
+      {!!showApplyAnnotations && (
+        <UploadAnnotationsDialog
+          setMessage={setMessage}
+          onUpload={handleAnnotationsUpload}
+          filename={projectData.filepath}
+          sheetname={projectData.sheetName}
+          onClose={closeApplyAnnotationsDialog} />
+      )}
       <ConfirmationDialog
         open={showConfirmation}
         text={confirmationText}

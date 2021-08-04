@@ -22,8 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const UploadAnnotationsDialog = ({
-  open,
-  close,
+  onClose,
   onUpload,
   filename,
   sheetname,
@@ -36,7 +35,7 @@ const UploadAnnotationsDialog = ({
     return (
       <React.Fragment>
         Upload Annotations File
-        <IconButton onClick={close}>
+        <IconButton onClick={onClose}>
           <CloseIcon />
         </IconButton>
       </React.Fragment>
@@ -60,8 +59,8 @@ const UploadAnnotationsDialog = ({
 
   return (
     <Dialog
-      open={open}
-      onClose={close}
+      open={true}
+      onClose={onClose}
       PaperComponent={DraggablePaper}
       classes={{paper: classes.uploadAnnotationsMenu}}
       PaperProps={{handle: '.draggable-upload-annotations-handle'}}>
