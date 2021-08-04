@@ -45,6 +45,7 @@ const ProjectMenu = ({
   updateProject,
   guessAnnotations,
   showApplyAnnotations,
+  showDownloadOptions,
   uploadFidilFile,
 }) => {
 
@@ -53,7 +54,7 @@ const ProjectMenu = ({
   const [anchorElement, setAnchorElement] = useState()
 
   const [showProjectSettings, setShowProjectSettings] = useState(false)
-  const [showDownloadOptions, setShowDownloadOptions] = useState(false)
+  const [expandDownloadOptions, setExpandDownloadOptions] = useState(false)
 
   const openProjectSettings = () => {
     setShowProjectSettings(true)
@@ -88,8 +89,8 @@ const ProjectMenu = ({
     setAnchorElement()
   }
 
-  const toggleShowDownloadOptions = () => {
-    setShowDownloadOptions(!showDownloadOptions)
+  const toggleExpandDownloadOptions = () => {
+    setExpandDownloadOptions(!expandDownloadOptions)
   }
 
   const handleOnDownload = option => {
@@ -124,19 +125,23 @@ const ProjectMenu = ({
         <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
         <MenuItem onClick={suggestAnnotations}>Suggest Annotations</MenuItem>
         <MenuItem onClick={applyAnnotations}>Apply Annotations</MenuItem>
-        <MenuItem onClick={uploadFidil}>Upload FIDIL File</MenuItem>
-        <Divider />
-        <MenuItem onClick={toggleShowDownloadOptions}>
-          <Typography>Download Options</Typography>
-          {showDownloadOptions ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </MenuItem>
-        <Collapse in={showDownloadOptions} timeout="auto" unmountOnExit>
-          {DOWNLOAD_OPTIONS.map(option => (
-            <MenuItem onClick={() => handleOnDownload(option)}>
-              {option.label}
+        {showDownloadOptions && (
+          <React.Fragment>
+            <MenuItem onClick={uploadFidil}>Upload FIDIL File</MenuItem>
+            <Divider />
+            <MenuItem onClick={toggleExpandDownloadOptions}>
+              <Typography>Download Options</Typography>
+              {expandDownloadOptions ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </MenuItem>
-          ))}
-        </Collapse>
+            <Collapse in={showDownloadOptions} timeout="auto" unmountOnExit>
+              {DOWNLOAD_OPTIONS.map(option => (
+                <MenuItem onClick={() => handleOnDownload(option)}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Collapse>
+          </React.Fragment>
+        )}
       </Menu>
     )
   }

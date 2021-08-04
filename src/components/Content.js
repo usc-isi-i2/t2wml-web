@@ -137,6 +137,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
         sheetname={projectData.sheetName}
         guessAnnotations={guessAnnotations}
         showApplyAnnotations={showApplyAnnotationsDialog}
+        showDownloadOptions={!!outputData && outputData.length >= 1}
         uploadFidilFile={uploadFidil}
         updateProject={handleProjectUpdate}
         switchTheme={() => setDarkTheme(!darkTheme)} />

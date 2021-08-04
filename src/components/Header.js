@@ -25,6 +25,7 @@ const Header = ({
   toggleSettings,
   guessAnnotations,
   showApplyAnnotations,
+  showDownloadOptions,
   uploadFidilFile,
 }) => {
 
@@ -46,6 +47,7 @@ const Header = ({
         updateProject={updateProject}
         guessAnnotations={guessAnnotations}
         showApplyAnnotations={showApplyAnnotations}
+        showDownloadOptions={showDownloadOptions}
         uploadFidilFile={uploadFidilFile} />
     )
   }
