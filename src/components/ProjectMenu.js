@@ -2,8 +2,12 @@ import React, { useState } from 'react'
 
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import Divider from '@material-ui/core/Divider'
+import Collapse from '@material-ui/core/Collapse'
 import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import ExpandLessIcon from '@material-ui/icons/ExpandLess'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { makeStyles } from '@material-ui/core/styles'
 
 import ProjectSettings from './ProjectSettings'
@@ -29,6 +33,7 @@ const ProjectMenu = ({
   const [anchorElement, setAnchorElement] = useState()
 
   const [showProjectSettings, setShowProjectSettings] = useState(false)
+  const [showDownloadOptions, setShowDownloadOptions] = useState(false)
 
   const openProjectSettings = () => {
     setShowProjectSettings(true)
@@ -63,6 +68,10 @@ const ProjectMenu = ({
     setAnchorElement()
   }
 
+  const toggleShowDownloadOptions = () => {
+    setShowDownloadOptions(!showDownloadOptions)
+  }
+
   const renderButton = () => {
     return (
       <IconButton
@@ -91,6 +100,17 @@ const ProjectMenu = ({
         <MenuItem onClick={suggestAnnotations}>Suggest Annotations</MenuItem>
         <MenuItem onClick={applyAnnotations}>Apply Annotations</MenuItem>
         <MenuItem onClick={uploadFidil}>Upload FIDIL File</MenuItem>
+        <Divider />
+        <MenuItem onClick={toggleShowDownloadOptions}>
+          Download Options
+          {showDownloadOptions ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </MenuItem>
+        <Collapse in={showDownloadOptions} timeout="auto" unmountOnExit>
+          <MenuItem onClick={uploadFidil}>KGTK (.tsv)</MenuItem>
+          <MenuItem onClick={uploadFidil}>Zipped (.zip)</MenuItem>
+          <MenuItem onClick={uploadFidil}>FIDIL (.fidil)</MenuItem>
+          <MenuItem onClick={uploadFidil}>Project (.t2wmlz)</MenuItem>
+        </Collapse>
       </Menu>
     )
   }
