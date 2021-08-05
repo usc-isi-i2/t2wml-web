@@ -75,12 +75,15 @@ const Content = ({darkTheme, setDarkTheme}) => {
       return projectData
     })
 
-    // update the output preview
-    updateOutputPreview()
   }
 
   const handleFileUpload = data => {
     setProjectData(data)
+
+    // update the output preview when users upload `.t2wmlz` project files
+    if ( !!data.annotations ) {
+      updateOutputPreview()
+    }
   }
 
   const guessAnnotations = () => {
