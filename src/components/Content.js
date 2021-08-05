@@ -113,6 +113,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
       }
     })
     setShowApplyAnnotations(false)
+
+    // update the output preview
+    updateOutputPreview()
   }
 
   const showApplyAnnotationsDialog = () => {
