@@ -89,8 +89,17 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const guessAnnotations = () => {
     if ( !projectData.filepath ) { return }
 
-    setConfirmationText('Requesting suggested annotations would overwrite all existing annotations, are you sure you want to continue?')
-    setShowConfirmation(true)
+    if ( !!outputData && outputData.length >= 1 ) {
+      // if there are existing annotations - ask user to confirm this action
+      setConfirmationText('Requesting suggested annotations would overwrite all existing annotations, are you sure you want to continue?')
+      setShowConfirmation(true)
+    } else {
+      // fetch suggested annotations and remove any previous annotations
+      fetchAnnotations(projectData.filepath, projectData.sheetName)
+      .then(suggestedAnnotations => {
+        setAnnotations(suggestedAnnotations)
+      })
+    }
   }
 
   useEffect(() => {
