@@ -1,17 +1,4 @@
-const downloadFile = (project, file, sheet, fileType) => {
-
-  let url
-  if ( fileType === 't2wmlz' ) {
-    url = '/api/causx/download_project'
-  } else if ( fileType === 'zip' ) {
-    url = '/api/causx/download_zip_results'
-  } else if ( fileType === 'fidil' ) {
-    url = '/api/causx/project/fidil_json'
-  } else {
-    url = '/api/causx/project/download/'
-    url += `${fileType}/${file}_output.${fileType}`
-  }
-
+const downloadFile = (project, file, sheet, fileType, url) => {
   url += `?data_file=${file}`
   url += `&sheet_name=${sheet}`
   url += `&mapping_file=web.annotation`

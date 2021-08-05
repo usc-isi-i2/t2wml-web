@@ -94,7 +94,7 @@ const ProjectMenu = ({
   }
 
   const handleOnDownload = option => {
-    downloadFile(project, filename, sheetname, option.value)
+    downloadFile(project, filename, sheetname, option.value, option.url)
   }
 
   const renderButton = () => {
