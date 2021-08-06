@@ -12,7 +12,7 @@ const TableCell = ({ cellData, rowIndex, columnIndex }) => {
       'active': data.active,
       'highlight': data.highlight,
       'maxWidth': data.maxWidth,
-      'qnode': !!data.qnode,
+      'qnode': (data.activeTop || data.activeRight || data.activeBottom || data.activeLeft) && !!data.qnode,
     })} data-row-index={rowIndex+1} data-col-index={columnIndex}>
       {data.value}
       {data.activeTop && <div className="cell-border-top" />}
