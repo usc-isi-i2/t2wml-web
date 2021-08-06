@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react'
 
+import Grid from '@material-ui/core/Grid'
 import Alert from '@material-ui/lab/Alert'
-import { Grid } from '@material-ui/core'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { useDropzone } from 'react-dropzone'
 
 import FileUpload from './FileUpload'
@@ -24,6 +25,8 @@ const FileDrop = ({
 
   const [errors, setErrors] = useState([])
 
+  const [loading, setLoading] = useState(false)
+
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     setFiles(prevFiles => [...prevFiles, ...acceptedFiles])
 
@@ -42,6 +45,8 @@ const FileDrop = ({
       })
       setErrors(prevErrors => [...prevErrors, ...errors])
     }
+
+    setLoading(true)
   }, [])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({
@@ -58,6 +63,7 @@ const FileDrop = ({
 
   const onUploadSuccess = data => {
     onSuccess(data)
+    setLoading(false)
     setMessage({
       type: 'success',
       text: 'Good news! File uploaded',
@@ -65,6 +71,7 @@ const FileDrop = ({
   }
 
   const onUploadError = error => {
+    setLoading(false)
     setMessage({
       type: 'error',
       title: `${error.errorCode} - ${error.errorTitle}`,
@@ -88,7 +95,11 @@ const FileDrop = ({
       <Grid item>
         <div {...getRootProps({ className: `${classes.dropzone} ${isDragActive ? 'active' : ''}` })}>
           <input {...getInputProps()} autoFocus={true} tabIndex="0" />
-          <UploadIcon width='256' height='256' />
+          {loading ? (
+            <CircularProgress />
+          ) : (
+            <UploadIcon width='256' height='256' />
+          )}
         </div>
       </Grid>
       {files.map((file, index) => (
