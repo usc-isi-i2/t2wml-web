@@ -128,49 +128,24 @@ const Table = ({
   }, [projectData, tableDataInitialized])
 
   const updateTableDataLayers = layers => {
-    setAnnotationBlocks(annotationBlocks => {
-      const allSelections = annotationBlocks.map(block => block.selection)
-      setTableData(prevTableData => {
-        const tableData = {...prevTableData}
-
-        layers.qnode.entries.forEach(qnode => {
-          qnode.indices.forEach(([rowIndex, colIndex]) => {
-
-            const selection = {
-              x1: colIndex + 1,
-              x2: colIndex + 1,
-              y1: rowIndex + 1,
-              y2: rowIndex + 1,
-            }
-
-            const collisionDetected = utils.checkOverlaps(
-              selection,
-              allSelections,
-            )
-
-            if ( collisionDetected ) {
-              tableData[rowIndex][colIndex] = {
-                ...tableData[rowIndex][colIndex],
-                qnode: {
-                  id: qnode.id,
-                  label: qnode.label,
-                  value: qnode.value,
-                  description: qnode.description,
-                  data_type: qnode.data_type,
-                  url: qnode.url,
-                },
-              }
-            } else {
-              tableData[rowIndex][colIndex] = {
-                ...tableData[rowIndex][colIndex],
-                qnode: null,
-              }
-            }
-          })
+    setTableData(prevTableData => {
+      const tableData = {...prevTableData}
+      layers.qnode.entries.forEach(qnode => {
+        qnode.indices.forEach(([rowIndex, colIndex]) => {
+          tableData[rowIndex][colIndex] = {
+            ...tableData[rowIndex][colIndex],
+            qnode: {
+              id: qnode.id,
+              label: qnode.label,
+              value: qnode.value,
+              description: qnode.description,
+              data_type: qnode.data_type,
+              url: qnode.url,
+            },
+          }
         })
-        return tableData
       })
-      return annotationBlocks
+      return tableData
     })
   }
 
