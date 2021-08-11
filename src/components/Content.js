@@ -155,6 +155,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
         filename={projectData.filepath}
         sheetname={projectData.sheetName}
         guessAnnotations={guessAnnotations}
+        loadingAnnotations={loadingAnnotations}
         showApplyAnnotations={showApplyAnnotationsDialog}
         showDownloadOptions={!!outputData && outputData.length >= 1}
         uploadFidilFile={uploadFidil}
