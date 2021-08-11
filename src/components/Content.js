@@ -30,6 +30,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const [confirmation, setConfirmation] = useState(false)
   const [confirmationText, setConfirmationText] = useState('')
   const [showConfirmation, setShowConfirmation] = useState(false)
+  const [loadingAnnotations, setLoadingAnnotations] = useState(false)
   const [showApplyAnnotations, setShowApplyAnnotations] = useState(false)
   const [colWidth, setColWidth] = useState(window.innerWidth * 0.65)
 
@@ -95,9 +96,11 @@ const Content = ({darkTheme, setDarkTheme}) => {
       setShowConfirmation(true)
     } else {
       // fetch suggested annotations and remove any previous annotations
+      setLoadingAnnotations(true)
       fetchAnnotations(projectData.filepath, projectData.sheetName)
       .then(suggestedAnnotations => {
         setAnnotations(suggestedAnnotations)
+        setLoadingAnnotations(false)
       })
     }
   }
@@ -110,9 +113,11 @@ const Content = ({darkTheme, setDarkTheme}) => {
       setShowConfirmation(false)
 
       // fetch suggested annotations and remove any previous annotations
+      setLoadingAnnotations(true)
       fetchAnnotations(projectData.filepath, projectData.sheetName)
       .then(suggestedAnnotations => {
         setAnnotations(suggestedAnnotations)
+        setLoadingAnnotations(false)
       })
     }
   }, [confirmation, projectData.filepath, projectData.sheetName])
