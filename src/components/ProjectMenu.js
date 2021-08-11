@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { makeStyles } from '@material-ui/core/styles'
 
 import ProjectSettings from './ProjectSettings'
@@ -44,6 +45,7 @@ const ProjectMenu = ({
   sheetname,
   updateProject,
   guessAnnotations,
+  loadingAnnotations,
   showApplyAnnotations,
   showDownloadOptions,
   uploadFidilFile,
@@ -123,7 +125,10 @@ const ProjectMenu = ({
         anchorEl={anchorElement}
         onClose={hideProjectMenu}>
         <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
-        <MenuItem onClick={suggestAnnotations}>Suggest Annotations</MenuItem>
+        <MenuItem onClick={suggestAnnotations}>
+          Suggest Annotations
+          {loadingAnnotations && <CircularProgress color="inherit" size={16} />}
+        </MenuItem>
         <MenuItem onClick={applyAnnotations}>Apply Annotations</MenuItem>
         {showDownloadOptions && (
           <React.Fragment>
