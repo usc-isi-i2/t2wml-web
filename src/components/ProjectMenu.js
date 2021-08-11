@@ -111,7 +111,7 @@ const ProjectMenu = ({
         </MenuItem>
         <MenuItem onClick={applyAnnotations}>Apply Annotations</MenuItem>
         {showDownloadOptions && (
-          <React.Fragment>
+          <div>
             <MenuItem onClick={uploadFidil}>Upload FIDIL File</MenuItem>
             <Divider />
             <MenuItem onClick={toggleExpandDownloadOptions}>
@@ -125,7 +125,7 @@ const ProjectMenu = ({
                 </MenuItem>
               ))}
             </Collapse>
-          </React.Fragment>
+          </div>
         )}
       </Menu>
     )
