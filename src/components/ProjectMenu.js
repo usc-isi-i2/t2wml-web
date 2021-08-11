@@ -104,8 +104,10 @@ const ProjectMenu = ({
         onClose={hideProjectMenu}>
         <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
         <MenuItem onClick={suggestAnnotations}>
-          Suggest Annotations
-          {loadingAnnotations && <CircularProgress color="inherit" size={16} />}
+          <Typography>Suggest Annotations</Typography>
+          {loadingAnnotations ? (
+            <CircularProgress color="inherit" size={16} />
+          ) : null}
         </MenuItem>
         <MenuItem onClick={applyAnnotations}>Apply Annotations</MenuItem>
         {showDownloadOptions && (
