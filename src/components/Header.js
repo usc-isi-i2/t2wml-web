@@ -12,6 +12,7 @@ import ViewQuiltIcon from '@material-ui/icons/ViewQuilt'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 
+import classNames from '../utils/classNames'
 import ProjectMenu from './ProjectMenu'
 import useStyles from '../styles/header'
 
@@ -70,7 +71,10 @@ const Header = ({
         <Button
           color="secondary"
           startIcon={<ViewQuiltIcon />}
-          endIcon={loadingAnnotations && <CircularProgress color="inherit" size={16} />}
+          endIcon={<CircularProgress color="inherit" size={16} />}
+          className={classNames(classes.guessAnnotations, {
+            active: loadingAnnotations,
+          })}
           onClick={guessAnnotations}>
           Suggest Annotations
         </Button>
