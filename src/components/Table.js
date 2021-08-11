@@ -711,7 +711,7 @@ const Table = ({
           // hide the overlay meny if users are resizing with overlaps
           if ( !!selectedAnnotationBlock && collisionDetected ) {
             // resizing one of the annotation blocks overlaps another block
-            if ( selection.current !== selectedAnnotationBlock.selection ) {
+            if ( !utils.areSelectionsEqual(selection.current, selectedAnnotationBlock.selection) ) {
               setShowOverlayMenu(false)
               setSelectedAnnotationBlock(undefined)
               setTargetSelection(undefined)
