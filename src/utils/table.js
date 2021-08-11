@@ -206,3 +206,13 @@ export const isWikifyable = annotation => {
 
   return false
 }
+
+
+export const areSelectionsEqual = (selectionA, selectionB) => {
+  return (
+    selectionA.x1 === selectionB.x1 &&
+    selectionA.x2 === selectionB.x2 &&
+    selectionA.y1 === selectionB.y1 &&
+    selectionA.y2 === selectionB.y2
+  )
+}
