@@ -6,7 +6,7 @@ import Draggable from 'react-draggable'
 
 const DraggablePaper = props => {
   return (
-    <Draggable handle={props.handle}>
+    <Draggable bounds="body" handle={props.handle}>
       <Paper {...props} />
     </Draggable>
   )
