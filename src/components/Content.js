@@ -51,6 +51,30 @@ const Content = ({darkTheme, setDarkTheme}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const handleOnMouseMove = useCallback(event => {
+    setColWidth(event.pageX + 2)
+  }, [])
+
+  const handleOnMouseDown = event => {
+    event.preventDefault()
+    document.addEventListener('mousemove', handleOnMouseMove)
+  }
+
+  const handleOnMouseUp = () => {
+    console.log('mouse up called: unbinding mouse move event listener')
+    document.removeEventListener('mousemove', handleOnMouseMove)
+  }
+
+  useEffect(() => {
+    // component did mount
+    document.addEventListener('mouseup', handleOnMouseUp)
+
+    // component will unmount
+    return () => {
+      document.removeEventListener('mouseup', handleOnMouseUp)
+    }
+  }, [handleOnMouseUp])
+
   const updateOutputPreview = useCallback(() => {
     setTimeout(() => {
       setProjectData(projectData => {
@@ -171,10 +195,13 @@ const Content = ({darkTheme, setDarkTheme}) => {
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {projectData && projectData.table ? (
         <div className={classes.wrapper}>
-          <div className={classes.inputWrapper}>
-            <div className={classes.divider}></div>
+          <div className={classes.inputWrapper}
+              style={{width: colWidth}}>
+            <div className={classes.divider}
+              onMouseDown={handleOnMouseDown}></div>
           </div>
-          <div className={classes.outputWrapper}>
+          <div className={classes.outputWrapper}
+            style={{left: colWidth}}>
             {!!outputData ? (
               <Output
                 filename={projectData.filepath}
