@@ -163,15 +163,9 @@ const Content = ({darkTheme, setDarkTheme}) => {
         switchTheme={() => setDarkTheme(!darkTheme)} />
       {projectData && projectData.table ? (
         <div className={classes.wrapper}>
-          <div className={classes.inputWrapper}
-            style={{ width: `${colWidth}px` }}>
-            <Table
-              setMessage={setMessage}
-              projectData={projectData}
-              suggestedAnnotations={annotations}
-              updateOutputPreview={updateOutputPreview} />
+          <div className={classes.inputWrapper}>
+            <div className={classes.divider}></div>
           </div>
-          <Divider setColWidth={setColWidth} />
           <div className={classes.outputWrapper}>
             {!!outputData ? (
               <Output
