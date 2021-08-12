@@ -111,24 +111,32 @@ const OverlayMenu = ({
 
   const renderButtons = () => {}
 
+  const renderOverlayMenu = () => {
+    return (
+      <Dialog
+        open={true}
+        onClose={hideOverlayMenu}
+        classes={{paper: classes.overlayMenu}}
+        aria-labelledby='dialog-modal-title'
+        PaperComponent={DraggablePaper}
+        PaperProps={{handle: '.draggable-overlay-handle'}}>
+        <DialogTitle classes={{ root: 'draggable-overlay-handle' }}>
+          {renderTitle()}
+        </DialogTitle>
+        <DialogContent>
+          {renderContent()}
+        </DialogContent>
+        <DialogActions>
+          {renderButtons()}
+        </DialogActions>
+      </Dialog>
+    )
+  }
+
   return (
-    <Dialog
-      open={true}
-      onClose={hideOverlayMenu}
-      classes={{paper: classes.overlayMenu}}
-      aria-labelledby='dialog-modal-title'
-      PaperComponent={DraggablePaper}
-      PaperProps={{handle: '.draggable-overlay-handle'}}>
-      <DialogTitle classes={{ root: 'draggable-overlay-handle' }}>
-        {renderTitle()}
-      </DialogTitle>
-      <DialogContent>
-        {renderContent()}
-      </DialogContent>
-      <DialogActions>
-        {renderButtons()}
-      </DialogActions>
-    </Dialog>
+    <React.Fragment>
+      {renderOverlayMenu()}
+    </React.Fragment>
   )
 }
 
