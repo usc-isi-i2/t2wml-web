@@ -178,7 +178,7 @@ const Table = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showOverlayMenu])
 
-  const submitNewAnnotation = () => {
+  const submitNewAnnotation = formState => {
 
     if ( !utils.selectionHasData(projectData.table.cells, selection) ) {
       setMessage({
@@ -194,6 +194,7 @@ const Table = ({
     const newAnnotation = {
       selection: {...selection.current},
       ...suggestedAnnotation,
+      ...formState,
     }
     if ( !!suggestedAnnotation.children.property ) {
       newAnnotation.property = suggestedAnnotation.children.property
