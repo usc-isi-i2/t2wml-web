@@ -64,7 +64,7 @@ const CreateProperty = ({
       setShowConfirmation(false)
       hideMenu()
     }
-  }, [confirmation])
+  }, [confirmation, hideMenu])
 
 
   const handleOnSubmit = () => {
