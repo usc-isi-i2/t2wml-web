@@ -85,6 +85,12 @@ const App = () => {
             borderColor: darkTheme ? '#fefefe' : '#4D4D4D',
           },
         },
+        textSecondary: {
+          '&.Mui-disabled': {
+            color: '#fefefe',
+            opacity: 0.5,
+          },
+        },
       },
       MuiFab: {
         root: {
