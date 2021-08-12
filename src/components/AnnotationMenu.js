@@ -497,7 +497,7 @@ const AnnotationMenu = ({
               {!!selectedAnnotation ? (
                 <span>Save changes</span>
               ) : (
-                <span>Submit annotation</span>
+                <span>Submit new annotation</span>
               )}
             </Button>
           </Grid>
