@@ -521,7 +521,11 @@ const AnnotationMenu = ({
               color="primary"
               variant="contained"
               onClick={handleOnSubmit}>
-              Submit
+              {!!selectedAnnotation ? (
+                <span>Save changes</span>
+              ) : (
+                <span>Submit annotation</span>
+              )}
             </Button>
           </Grid>
           <Grid item>
