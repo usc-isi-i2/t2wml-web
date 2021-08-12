@@ -49,7 +49,7 @@ const WikificationMenu = ({
     return (
       <Grid item xs={12}>
         <Typography variant="body1">
-          <b>Selected cell:</b> {utils.humanReadableSelection(targetSelection)} ({selectedCell.value})
+          <b>Selected cell:</b> {utils.humanReadableSelection(targetSelection)} {!!selectedCell.value ? `(${selectedCell.value})` : ''}
         </Typography>
       </Grid>
     )
