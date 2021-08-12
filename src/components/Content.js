@@ -61,7 +61,6 @@ const Content = ({darkTheme, setDarkTheme}) => {
   }
 
   const handleOnMouseUp = () => {
-    console.log('mouse up called: unbinding mouse move event listener')
     document.removeEventListener('mousemove', handleOnMouseMove)
   }
 
@@ -172,12 +171,6 @@ const Content = ({darkTheme, setDarkTheme}) => {
   }
 
 
-            //<Table
-            //  setMessage={setMessage}
-            //  projectData={projectData}
-            //  suggestedAnnotations={annotations}
-            //  updateOutputPreview={updateOutputPreview} />
-
           //<Divider setColWidth={setColWidth} />
   return (
     <Grid className={classes.content}>
@@ -196,7 +189,12 @@ const Content = ({darkTheme, setDarkTheme}) => {
       {projectData && projectData.table ? (
         <div className={classes.wrapper}>
           <div className={classes.inputWrapper}
-              style={{width: colWidth}}>
+            style={{width: colWidth}}>
+            <Table
+              setMessage={setMessage}
+              projectData={projectData}
+              suggestedAnnotations={annotations}
+              updateOutputPreview={updateOutputPreview} />
             <div className={classes.divider}
               onMouseDown={handleOnMouseDown}></div>
           </div>
