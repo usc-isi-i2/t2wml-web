@@ -76,6 +76,11 @@ const Content = ({darkTheme, setDarkTheme}) => {
       return projectData
     })
 
+    // Show a success message
+    setMessage({
+      type: 'success',
+      text: 'Project settings were uploaded!',
+    })
   }
 
   const handleFileUpload = data => {
@@ -101,6 +106,19 @@ const Content = ({darkTheme, setDarkTheme}) => {
       .then(suggestedAnnotations => {
         setAnnotations(suggestedAnnotations)
         setLoadingAnnotations(false)
+
+        // Show a success message
+        setMessage({
+          type: 'success',
+          text: 'All done, suggested annotations are in!',
+        })
+      })
+      .catch(error => {
+        setMessage({
+          type: 'error',
+          title: `${error.errorCode} - ${error.errorTitle}`,
+          text: error.errorDescription,
+        })
       })
     }
   }
@@ -118,6 +136,19 @@ const Content = ({darkTheme, setDarkTheme}) => {
       .then(suggestedAnnotations => {
         setAnnotations(suggestedAnnotations)
         setLoadingAnnotations(false)
+
+        // Show a success message
+        setMessage({
+          type: 'success',
+          text: 'All done, suggested annotations are in!',
+        })
+      })
+      .catch(error => {
+        setMessage({
+          type: 'error',
+          title: `${error.errorCode} - ${error.errorTitle}`,
+          text: error.errorDescription,
+        })
       })
     }
   }, [confirmation, projectData.filepath, projectData.sheetName])
@@ -145,6 +176,12 @@ const Content = ({darkTheme, setDarkTheme}) => {
 
   const uploadFidil = () => {
     uploadFidilFile(projectData.filepath, projectData.sheetName)
+
+    // Show a success message
+    setMessage({
+      type: 'success',
+      text: 'FIDIL file upload is done!',
+    })
   }
 
   return (
