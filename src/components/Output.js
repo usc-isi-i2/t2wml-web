@@ -41,41 +41,39 @@ const Output = ({ data, filename }) => {
 
   const renderTable = () => {
     return (
-      <Paper>
-        <div className={classes.tableWrapper}>
-          <table ref={element => tableElement.current = element}>
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                {cols.map((r, i) => (
-                  <th scope="col" key={i}>
-                    <div onDoubleClick={handleOnClickHeader}>
-                      {utils.columnToLetter(i + 1)}
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((e, i) => (
-                <tr key={`row-${i}`}>
-                  <td>{i + 1}</td>
-                  {cols.map((r, j) => {
-                    if ( i < data.length && j < data[i].length && data[i][j] ) {
-                      return (
-                        <td key={`cell-${j}`}>
-                          {data[i][j]}
-                        </td>
-                      )
-                    } else {
-                      return <td key={`cell-${j}`}/>
-                    }
-                  })}
-                </tr>
+      <Paper className={classes.tableWrapper}>
+        <table ref={element => tableElement.current = element}>
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              {cols.map((r, i) => (
+                <th scope="col" key={i}>
+                  <div onDoubleClick={handleOnClickHeader}>
+                    {utils.columnToLetter(i + 1)}
+                  </div>
+                </th>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((e, i) => (
+              <tr key={`row-${i}`}>
+                <td>{i + 1}</td>
+                {cols.map((r, j) => {
+                  if ( i < data.length && j < data[i].length && data[i][j] ) {
+                    return (
+                      <td key={`cell-${j}`}>
+                        {data[i][j]}
+                      </td>
+                    )
+                  } else {
+                    return <td key={`cell-${j}`}/>
+                  }
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </Paper>
     )
   }
