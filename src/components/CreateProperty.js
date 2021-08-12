@@ -39,6 +39,12 @@ const CreateProperty = ({ file, sheet, dataType, selectProperty, hideMenu }) => 
     qnodeDescription: '',
   })
 
+  const [showConfirmation, setShowConfirmation] = useState(false)
+
+  const handleOnClose = () => {
+    setShowConfirmation(true)
+  }
+
   const handleOnSubmit = () => {
     if ( !formState.qnodeLabel ) { return }
     uploadProperty(file, sheet, formState, dataType).then(property => {
@@ -59,7 +65,7 @@ const CreateProperty = ({ file, sheet, dataType, selectProperty, hideMenu }) => 
     return (
       <React.Fragment>
         Create a new property
-        <IconButton onClick={hideMenu}>
+        <IconButton onClick={handleOnClose}>
           <CloseIcon />
         </IconButton>
       </React.Fragment>
@@ -147,7 +153,7 @@ const CreateProperty = ({ file, sheet, dataType, selectProperty, hideMenu }) => 
     return (
       <Dialog
         open={true}
-        onClose={hideMenu}
+        onClose={handleOnClose}
         classes={{paper: classes.menu}}
         aria-labelledby='dialog-modal-title'
         PaperComponent={DraggablePaper}
