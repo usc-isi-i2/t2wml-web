@@ -901,62 +901,60 @@ const Table = ({
   const renderTable = () => {
     if ( !tableData ) { return }
     return (
-      <Paper>
-        <div className={classes.tableWrapper}
-          onMouseDown={handleOnMouseDown}
-          onMouseMove={handleOnMouseMove}>
-          <AutoSizer>
-            {({ height, width }) => (
-              <VirtualizedTable
-                width={cols.current.length * 100}
-                height={height}
-                headerHeight={25}
-                rowHeight={25}
-                className={userSelecting ? 'active': ''}
-                ref={element => tableElement.current = element}
-                rowCount={Object.keys(tableData).length}
-                rowGetter={({ index }) => Object.entries(tableData[index])}>
-                <Column
-                  label=''
-                  dataKey=''
-                  headerRenderer={data => <div>&nbsp;</div>}
-                  width={50}
+      <Paper className={classes.tableWrapper}
+        onMouseDown={handleOnMouseDown}
+        onMouseMove={handleOnMouseMove}>
+        <AutoSizer>
+          {({ height, width }) => (
+            <VirtualizedTable
+              width={cols.current.length * 77.5}
+              height={height}
+              headerHeight={25}
+              rowHeight={25}
+              className={userSelecting ? 'active': ''}
+              ref={element => tableElement.current = element}
+              rowCount={Object.keys(tableData).length}
+              rowGetter={({ index }) => Object.entries(tableData[index])}>
+              <Column
+                label=''
+                dataKey=''
+                headerRenderer={data => <div>&nbsp;</div>}
+                width={50}
+                cellDataGetter={data => {
+                  return data.rowData[data.dataKey]
+                }}
+                cellRenderer={data => {
+                  return <div>{data.rowIndex + 1}</div>
+                }}
+              />
+              {Object.keys(tableData[0]).map((r, i) => (
+                <Column key={`col-${i}`}
+                  label={utils.columnToLetter(i + 1)}
+                  dataKey={i}
+                  headerRenderer={data => {
+                    return (
+                      <div
+                        data-row-index={0}
+                        data-col-index={i+1}
+                        onDoubleClick={handleOnClickHeader}>
+                        {data.label}
+                      </div>
+                    )
+                  }}
+                  width={100}
                   cellDataGetter={data => {
                     return data.rowData[data.dataKey]
                   }}
                   cellRenderer={data => {
-                    return <div>{data.rowIndex + 1}</div>
+                    return (
+                      <TableCell {...data} />
+                    )
                   }}
                 />
-                {Object.keys(tableData[0]).map((r, i) => (
-                  <Column key={`col-${i}`}
-                    label={utils.columnToLetter(i + 1)}
-                    dataKey={i}
-                    headerRenderer={data => {
-                      return (
-                        <div
-                          data-row-index={0}
-                          data-col-index={i+1}
-                          onDoubleClick={handleOnClickHeader}>
-                          {data.label}
-                        </div>
-                      )
-                    }}
-                    width={100}
-                    cellDataGetter={data => {
-                      return data.rowData[data.dataKey]
-                    }}
-                    cellRenderer={data => {
-                      return (
-                        <TableCell {...data} />
-                      )
-                    }}
-                  />
-                ))}
-              </VirtualizedTable>
-            )}
-          </AutoSizer>
-        </div>
+              ))}
+            </VirtualizedTable>
+          )}
+        </AutoSizer>
       </Paper>
     )
   }

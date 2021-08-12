@@ -32,7 +32,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [loadingAnnotations, setLoadingAnnotations] = useState(false)
   const [showApplyAnnotations, setShowApplyAnnotations] = useState(false)
-  const [colWidth, setColWidth] = useState(window.innerWidth * 0.65)
+  const [colWidth, setColWidth] = useState('65vw')
 
   const handleOnUnload = event => {
     event.preventDefault()
@@ -164,15 +164,16 @@ const Content = ({darkTheme, setDarkTheme}) => {
       {projectData && projectData.table ? (
         <div className={classes.wrapper}>
           <div className={classes.inputWrapper}
-            style={{ width: `${colWidth}px` }}>
+            style={{width: colWidth}}>
             <Table
               setMessage={setMessage}
               projectData={projectData}
               suggestedAnnotations={annotations}
               updateOutputPreview={updateOutputPreview} />
+            <Divider setColWidth={setColWidth} />
           </div>
-          <Divider setColWidth={setColWidth} />
-          <div className={classes.outputWrapper}>
+          <div className={classes.outputWrapper}
+            style={{left: colWidth}}>
             {!!outputData ? (
               <Output
                 filename={projectData.filepath}

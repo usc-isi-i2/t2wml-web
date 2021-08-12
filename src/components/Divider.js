@@ -1,20 +1,17 @@
-import React, { useRef, useState } from 'react'
-
+import React, { useCallback, useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-
-import Draggable from 'react-draggable'
 
 import classNames from '../utils/classNames'
 
 
 const useStyles = makeStyles(theme => ({
   divider: {
-    flex: '0 0 .5em',
-    width: theme.spacing(1),
-    height: '95vh',
+    top: 0,
+    right: 0,
+    bottom: 0,
     position: 'absolute',
-    left: '65vw',
-    cursor: 'ew-resize',
+    width: '10px',
+    cursor: 'col-resize',
     background: '#c7c7c7',
     zIndex: '5',
     '&.active': {
@@ -29,33 +26,41 @@ const Divider = ({ setColWidth }) => {
 
   const classes = useStyles()
 
-  const timeoutID = useRef(null)
-
   const [active, setActive] = useState(false)
 
-  const handleOnDrag = event => {
-    event.preventDefault()
-    clearTimeout(timeoutID.current)
-    timeoutID.current = setTimeout(() => {
-      setColWidth(event.clientX)
-    }, 1)
-  }
+  const handleOnMouseMove = useCallback(event => {
+    setColWidth(`${event.pageX * 100 / window.innerWidth}vw`)
 
-  const handleOnStart = event => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleOnMouseDown = event => {
+    event.preventDefault()
+    document.addEventListener('mousemove', handleOnMouseMove)
     setActive(true)
   }
 
-  const handleOnStop = event => {
+  const handleOnMouseUp = useCallback(() => {
+    document.removeEventListener('mousemove', handleOnMouseMove)
     setActive(false)
-  }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    // component did mount
+    document.addEventListener('mouseup', handleOnMouseUp)
+
+    // component will unmount
+    return () => {
+      document.removeEventListener('mouseup', handleOnMouseUp)
+    }
+  }, [handleOnMouseUp])
 
   return (
-    <Draggable axis="x" bounds="body"
-      onDrag={handleOnDrag}
-      onStart={handleOnStart}
-      onStop={handleOnStop}>
-      <div className={classNames(classes.divider, {active})} />
-    </Draggable>
+    <div
+      onMouseDown={handleOnMouseDown}
+      className={classNames(classes.divider, {active})} />
   )
 }
 
