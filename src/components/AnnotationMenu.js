@@ -118,6 +118,8 @@ const AnnotationMenu = ({
   }, [annotation, formState, suggestion, userChangedFormState])
 
   useEffect(() => {
+    // form state has changed, update selected annotation
+    if ( !selectedAnnotation ) { return }
 
     // skip if the form state is empty (on init)
     if ( Object.keys(formState).map(key => !!formState[key]).every(x => !x) ) {
