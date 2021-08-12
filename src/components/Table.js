@@ -52,7 +52,7 @@ const Table = ({
   const [selectedAnnotationBlock, setSelectedAnnotationBlock] = useState()
   const [suggestedAnnotation, setSuggestedAnnotation] = useState()
 
-  const [selectedTab, setSelectedTab] = useState('block')
+  const [selectedTab, setSelectedTab] = useState('block') // or 'cell'
   const [showOverlayMenu, setShowOverlayMenu] = useState(false)
   const [targetSelection, setTargetSelection] = useState(false)
 
@@ -703,6 +703,13 @@ const Table = ({
             selection.current,
             allSelections,
           )
+
+          // set the selected overlay menu tab to either cell or block
+          if ( utils.singleCellSelection(selection.current) ) {
+            setSelectedTab('cell') // user selected a single cell
+          } else {
+            setSelectedTab('block') // user selected a block
+          }
 
           // show the overlay menu when creating a new annotation
           // show the overlay menu when selecting an existing annotation
