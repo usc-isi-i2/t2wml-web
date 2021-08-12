@@ -221,3 +221,10 @@ export const areSelectionsEqual = (selectionA, selectionB) => {
 export const singleCellSelection = selection => {
   return selection.x1 === selection.x2 && selection.y1 === selection.y2
 }
+
+
+export const findSelectedAnnotation = (annotations, selection) => {
+  return annotations.filter(annotation => {
+    return areSelectionsEqual(annotation.selection, selection)
+  })
+}
