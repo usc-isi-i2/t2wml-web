@@ -180,6 +180,15 @@ const Table = ({
 
   const submitNewAnnotation = () => {
 
+    if ( !utils.selectionHasData(projectData.table.cells, selection) ) {
+      setMessage({
+        type: 'error',
+        title: 'Selection is missing table data',
+        text: 'Annotations can only be created if there is table data',
+      })
+      return
+    }
+
     // upload suggestions as a new annotation
     const annotations = annotationBlocks
     const newAnnotation = {
