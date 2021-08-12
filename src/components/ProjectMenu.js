@@ -120,7 +120,8 @@ const ProjectMenu = ({
             </MenuItem>
             <Collapse in={showDownloadOptions} timeout="auto" unmountOnExit>
               {DOWNLOAD_OPTIONS.map(option => (
-                <MenuItem onClick={() => handleOnDownload(option)}>
+                <MenuItem key={option.label}
+                  onClick={() => handleOnDownload(option)}>
                   {option.label}
                 </MenuItem>
               ))}
