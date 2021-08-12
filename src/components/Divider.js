@@ -29,7 +29,13 @@ const Divider = ({ setColWidth }) => {
   const [active, setActive] = useState(false)
 
   const handleOnMouseMove = useCallback(event => {
-    setColWidth(`${event.pageX * 100 / window.innerWidth}vw`)
+    const viewWidthPercentage = event.pageX * 100 / window.innerWidth
+    if ( viewWidthPercentage >= 95 || viewWidthPercentage <= 5 ) {
+      document.removeEventListener('mousemove', handleOnMouseMove)
+      setActive(false)
+    } else {
+      setColWidth(`${viewWidthPercentage}vw`)
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
