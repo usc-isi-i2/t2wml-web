@@ -857,6 +857,13 @@ const Table = ({
         if ( deletedAnnotationBlock ) {
           removeAnnotationBlocks([deletedAnnotationBlock])
         }
+        if ( !!selection.current ) {
+          const selectedAnnotations = utils.findSelectedAnnotation(annotations, selection.current)
+          // if multiple annotation selections match, select the first one
+          if ( !!selectedAnnotations.length ) {
+            setSelectedAnnotationBlock(selectedAnnotations[0])
+          }
+        }
         return annotations
       })
       updateOutputPreview()
