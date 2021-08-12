@@ -9,8 +9,6 @@ import OverlayMenu from './OverlayMenu'
 import useStyles from '../styles/table'
 import * as utils from '../utils/table'
 import fetchSuggestions from '../utils/fetchSuggestions'
-import uploadAnnotations from '../utils/uploadAnnotations'
-import uploadWikinodes from '../utils/uploadWikinodes'
 import wikifyRegion from '../utils/wikifyRegion'
 
 
@@ -160,46 +158,6 @@ const Table = ({
         fetchSuggestions(projectData.filepath, projectData.sheetName, selection.current, annotationBlocks)
         .then(data => {
           setSuggestedAnnotation(data)
-
-          // upload suggestions as a new annotation
-          const annotations = annotationBlocks
-          const newAnnotation = {
-            selection: {...selection.current},
-            ...data,
-          }
-          if ( !!data.children.property ) {
-            newAnnotation.property = data.children.property
-          }
-          annotations.push(newAnnotation)
-          uploadAnnotations(projectData.filepath, projectData.sheetName, annotations, () => {}).then(data => {
-            setAnnotationBlocks(data.annotations)
-            if ( selection.current ) {
-              const selectedBlock = utils.checkSelectedAnnotationBlocks(selection.current, data.annotations)
-              setSelectedAnnotationBlock(selectedBlock)
-            }
-            if ( utils.isWikifyable({role: newAnnotation.role}) ) {
-              if ( newAnnotation.role === 'mainSubject' ) {
-                wikifyRegion(projectData.filepath, projectData.sheetName, newAnnotation.selection)
-                .then(layers => updateTableDataLayers(layers))
-              } else {
-                uploadWikinodes(
-                  projectData.filepath,
-                  projectData.sheetName,
-                  newAnnotation.selection,
-                  newAnnotation.role === 'property' || newAnnotation.type === 'property',
-                  'string',
-                ).then(layers => updateTableDataLayers(layers))
-              }
-            }
-            updateOutputPreview()
-          })
-          .catch(error => {
-            setMessage({
-              type: 'error',
-              title: `${error.errorCode} - ${error.errorTitle}`,
-              text: error.errorDescription,
-            })
-          })
         })
         .catch(error => {
           setMessage({
