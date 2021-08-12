@@ -147,6 +147,14 @@ const Content = ({darkTheme, setDarkTheme}) => {
     uploadFidilFile(projectData.filepath, projectData.sheetName)
   }
 
+
+            //<Table
+            //  setMessage={setMessage}
+            //  projectData={projectData}
+            //  suggestedAnnotations={annotations}
+            //  updateOutputPreview={updateOutputPreview} />
+
+          //<Divider setColWidth={setColWidth} />
   return (
     <Grid className={classes.content}>
       <Header
