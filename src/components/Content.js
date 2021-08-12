@@ -32,7 +32,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [loadingAnnotations, setLoadingAnnotations] = useState(false)
   const [showApplyAnnotations, setShowApplyAnnotations] = useState(false)
-  const [colWidth, setColWidth] = useState(window.innerWidth * 0.65)
+  const [colWidth, setColWidth] = useState('65vw')
 
   const handleOnUnload = event => {
     event.preventDefault()
