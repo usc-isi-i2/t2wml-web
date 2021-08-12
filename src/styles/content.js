@@ -10,16 +10,6 @@ const useStyles = makeStyles(theme => ({
       'linear-gradient(180deg, #d8d8d8, #fefefe)',
   },
   wrapper: {
-    //display: 'flex',
-    //flex: '1 1 100%',
-    //height: '95vh',
-    //position: 'relative',
-    //overflow: 'hidden',
-    //flexDirection: 'row',
-    //top: 0,
-    //left: 0,
-    //right: 0,
-
     top: 0,
     left: 0,
     right: 0,
@@ -29,13 +19,6 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
   },
   inputWrapper: {
-    //flex: '0 0 auto',
-    //position: 'relative',
-    //overflowX: 'scroll',
-    //overflowY: 'hidden',
-    //width: '1150px',
-    //display: 'flex',
-
     position: 'absolute',
     top: 0,
     left: 0,
@@ -46,9 +29,6 @@ const useStyles = makeStyles(theme => ({
     overflowY: 'hidden',
   },
   divider: {
-    //height: '100%',
-    //float: 'right',
-
     width: '10px',
     top: 0,
     right: 0,
@@ -58,12 +38,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'black',
   },
   outputWrapper: {
-    //flex: '1 1 0%',
-    //position: 'relative',
-    //overflow: 'scroll',
-    //display: 'flex',
-    //
-
     position: 'absolute',
     top: 0,
     right: 0,
