@@ -65,9 +65,23 @@ const CreateProperty = ({
 
   const handleOnSubmit = () => {
     if ( !formState.qnodeLabel ) { return }
-    uploadProperty(file, sheet, formState, dataType).then(property => {
+    uploadProperty(file, sheet, formState, dataType)
+    .then(property => {
       selectProperty(property)
       hideMenu()
+
+      // Show a success message
+      setMessage({
+        type: 'success',
+        text: 'New property is created!',
+      })
+    })
+    .catch(error => {
+      setMessage({
+        type: 'error',
+        title: `${error.errorCode} - ${error.errorTitle}`,
+        text: error.errorDescription,
+      })
     })
   }
 
