@@ -40,6 +40,7 @@ const OverlayMenu = ({
   annotations,
   selectedAnnotation,
   suggestedAnnotation,
+  submitNewAnnotation,
   onSelectionChange,
   updateAnnotation,
   updateTableDataLayers,
@@ -86,6 +87,7 @@ const OverlayMenu = ({
             selectedCell={selectedCell}
             selectedAnnotation={selectedAnnotation}
             suggestedAnnotation={suggestedAnnotation}
+            submitNewAnnotation={submitNewAnnotation}
             updateTableDataLayers={updateTableDataLayers}
             updateOutputPreview={updateOutputPreview}
             onSelectionChange={onSelectionChange}

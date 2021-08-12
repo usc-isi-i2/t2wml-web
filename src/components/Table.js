@@ -160,46 +160,6 @@ const Table = ({
         fetchSuggestions(projectData.filepath, projectData.sheetName, selection.current, annotationBlocks)
         .then(data => {
           setSuggestedAnnotation(data)
-
-          // upload suggestions as a new annotation
-          const annotations = annotationBlocks
-          const newAnnotation = {
-            selection: {...selection.current},
-            ...data,
-          }
-          if ( !!data.children.property ) {
-            newAnnotation.property = data.children.property
-          }
-          annotations.push(newAnnotation)
-          uploadAnnotations(projectData.filepath, projectData.sheetName, annotations, () => {}).then(data => {
-            setAnnotationBlocks(data.annotations)
-            if ( selection.current ) {
-              const selectedBlock = utils.checkSelectedAnnotationBlocks(selection.current, data.annotations)
-              setSelectedAnnotationBlock(selectedBlock)
-            }
-            if ( utils.isWikifyable({role: newAnnotation.role}) ) {
-              if ( newAnnotation.role === 'mainSubject' ) {
-                wikifyRegion(projectData.filepath, projectData.sheetName, newAnnotation.selection)
-                .then(layers => updateTableDataLayers(layers))
-              } else {
-                uploadWikinodes(
-                  projectData.filepath,
-                  projectData.sheetName,
-                  newAnnotation.selection,
-                  newAnnotation.role === 'property' || newAnnotation.type === 'property',
-                  'string',
-                ).then(layers => updateTableDataLayers(layers))
-              }
-            }
-            updateOutputPreview()
-          })
-          .catch(error => {
-            setMessage({
-              type: 'error',
-              title: `${error.errorCode} - ${error.errorTitle}`,
-              text: error.errorDescription,
-            })
-          })
         })
         .catch(error => {
           setMessage({
@@ -217,6 +177,49 @@ const Table = ({
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showOverlayMenu])
+
+  const submitNewAnnotation = () => {
+
+    // upload suggestions as a new annotation
+    const annotations = annotationBlocks
+    const newAnnotation = {
+      selection: {...selection.current},
+      ...suggestedAnnotation,
+    }
+    if ( !!suggestedAnnotation.children.property ) {
+      newAnnotation.property = suggestedAnnotation.children.property
+    }
+    annotations.push(newAnnotation)
+    uploadAnnotations(projectData.filepath, projectData.sheetName, annotations, () => {}).then(data => {
+      setAnnotationBlocks(data.annotations)
+      if ( selection.current ) {
+        const selectedBlock = utils.checkSelectedAnnotationBlocks(selection.current, data.annotations)
+        setSelectedAnnotationBlock(selectedBlock)
+      }
+      if ( utils.isWikifyable({role: newAnnotation.role}) ) {
+        if ( newAnnotation.role === 'mainSubject' ) {
+          wikifyRegion(projectData.filepath, projectData.sheetName, newAnnotation.selection)
+          .then(layers => updateTableDataLayers(layers))
+        } else {
+          uploadWikinodes(
+            projectData.filepath,
+            projectData.sheetName,
+            newAnnotation.selection,
+            newAnnotation.role === 'property' || newAnnotation.type === 'property',
+            'string',
+          ).then(layers => updateTableDataLayers(layers))
+        }
+      }
+      updateOutputPreview()
+    })
+    .catch(error => {
+      setMessage({
+        type: 'error',
+        title: `${error.errorCode} - ${error.errorTitle}`,
+        text: error.errorDescription,
+      })
+    })
+  }
 
   const updateAnnotationBlocks = useCallback(() => {
     setTableData(prevTableData => {
@@ -998,6 +1001,7 @@ const Table = ({
         selection={selection.current}
         annotations={annotationBlocks}
         suggestedAnnotation={suggestedAnnotation}
+        submitNewAnnotation={submitNewAnnotation}
         selectedAnnotation={selectedAnnotationBlock}
         onSelectionChange={handleOnSelectionChange}
         updateOutputPreview={updateOutputPreview}
