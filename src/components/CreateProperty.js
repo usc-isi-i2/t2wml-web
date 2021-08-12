@@ -143,24 +143,32 @@ const CreateProperty = ({ file, sheet, dataType, selectProperty, hideMenu }) => 
     )
   }
 
+  const renderCreatePropertyDialog = () => {
+    return (
+      <Dialog
+        open={true}
+        onClose={hideMenu}
+        classes={{paper: classes.menu}}
+        aria-labelledby='dialog-modal-title'
+        PaperComponent={DraggablePaper}
+        PaperProps={{handle: '.draggable-property-handle'}}>
+        <DialogTitle classes={{ root: 'draggable-property-handle' }}>
+          {renderTitle()}
+        </DialogTitle>
+        <DialogContent>
+          {renderContent()}
+        </DialogContent>
+        <DialogActions>
+          {renderButtons()}
+        </DialogActions>
+      </Dialog>
+    )
+  }
+
   return (
-    <Dialog
-      open={true}
-      onClose={hideMenu}
-      classes={{paper: classes.menu}}
-      aria-labelledby='dialog-modal-title'
-      PaperComponent={DraggablePaper}
-      PaperProps={{handle: '.draggable-property-handle'}}>
-      <DialogTitle classes={{ root: 'draggable-property-handle' }}>
-        {renderTitle()}
-      </DialogTitle>
-      <DialogContent>
-        {renderContent()}
-      </DialogContent>
-      <DialogActions>
-        {renderButtons()}
-      </DialogActions>
-    </Dialog>
+    <React.Fragment>
+      {renderCreatePropertyDialog()}
+    </React.Fragment>
   )
 }
 
