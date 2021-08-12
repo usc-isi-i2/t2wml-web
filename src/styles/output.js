@@ -4,11 +4,9 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
   tableWrapper: {
     width: '100%',
-    height: '95vh',
     overflow: 'scroll',
     position: 'relative',
     '& table': {
-      marginTop: '-1px',
       tableLayout: 'fixed',
       transform:'rotateX(0deg)',
       border: '1px solid #c7c7c7',
