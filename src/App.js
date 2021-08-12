@@ -33,7 +33,7 @@ const styles = theme => ({
 
 const App = () => {
 
-  const [darkTheme, setDarkTheme] = useState(false)
+  const [darkTheme, setDarkTheme] = useState(true)
 
   const defaultTheme = createMuiTheme()
 
