@@ -50,7 +50,7 @@ const Divider = ({ setColWidth }) => {
   }
 
   return (
-    <Draggable axis="x"
+    <Draggable axis="x" bounds="body"
       onDrag={handleOnDrag}
       onStart={handleOnStart}
       onStop={handleOnStop}>
