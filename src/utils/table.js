@@ -1,5 +1,6 @@
 import { ROLES, TYPES } from '../content/annotation-options'
 
+
 export const columnToLetter = column => {
   let temp, letter = ''
   while ( column > 0 ) {
@@ -142,11 +143,6 @@ export const humanReadableSelection = selection => {
 }
 
 
-export const isBlock = selection => {
-  return !(selection.x1 === selection.x2 && selection.y1 === selection.y2)
-}
-
-
 export const selectionHasData = (data, selection) => {
   const { x1, x2, y1, y2 } = selection.current
   const leftCol = Math.min(x1-1, x2-1)
@@ -215,6 +211,11 @@ export const areSelectionsEqual = (selectionA, selectionB) => {
     selectionA.y1 === selectionB.y1 &&
     selectionA.y2 === selectionB.y2
   )
+}
+
+
+export const isBlockSelection = selection => {
+  return !(selection.x1 === selection.x2 && selection.y1 === selection.y2)
 }
 
 
