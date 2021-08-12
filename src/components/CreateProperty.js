@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
@@ -13,6 +13,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
 
 import DraggablePaper from './DraggablePaper'
+import ConfirmationDialog from './ConfirmationDialog'
 import uploadProperty from '../utils/uploadProperty'
 
 
@@ -39,11 +40,21 @@ const CreateProperty = ({ file, sheet, dataType, selectProperty, hideMenu }) => 
     qnodeDescription: '',
   })
 
+  const [confirmation, setConfirmation] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
 
   const handleOnClose = () => {
     setShowConfirmation(true)
   }
+
+  useEffect(() => {
+    if ( confirmation ) {
+      setConfirmation(false)
+      setShowConfirmation(false)
+      hideMenu()
+    }
+  }, [confirmation])
+
 
   const handleOnSubmit = () => {
     if ( !formState.qnodeLabel ) { return }
@@ -171,9 +182,20 @@ const CreateProperty = ({ file, sheet, dataType, selectProperty, hideMenu }) => 
     )
   }
 
+  const renderConfirmationDialog = () => {
+    return (
+      <ConfirmationDialog
+        open={showConfirmation}
+        text={'Submit the form to save this new property.'}
+        close={() => setShowConfirmation(false)}
+        onConfirm={() => setConfirmation(true)} />
+    )
+  }
+
   return (
     <React.Fragment>
       {renderCreatePropertyDialog()}
+      {renderConfirmationDialog()}
     </React.Fragment>
   )
 }
