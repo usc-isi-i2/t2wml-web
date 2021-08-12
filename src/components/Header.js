@@ -75,6 +75,7 @@ const Header = ({
           className={classNames(classes.guessAnnotations, {
             active: loadingAnnotations,
           })}
+          disabled={loadingAnnotations}
           onClick={guessAnnotations}>
           Suggest Annotations
         </Button>
