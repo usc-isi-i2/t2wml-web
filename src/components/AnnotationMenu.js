@@ -101,6 +101,43 @@ const AnnotationMenu = ({
     })
   }, [selectedAnnotation])
 
+  const handleOnSubmit = event => {
+    event.preventDefault()
+
+    // upload suggestions as a new annotation
+    const newAnnotation = {
+      selection: {...selection},
+      ...suggestedAnnotation,
+    }
+    if ( !!suggestedAnnotation.children.property ) {
+      newAnnotation.property = suggestedAnnotation.children.property
+    }
+    annotations.push(newAnnotation)
+
+    // upload new annotation to the backend
+    uploadAnnotations(file, sheet, annotations, () => {})
+    .then(data => {
+      updateAnnotation(data.annotations)
+      if ( utils.isWikifyable({role: suggestedAnnotation.role}) ) {
+        if ( getFormValue('role') === 'mainSubject' ) {
+          wikifyRegion(file, sheet, selection)
+          .then(layers => updateTableDataLayers(layers))
+        } else {
+          uploadWikinodes(file, sheet, selection, suggestedAnnotation.role === 'property', 'string')
+          .then(layers => updateTableDataLayers(layers))
+        }
+      }
+    })
+    .catch(error => {
+      setMessage({
+        type: 'error',
+        title: `${error.errorCode} - ${error.errorTitle}`,
+        text: error.errorDescription,
+      })
+    })
+
+  }
+
   const getFormValue = useCallback(field => {
     if ( !!formState[field] || typeof formState[field] === 'undefined' ) {
       return formState[field]
