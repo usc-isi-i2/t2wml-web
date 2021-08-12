@@ -51,29 +51,6 @@ const Content = ({darkTheme, setDarkTheme}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleOnMouseMove = useCallback(event => {
-    setColWidth(event.pageX + 2)
-  }, [])
-
-  const handleOnMouseDown = event => {
-    event.preventDefault()
-    document.addEventListener('mousemove', handleOnMouseMove)
-  }
-
-  const handleOnMouseUp = () => {
-    document.removeEventListener('mousemove', handleOnMouseMove)
-  }
-
-  useEffect(() => {
-    // component did mount
-    document.addEventListener('mouseup', handleOnMouseUp)
-
-    // component will unmount
-    return () => {
-      document.removeEventListener('mouseup', handleOnMouseUp)
-    }
-  }, [handleOnMouseUp])
-
   const updateOutputPreview = useCallback(() => {
     setTimeout(() => {
       setProjectData(projectData => {
@@ -170,8 +147,6 @@ const Content = ({darkTheme, setDarkTheme}) => {
     uploadFidilFile(projectData.filepath, projectData.sheetName)
   }
 
-
-          //<Divider setColWidth={setColWidth} />
   return (
     <Grid className={classes.content}>
       <Header
@@ -195,8 +170,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
               projectData={projectData}
               suggestedAnnotations={annotations}
               updateOutputPreview={updateOutputPreview} />
-            <div className={classes.divider}
-              onMouseDown={handleOnMouseDown}></div>
+            <Divider setColWidth={setColWidth} />
           </div>
           <div className={classes.outputWrapper}
             style={{left: colWidth}}>
