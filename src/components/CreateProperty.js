@@ -155,7 +155,7 @@ const CreateProperty = ({ file, sheet, dataType, selectProperty, hideMenu }) => 
         color="primary"
         variant="contained"
         onClick={handleOnSubmit}>
-        Submit
+        Submit new Property
       </Button>
     )
   }
