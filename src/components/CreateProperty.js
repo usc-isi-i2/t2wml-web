@@ -31,7 +31,14 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const CreateProperty = ({ file, sheet, dataType, selectProperty, hideMenu }) => {
+const CreateProperty = ({
+  file,
+  sheet,
+  dataType,
+  selectProperty,
+  setMessage,
+  hideMenu,
+}) => {
 
   const classes = useStyles()
 

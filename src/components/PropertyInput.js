@@ -12,6 +12,7 @@ const PropertyInput = ({
   file,
   sheet,
   dataType,
+  setMessage,
   selectedProperty,
   onSelectProperty,
 }) => {
@@ -60,6 +61,7 @@ const PropertyInput = ({
             file={file}
             sheet={sheet}
             dataType={dataType}
+            setMessage={setMessage}
             selectProperty={selectProperty}
             hideMenu={() => setShowCreateProperty(false)} />
         )}
