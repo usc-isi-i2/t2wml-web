@@ -51,7 +51,11 @@ const CreateProperty = ({
   const [showConfirmation, setShowConfirmation] = useState(false)
 
   const handleOnClose = () => {
-    setShowConfirmation(true)
+    if ( !!formState.qnodeLabel || !!formState.qnodeDescription ) {
+      setShowConfirmation(true)
+    } else {
+      hideMenu()
+    }
   }
 
   useEffect(() => {
