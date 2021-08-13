@@ -409,7 +409,9 @@ const AnnotationMenu = ({
         {TYPE.children.length > 1 && renderAdditionalInputsToggle()}
         {TYPE.children.map(option => {
 
-          if ( currentRole !== 'property' && option.value === 'property' ) {
+          if ( !!selectedAnnotation &&
+               currentRole !== 'property' &&
+               option.value === 'property' ) {
             return (
               <Grid item xs={12} key={option.value}>
                 <PropertyInput
