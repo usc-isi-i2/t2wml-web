@@ -68,11 +68,11 @@ const PropertyTags = ({
       return tags
     })
 
-    // submit changes after a 250ms timeout
+    // submit changes after a 1 second timeout
     clearTimeout(timeoutID.current)
     timeoutID.current = setTimeout(() => {
       updateTags()
-    }, 250)
+    }, 1000)
   }
 
   const handleOnSelectTagValue = (key, value) => {
