@@ -118,6 +118,19 @@ const PropertyTags = ({
             newTagValue: '',
           })
         }
+
+        // Show a success message
+        setMessage({
+          type: 'success',
+          text: 'New property tag was saved!',
+        })
+      })
+      .catch(error => {
+        setMessage({
+          type: 'error',
+          title: `${error.errorCode} - ${error.errorTitle}`,
+          text: error.errorDescription,
+        })
       })
     }
   }, [entity, tags, file, sheet, formState, updateEntity])
