@@ -233,7 +233,23 @@ const Table = ({
             newAnnotation.selection,
             newAnnotation.role === 'property' || newAnnotation.type === 'property',
             'string',
-          ).then(layers => updateTableDataLayers(layers))
+          )
+          .then(layers => {
+            updateTableDataLayers(layers)
+
+            // Show a success message
+            setMessage({
+              type: 'success',
+              text: 'Property wikifed automatically!',
+            })
+          })
+          .catch(error => {
+            setMessage({
+              type: 'error',
+              title: `${error.errorCode} - ${error.errorTitle}`,
+              text: error.errorDescription,
+            })
+          })
         }
       }
       updateOutputPreview()
