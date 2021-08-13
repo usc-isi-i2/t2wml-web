@@ -49,6 +49,7 @@ const CreateProperty = ({
     qnodeDescription: '',
   })
 
+  const [loading, setLoading] = useState(false)
   const [confirmation, setConfirmation] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
 
@@ -93,9 +94,11 @@ const CreateProperty = ({
       description: formState.qnodeDescription,
     }
 
+    setLoading(true)
     uploadEntity(entity, {}, file, sheet)
     .then(entity => {
       selectProperty(entity)
+      setLoading(false)
       hideMenu()
 
       // Show a success message
@@ -105,6 +108,7 @@ const CreateProperty = ({
       })
     })
     .catch(error => {
+      setLoading(false)
       setMessage({
         type: 'error',
         title: `${error.errorCode} - ${error.errorTitle}`,
@@ -114,9 +118,11 @@ const CreateProperty = ({
   }
 
   const submitNewProperty = () => {
+    setLoading(true)
     uploadProperty(file, sheet, formState, dataType)
     .then(property => {
       selectProperty(property)
+      setLoading(false)
       hideMenu()
 
       // Show a success message
@@ -126,6 +132,7 @@ const CreateProperty = ({
       })
     })
     .catch(error => {
+      setLoading(false)
       setMessage({
         type: 'error',
         title: `${error.errorCode} - ${error.errorTitle}`,
