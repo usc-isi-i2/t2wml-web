@@ -36,6 +36,7 @@ const CreateProperty = ({
   sheet,
   dataType,
   selectProperty,
+  selectedProperty,
   setMessage,
   hideMenu,
 }) => {
@@ -49,6 +50,13 @@ const CreateProperty = ({
 
   const [confirmation, setConfirmation] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
+
+  useEffect(() => {
+    setFormState({
+      qnodeLabel: selectedProperty.label,
+      qnodeDescription: selectedProperty.description,
+    })
+  }, [selectedProperty])
 
   const handleOnClose = () => {
     if ( !!formState.qnodeLabel || !!formState.qnodeDescription ) {

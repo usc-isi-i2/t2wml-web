@@ -75,6 +75,7 @@ const PropertyInput = ({
             dataType={dataType}
             setMessage={setMessage}
             selectProperty={selectProperty}
+            selectedProperty={selectedProperty}
             hideMenu={() => setShowCreateProperty(false)} />
         )}
       </Grid>
