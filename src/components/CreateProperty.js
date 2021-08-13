@@ -17,6 +17,7 @@ import DraggablePaper from './DraggablePaper'
 import ConfirmationDialog from './ConfirmationDialog'
 import uploadProperty from '../utils/uploadProperty'
 import uploadEntity from '../utils/uploadEntity'
+import classNames from '../utils/classNames'
 
 
 const useStyles = makeStyles(theme => ({
@@ -33,8 +34,11 @@ const useStyles = makeStyles(theme => ({
   submitButton: {
     marginRight: theme.spacing(10),
     position: 'relative',
-    '&.active': {
-      marginRight: theme.spacing(10),
+    '& .MuiCircularProgress-root': {
+      display: 'none',
+    },
+    '&.active .MuiCircularProgress-root': {
+      display: 'block',
     },
   },
 }))
@@ -240,7 +244,9 @@ const CreateProperty = ({
         color="primary"
         variant="contained"
         disabled={loading}
-        className={classes.submitButton}
+        className={classNames(classes.submitButton, {
+          active: loading,
+        })}
         endIcon={<CircularProgress color="inherit" size={16} />}
         onClick={handleOnSubmit}>
         {!!selectedProperty ? (

@@ -72,6 +72,7 @@ const App = () => {
             backgroundColor: darkTheme ? '#ddd' : '#7f7f7f',
           },
           '&.Mui-disabled': {
+            color: darkTheme ? '#fefefe' : '#4D4D4D',
             pointerEvents: 'all',
             cursor: 'not-allowed',
           },
