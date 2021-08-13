@@ -39,7 +39,6 @@ const AnnotationMenu = ({
   sheet,
   selection,
   annotations,
-  selectedCell,
   hideOverlayMenu,
   updateAnnotation,
   onSelectionChange,
