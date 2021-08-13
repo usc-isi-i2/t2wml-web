@@ -210,7 +210,22 @@ const Table = ({
       if ( utils.isWikifyable({role: newAnnotation.role}) ) {
         if ( newAnnotation.role === 'mainSubject' ) {
           wikifyRegion(projectData.filepath, projectData.sheetName, newAnnotation.selection)
-          .then(layers => updateTableDataLayers(layers))
+          .then(layers => {
+            updateTableDataLayers(layers)
+
+            // Show a success message
+            setMessage({
+              type: 'success',
+              text: 'Countries wikifed automatically!',
+            })
+          })
+          .catch(error => {
+            setMessage({
+              type: 'error',
+              title: `${error.errorCode} - ${error.errorTitle}`,
+              text: error.errorDescription,
+            })
+          })
         } else {
           uploadWikinodes(
             projectData.filepath,
