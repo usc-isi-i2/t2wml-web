@@ -8,6 +8,7 @@ import TableCell from './TableCell'
 import OverlayMenu from './OverlayMenu'
 import useStyles from '../styles/table'
 import * as utils from '../utils/table'
+import fetchEntity from '../utils/fetchEntity'
 import fetchSuggestions from '../utils/fetchSuggestions'
 import uploadAnnotations from '../utils/uploadAnnotations'
 import uploadWikinodes from '../utils/uploadWikinodes'
@@ -727,6 +728,30 @@ const Table = ({
                 setSelectedTab('block') // user selected a block
               }
             }
+
+            // fetch the qnode with tags based on the target selection
+            setTableData(prevTableData => {
+              const tableData = {...prevTableData}
+              const rowIndex = selection.current.y1 - 1
+              const colIndex = selection.current.x1 - 1
+              const selectedCell = {...tableData[rowIndex][colIndex]}
+              if ( !!selectedCell.qnode && !selectedCell.qnode.tags ) {
+                fetchEntity(selectedCell.qnode, projectData.filepath, projectData.sheetName)
+                .then(entity => {
+
+                  // update that cell's qnode with the tags
+                  tableData[rowIndex][colIndex] = {
+                    ...tableData[rowIndex][colIndex],
+                    qnode: {
+                      ...tableData[rowIndex][colIndex].qnode,
+                      ...entity
+                    },
+                  }
+                  console.log(tableData[rowIndex][colIndex])
+                })
+              }
+              return tableData
+            })
 
             // show the overlay menu when creating a new annotation
             // show the overlay menu when selecting an existing annotation
