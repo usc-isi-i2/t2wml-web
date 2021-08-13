@@ -36,11 +36,11 @@ const PropertyInput = ({
         <Typography variant="body1">
           <b>Property:</b> {selected.label}
         </Typography>
-        {!!selected.description && (
-          <Typography variant="body1">
-            <b>Description:</b> {selected.description}
-          </Typography>
-        )}
+        <Typography variant="body1">
+          <span>
+            <b>Description:</b> {selected.description || '<no description>'}
+          </span>
+        </Typography>
       </Grid>
     )
   }
