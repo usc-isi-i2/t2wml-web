@@ -222,6 +222,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
             {!!outputData ? (
               <Output
                 filename={projectData.filepath}
+                loading={loadingOutputData}
                 data={outputData} />
             ) : (
               <Instructions />

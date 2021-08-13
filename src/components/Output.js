@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import Paper from '@material-ui/core/Paper'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
+import classNames from '../utils/classNames'
 import useStyles from '../styles/output'
 import * as utils from '../utils/table'
 
 
-const Output = ({ data, filename }) => {
+const Output = ({ data, filename, loading }) => {
 
   const classes = useStyles()
 
@@ -41,7 +43,7 @@ const Output = ({ data, filename }) => {
 
   const renderTable = () => {
     return (
-      <Paper className={classes.tableWrapper}>
+      <Paper className={classNames(classes.tableWrapper, {loading})}>
         <table ref={element => tableElement.current = element}>
           <thead>
             <tr>
@@ -78,9 +80,20 @@ const Output = ({ data, filename }) => {
     )
   }
 
+  const renderLoading = () => {
+    if ( !loading ) { return }
+    return (
+      <CircularProgress
+        size={50}
+        color="inherit"
+        className={classes.loading} />
+    )
+  }
+
   return (
     <React.Fragment>
       {renderTable()}
+      {renderLoading()}
     </React.Fragment>
   )
 }

@@ -2,11 +2,20 @@ import { makeStyles } from '@material-ui/core/styles'
 
 
 const useStyles = makeStyles(theme => ({
+  loading: {
+    position: 'absolute',
+    top: 'calc(50% - 25px)',
+    left: 'calc(50% - 25px)',
+    color: theme.palette.type === 'dark' ? '#fefefe' : '#777',
+  },
   tableWrapper: {
     width: '100%',
     height: '100%',
     overflow: 'scroll',
     position: 'relative',
+    '&.loading': {
+      opacity: 0.5,
+    },
     '& table': {
       tableLayout: 'fixed',
       transform:'rotateX(0deg)',
