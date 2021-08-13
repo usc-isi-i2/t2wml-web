@@ -205,6 +205,13 @@ const App = () => {
           padding: defaultTheme.spacing(1),
         },
       },
+      MuiSnackbar: {
+        root: {
+          '& .MuiPaper-root': {
+            minWidth: '350px',
+          },
+        },
+      },
       MuiTooltip: {
         tooltip: {
           fontSize: defaultTheme.spacing(2),
