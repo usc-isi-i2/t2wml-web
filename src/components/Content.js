@@ -225,7 +225,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
                 loading={loadingOutputData}
                 data={outputData} />
             ) : (
-              <Instructions />
+              <Instructions loading={loadingOutputData} />
             )}
           </div>
         </div>
