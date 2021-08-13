@@ -110,6 +110,8 @@ const PropertyTags = ({
       uploadEntity(entity, file, sheet)
       .then(entity => {
         updateEntity(entity)
+
+        // clear out the new tag create form
         if ( !!formState.newTagKey && !!formState.newTagValue ) {
           setFormState({
             newTagKey: '',
@@ -124,7 +126,6 @@ const PropertyTags = ({
 
     // submit changes when users hit the Enter or NumpadEnter keys
     if ( event.code === 'Enter' || event.code === 'NumpadEnter' ) {
-
       updateTags()
     }
   }, [updateTags])
