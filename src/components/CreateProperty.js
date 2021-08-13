@@ -225,7 +225,11 @@ const CreateProperty = ({
         color="primary"
         variant="contained"
         onClick={handleOnSubmit}>
-        Submit new Property
+        {!!selectedProperty ? (
+          <span>Save Changes</span>
+        ) : (
+          <span>Submit new Property</span>
+        )}
       </Button>
     )
   }
