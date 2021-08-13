@@ -107,7 +107,7 @@ const CreateProperty = ({
     }
 
     setLoading(true)
-    uploadEntity(entity, {}, file, sheet)
+    uploadEntity(entity, file, sheet)
     .then(entity => {
       selectProperty(entity)
       setLoading(false)
