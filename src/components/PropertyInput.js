@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
@@ -20,29 +20,23 @@ const PropertyInput = ({
   onSelectProperty,
 }) => {
 
-  const [selected, setSelected] = useState(selectedProperty)
   const [showCreateProperty, setShowCreateProperty] = useState(false)
-
-  useEffect(() => {
-    setSelected(selectedProperty)
-  }, [selectedProperty])
 
   const selectProperty = property => {
     onSelectProperty(property)
-    setSelected(property)
   }
 
   const renderSelectedProperty = () => {
-    if ( !selected || !selected.label ) { return }
+    if ( !selectedProperty || !selectedProperty.label ) { return }
     return (
       <React.Fragment>
         <Grid item xs={10}>
           <Typography variant="body1">
-            <b>Property:</b> {selected.label}
+            <b>Property:</b> {selectedProperty.label}
           </Typography>
           <Typography variant="body1">
             <span>
-              <b>Description:</b> {selected.description || '<no description>'}
+              <b>Description:</b> {selectedProperty.description || '<no description>'}
             </span>
           </Typography>
         </Grid>
@@ -59,7 +53,7 @@ const PropertyInput = ({
   }
 
   const renderPropertyCreateButton = () => {
-    if ( !!selected ) { return }
+    if ( !!selectedProperty ) { return }
     return (
       <Grid item xs={12}>
         <Button
