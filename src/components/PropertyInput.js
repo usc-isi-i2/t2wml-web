@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
+import EditIcon from '@material-ui/icons/Edit'
 import AddIcon from '@material-ui/icons/Add'
 
 import CreateProperty from './CreateProperty'
@@ -32,16 +34,23 @@ const PropertyInput = ({
   const renderSelectedProperty = () => {
     if ( !selected || !selected.label ) { return }
     return (
-      <Grid item xs={12}>
-        <Typography variant="body1">
-          <b>Property:</b> {selected.label}
-        </Typography>
-        <Typography variant="body1">
-          <span>
-            <b>Description:</b> {selected.description || '<no description>'}
-          </span>
-        </Typography>
-      </Grid>
+      <React.Fragment>
+        <Grid item xs={10}>
+          <Typography variant="body1">
+            <b>Property:</b> {selected.label}
+          </Typography>
+          <Typography variant="body1">
+            <span>
+              <b>Description:</b> {selected.description || '<no description>'}
+            </span>
+          </Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <IconButton aria-label="delete">
+            <EditIcon />
+          </IconButton>
+        </Grid>
+      </React.Fragment>
     )
   }
 
