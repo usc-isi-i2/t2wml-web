@@ -780,30 +780,6 @@ const Table = ({
               }
             }
 
-            // fetch the qnode with tags based on the target selection
-            setTableData(prevTableData => {
-              const tableData = {...prevTableData}
-              const rowIndex = selection.current.y1 - 1
-              const colIndex = selection.current.x1 - 1
-              const selectedCell = {...tableData[rowIndex][colIndex]}
-              if ( !!selectedCell.qnode && !selectedCell.qnode.tags ) {
-                fetchEntity(selectedCell.qnode, projectData.filepath, projectData.sheetName)
-                .then(entity => {
-
-                  // update that cell's qnode with the tags
-                  tableData[rowIndex][colIndex] = {
-                    ...tableData[rowIndex][colIndex],
-                    qnode: {
-                      ...tableData[rowIndex][colIndex].qnode,
-                      ...entity
-                    },
-                  }
-                  console.log(tableData[rowIndex][colIndex])
-                })
-              }
-              return tableData
-            })
-
             // show the overlay menu when creating a new annotation
             // show the overlay menu when selecting an existing annotation
             return true
