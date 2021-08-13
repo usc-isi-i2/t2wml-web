@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 
@@ -22,6 +22,8 @@ import uploadFidilFile from '../utils/uploadFidilFile'
 const Content = ({darkTheme, setDarkTheme}) => {
 
   const classes = useStyles()
+
+  const outputDataTimeout = useRef(null)
 
   const [projectData, setProjectData] = useState({})
   const [annotations, setAnnotations] = useState()
@@ -52,7 +54,8 @@ const Content = ({darkTheme, setDarkTheme}) => {
   }, [])
 
   const updateOutputPreview = useCallback(() => {
-    setTimeout(() => {
+    clearTimeout(outputDataTimeout)
+    outputDataTimeout.current = setTimeout(() => {
       setProjectData(projectData => {
         fetchPartialCSV(projectData.filepath, projectData.sheetName)
         .then(output => setOutputData(output.cells))
@@ -65,7 +68,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
         })
         return projectData
       })
-    }, 250)
+    }, 350)
   }, [])
 
   const handleProjectUpdate = project => {
