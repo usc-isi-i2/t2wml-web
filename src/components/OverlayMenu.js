@@ -100,6 +100,7 @@ const OverlayMenu = ({
             file={file}
             sheet={sheet}
             selection={selection}
+            setMessage={setMessage}
             selectedCell={selectedCell}
             targetSelection={targetSelection}
             selectedAnnotation={selectedAnnotation}

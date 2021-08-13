@@ -25,6 +25,7 @@ const WikificationMenu = ({
   sheet,
   hideMenu,
   selection,
+  setMessage,
   selectedCell,
   targetSelection,
   selectedAnnotation,
@@ -82,6 +83,7 @@ const WikificationMenu = ({
           <PropertyInput
             file={file}
             sheet={sheet}
+            setMessage={setMessage}
             selectedAnnotation={selectedAnnotation}
             selectedProperty={selectedCell.qnode}
             onSelectProperty={handleOnSelectProperty} />
