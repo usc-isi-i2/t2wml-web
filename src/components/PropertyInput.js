@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
+import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import EditIcon from '@material-ui/icons/Edit'
@@ -46,9 +47,11 @@ const PropertyInput = ({
           </Typography>
         </Grid>
         <Grid item xs={2}>
-          <IconButton aria-label="delete">
-            <EditIcon />
-          </IconButton>
+          <Tooltip arrow title="edit property" placement="left">
+            <IconButton aria-label="delete">
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
         </Grid>
       </React.Fragment>
     )
