@@ -57,7 +57,7 @@ const PropertyInput = ({
     )
   }
 
-  const renderPropertyCreate = () => {
+  const renderPropertyCreateButton = () => {
     if ( !!selected ) { return }
     return (
       <Grid item xs={12}>
@@ -68,24 +68,29 @@ const PropertyInput = ({
           onClick={() => setShowCreateProperty(true)}>
           Add a new property
         </Button>
-        {showCreateProperty && (
-          <CreateProperty
-            file={file}
-            sheet={sheet}
-            dataType={dataType}
-            setMessage={setMessage}
-            selectProperty={selectProperty}
-            selectedProperty={selectedProperty}
-            hideMenu={() => setShowCreateProperty(false)} />
-        )}
       </Grid>
+    )
+  }
+
+  const renderPropertyCreateMenu = () => {
+    if ( !showCreateProperty ) { return }
+    return (
+      <CreateProperty
+        file={file}
+        sheet={sheet}
+        dataType={dataType}
+        setMessage={setMessage}
+        selectProperty={selectProperty}
+        selectedProperty={selectedProperty}
+        hideMenu={() => setShowCreateProperty(false)} />
     )
   }
 
   return (
     <Grid container spacing={3}>
       {renderSelectedProperty()}
-      {renderPropertyCreate()}
+      {renderPropertyCreateButton()}
+      {renderPropertyCreateMenu()}
     </Grid>
   )
 }
