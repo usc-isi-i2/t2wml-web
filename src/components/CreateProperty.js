@@ -7,6 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
@@ -28,6 +29,13 @@ const useStyles = makeStyles(theme => ({
     minHeight: '50px',
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
+  },
+  submitButton: {
+    marginRight: theme.spacing(10),
+    position: 'relative',
+    '&.active': {
+      marginRight: theme.spacing(10),
+    },
   },
 }))
 
@@ -231,6 +239,9 @@ const CreateProperty = ({
       <Button
         color="primary"
         variant="contained"
+        disabled={loading}
+        className={classes.submitButton}
+        endIcon={<CircularProgress color="inherit" size={16} />}
         onClick={handleOnSubmit}>
         {!!selectedProperty ? (
           <span>Save Changes</span>
