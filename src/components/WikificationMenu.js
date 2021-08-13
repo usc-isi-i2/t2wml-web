@@ -127,6 +127,7 @@ const WikificationMenu = ({
             file={file}
             sheet={sheet}
             entity={entity}
+            setMessage={setMessage}
             updateEntity={updateEntity}
             property={selectedCell.qnode}
             hideMenu={() => setShowPropertyTagsMenu(false)} />

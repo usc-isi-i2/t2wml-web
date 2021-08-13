@@ -28,7 +28,14 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
+const PropertyTags = ({
+  file,
+  sheet,
+  entity,
+  updateEntity,
+  setMessage,
+  hideMenu,
+}) => {
 
   const classes = useStyles()
 
@@ -71,8 +78,25 @@ const PropertyTags = ({ file, sheet, entity, updateEntity, hideMenu }) => {
   const handleOnSelectTagValue = (key, value) => {
     setTags(tags => {
       tags[key] = value || ''
+
       uploadEntity(entity, tags, file, sheet)
-      .then(entity => updateEntity(entity))
+      .then(entity => {
+        updateEntity(entity)
+
+        // Show a success message
+        setMessage({
+          type: 'success',
+          text: 'Property tags were updated!',
+        })
+      })
+      .catch(error => {
+        setMessage({
+          type: 'error',
+          title: `${error.errorCode} - ${error.errorTitle}`,
+          text: error.errorDescription,
+        })
+      })
+
       return tags
     })
   }
