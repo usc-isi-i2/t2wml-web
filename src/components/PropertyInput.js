@@ -48,7 +48,8 @@ const PropertyInput = ({
         </Grid>
         <Grid item xs={2}>
           <Tooltip arrow title="edit property" placement="left">
-            <IconButton aria-label="delete">
+            <IconButton aria-label="delete"
+              onClick={() => setShowCreateProperty(true)}>
               <EditIcon />
             </IconButton>
           </Tooltip>
