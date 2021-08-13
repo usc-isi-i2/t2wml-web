@@ -133,7 +133,7 @@ const PropertyTags = ({
         })
       })
     }
-  }, [entity, tags, file, sheet, formState, updateEntity])
+  }, [entity, tags, file, sheet, formState, updateEntity, setMessage])
 
   const handleOnKeyDown = useCallback(event => {
 

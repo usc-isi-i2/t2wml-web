@@ -43,7 +43,7 @@ const WikificationMenu = ({
         setEntity(entity)
       })
     }
-  }, [selectedCell])
+  }, [selectedCell, file, sheet])
 
   const updateEntity = entity => {
     setEntity(entity)
