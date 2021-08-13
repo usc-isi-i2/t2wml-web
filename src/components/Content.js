@@ -32,6 +32,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const [confirmation, setConfirmation] = useState(false)
   const [confirmationText, setConfirmationText] = useState('')
   const [showConfirmation, setShowConfirmation] = useState(false)
+  const [loadingOutputData, setLoadingOutputData] = useState(false)
   const [loadingAnnotations, setLoadingAnnotations] = useState(false)
   const [showApplyAnnotations, setShowApplyAnnotations] = useState(false)
   const [colWidth, setColWidth] = useState('65vw')
@@ -56,9 +57,13 @@ const Content = ({darkTheme, setDarkTheme}) => {
   const updateOutputPreview = useCallback(() => {
     clearTimeout(outputDataTimeout)
     outputDataTimeout.current = setTimeout(() => {
+      setLoadingOutputData(true)
       setProjectData(projectData => {
         fetchPartialCSV(projectData.filepath, projectData.sheetName)
-        .then(output => setOutputData(output.cells))
+        .then(output => {
+          setOutputData(output.cells)
+          setLoadingOutputData(false)
+        })
         .catch(error => {
           setMessage({
             type: 'error',
