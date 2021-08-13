@@ -1,4 +1,4 @@
-const uploadEntity = (entity, tags, file, sheet) => {
+const uploadEntity = (entity, file, sheet) => {
   let url = `/api/causx/entity/${entity.id}`
   url += `?data_file=${file}`
   url += `&sheet_name=${sheet}`

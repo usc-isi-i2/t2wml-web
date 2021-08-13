@@ -79,7 +79,7 @@ const PropertyTags = ({
     setTags(tags => {
       tags[key] = value || ''
 
-      uploadEntity(entity, tags, file, sheet)
+      uploadEntity(entity, file, sheet)
       .then(entity => {
         updateEntity(entity)
 
@@ -107,7 +107,7 @@ const PropertyTags = ({
     }
 
     if ( validateInput('Relevance', tags['Relevance']) ) {
-      uploadEntity(entity, tags, file, sheet)
+      uploadEntity(entity, file, sheet)
       .then(entity => {
         updateEntity(entity)
         if ( !!formState.newTagKey && !!formState.newTagValue ) {
