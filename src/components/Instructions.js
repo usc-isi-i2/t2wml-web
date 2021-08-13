@@ -22,21 +22,29 @@ const Instructions = () => {
 
   const classes = useStyles()
 
+  const renderInstructions = () => {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6">
+          In order to annotate the data:
+        </Typography>
+        <Typography variant="h6">
+          1. Select the main subject
+        </Typography>
+        <Typography variant="h6">
+          2. Select the dependent variable
+        </Typography>
+        <Typography variant="h6">
+          3. Select data properties and qualifiers
+        </Typography>
+      </Paper>
+    )
+  }
+
   return (
-    <Paper className={classes.paper}>
-      <Typography variant="h6">
-        In order to annotate the data:
-      </Typography>
-      <Typography variant="h6">
-        1. Select the main subject
-      </Typography>
-      <Typography variant="h6">
-        2. Select the dependent variable
-      </Typography>
-      <Typography variant="h6">
-        3. Select data properties and qualifiers
-      </Typography>
-    </Paper>
+    <React.Fragment>
+      {renderInstructions()}
+    </React.Fragment>
   )
 }
 
