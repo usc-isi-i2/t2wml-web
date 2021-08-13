@@ -140,6 +140,7 @@ const Table = ({
               value: qnode.value,
               description: qnode.description,
               data_type: qnode.data_type,
+              tags: qnode.tags,
               url: qnode.url,
             },
           }
@@ -235,6 +236,25 @@ const Table = ({
             'string',
           )
           .then(layers => {
+
+            // Check for property qnodes without tags and pre-fetch the tags
+            const entries = []
+            const fetchPromises = []
+            layers.qnode.entries.forEach(entry => {
+              if ( entry.id[0] === 'P' ) {
+                fetchPromises.push(
+                  fetchEntity(entry, projectData.filepath, projectData.sheetName)
+                  .then(entity => entries.push({...entry, tags: entity.tags}))
+                )
+              } else {
+                entries.push(entry)
+              }
+            })
+
+            // Update qnode layers with the augmented entries with tags
+            Promise.all(fetchPromises).then(() => {
+              updateTableDataLayers({qnode: {entries}})
+            })
             updateTableDataLayers(layers)
 
             // Show a success message
