@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
@@ -9,7 +9,6 @@ import { makeStyles } from '@material-ui/styles'
 import QnodeInput from './QnodeInput'
 import PropertyTags from './PropertyTags'
 import PropertyInput from './PropertyInput'
-import fetchEntity from '../utils/fetchEntity'
 import * as utils from '../utils/table'
 
 
@@ -35,18 +34,8 @@ const WikificationMenu = ({
   const classes = useStyles()
 
   const [showPropertyTagsMenu, setShowPropertyTagsMenu] = useState(false)
-  const [entity, setEntity] = useState([])
-
-  useEffect(() => {
-    if ( !!selectedCell.qnode ) {
-      fetchEntity(selectedCell.qnode, file, sheet).then(entity => {
-        setEntity(entity)
-      })
-    }
-  }, [selectedCell, file, sheet])
 
   const updateEntity = entity => {
-    setEntity(entity)
     updateOutputPreview()
   }
 
@@ -92,7 +81,7 @@ const WikificationMenu = ({
             file={file}
             sheet={sheet}
             setMessage={setMessage}
-            selectedProperty={entity}
+            selectedProperty={selectedCell.qnode}
             selectedAnnotation={selectedAnnotation}
             onSelectProperty={handleOnSelectProperty} />
         </Grid>
@@ -131,7 +120,7 @@ const WikificationMenu = ({
           <PropertyTags
             file={file}
             sheet={sheet}
-            entity={entity}
+            entity={selectedCell.qnode}
             setMessage={setMessage}
             updateEntity={updateEntity}
             hideMenu={() => setShowPropertyTagsMenu(false)} />
