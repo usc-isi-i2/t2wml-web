@@ -106,7 +106,7 @@ const AnnotationMenu = ({
     event.preventDefault()
 
     if ( !selectedAnnotation ) {
-      submitNewAnnotation(formState)
+      submitNewAnnotation(userChangedFormState ? formState : {})
     }
   }
 
