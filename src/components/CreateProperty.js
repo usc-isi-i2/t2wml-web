@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import DraggablePaper from './DraggablePaper'
 import ConfirmationDialog from './ConfirmationDialog'
 import uploadProperty from '../utils/uploadProperty'
+import uploadEntity from '../utils/uploadEntity'
 
 
 const useStyles = makeStyles(theme => ({
@@ -77,6 +78,42 @@ const CreateProperty = ({
 
   const handleOnSubmit = () => {
     if ( !formState.qnodeLabel ) { return }
+
+    if ( !!selectedProperty ) {
+      updateSelectedProperty()
+    } else {
+      submitNewProperty()
+    }
+  }
+
+  const updateSelectedProperty = () => {
+    const entity = {
+      ...selectedProperty,
+      label: formState.qnodeLabel,
+      description: formState.qnodeDescription,
+    }
+
+    uploadEntity(entity, {}, file, sheet)
+    .then(entity => {
+      selectProperty(entity)
+      hideMenu()
+
+      // Show a success message
+      setMessage({
+        type: 'success',
+        text: 'Property is updated!',
+      })
+    })
+    .catch(error => {
+      setMessage({
+        type: 'error',
+        title: `${error.errorCode} - ${error.errorTitle}`,
+        text: error.errorDescription,
+      })
+    })
+  }
+
+  const submitNewProperty = () => {
     uploadProperty(file, sheet, formState, dataType)
     .then(property => {
       selectProperty(property)
