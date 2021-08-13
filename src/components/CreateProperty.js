@@ -164,7 +164,11 @@ const CreateProperty = ({
   const renderTitle = () => {
     return (
       <React.Fragment>
-        Create a new property
+        {!!selectedProperty ? (
+          <span>Edit property</span>
+        ) : (
+          <span>Create a new property</span>
+        )}
         <IconButton onClick={handleOnClose}>
           <CloseIcon />
         </IconButton>
@@ -175,9 +179,15 @@ const CreateProperty = ({
   const renderFormInstructions = () => {
     return (
       <Grid item xs={12}>
-        <FormHelperText component="p">
-          Use this form to create a new property
-        </FormHelperText>
+        {!!selectedProperty ? (
+          <FormHelperText component="p">
+            Use this form to edit property label and/or description
+          </FormHelperText>
+        ) : (
+          <FormHelperText component="p">
+            Use this form to create a new property
+          </FormHelperText>
+        )}
       </Grid>
     )
   }
