@@ -723,11 +723,6 @@ const Table = ({
   }, [selectedAnnotationBlock, annotationBlocks, updateAnnotationBlocks])
 
   useEffect(() => {
-    resetSelections()
-    updateSelections()
-  }, [resetSelections, updateSelections])
-
-  useEffect(() => {
     if ( !suggestedAnnotations ) { return }
 
     // show the annotation blocks for the suggested/guessed annotations
