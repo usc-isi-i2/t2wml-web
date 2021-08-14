@@ -856,6 +856,7 @@ const Table = ({
       setShowOverlayMenu(false)
       setUserSelecting(true)
       element = element.parentElement
+      return
     }
 
     // Set both coordinates to the same cell
