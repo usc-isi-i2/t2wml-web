@@ -865,7 +865,6 @@ const Table = ({
       const y2 = parseInt(element.dataset.rowIndex)
       if ( !x1 || !x2 || !y1 || !y2 ) { return }
       const newSelection = { x1, x2, y1, y2 }
-      //setTargetSelection(newSelection) NOT WHEN RESIZING WITH THE CORNER
 
       // check if the user is selecting an annotation block
       const selectedBlock = utils.checkSelectedAnnotationBlocks(newSelection, annotationBlocks)
@@ -875,6 +874,12 @@ const Table = ({
         if ( selectedBlock !== selectedAnnotationBlock ) {
           setSelectedAnnotationBlock(selectedBlock)
           selection.current = selectedBlock.selection
+          setTargetSelection({
+            x1: selection.current.x1,
+            x2: selection.current.x2,
+            y1: selection.current.y1,
+            y2: selection.current.y2,
+          })
         } else {
           updateAnnotationBlocks()
         }
