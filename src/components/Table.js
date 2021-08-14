@@ -788,7 +788,9 @@ const Table = ({
       setAnnotationBlocks(annotationBlocks => {
         setSelectedAnnotationBlock(selectedAnnotationBlock => {
 
-          const allSelections = annotationBlocks.map(block => block.selection)
+          const allSelections = annotationBlocks.filter(block =>
+            block.id !== selectedAnnotationBlock.id
+          ).map(block => block.selection)
           const collisionDetected = utils.checkOverlaps(
             selection.current,
             allSelections,
