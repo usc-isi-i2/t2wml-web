@@ -106,13 +106,15 @@ const AnnotationMenu = ({
 
     if ( !selectedAnnotation ) {
       submitNewAnnotation(userChangedFormState ? formState : {})
-      hideOverlayMenu()
     } else {
       setMessage({
         type: 'success',
         text: 'Your changes have been saved!',
       })
     }
+
+    // Close annotation menu
+    hideOverlayMenu()
   }
 
   const getFormValue = useCallback(field => {
