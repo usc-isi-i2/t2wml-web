@@ -420,6 +420,7 @@ const Table = ({
   }, [])
 
   const hideOverlayMenu = useCallback(() => {
+    removeAnnotationBlocks([{selection: selection.current}])
     setShowOverlayMenu(false)
     setSelectedAnnotationBlock(undefined)
     setTargetSelection(undefined)
