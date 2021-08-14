@@ -106,6 +106,7 @@ const AnnotationMenu = ({
 
     if ( !selectedAnnotation ) {
       submitNewAnnotation(userChangedFormState ? formState : {})
+      hideOverlayMenu()
     }
   }
 
