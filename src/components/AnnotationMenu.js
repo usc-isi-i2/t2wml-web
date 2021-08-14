@@ -107,10 +107,7 @@ const AnnotationMenu = ({
     if ( !selectedAnnotation ) {
       submitNewAnnotation(userChangedFormState ? formState : {})
     } else {
-      setMessage({
-        type: 'success',
-        text: 'Your changes have been saved!',
-      })
+      saveAnnotationChanges()
     }
 
     // Close annotation menu
@@ -133,15 +130,8 @@ const AnnotationMenu = ({
     return ''
   }, [annotation, formState, suggestion, userChangedFormState])
 
-  useEffect(() => {
-    // form state has changed, update selected annotation
-    if ( !selectedAnnotation ) { return }
-
-    // skip if the form state is empty (on init)
-    if ( Object.keys(formState).map(key => !!formState[key]).every(x => !x) ) {
-      return
-    }
-
+  const saveAnnotationChanges = () => {
+    // get a list of all other annotations
     const filteredAnnotations = annotations.filter(
       annotation => annotation !== selectedAnnotation
     )
@@ -155,6 +145,7 @@ const AnnotationMenu = ({
     const format = getFormValue('format')
     const id = annotation.id
 
+    // add updated annotation to the list with the others
     filteredAnnotations.push({
       selection: {...selection},
       role: role,
@@ -178,6 +169,12 @@ const AnnotationMenu = ({
           .then(layers => updateTableDataLayers(layers))
         }
       }
+
+      // Show a success message
+      setMessage({
+        type: 'success',
+        text: 'Your changes have been saved!',
+      })
     })
     .catch(error => {
       setMessage({
@@ -186,6 +183,19 @@ const AnnotationMenu = ({
         text: error.errorDescription,
       })
     })
+  }
+
+  useEffect(() => {
+    // form state has changed, update selected annotation
+    if ( !selectedAnnotation ) { return }
+
+    // skip if the form state is empty (on init)
+    if ( Object.keys(formState).map(key => !!formState[key]).every(x => !x) ) {
+      return
+    }
+
+    // save annotation changes
+    saveAnnotationChanges()
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState])
