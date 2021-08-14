@@ -856,6 +856,31 @@ const Table = ({
       setShowOverlayMenu(false)
       setUserSelecting(true)
       element = element.parentElement
+
+      const x1 = parseInt(element.dataset.colIndex)
+      const x2 = parseInt(element.dataset.colIndex)
+      const y1 = parseInt(element.dataset.rowIndex)
+      const y2 = parseInt(element.dataset.rowIndex)
+      if ( !x1 || !x2 || !y1 || !y2 ) { return }
+      const newSelection = { x1, x2, y1, y2 }
+      //setTargetSelection(newSelection) NOT WHEN RESIZING WITH THE CORNER
+
+      // check if the user is selecting an annotation block
+      const selectedBlock = utils.checkSelectedAnnotationBlocks(newSelection, annotationBlocks)
+      if ( selectedBlock ) {
+
+        // Reset annotation menu
+        if ( selectedBlock !== selectedAnnotationBlock ) {
+          setSelectedAnnotationBlock(selectedBlock)
+          selection.current = selectedBlock.selection
+        } else {
+          updateAnnotationBlocks()
+        }
+      }
+
+      updateSelections()
+      resetSelections()
+
       return
     }
 
