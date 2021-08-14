@@ -102,7 +102,7 @@ const ProjectMenu = ({
         className={classes.menu}
         anchorEl={anchorElement}
         onClose={hideProjectMenu}>
-        <MenuItem onClick={openProjectSettings}>Settings</MenuItem>
+        <MenuItem onClick={openProjectSettings}>Project Settings</MenuItem>
         <MenuItem onClick={suggestAnnotations} disabled={loadingAnnotations}>
           <Typography>Suggest Annotations</Typography>
           {loadingAnnotations ? (
