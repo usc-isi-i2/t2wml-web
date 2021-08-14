@@ -743,7 +743,22 @@ const Table = ({
     suggestedAnnotations.forEach(annotation => {
       if ( annotation.role === 'mainSubject' ) {
         wikifyRegion(projectData.filepath, projectData.sheetName, annotation.selection)
-        .then(layers => setLayers(layers))
+        .then(layers => {
+          setLayers(layers)
+
+          // Show a success message
+          setMessage({
+            type: 'success',
+            text: 'Countries wikifed automatically!',
+          })
+        })
+        .catch(error => {
+          setMessage({
+            type: 'error',
+            title: `${error.errorCode} - ${error.errorTitle}`,
+            text: error.errorDescription,
+          })
+        })
       }
     })
 
