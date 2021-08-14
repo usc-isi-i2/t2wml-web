@@ -127,6 +127,12 @@ const Table = ({
 
   }, [projectData, tableDataInitialized])
 
+  useEffect(() => {
+    if ( 'qnode' in layers && 'entries' in layers.qnode ) {
+      updateTableDataLayers(layers)
+    }
+  }, [layers])
+
   const updateTableDataLayers = layers => {
     setTableData(prevTableData => {
       const tableData = {...prevTableData}
@@ -212,7 +218,7 @@ const Table = ({
         if ( newAnnotation.role === 'mainSubject' ) {
           wikifyRegion(projectData.filepath, projectData.sheetName, newAnnotation.selection)
           .then(layers => {
-            updateTableDataLayers(layers)
+            setLayers(layers)
 
             // Show a success message
             setMessage({
@@ -253,9 +259,8 @@ const Table = ({
 
             // Update qnode layers with the augmented entries with tags
             Promise.all(fetchPromises).then(() => {
-              updateTableDataLayers({qnode: {entries}})
+              setLayers({qnode: {entries}})
             })
-            updateTableDataLayers(layers)
 
             // Show a success message
             setMessage({
@@ -712,12 +717,6 @@ const Table = ({
   }, [resetSelections, updateSelections])
 
   useEffect(() => {
-    if ( 'qnode' in layers && 'entries' in layers.qnode ) {
-      updateTableDataLayers(layers)
-    }
-  }, [layers])
-
-  useEffect(() => {
     if ( !suggestedAnnotations ) { return }
 
     // show the annotation blocks for the suggested/guessed annotations
@@ -733,7 +732,7 @@ const Table = ({
     suggestedAnnotations.forEach(annotation => {
       if ( annotation.role === 'mainSubject' ) {
         wikifyRegion(projectData.filepath, projectData.sheetName, annotation.selection)
-        .then(layers => updateTableDataLayers(layers))
+        .then(layers => setLayers(layers))
       }
     })
 
