@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 import { makeStyles } from '@material-ui/styles'
 
-import QnodeInput from './QnodeInput'
 import PropertyTags from './PropertyTags'
 import PropertyInput from './PropertyInput'
 import * as utils from '../utils/table'
@@ -38,10 +37,6 @@ const WikificationMenu = ({
   const updateEntity = entity => {
     updateOutputPreview()
   }
-
-  const handleOnSelectQnode = () => {}
-
-  const handleOnSelectProperty = () => {}
 
   const renderCellContent = () => {
     return (
@@ -81,22 +76,12 @@ const WikificationMenu = ({
             file={file}
             sheet={sheet}
             setMessage={setMessage}
+            onSelectProperty={updateEntity}
             selectedProperty={selectedCell.qnode}
-            selectedAnnotation={selectedAnnotation}
-            onSelectProperty={handleOnSelectProperty} />
+            selectedAnnotation={selectedAnnotation} />
         </Grid>
       )
     }
-    return (
-      <Grid item xs={12}>
-        <QnodeInput
-          file={file}
-          sheet={sheet}
-          selectedQnode={selectedCell.qnode}
-          selectedAnnotation={selectedAnnotation}
-          onSelectQnode={handleOnSelectQnode} />
-      </Grid>
-    )
   }
 
   const openPropertyTagsMenu = () => {
