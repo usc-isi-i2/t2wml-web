@@ -209,6 +209,10 @@ const App = () => {
         root: {
           '& .MuiPaper-root': {
             minWidth: '350px',
+            '&.MuiAlert-message': {
+              textAlign: 'center',
+              flex: '1 auto',
+            },
           },
         },
       },
