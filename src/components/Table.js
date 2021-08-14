@@ -766,7 +766,7 @@ const Table = ({
     if ( !!suggestedAnnotations.length ) {
       updateOutputPreview()
     }
-  }, [suggestedAnnotations, projectData.filepath, projectData.sheetName, updateOutputPreview])
+  }, [suggestedAnnotations, projectData.filepath, projectData.sheetName, updateOutputPreview, setMessage])
 
   useEffect(() => {
     setSelectedAnnotationBlock(selectedAnnotation => {
