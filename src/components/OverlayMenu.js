@@ -45,6 +45,7 @@ const OverlayMenu = ({
   updateAnnotation,
   updateTableDataLayers,
   updateOutputPreview,
+  updateQnodeLayer,
   hideOverlayMenu,
   setMessage,
 }) => {
@@ -102,6 +103,7 @@ const OverlayMenu = ({
             setMessage={setMessage}
             selectedCell={selectedCell}
             targetSelection={targetSelection}
+            updateQnodeLayer={updateQnodeLayer}
             selectedAnnotation={selectedAnnotation}
             updateOutputPreview={updateOutputPreview} />
         </TabPanel>

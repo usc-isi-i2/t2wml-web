@@ -156,6 +156,17 @@ const Table = ({
     })
   }
 
+  const updateQnodeLayer = entity => {
+    const entries = layers.qnode.entries.map(qnode => {
+      if ( qnode.id === entity.id ) {
+        return {...qnode, ...entity}
+      }
+      return qnode
+    })
+    setLayers({qnode: {entries}})
+    updateOutputPreview()
+  }
+
   useEffect(() => {
 
     // user is opening the annotation menu with a selection
@@ -1063,11 +1074,12 @@ const Table = ({
         setSelectedTab={setSelectedTab}
         selectedCell={selectedCell}
         targetSelection={{...targetSelection}}
-        updateTableDataLayers={updateTableDataLayers}
         selection={selection.current}
         annotations={annotationBlocks}
+        updateQnodeLayer={updateQnodeLayer}
         suggestedAnnotation={suggestedAnnotation}
         submitNewAnnotation={submitNewAnnotation}
+        updateTableDataLayers={updateTableDataLayers}
         selectedAnnotation={selectedAnnotationBlock}
         onSelectionChange={handleOnSelectionChange}
         updateOutputPreview={updateOutputPreview}

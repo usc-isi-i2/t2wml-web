@@ -28,6 +28,7 @@ const WikificationMenu = ({
   targetSelection,
   selectedAnnotation,
   updateOutputPreview,
+  updateQnodeLayer,
 }) => {
 
   const classes = useStyles()
@@ -35,6 +36,7 @@ const WikificationMenu = ({
   const [showPropertyTagsMenu, setShowPropertyTagsMenu] = useState(false)
 
   const updateEntity = entity => {
+    updateQnodeLayer(entity)
     updateOutputPreview()
   }
 
