@@ -891,14 +891,19 @@ const Table = ({
 
         // Reset annotation menu
         if ( selectedBlock !== selectedAnnotationBlock ) {
+
+          // Set the selection to be that of the selected annotation block
           setSelectedAnnotationBlock(selectedBlock)
           selection.current = selectedBlock.selection
-          setTargetSelection({
+
+          // set the target cell to be top-left of the selection block
+          const target = {
             x1: selection.current.x1,
             x2: selection.current.x2,
             y1: selection.current.y1,
             y2: selection.current.y2,
-          })
+          }
+          setTargetSelection(target)
         } else {
           updateAnnotationBlocks()
         }
