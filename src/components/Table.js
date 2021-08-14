@@ -826,23 +826,23 @@ const Table = ({
               updateAnnotationBlocks()
               resetSelections()
             }
-
-            // user is opening overlay menu for the first time
-            setShowOverlayMenu(showOverlayMenu => {
-              if ( !showOverlayMenu ) {
-                // set the selected overlay menu tab to either cell or block
-                if ( utils.singleCellSelection(selection.current) ) {
-                  setSelectedTab('cell') // user selected a single cell
-                } else {
-                  setSelectedTab('block') // user selected a block
-                }
-              }
-
-              // show the overlay menu when creating a new annotation
-              // show the overlay menu when selecting an existing annotation
-              return true
-            })
           }
+
+          // user is opening overlay menu for the first time
+          setShowOverlayMenu(showOverlayMenu => {
+            if ( !showOverlayMenu ) {
+              // set the selected overlay menu tab to either cell or block
+              if ( utils.singleCellSelection(selection.current) ) {
+                setSelectedTab('cell') // user selected a single cell
+              } else {
+                setSelectedTab('block') // user selected a block
+              }
+            }
+
+            // show the overlay menu when creating a new annotation
+            // show the overlay menu when selecting an existing annotation
+            return true
+          })
 
           return selectedAnnotationBlock
         })
