@@ -788,13 +788,31 @@ const Table = ({
       setAnnotationBlocks(annotationBlocks => {
         setSelectedAnnotationBlock(selectedAnnotationBlock => {
 
-          const allSelections = annotationBlocks.filter(block =>
-            block.id !== selectedAnnotationBlock.id
-          ).map(block => block.selection)
-          const collisionDetected = utils.checkOverlaps(
-            selection.current,
-            allSelections,
-          )
+          // annotation block already selected
+          if ( !!selectedAnnotationBlock ) {
+
+            // check for overlaps with other blocks
+            const allSelections = annotationBlocks.filter(block =>
+              block.id !== selectedAnnotationBlock.id
+            ).map(block => block.selection)
+            const collisionDetected = utils.checkOverlaps(
+              selection.current,
+              allSelections,
+            )
+
+            // hide the overlay meny if users are resizing with overlaps
+            if ( !!selectedAnnotationBlock && collisionDetected ) {
+              // resizing one of the annotation blocks overlaps another block
+              if ( !utils.areSelectionsEqual(selection.current, selectedAnnotationBlock.selection) ) {
+                setShowOverlayMenu(false)
+                setSelectedAnnotationBlock(undefined)
+                setTargetSelection(undefined)
+                updateSelections(selection.current)
+                updateAnnotationBlocks()
+                resetSelections()
+              }
+            }
+          }
 
           // user is opening overlay menu for the first time
           setShowOverlayMenu(showOverlayMenu => {
@@ -811,19 +829,6 @@ const Table = ({
             // show the overlay menu when selecting an existing annotation
             return true
           })
-
-          // hide the overlay meny if users are resizing with overlaps
-          if ( !!selectedAnnotationBlock && collisionDetected ) {
-            // resizing one of the annotation blocks overlaps another block
-            if ( !utils.areSelectionsEqual(selection.current, selectedAnnotationBlock.selection) ) {
-              setShowOverlayMenu(false)
-              setSelectedAnnotationBlock(undefined)
-              setTargetSelection(undefined)
-              updateSelections(selection.current)
-              updateAnnotationBlocks()
-              resetSelections()
-            }
-          }
 
           return selectedAnnotationBlock
         })
