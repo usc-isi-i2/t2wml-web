@@ -21,7 +21,7 @@ const downloadFile = (project, file, sheet, fileType, url) => {
     .then(response => response.blob())
     .then(blob => {
       if (navigator.msSaveBlob) { // IE 10+
-          navigator.msSaveBlob(blob, file)
+          navigator.msSaveBlob(blob, filename)
       } else {
         const link = document.createElement('a')
         if ( link.download !== undefined ) { // feature detection
