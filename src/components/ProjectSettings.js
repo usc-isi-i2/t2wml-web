@@ -18,8 +18,8 @@ import uploadSettings from '../utils/uploadSettings'
 const useStyles = makeStyles(theme => ({
   projectSettings: {
     position: 'absolute',
-    top: theme.spacing(10),
-    left: theme.spacing(5),
+    top: '10vh',
+    left: '10vw',
   },
 }))
 

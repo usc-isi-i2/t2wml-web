@@ -19,8 +19,8 @@ import uploadQnode from '../utils/uploadQnode'
 const useStyles = makeStyles(theme => ({
   menu: {
     position: 'absolute',
-    top: theme.spacing(54),
-    right: theme.spacing(80),
+    top: '10vh',
+    right: '10vw',
   },
   form: {
     minHeight: '50px',

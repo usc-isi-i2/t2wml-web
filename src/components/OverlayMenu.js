@@ -20,8 +20,8 @@ import * as utils from '../utils/table'
 const useStyles = makeStyles(theme => ({
   overlayMenu: {
     position: 'absolute',
-    top: theme.spacing(4),
-    right: theme.spacing(15),
+    top: '5vh',
+    right: '10vw',
     '& > .MuiDialogTitle-root': {
       padding: 0,
     },

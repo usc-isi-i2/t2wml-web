@@ -22,8 +22,8 @@ const useStyles = makeStyles(theme => ({
   menu: {
     minWidth: '550px',
     position: 'absolute',
-    top: theme.spacing(4),
-    right: theme.spacing(80),
+    top: '5vh',
+    left: '5vw',
   },
 }))
 
