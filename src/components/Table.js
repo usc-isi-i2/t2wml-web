@@ -1051,7 +1051,7 @@ const Table = ({
     })
   }
 
-  const updateAnnotation = (annotations, deletedAnnotationBlock=null) => {
+  const updateAnnotations = (annotations, deletedAnnotationBlock=null) => {
     if ( annotations && annotations instanceof Array ) {
       setAnnotationBlocks(annotationBlocks => {
         if ( deletedAnnotationBlock ) {
@@ -1161,7 +1161,7 @@ const Table = ({
         selectedAnnotation={selectedAnnotationBlock}
         onSelectionChange={handleOnSelectionChange}
         updateOutputPreview={updateOutputPreview}
-        updateAnnotation={updateAnnotation}
+        updateAnnotations={updateAnnotations}
         hideOverlayMenu={hideOverlayMenu}
         setMessage={setMessage} />
     )

@@ -40,7 +40,7 @@ const AnnotationMenu = ({
   selection,
   annotations,
   hideOverlayMenu,
-  updateAnnotation,
+  updateAnnotations,
   onSelectionChange,
   selectedAnnotation,
   suggestedAnnotation,
@@ -158,7 +158,7 @@ const AnnotationMenu = ({
     .then(data => {
 
       // update annotations in the table component
-      updateAnnotation(data.annotations)
+      updateAnnotations(data.annotations)
 
       if ( utils.isWikifyable({role: getFormValue('role')}) ) {
         if ( getFormValue('role') === 'mainSubject' ) {
@@ -208,7 +208,7 @@ const AnnotationMenu = ({
     )
 
     uploadAnnotations(file, sheet, filteredAnnotations, () => {}).then(data => {
-      updateAnnotation(data.annotations, selectedAnnotation)
+      updateAnnotations(data.annotations, selectedAnnotation)
       hideOverlayMenu()
     }).catch(error => {
       hideOverlayMenu()
