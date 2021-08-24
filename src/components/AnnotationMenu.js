@@ -159,7 +159,10 @@ const AnnotationMenu = ({
     })
     uploadAnnotations(file, sheet, filteredAnnotations, () => {})
     .then(data => {
+
+      // update annotations in the table component
       updateAnnotation(data.annotations)
+
       if ( utils.isWikifyable({role: getFormValue('role')}) ) {
         if ( getFormValue('role') === 'mainSubject' ) {
           wikifyRegion(file, sheet, selection)
