@@ -297,6 +297,9 @@ const Table = ({
         text: error.errorDescription,
       })
     })
+
+    // Close the annotation/wikification menu
+    hideOverlayMenu()
   }
 
   const updateAnnotationBlocks = useCallback(() => {

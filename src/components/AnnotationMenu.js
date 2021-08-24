@@ -109,9 +109,6 @@ const AnnotationMenu = ({
     } else {
       saveAnnotationChanges()
     }
-
-    // Close annotation menu
-    hideOverlayMenu()
   }
 
   const getFormValue = useCallback(field => {
