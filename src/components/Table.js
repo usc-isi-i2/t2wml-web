@@ -1080,7 +1080,7 @@ const Table = ({
           {({ height, width }) => (
             <VirtualizedTable
               width={cols.current.length * 77.5}
-              height={height}
+              height={height - 15}
               headerHeight={26}
               rowHeight={25}
               className={userSelecting ? 'active': ''}
