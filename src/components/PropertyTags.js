@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -10,6 +11,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
+import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -27,7 +29,15 @@ const useStyles = makeStyles(theme => ({
   },
   noOptionsLabel: {
     color: 'red',
+    display: 'block',
     fontWeight: 'bold',
+    marginBottom: theme.spacing(2),
+  },
+  createFactorClassButton: {
+    '&:hover': {
+      color: 'red',
+      transition: 'color 150ms ease',
+    },
   },
 }))
 
@@ -157,6 +167,10 @@ const PropertyTags = ({
     }
   }, [handleOnKeyDown])
 
+  const handleOnCreateFactorClass = event => {
+    console.log(event)
+  }
+
   const validateInput = (key, value) => {
     if ( key === 'Relevance' ) {
       if ( !value ) {
@@ -270,8 +284,16 @@ const PropertyTags = ({
                   options={DEFAULT_TAGS[key]}
                   onChange={(event, option) => handleOnSelectTagValue(key, option)}
                   noOptionsText={key === 'FactorClass' ? (
-                    <span className={classes.noOptionsLabel}>
-                      This is not one of the pre-defined FactorClass tags - a new tag will be created
+                    <span>
+                      <Typography variant="body1" className={classes.noOptionsLabel}>
+                        This is not one of the pre-defined FactorClass tags - do you want to create a new tag?
+                      </Typography>
+                      <Button
+                        startIcon={<CheckIcon />}
+                        onClick={handleOnCreateFactorClass}
+                        className={classes.createFactorClassButton}>
+                        Yes, create new tag
+                      </Button>
                     </span>
                   ) : (
                     <span>No options available</span>
