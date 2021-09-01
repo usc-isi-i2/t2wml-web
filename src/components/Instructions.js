@@ -10,12 +10,11 @@ import classNames from '../utils/classNames'
 
 const useStyles = makeStyles(theme => ({
   instructions: {
+    width: '100%',
+    height: '100%',
+    overflow: 'auto',
+    position: 'relative',
     padding: theme.spacing(3),
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
     '&.loading': {
       opacity: 0.5,
     },

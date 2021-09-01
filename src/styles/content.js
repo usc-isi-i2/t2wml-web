@@ -5,6 +5,7 @@ const useStyles = makeStyles(theme => ({
   content: {
     width: '100vw',
     height: '100vh',
+    overflow: 'auto',
     background: theme.palette.type === 'dark' ?
       'linear-gradient(180deg, #4D4D4D, #737373)' :
       'linear-gradient(180deg, #d8d8d8, #fefefe)',
@@ -14,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     left: 0,
     right: 0,
     bottom: 0,
-    height: '95vh',
+    height: 'calc(100vh - 48px)',
     overflow: 'hidden',
     position: 'relative',
   },
@@ -25,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     bottom: 0,
     width: '50vw',
     float: 'left',
-    overflowX: 'scroll',
+    overflowX: 'auto',
     overflowY: 'hidden',
   },
   divider: {
