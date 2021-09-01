@@ -94,7 +94,7 @@ const ProjectSettings = ({
     clearTimeout(timeoutID.current)
     timeoutID.current = setTimeout(() => {
       handleOnSubmit()
-    }, 250)
+    }, 1000)
   }
 
   const renderTitle = () => {
