@@ -77,6 +77,9 @@ const Table = ({
   }
 
   useEffect(() => {
+    // Don't bother if the table data was already initialized
+    if ( tableDataInitialized ) { return }
+
     // update project annotations
     const annotations = projectData.annotations
     if ( !!annotations ) {
@@ -86,10 +89,27 @@ const Table = ({
     // update project layers
     const layers = projectData.layers
     if ( !!layers && 'qnode' in layers && 'entries' in layers.qnode ) {
-      setLayers(layers)
+
+      // Check for property qnodes without tags and pre-fetch the tags
+      const entries = []
+      const fetchPromises = []
+      layers.qnode.entries.forEach(entry => {
+        if ( entry.id[0] === 'P' ) {
+          fetchPromises.push(
+            fetchEntity(entry, projectData.filepath, projectData.sheetName)
+            .then(entity => entries.push({...entry, tags: entity.tags}))
+          )
+        } else {
+          entries.push(entry)
+        }
+      })
+
+      // Update qnode layers with the augmented entries with tags
+      Promise.all(fetchPromises).then(() => {
+        setLayers({qnode: {entries}})
+      })
     }
 
-    if ( tableDataInitialized ) { return }
     setTableData(prev => {
       rows.current = [...Array(Math.max(projectData.table.dims[0], 100))] // at least 100 rows
       cols.current = [...Array(Math.max(projectData.table.dims[1], 26))]  // at least 26 cols
