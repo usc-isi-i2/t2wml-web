@@ -255,7 +255,61 @@ const PropertyTags = ({
     )
   }
 
+  const renderFactorClassInput = (key, value, input) => {
+    return (
+      <Autocomplete
+        fullWidth={true}
+        clearOnBlur={false}
+        selectOnFocus={false}
+        options={DEFAULT_TAGS[key]}
+        onChange={(event, option) => handleOnSelectTagValue(key, option)}
+        noOptionsText={
+          <span>
+            <Typography variant="body1" className={classes.noOptionsLabel}>
+              This is not one of the pre-defined FactorClass options - would you like to create a new one?
+            </Typography>
+            <Button
+              startIcon={<CheckIcon />}
+              onMouseDown={handleOnCreateFactorClass}
+              className={classes.createFactorClassButton}>
+              Yes, create a new Factor Class
+            </Button>
+          </span>
+        }
+        value={value || null}
+        renderOption={option => (
+          <Typography variant="body1" key={option}>
+            {option}
+          </Typography>
+        )}
+        renderInput={params => (
+          <TextField {...params}
+            fullWidth
+            size="small"
+            name="value"
+            label="Value"
+            variant="outlined"
+            autoCorrect="off"
+            autoComplete="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <React.Fragment>
+                  {params.InputProps.endAdornment}
+                </React.Fragment>
+              ),
+            }} />
+        )}
+      />
+    )
+  }
+
   const renderAutocompleteInput = (key, value, options) => {
+    if ( key === 'FactorClass' ) {
+      return renderFactorClassInput(key, value, options)
+    }
     return (
       <Autocomplete
         fullWidth={true}
