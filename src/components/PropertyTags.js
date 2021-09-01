@@ -77,7 +77,8 @@ const PropertyTags = ({
 
   const handleOnTagChange = (event, key) => {
     const value = event.target.value
-    setTags(tags => {
+    setTags(prevTags => {
+      const tags = {...prevTags}
       tags[key] = value
       return tags
     })
@@ -90,10 +91,11 @@ const PropertyTags = ({
   }
 
   const handleOnSelectTagValue = (key, value) => {
-    setTags(tags => {
+    setTags(prevTags => {
+      const tags = {...prevTags}
       tags[key] = value || ''
 
-      uploadEntity(entity, file, sheet)
+      uploadEntity(entity, tags, file, sheet)
       .then(entity => {
         updateEntity(entity)
 
@@ -121,7 +123,7 @@ const PropertyTags = ({
     }
 
     if ( validateInput('Relevance', tags['Relevance']) ) {
-      uploadEntity(entity, file, sheet)
+      uploadEntity(entity, tags, file, sheet)
       .then(entity => {
         updateEntity(entity)
 
@@ -167,8 +169,12 @@ const PropertyTags = ({
     }
   }, [handleOnKeyDown])
 
-  const handleOnCreateFactorClass = event => {
-    console.log(event)
+  const handleOnCreateFactorClass = () => {
+    setTags(prevTags => {
+      const tags = {...prevTags}
+      tags['FactorClass'] = factorClassInputValue
+      return tags
+    })
   }
 
   const validateInput = (key, value) => {
