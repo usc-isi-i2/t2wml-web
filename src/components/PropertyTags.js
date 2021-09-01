@@ -25,6 +25,10 @@ const useStyles = makeStyles(theme => ({
     top: '5vh',
     left: '5vw',
   },
+  noOptionsLabel: {
+    color: 'red',
+    fontWeight: 'bold',
+  },
 }))
 
 
@@ -265,7 +269,13 @@ const PropertyTags = ({
                   selectOnFocus={false}
                   options={DEFAULT_TAGS[key]}
                   onChange={(event, option) => handleOnSelectTagValue(key, option)}
-                  noOptionsText={'No options available'}
+                  noOptionsText={key === 'FactorClass' ? (
+                    <span className={classes.noOptionsLabel}>
+                      This is not one of the pre-defined FactorClass tags - a new tag will be created
+                    </span>
+                  ) : (
+                    <span>No options available</span>
+                  )}
                   value={value || null}
                   renderOption={option => (
                     <Typography variant="body1" key={option}>
