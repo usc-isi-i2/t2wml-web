@@ -249,6 +249,68 @@ const PropertyTags = ({
     )
   }
 
+  const renderAutocompleteInput = (key, value, options) => {
+    return (
+      <Autocomplete
+        fullWidth={true}
+        clearOnBlur={false}
+        selectOnFocus={false}
+        options={DEFAULT_TAGS[key]}
+        onChange={(event, option) => handleOnSelectTagValue(key, option)}
+        noOptionsText={'No options available'}
+        value={value || null}
+        renderOption={option => (
+          <Typography variant="body1" key={option}>
+            {option}
+          </Typography>
+        )}
+        renderInput={params => (
+          <TextField {...params}
+            fullWidth
+            size="small"
+            name="value"
+            label="Value"
+            variant="outlined"
+            autoCorrect="off"
+            autoComplete="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <React.Fragment>
+                  {params.InputProps.endAdornment}
+                </React.Fragment>
+              ),
+            }} />
+        )}
+      />
+    )
+  }
+
+  const renderTextFieldInput = (key, value) => {
+    return (
+      <TextField
+        fullWidth
+        size="small"
+        name="value"
+        label="Value"
+        variant="outlined"
+        autoCorrect="off"
+        autoComplete="off"
+        autoCapitalize="off"
+        spellCheck="false"
+        inputProps={{'data-lpignore': 'true'}}
+        onChange={event => handleOnTagChange(event, key)}
+        onBlur={updateTags}
+        error={!validateInput(key, value)}
+        helperText={key === 'Relevance' ? (
+          'value must be greater than or equal to -1 and less than or equal to 1'
+        ) : ''}
+        defaultValue={value} />
+    )
+  }
+
   const renderPropertyTags = () => {
     return Object.entries(tags).map(tag => {
       const key = tag[0]
@@ -277,73 +339,9 @@ const PropertyTags = ({
             </Grid>
             <Grid item xs={8}>
               {key in DEFAULT_TAGS && !!DEFAULT_TAGS[key].length ? (
-                <Autocomplete
-                  fullWidth={true}
-                  clearOnBlur={false}
-                  selectOnFocus={false}
-                  options={DEFAULT_TAGS[key]}
-                  onChange={(event, option) => handleOnSelectTagValue(key, option)}
-                  noOptionsText={key === 'FactorClass' ? (
-                    <span>
-                      <Typography variant="body1" className={classes.noOptionsLabel}>
-                        This is not one of the pre-defined FactorClass tags - do you want to create a new tag?
-                      </Typography>
-                      <Button
-                        startIcon={<CheckIcon />}
-                        onClick={handleOnCreateFactorClass}
-                        className={classes.createFactorClassButton}>
-                        Yes, create new tag
-                      </Button>
-                    </span>
-                  ) : (
-                    <span>No options available</span>
-                  )}
-                  value={value || null}
-                  renderOption={option => (
-                    <Typography variant="body1" key={option}>
-                      {option}
-                    </Typography>
-                  )}
-                  renderInput={params => (
-                    <TextField {...params}
-                      fullWidth
-                      size="small"
-                      name="value"
-                      label="Value"
-                      variant="outlined"
-                      autoCorrect="off"
-                      autoComplete="off"
-                      autoCapitalize="off"
-                      spellCheck="false"
-                      InputProps={{
-                        ...params.InputProps,
-                        endAdornment: (
-                          <React.Fragment>
-                            {params.InputProps.endAdornment}
-                          </React.Fragment>
-                        ),
-                      }} />
-                  )}
-                />
+                renderAutocompleteInput(key, value, DEFAULT_TAGS[key])
               ) : (
-                <TextField
-                  fullWidth
-                  size="small"
-                  name="value"
-                  label="Value"
-                  variant="outlined"
-                  autoCorrect="off"
-                  autoComplete="off"
-                  autoCapitalize="off"
-                  spellCheck="false"
-                  inputProps={{'data-lpignore': 'true'}}
-                  onChange={event => handleOnTagChange(event, key)}
-                  onBlur={updateTags}
-                  error={!validateInput(key, value)}
-                  helperText={key === 'Relevance' ? (
-                    'value must be greater than or equal to -1 and less than or equal to 1'
-                  ) : ''}
-                  defaultValue={value} />
+                renderTextFieldInput(key, value)
               )}
             </Grid>
           </Grid>
