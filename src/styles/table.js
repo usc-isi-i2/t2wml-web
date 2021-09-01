@@ -26,6 +26,8 @@ const useStyles = makeStyles(theme => ({
       },
       '& .ReactVirtualized__Grid.ReactVirtualized__Table__Grid': {
         outline: 'none',
+        overflowX: 'scroll !important',
+        marginBottom: 'calc(100vh - 100%)',
       },
       '& .ReactVirtualized__Table__headerColumn:nth-child(1)': {
         textAlign: 'center',
