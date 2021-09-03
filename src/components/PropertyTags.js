@@ -61,6 +61,8 @@ const PropertyTags = ({
     newTagValue: '',
   })
 
+  const [factorClassValue, setFactorClassValue] = useState('')
+
   useEffect(() => {
     if ( !!entity.tags ) {
       setTags(entity.tags)
@@ -172,7 +174,26 @@ const PropertyTags = ({
   const handleOnCreateFactorClass = () => {
     setTags(prevTags => {
       const tags = {...prevTags}
-      tags['FactorClass'] = factorClassInputValue
+      tags['FactorClass'] = factorClassValue
+
+      uploadEntity(entity, tags, file, sheet)
+      .then(entity => {
+        updateEntity(entity)
+
+        // Show a success message
+        setMessage({
+          type: 'success',
+          text: 'Property tags were updated!',
+        })
+      })
+      .catch(error => {
+        setMessage({
+          type: 'error',
+          title: `${error.errorCode} - ${error.errorTitle}`,
+          text: error.errorDescription,
+        })
+      })
+
       return tags
     })
   }
@@ -258,11 +279,34 @@ const PropertyTags = ({
   const renderFactorClassInput = (key, value, input) => {
     return (
       <Autocomplete
+        id="factor-class-input"
+        selectOnFocus
+        handleHomeEndKeys
         fullWidth={true}
         clearOnBlur={false}
-        selectOnFocus={false}
         options={DEFAULT_TAGS[key]}
-        onChange={(event, option) => handleOnSelectTagValue(key, option)}
+        value={value}
+        onChange={(event, newValue) => {
+          if ( typeof newValue === 'string' ) {
+            setFactorClassValue(newValue)
+          } else if ( newValue && newValue.inputValue ) {
+            // Create a new value from the user input
+            setFactorClassValue(newValue.inputValue)
+          } else {
+            setFactorClassValue(newValue)
+          }
+        }}
+        onClose={(event, newValue) => {
+          if ( typeof newValue === 'string' ) {
+            setFactorClassValue(newValue)
+          } else if ( newValue && newValue.inputValue ) {
+            // Create a new value from the user input
+            setFactorClassValue(newValue.inputValue)
+          } else {
+            setFactorClassValue(newValue)
+          }
+        }}
+        getOptionLabel={option => option}
         noOptionsText={
           <span>
             <Typography variant="body1" className={classes.noOptionsLabel}>
@@ -276,7 +320,6 @@ const PropertyTags = ({
             </Button>
           </span>
         }
-        value={value || null}
         renderOption={option => (
           <Typography variant="body1" key={option}>
             {option}
@@ -293,6 +336,7 @@ const PropertyTags = ({
             autoComplete="off"
             autoCapitalize="off"
             spellCheck="false"
+            onChange={event => setFactorClassValue(event.target.value)}
             InputProps={{
               ...params.InputProps,
               endAdornment: (
