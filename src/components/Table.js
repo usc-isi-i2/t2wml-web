@@ -961,6 +961,8 @@ const Table = ({
       } else {
         updateAnnotationBlocks()
       }
+
+      resetSelections()
       updateSelections()
 
       return
