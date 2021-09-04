@@ -58,7 +58,8 @@ const PropertyInput = ({
 
   const renderPropertySelection = () => {
     let defaultValue = ''
-    if ( !!selectedProperty ) {
+    if ( !annotations || !annotations.length ) { return }
+    if ( !!selectedProperty && !!selectedProperty.selection ) {
       defaultValue = utils.humanReadableSelection(selectedProperty.selection)
     }
 
