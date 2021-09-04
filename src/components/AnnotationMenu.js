@@ -436,6 +436,7 @@ const AnnotationMenu = ({
                   sheet={sheet}
                   dataType={currentType}
                   setMessage={setMessage}
+                  annotations={annotations}
                   selectedAnnotation={selectedAnnotation}
                   selectedProperty={getFormValue('property')}
                   onSelectProperty={handleOnSelectProperty} />

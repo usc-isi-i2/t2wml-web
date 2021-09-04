@@ -3,12 +3,15 @@ import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import EditIcon from '@material-ui/icons/Edit'
 import AddIcon from '@material-ui/icons/Add'
 
 import CreateProperty from './CreateProperty'
+import * as utils from '../utils/table'
 
 
 const PropertyInput = ({
@@ -16,6 +19,7 @@ const PropertyInput = ({
   sheet,
   dataType,
   setMessage,
+  annotations,
   selectedProperty,
   onSelectProperty,
 }) => {
@@ -52,6 +56,47 @@ const PropertyInput = ({
     )
   }
 
+  const renderPropertySelection = () => {
+    let defaultValue = ''
+    if ( !!selectedProperty ) {
+      defaultValue = utils.humanReadableSelection(selectedProperty.selection)
+    }
+
+    const propertyBlocks = annotations.filter(annotation => (
+      annotation.role === 'property'
+    ))
+
+    // don't bother if there are no property blocks yet
+    if ( !propertyBlocks.length ) { return }
+
+    return (
+      <Grid item xs={12}>
+        <TextField
+          select
+          fullWidth
+          label="Property"
+          id="property"
+          name="property"
+          variant="outlined"
+          autoCorrect="off"
+          autoComplete="off"
+          autoCapitalize="off"
+          spellCheck="false"
+          value={defaultValue}>
+          {propertyBlocks.map(property => {
+            const label = utils.humanReadableSelection(property.selection)
+            return (
+              <MenuItem key={property.id} value={label}
+                onClick={event => selectProperty(property)}>
+                {label}
+              </MenuItem>
+            )
+          })}
+        </TextField>
+      </Grid>
+    )
+  }
+
   const renderPropertyCreateButton = () => {
     if ( !!selectedProperty ) { return }
     return (
@@ -84,6 +129,7 @@ const PropertyInput = ({
   return (
     <Grid container spacing={3}>
       {renderSelectedProperty()}
+      {renderPropertySelection()}
       {renderPropertyCreateButton()}
       {renderPropertyCreateMenu()}
     </Grid>
