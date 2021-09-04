@@ -2,13 +2,16 @@ import React, { useCallback, useEffect, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
+import Tooltip from '@material-ui/core/Tooltip'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 
 import PropertyTags from './PropertyTags'
@@ -311,7 +314,18 @@ const AnnotationMenu = ({
           error={!!formState.range && !parsedCorrectly}
           helperText={formState.range && !parsedCorrectly ? (
             'format: [col][row](:[col][row])?'
-          ) : ''} />
+          ) : ''}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Tooltip arrow placement="right"
+                  title={<div>This input field can be used to manually adjust the selected area.<br/><br/>Accepted input format can be either one cell (e.g. A1) or a range of cells (e.g. A1:B12).</div>}>
+                  <HelpOutlineIcon fontSize="small" />
+                </Tooltip>
+              </InputAdornment>
+            ),
+          }}
+        />
       </Grid>
     )
   }
