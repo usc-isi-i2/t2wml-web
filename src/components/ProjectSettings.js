@@ -26,6 +26,7 @@ const useStyles = makeStyles(theme => ({
 
 const ProjectSettings = ({
   project,
+  setMessage,
   updateProject,
   hideProjectSettings,
 }) => {

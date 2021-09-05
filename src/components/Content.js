@@ -196,6 +196,7 @@ const Content = ({darkTheme, setDarkTheme}) => {
     <Grid className={classes.content}>
       <Header
         darkTheme={darkTheme}
+        setMessage={setMessage}
         project={projectData.project}
         filename={projectData.filepath}
         sheetname={projectData.sheetName}

@@ -19,6 +19,7 @@ import useStyles from '../styles/header'
 
 const Header = ({
   darkTheme,
+  setMessage,
   project,
   filename,
   sheetname,
@@ -49,6 +50,7 @@ const Header = ({
         project={project}
         filename={filename}
         sheetname={sheetname}
+        setMessage={setMessage}
         updateProject={updateProject}
         guessAnnotations={guessAnnotations}
         loadingAnnotations={loadingAnnotations}

@@ -21,6 +21,7 @@ const ProjectMenu = ({
   project,
   filename,
   sheetname,
+  setMessage,
   updateProject,
   guessAnnotations,
   loadingAnnotations,
@@ -137,6 +138,7 @@ const ProjectMenu = ({
       return (
         <ProjectSettings
           project={project}
+          setMessage={setMessage}
           updateProject={updateProject}
           hideProjectSettings={hideProjectSettings} />
       )
