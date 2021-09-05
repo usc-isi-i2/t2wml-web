@@ -56,8 +56,23 @@ const ProjectSettings = ({
         description: formState.projectDescription,
         url: formState.projectDataSource,
       }
-      uploadSettings(settings)
-        .then(updatedProject => updateProject(updatedProject))
+      uploadSettings(settings).then(updatedProject => {
+        updateProject(updatedProject)
+
+        // Show a success message
+        setMessage({
+          type: 'success',
+          text: 'Project settings saved!',
+        })
+      })
+      .catch(error => {
+        setMessage({
+          type: 'error',
+          title: `${error.errorCode} - ${error.errorTitle}`,
+          text: error.errorDescription,
+        })
+      })
+
       return formState
     })
   }, [updateProject])
