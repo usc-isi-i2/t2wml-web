@@ -320,7 +320,7 @@ const AnnotationMenu = ({
               <InputAdornment position="end">
                 <Tooltip arrow placement="right"
                   title={<div>This input field can be used to manually adjust the selected area.<br/><br/>Accepted input format can be either one cell (e.g. A1) or a range of cells (e.g. A1:B12).</div>}>
-                  <HelpOutlineIcon fontSize="small" />
+                  <HelpOutlineIcon fontSize="small" className={classes.help} />
                 </Tooltip>
               </InputAdornment>
             ),

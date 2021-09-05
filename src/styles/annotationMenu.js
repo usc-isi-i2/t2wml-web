@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
       transition: 'color 150ms ease',
     },
   },
+  help: {
+    cursor: 'pointer',
+  },
 }))
 
 
