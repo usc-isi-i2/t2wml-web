@@ -57,7 +57,6 @@ const FileDrop = ({
       'application/vnd.ms-excel',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     ],
-    maxSize: 5000 * 1024, // 5MB
     maxFiles: 1,
   })
 
