@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 'bold',
     marginBottom: theme.spacing(2),
   },
-  createFactorClassButton: {
+  createButton: {
     '&:hover': {
       color: 'red',
       transition: 'color 150ms ease',
@@ -62,6 +62,7 @@ const PropertyTags = ({
   })
 
   const [factorClassValue, setFactorClassValue] = useState('')
+  const [unitsValue, setUnitsValue] = useState('')
 
   useEffect(() => {
     if ( !!entity.tags ) {
@@ -204,6 +205,33 @@ const PropertyTags = ({
     })
   }
 
+  const handleOnCreateUnit = () => {
+    setTags(prevTags => {
+      const tags = {...prevTags}
+      tags['Units'] = unitsValue
+
+      uploadEntity(entity, tags, file, sheet)
+      .then(entity => {
+        updateEntity(entity)
+
+        // Show a success message
+        setMessage({
+          type: 'success',
+          text: 'Property tags were updated!',
+        })
+      })
+      .catch(error => {
+        setMessage({
+          type: 'error',
+          title: `${error.errorCode} - ${error.errorTitle}`,
+          text: error.errorDescription,
+        })
+      })
+
+      return tags
+    })
+  }
+
   const validateInput = (key, value) => {
     if ( key === 'Relevance' ) {
       if ( !value ) {
@@ -321,7 +349,7 @@ const PropertyTags = ({
             <Button
               startIcon={<CheckIcon />}
               onMouseDown={handleOnCreateFactorClass}
-              className={classes.createFactorClassButton}>
+              className={classes.createButton}>
               Yes, create a new Factor Class
             </Button>
           </span>
@@ -356,9 +384,86 @@ const PropertyTags = ({
     )
   }
 
+  const renderUnitsInput = (key, value, input) => {
+    return (
+      <Autocomplete
+        id="units-input"
+        selectOnFocus
+        handleHomeEndKeys
+        fullWidth={true}
+        clearOnBlur={false}
+        options={DEFAULT_TAGS[key]}
+        value={value}
+        onChange={(event, newValue) => {
+          if ( typeof newValue === 'string' ) {
+            setUnitsValue(newValue)
+          } else if ( newValue && newValue.inputValue ) {
+            // Create a new value from the user input
+            setUnitsValue(newValue.inputValue)
+          } else {
+            setUnitsValue(newValue)
+          }
+        }}
+        onClose={(event, newValue) => {
+          if ( typeof newValue === 'string' ) {
+            setUnitsValue(newValue)
+          } else if ( newValue && newValue.inputValue ) {
+            // Create a new value from the user input
+            setUnitsValue(newValue.inputValue)
+          } else {
+            setUnitsValue(newValue)
+          }
+        }}
+        getOptionLabel={option => option}
+        noOptionsText={
+          <span>
+            <Typography variant="body1" className={classes.noOptionsLabel}>
+              This is not one of the pre-defined unit options - would you like to create a new one?
+            </Typography>
+            <Button
+              startIcon={<CheckIcon />}
+              onMouseDown={handleOnCreateUnit}
+              className={classes.createButton}>
+              Yes, create a new unit
+            </Button>
+          </span>
+        }
+        renderOption={option => (
+          <Typography variant="body1" key={option}>
+            {option}
+          </Typography>
+        )}
+        renderInput={params => (
+          <TextField {...params}
+            fullWidth
+            size="small"
+            name="value"
+            label="Value"
+            variant="outlined"
+            autoCorrect="off"
+            autoComplete="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            onChange={event => setUnitsValue(event.target.value)}
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <React.Fragment>
+                  {params.InputProps.endAdornment}
+                </React.Fragment>
+              ),
+            }} />
+        )}
+      />
+    )
+  }
+
   const renderAutocompleteInput = (key, value, options) => {
     if ( key === 'FactorClass' ) {
       return renderFactorClassInput(key, value, options)
+    }
+    if ( key === 'Units' ) {
+      return renderUnitsInput(key, value, options)
     }
     return (
       <Autocomplete
