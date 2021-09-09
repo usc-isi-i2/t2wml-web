@@ -75,7 +75,7 @@ const ProjectSettings = ({
 
       return formState
     })
-  }, [updateProject])
+  }, [updateProject, setMessage])
 
   const handleOnKeyDown = useCallback(event => {
 
