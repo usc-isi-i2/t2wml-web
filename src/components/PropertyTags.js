@@ -120,38 +120,44 @@ const PropertyTags = ({
   }
 
   const updateTags = useCallback(() => {
-    if ( !!formState.newTagKey && !!formState.newTagValue ) {
-      tags[formState.newTagKey] = formState.newTagValue
-    }
+    setTags(prevTags => {
+      const tags = {...prevTags}
 
-    if ( validateInput('Relevance', tags['Relevance']) ) {
-      uploadEntity(entity, tags, file, sheet)
-      .then(entity => {
-        updateEntity(entity)
+      if ( !!formState.newTagKey && !!formState.newTagValue ) {
+        tags[formState.newTagKey] = formState.newTagValue
+      }
 
-        // clear out the new tag create form
-        if ( !!formState.newTagKey && !!formState.newTagValue ) {
-          setFormState({
-            newTagKey: '',
-            newTagValue: '',
+      if ( validateInput('Relevance', tags['Relevance']) ) {
+        uploadEntity(entity, tags, file, sheet)
+        .then(entity => {
+          updateEntity(entity)
+
+          // clear out the new tag create form
+          if ( !!formState.newTagKey && !!formState.newTagValue ) {
+            setFormState({
+              newTagKey: '',
+              newTagValue: '',
+            })
+          }
+
+          // Show a success message
+          setMessage({
+            type: 'success',
+            text: 'New property tag was saved!',
           })
-        }
+        })
+        .catch(error => {
+          setMessage({
+            type: 'error',
+            title: `${error.errorCode} - ${error.errorTitle}`,
+            text: error.errorDescription,
+          })
+        })
+      }
 
-        // Show a success message
-        setMessage({
-          type: 'success',
-          text: 'New property tag was saved!',
-        })
-      })
-      .catch(error => {
-        setMessage({
-          type: 'error',
-          title: `${error.errorCode} - ${error.errorTitle}`,
-          text: error.errorDescription,
-        })
-      })
-    }
-  }, [entity, tags, file, sheet, formState, updateEntity, setMessage])
+      return tags
+    })
+  }, [entity, file, sheet, formState, updateEntity, setMessage])
 
   const handleOnKeyDown = useCallback(event => {
 
