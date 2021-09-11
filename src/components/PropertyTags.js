@@ -323,6 +323,7 @@ const PropertyTags = ({
         onChange={(event, newValue) => {
           if ( typeof newValue === 'string' ) {
             setFactorClassValue(newValue)
+            handleOnSelectTagValue(key, newValue)
           } else if ( newValue && newValue.inputValue ) {
             // Create a new value from the user input
             setFactorClassValue(newValue.inputValue)
@@ -331,13 +332,9 @@ const PropertyTags = ({
           }
         }}
         onClose={(event, newValue) => {
-          if ( typeof newValue === 'string' ) {
-            setFactorClassValue(newValue)
-          } else if ( newValue && newValue.inputValue ) {
-            // Create a new value from the user input
-            setFactorClassValue(newValue.inputValue)
-          } else {
-            setFactorClassValue(newValue)
+          if ( typeof event.target.value === 'string' ) {
+            setFactorClassValue(event.target.value)
+            handleOnSelectTagValue(key, event.target.value)
           }
         }}
         getOptionLabel={option => option}
@@ -397,6 +394,7 @@ const PropertyTags = ({
         onChange={(event, newValue) => {
           if ( typeof newValue === 'string' ) {
             setUnitsValue(newValue)
+            handleOnSelectTagValue(key, newValue)
           } else if ( newValue && newValue.inputValue ) {
             // Create a new value from the user input
             setUnitsValue(newValue.inputValue)
@@ -405,13 +403,9 @@ const PropertyTags = ({
           }
         }}
         onClose={(event, newValue) => {
-          if ( typeof newValue === 'string' ) {
-            setUnitsValue(newValue)
-          } else if ( newValue && newValue.inputValue ) {
-            // Create a new value from the user input
-            setUnitsValue(newValue.inputValue)
-          } else {
-            setUnitsValue(newValue)
+          if ( typeof event.target.value === 'string' ) {
+            setFactorClassValue(event.target.value)
+            handleOnSelectTagValue(key, event.target.value)
           }
         }}
         getOptionLabel={option => option}
