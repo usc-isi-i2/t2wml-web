@@ -13,6 +13,7 @@ import fetchSuggestions from '../utils/fetchSuggestions'
 import uploadAnnotations from '../utils/uploadAnnotations'
 import uploadWikinodes from '../utils/uploadWikinodes'
 import wikifyRegion from '../utils/wikifyRegion'
+import deleteWikifiedRegion from '../utils/deleteWikifiedRegion'
 
 
 const DEFAULT_CELL_STATE = {
@@ -1063,6 +1064,7 @@ const Table = ({
               ...DEFAULT_CELL_STATE,
               annotation: false,
               classNames: [],
+              qnode: null,
             }
             colIndex += 1
           }
@@ -1075,6 +1077,8 @@ const Table = ({
 
   const updateAnnotations = (annotations, deletedAnnotationBlock=null) => {
     if ( annotations && annotations instanceof Array ) {
+
+      // update annotation blocks
       setAnnotationBlocks(annotationBlocks => {
         if ( deletedAnnotationBlock ) {
           removeAnnotationBlocks([deletedAnnotationBlock])
@@ -1088,6 +1092,32 @@ const Table = ({
         }
         return annotations
       })
+
+      // remove wikified region and update layers
+      if ( deletedAnnotationBlock ) {
+          deleteWikifiedRegion(
+            projectData.filepath,
+            projectData.sheetName,
+            deletedAnnotationBlock.selection,
+          )
+          .then(layers => {
+            setLayers(layers)
+
+            // Show a success message
+            setMessage({
+              type: 'success',
+              text: 'Removed wikified region!',
+            })
+          })
+          .catch(error => {
+            setMessage({
+              type: 'error',
+              title: `${error.errorCode} - ${error.errorTitle}`,
+              text: error.errorDescription,
+            })
+          })
+      }
+
       updateOutputPreview()
     }
   }
