@@ -5,6 +5,9 @@ const uploadFile = (file, onProgress) => {
     url = `${process.env.REACT_APP_BACKEND_URL}${url}`
   }
 
+  // fetch only the first 100 lines of the data file
+  url += '?data_start=0&map_start=0&data_end=99&map_end=99'
+
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     xhr.open('POST', url)
