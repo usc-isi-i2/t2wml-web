@@ -91,17 +91,29 @@ const Table = ({
         stopIndex,
       )
       .then(data => {
-        const newRows = data.table.cells
+
+        const newData = data.table.cells
+
+        rows.current = [...Array(stopIndex)] // extend to include new rows
+
         setTableData(prevTableData => {
           const tableData = {...prevTableData}
 
-          newRows.forEach((row, rowIndex) => {
+          Object.entries(newData).forEach((rowItem, rowIndex) => {
             tableData[startIndex + rowIndex] = {}
-            row.forEach((cellValue, colIndex) => {
-              if ( !!cellValue ) {
-                tableData[startIndex + rowIndex][colIndex] = {
-                  value: cellValue,
-                  classNames: [],
+            Object.entries(cols.current).forEach((colItem, colIndex) => {
+              if ( !!newData[rowIndex] ) {
+                const cellValue = newData[rowIndex][colIndex]
+                if ( !!cellValue ) {
+                  tableData[startIndex + rowIndex][colIndex] = {
+                    value: cellValue,
+                    classNames: [],
+                  }
+                } else {
+                  tableData[startIndex + rowIndex][colIndex] = {
+                    value: '',
+                    classNames: [],
+                  }
                 }
               } else {
                 tableData[startIndex + rowIndex][colIndex] = {
@@ -157,19 +169,27 @@ const Table = ({
     }
 
     setTableData(prev => {
-      rows.current = [...Array(Math.max(projectData.table.dims[0], 100))] // at least 100 rows
-      cols.current = [...Array(Math.max(projectData.table.dims[1], 26))]  // at least 26 cols
-
-      const data = projectData.table.cells
       const tableData = {} // empty table data
+      const data = projectData.table.cells
 
-      data.forEach((row, rowIndex) => {
+      rows.current = [...Array(Math.max(data.length, 100))] // at least 100 rows
+      cols.current = [...Array(Math.max(data[1].length, 26))]  // at least 26 cols
+
+      Object.entries(rows.current).forEach((rowItem, rowIndex) => {
         tableData[rowIndex] = {}
-        row.forEach((cellValue, colIndex) => {
-          if ( !!cellValue ) {
-            tableData[rowIndex][colIndex] = {
-              value: cellValue,
-              classNames: [],
+        Object.entries(cols.current).forEach((colItem, colIndex) => {
+          if ( !!data[rowIndex] ) {
+            const cellValue = data[rowIndex][colIndex]
+            if ( !!cellValue ) {
+              tableData[rowIndex][colIndex] = {
+                value: cellValue,
+                classNames: [],
+              }
+            } else {
+              tableData[rowIndex][colIndex] = {
+                value: '',
+                classNames: [],
+              }
             }
           } else {
             tableData[rowIndex][colIndex] = {
