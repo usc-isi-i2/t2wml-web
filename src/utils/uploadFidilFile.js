@@ -12,7 +12,7 @@ const uploadFidilFile = (file, sheet) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authentication': localStorage.getItem('token'),
+        'Authentication': sessionStorage.getItem('token'),
       },
     })
     .then(response => response.json())

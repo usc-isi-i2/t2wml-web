@@ -17,7 +17,7 @@ const fetchSuggestions = (file, sheet, selection, annotations) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authentication': localStorage.getItem('token'),
+        'Authentication': sessionStorage.getItem('token'),
       },
       body: JSON.stringify(requestData),
     })

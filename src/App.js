@@ -256,7 +256,7 @@ const App = () => {
 
   useEffect(() => {
     // fetch the authentication token from the backend
-    fetchToken().then(token => localStorage.setItem('token', token))
+    fetchToken().then(token => sessionStorage.setItem('token', token))
   }, [])
 
   return (

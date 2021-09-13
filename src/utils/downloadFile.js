@@ -14,7 +14,7 @@ const downloadFile = (project, file, sheet, fileType, url) => {
     fetch(url, {
       method: 'GET',
       headers: {
-        'Authentication': localStorage.getItem('token'),
+        'Authentication': sessionStorage.getItem('token'),
       },
       cache: 'no-store',
     })

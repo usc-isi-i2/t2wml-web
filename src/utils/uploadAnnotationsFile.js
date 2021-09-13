@@ -11,7 +11,7 @@ const uploadAnnotationsFile = (file, filename, sheetname, onProgress) => {
     const xhr = new XMLHttpRequest()
     xhr.open('POST', url)
 
-    xhr.setRequestHeader('Authentication', localStorage.getItem('token'))
+    xhr.setRequestHeader('Authentication', sessionStorage.getItem('token'))
 
     xhr.onload = () => {
       try {

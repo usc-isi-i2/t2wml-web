@@ -19,7 +19,7 @@ const uploadProperty = (file, sheet, property, dataType) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authentication': localStorage.getItem('token'),
+        'Authentication': sessionStorage.getItem('token'),
       },
       body: JSON.stringify(requestData),
     })

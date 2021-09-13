@@ -13,7 +13,7 @@ const fetchAnnotations = (file, sheet) => {
     fetch(url, {
       method: 'GET',
       headers: {
-        'Authentication': localStorage.getItem('token'),
+        'Authentication': sessionStorage.getItem('token'),
       },
     })
       .then((response) => response.json())
