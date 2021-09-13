@@ -1,6 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
-import { AutoSizer, Column, Table as VirtualizedTable } from 'react-virtualized'
+import {
+  Column,
+  AutoSizer,
+  InfiniteLoader,
+  Table as VirtualizedTable,
+} from 'react-virtualized'
 
 import { Paper } from '@material-ui/core'
 
@@ -14,6 +19,7 @@ import uploadAnnotations from '../utils/uploadAnnotations'
 import uploadWikinodes from '../utils/uploadWikinodes'
 import wikifyRegion from '../utils/wikifyRegion'
 import deleteWikifiedRegion from '../utils/deleteWikifiedRegion'
+import fetchTableRows from '../utils/fetchTableRows'
 
 
 const DEFAULT_CELL_STATE = {
@@ -42,7 +48,6 @@ const Table = ({
   const selection = useRef(null)
   const timeoutID = useRef(null)
   const prevElement = useRef(null)
-  const tableElement = useRef(null)
   const prevDirection = useRef(null)
 
   const [layers, setLayers] = useState({})
@@ -74,6 +79,46 @@ const Table = ({
       })
 
       return tableData
+    })
+  }
+
+  const loadMoreRows = ({startIndex, stopIndex}) => {
+    return new Promise((resolve, reject) => {
+      fetchTableRows(
+        projectData.filepath,
+        projectData.sheetName,
+        startIndex,
+        stopIndex,
+      )
+      .then(data => {
+        const newRows = data.table.cells
+        setTableData(prevTableData => {
+          const tableData = {...prevTableData}
+
+          newRows.forEach((row, rowIndex) => {
+            tableData[startIndex + rowIndex] = {}
+            row.forEach((cellValue, colIndex) => {
+              if ( !!cellValue ) {
+                tableData[startIndex + rowIndex][colIndex] = {
+                  value: cellValue,
+                  classNames: [],
+                }
+              } else {
+                tableData[startIndex + rowIndex][colIndex] = {
+                  value: '',
+                  classNames: [],
+                }
+              }
+            })
+          })
+
+          return tableData
+        })
+        resolve()
+      })
+      .catch(error => {
+        reject(error)
+      })
     })
   }
 
@@ -118,21 +163,13 @@ const Table = ({
       const data = projectData.table.cells
       const tableData = {} // empty table data
 
-      Object.entries(rows.current).forEach((rowItem, rowIndex) => {
+      data.forEach((row, rowIndex) => {
         tableData[rowIndex] = {}
-        Object.entries(cols.current).forEach((colItem, colIndex) => {
-          if ( !!data[rowIndex] ) {
-            const cellValue = data[rowIndex][colIndex]
-            if ( !!cellValue ) {
-              tableData[rowIndex][colIndex] = {
-                value: cellValue,
-                classNames: [],
-              }
-            } else {
-              tableData[rowIndex][colIndex] = {
-                value: '',
-                classNames: [],
-              }
+        row.forEach((cellValue, colIndex) => {
+          if ( !!cellValue ) {
+            tableData[rowIndex][colIndex] = {
+              value: cellValue,
+              classNames: [],
             }
           } else {
             tableData[rowIndex][colIndex] = {
@@ -1128,57 +1165,67 @@ const Table = ({
       <Paper className={classes.tableWrapper}
         onMouseDown={handleOnMouseDown}
         onMouseMove={handleOnMouseMove}>
-        <AutoSizer>
-          {({ height, width }) => (
-            <VirtualizedTable
-              width={cols.current.length * 77.5}
-              height={height}
-              headerHeight={26}
-              rowHeight={25}
-              className={userSelecting ? 'active': ''}
-              ref={element => tableElement.current = element}
-              rowCount={Object.keys(tableData).length}
-              rowGetter={({ index }) => Object.entries(tableData[index])}>
-              <Column
-                label=''
-                dataKey=''
-                headerRenderer={data => <div>&nbsp;</div>}
-                width={50}
-                cellDataGetter={data => {
-                  return data.rowData[data.dataKey]
-                }}
-                cellRenderer={data => {
-                  return <div>{data.rowIndex + 1}</div>
-                }}
-              />
-              {Object.keys(tableData[0]).map((r, i) => (
-                <Column key={`col-${i}`}
-                  label={utils.columnToLetter(i + 1)}
-                  dataKey={i}
-                  headerRenderer={data => {
-                    return (
-                      <div
-                        data-row-index={0}
-                        data-col-index={i+1}
-                        onDoubleClick={handleOnClickHeader}>
-                        {data.label}
-                      </div>
-                    )
-                  }}
-                  width={100}
-                  cellDataGetter={data => {
-                    return data.rowData[data.dataKey]
-                  }}
-                  cellRenderer={data => {
-                    return (
-                      <TableCell {...data} />
-                    )
-                  }}
-                />
-              ))}
-            </VirtualizedTable>
+        <InfiniteLoader
+          isRowLoaded={({ index }) => !!tableData[index]}
+          loadMoreRows={loadMoreRows}
+          minimumBatchSize={100}
+          threshold={25}
+          rowCount={1000000}>
+          {({onRowsRendered, registerChild}) => (
+            <AutoSizer>
+              {({ height, width }) => (
+                <VirtualizedTable
+                  ref={registerChild}
+                  onRowsRendered={onRowsRendered}
+                  width={cols.current.length * 77.5}
+                  height={height}
+                  headerHeight={26}
+                  rowHeight={25}
+                  className={userSelecting ? 'active': ''}
+                  rowCount={Object.keys(tableData).length}
+                  rowGetter={({ index }) => Object.entries(tableData[index])}>
+                  <Column
+                    label=''
+                    dataKey=''
+                    headerRenderer={data => <div>&nbsp;</div>}
+                    width={50}
+                    cellDataGetter={data => {
+                      return data.rowData[data.dataKey]
+                    }}
+                    cellRenderer={data => {
+                      return <div>{data.rowIndex + 1}</div>
+                    }}
+                  />
+                  {Object.keys(tableData[0]).map((r, i) => (
+                    <Column key={`col-${i}`}
+                      label={utils.columnToLetter(i + 1)}
+                      dataKey={i}
+                      headerRenderer={data => {
+                        return (
+                          <div
+                            data-row-index={0}
+                            data-col-index={i+1}
+                            onDoubleClick={handleOnClickHeader}>
+                            {data.label}
+                          </div>
+                        )
+                      }}
+                      width={100}
+                      cellDataGetter={data => {
+                        return data.rowData[data.dataKey]
+                      }}
+                      cellRenderer={data => {
+                        return (
+                          <TableCell {...data} />
+                        )
+                      }}
+                    />
+                  ))}
+                </VirtualizedTable>
+              )}
+            </AutoSizer>
           )}
-        </AutoSizer>
+        </InfiniteLoader>
       </Paper>
     )
   }
