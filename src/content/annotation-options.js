@@ -19,9 +19,6 @@ export const TYPES = [{
     'label': 'Precision',
     'value': 'precision',
   }, {
-    'label': 'Calendar',
-    'value': 'calendar',
-  }, {
     'label': 'Format',
     'value': 'format',
   }, {
@@ -51,7 +48,4 @@ export const ROLES = [{
   'label': 'Qualifier',
   'value': 'qualifier',
   'children': TYPES,
-}, {
-  'label': 'Metadata',
-  'value': 'metadata',
 }]
