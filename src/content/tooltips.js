@@ -32,12 +32,16 @@ export const TOOLTIPS = {
   'property_label': '',
   'property_description': '',
 
-  // property tags
-  'DocID': '',
-  'FactorClass': '',
-  'Normalizer': '',
-  'Relevance': '',
-  'Units': '',
+  // property tags menu
+  'property_tags': '',
+  'doc_id': '',
+  'factor_class': '',
+  'normalizer': '',
+  'normalizer_longitudinal': 'Maps data values to percentile by year in the data set.',
+  'normalizer_simple': 'Scales the data between the minimum and maximum data in the data set.',
+  'normalizer_standard': 'Maps data values to percentile in the data set.',
+  'relevance': '',
+  'units': '',
 
   // other
   '': '',
