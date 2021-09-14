@@ -28,6 +28,13 @@ const useStyles = makeStyles(theme => ({
   help: {
     cursor: 'pointer',
   },
+  tooltip: {
+    marginRight: theme.spacing(3),
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    right: theme.spacing(1),
+  },
 }))
 
 
