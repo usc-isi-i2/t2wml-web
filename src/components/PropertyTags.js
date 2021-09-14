@@ -381,6 +381,45 @@ const PropertyTags = ({
     )
   }
 
+  const renderNormalizerInput = (key, value, input) => {
+    return (
+      <Autocomplete
+        fullWidth={true}
+        clearOnBlur={false}
+        selectOnFocus={false}
+        options={DEFAULT_TAGS[key]}
+        onChange={(event, option) => handleOnSelectTagValue(key, option)}
+        noOptionsText={'No options available'}
+        value={value || null}
+        renderOption={option => (
+          <Typography variant="body1" key={option}>
+            {option}
+          </Typography>
+        )}
+        renderInput={params => (
+          <TextField {...params}
+            fullWidth
+            size="small"
+            name="value"
+            label="Value"
+            variant="outlined"
+            autoCorrect="off"
+            autoComplete="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <React.Fragment>
+                  {params.InputProps.endAdornment}
+                </React.Fragment>
+              ),
+            }} />
+        )}
+      />
+    )
+  }
+
   const renderUnitsInput = (key, value, input) => {
     return (
       <Autocomplete
@@ -455,6 +494,9 @@ const PropertyTags = ({
   const renderAutocompleteInput = (key, value, options) => {
     if ( key === 'FactorClass' ) {
       return renderFactorClassInput(key, value, options)
+    }
+    if ( key === 'Normalizer' ) {
+      return renderNormalizerInput(key, value, options)
     }
     if ( key === 'Units' ) {
       return renderUnitsInput(key, value, options)
