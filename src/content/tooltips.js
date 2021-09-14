@@ -10,6 +10,10 @@ export const TOOLTIPS = {
   'suggest_annotations': '',
   'apply_annotations': '',
   'upload_fidil': '',
+  'download_t2wmlz': '',
+  'download_zip': '',
+  'download_fidil': '',
+  'download_tsv': '',
 
   // annotation menu
   'block_menu': '',
