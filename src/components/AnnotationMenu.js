@@ -298,10 +298,11 @@ const AnnotationMenu = ({
     const defaultValue = utils.humanReadableSelection(selection)
     const parsedCorrectly = utils.parseSelectedRangeInput(formState.range)
     return (
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <TextField
           id="range"
           name="range"
+          fullWidth
           label="Selected range"
           variant="outlined"
           autoCorrect="off"
