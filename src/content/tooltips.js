@@ -45,8 +45,4 @@ export const TOOLTIPS = {
 
   // other
   '': '',
-  '': '',
-  '': '',
-  '': '',
-  '': '',
 }
