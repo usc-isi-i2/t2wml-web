@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete'
 
@@ -9,6 +9,11 @@ const filter = createFilterOptions()
 const Dropdown = ({ label, options, selected, onSelect }) => {
 
   const [value, setValue] = useState(null)
+
+  useEffect(() => {
+    if ( !selected ) { return }
+    setValue(selected)
+  }, [selected])
 
   return (
     <Autocomplete

@@ -486,6 +486,11 @@ const AnnotationMenu = ({
           }
 
           if ( showAdditionalInputs ) {
+
+            // find the selected option from the list
+            const value = getFormValue(option.value)
+            const selectedOption = option.children.find(option => option.value === value)
+
             return (
               <Grid item xs={12} key={option.value}>
                 <Grid container>
