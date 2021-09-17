@@ -11,13 +11,16 @@ import Autocomplete from '@material-ui/lab/Autocomplete'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
-import CheckIcon from '@material-ui/icons/Check';
+import CheckIcon from '@material-ui/icons/Check'
+import Tooltip from '@material-ui/core/Tooltip'
 import CloseIcon from '@material-ui/icons/Close'
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import { makeStyles } from '@material-ui/core/styles'
 
 import DraggablePaper from './DraggablePaper'
 import uploadEntity from '../utils/uploadEntity'
 import { DEFAULT_TAGS } from '../content/tag-options'
+import { TOOLTIPS } from '../content/tooltips'
 
 
 const useStyles = makeStyles(theme => ({
@@ -38,6 +41,17 @@ const useStyles = makeStyles(theme => ({
       color: 'red',
       transition: 'color 150ms ease',
     },
+  },
+  menuItem: {
+    position: 'relative',
+    width: '100%',
+  },
+  tooltip: {
+    marginRight: theme.spacing(3),
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    right: theme.spacing(1),
   },
 }))
 
@@ -381,6 +395,52 @@ const PropertyTags = ({
     )
   }
 
+  const renderNormalizerInput = (key, value, input) => {
+    return (
+      <Autocomplete
+        fullWidth={true}
+        clearOnBlur={false}
+        selectOnFocus={false}
+        options={DEFAULT_TAGS[key]}
+        onChange={(event, option) => handleOnSelectTagValue(key, option)}
+        noOptionsText={'No options available'}
+        value={value || null}
+        renderOption={option => (
+          <div className={classes.menuItem}>
+            {option}
+            <Tooltip
+              arrow
+              placement="right"
+              className={classes.tooltip}
+              title={TOOLTIPS[`${key.toLowerCase()}_${option.toLowerCase()}`]}>
+              <HelpOutlineIcon fontSize="small" className={classes.help} />
+            </Tooltip>
+          </div>
+        )}
+        renderInput={params => (
+          <TextField {...params}
+            fullWidth
+            size="small"
+            name="value"
+            label="Value"
+            variant="outlined"
+            autoCorrect="off"
+            autoComplete="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <React.Fragment>
+                  {params.InputProps.endAdornment}
+                </React.Fragment>
+              ),
+            }} />
+        )}
+      />
+    )
+  }
+
   const renderUnitsInput = (key, value, input) => {
     return (
       <Autocomplete
@@ -455,6 +515,9 @@ const PropertyTags = ({
   const renderAutocompleteInput = (key, value, options) => {
     if ( key === 'FactorClass' ) {
       return renderFactorClassInput(key, value, options)
+    }
+    if ( key === 'Normalizer' ) {
+      return renderNormalizerInput(key, value, options)
     }
     if ( key === 'Units' ) {
       return renderUnitsInput(key, value, options)

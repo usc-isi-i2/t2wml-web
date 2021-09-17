@@ -298,10 +298,11 @@ const AnnotationMenu = ({
     const defaultValue = utils.humanReadableSelection(selection)
     const parsedCorrectly = utils.parseSelectedRangeInput(formState.range)
     return (
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <TextField
           id="range"
           name="range"
+          fullWidth
           label="Selected range"
           variant="outlined"
           autoCorrect="off"
@@ -318,7 +319,7 @@ const AnnotationMenu = ({
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <Tooltip arrow placement="right"
+                <Tooltip arrow placement="right" className={classes.tooltip}
                   title={<div>This input field can be used to manually adjust the selected area.<br/><br/>Accepted input format can be either one cell (e.g. A1) or a range of cells (e.g. A1:B12).</div>}>
                   <HelpOutlineIcon fontSize="small" className={classes.help} />
                 </Tooltip>
