@@ -285,6 +285,11 @@ const PropertyTags = ({
     return (
       <Grid item xs={12}>
         <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <FormHelperText component="p">
+              Alternatively, you may want to create new property tags using the form below
+            </FormHelperText>
+          </Grid>
           <Grid item xs={4}>
             <TextField
               fullWidth

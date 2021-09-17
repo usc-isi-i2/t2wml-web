@@ -18,9 +18,41 @@ export const TYPES = [{
   'children': [{
     'label': 'Precision',
     'value': 'precision',
+    'children': [{
+      'label': 'Year',
+      'value': 9,
+    }, {
+      'label': 'Month',
+      'value': 10,
+    }, {
+      'label': 'Day',
+      'value': 11,
+    }],
   }, {
     'label': 'Format',
     'value': 'format',
+    'children': [{
+      'label': '%Y (2021)',
+      'value': '"%Y"',
+    }, {
+      'label': '%Y-%m (2021-09)',
+      'value': '"%Y-%m"',
+    }, {
+      'label': '%Y-%m-%d (2021-09-17)',
+      'value': '"%Y-%m-%d"',
+    }, {
+      'label': '%m/%d/%Y (09/17/2021)',
+      'value': '"%m/%d/%Y"',
+    }, {
+      'label': '%Y-%b-%d (2021-Sep-17)',
+      'value': '"%Y-%b-%d"',
+    }, {
+      'label': '%Y-%B-%d (2021-September-17)',
+      'value': '"%Y-%B-%d"',
+    }, {
+      'label': '%Y-%m-%dT%H:%M:%S (2021-09-17T14:00:00)',
+      'value': '"%Y-%m-%dT%H:%M:%S"',
+    }],
   }, {
     'label': 'Property',
     'value': 'property',

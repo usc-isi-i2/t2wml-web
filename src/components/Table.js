@@ -501,9 +501,6 @@ const Table = ({
   }, [])
 
   const hideOverlayMenu = useCallback(() => {
-    if ( !!selection.current ) {
-      removeAnnotationBlocks([{selection: selection.current}])
-    }
     setShowOverlayMenu(false)
     setSelectedAnnotationBlock(undefined)
     setTargetSelection(undefined)
@@ -1251,9 +1248,6 @@ const Table = ({
   }
 
   const handleOnSelectionChange = newSelection => {
-    if ( !!selection.current ) {
-      removeAnnotationBlocks([{selection: selection.current}])
-    }
     const prevSelection = {...selection.current}
     selection.current = {...newSelection}
     resetSelections()
