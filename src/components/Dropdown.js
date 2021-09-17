@@ -16,17 +16,20 @@ const Dropdown = ({ label, options, selected, onSelect }) => {
       id={label}
       value={value}
       onChange={(event, newValue) => {
-        if (typeof newValue === 'string') {
+        if ( typeof newValue === 'string' ) {
           setValue({
             label: newValue,
           })
+          onSelect(newValue)
         } else if (newValue && newValue.inputValue) {
           // Create a new value from the user input
           setValue({
             label: newValue.inputValue,
           })
+          onSelect(newValue.inputValue)
         } else {
           setValue(newValue)
+          onSelect(newValue)
         }
       }}
       filterOptions={(options, params) => {

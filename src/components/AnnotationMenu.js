@@ -420,6 +420,22 @@ const AnnotationMenu = ({
     })
   }
 
+  const handleOnSelectAdditionalInput = (option, newValue) => {
+    if ( typeof newValue === 'string' ) {
+      setFormState(prevState => {
+        const formState = {...prevState}
+        formState[option.value] = newValue
+        return formState
+      })
+    } else if ( newValue && newValue.value ) {
+      setFormState(prevState => {
+        const formState = {...prevState}
+        formState[option.value] = newValue.value
+        return formState
+      })
+    }
+  }
+
   const renderAdditionalInputs = () => {
     const currentRole = getFormValue('role')
     const currentType = getFormValue('type')
