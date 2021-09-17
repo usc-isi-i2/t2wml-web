@@ -41,14 +41,14 @@ export const TYPES = [{
       'label': '%Y-%m-%d (2021-09-17)',
       'value': '"%Y-%m-%d"',
     }, {
-      'label': '%d/%m/%Y (17/09/2021)',
-      'value': '"%d/%m/%Y"',
+      'label': '%m/%d/%Y (09/17/2021)',
+      'value': '"%m/%d/%Y"',
     }, {
       'label': '%Y-%b-%d (2021-Sep-17)',
       'value': '"%Y-%b-%d"',
     }, {
-      'label': '%Y-%b-%d (2021-September-17)',
-      'value': '"%Y-%b-%d"',
+      'label': '%Y-%B-%d (2021-September-17)',
+      'value': '"%Y-%B-%d"',
     }, {
       'label': '%Y-%m-%dT%H:%M:%S (2021-09-17T14:00:00)',
       'value': '"%Y-%m-%dT%H:%M:%S"',
