@@ -14,6 +14,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 
+import Dropdown from './Dropdown'
 import PropertyTags from './PropertyTags'
 import PropertyInput from './PropertyInput'
 import { ROLES, TYPES } from '../content/annotation-options'
@@ -473,25 +474,13 @@ const AnnotationMenu = ({
                   <Grid item xs={1}>
                   </Grid>
                   <Grid item xs={11}>
-                    <TextField
-                      select
-                      fullWidth
-                      variant="outlined"
-                      autoCorrect="off"
-                      autoComplete="off"
-                      autoCapitalize="off"
-                      spellCheck="false"
+                    <Dropdown
                       label={option.label}
-                      id={option.value}
-                      name={option.value}
-                      value={getFormValue(option.value)}
-                      onChange={handleOnChange}>
-                      {option.children.map(option => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                      </TextField>
+                      options={option.children}
+                      selected={getFormValue(option.value)}
+                      onSelect={newValue =>
+                        handleOnSelectAdditionalInput(option, newValue)}
+                    />
                   </Grid>
                 </Grid>
               </Grid>
