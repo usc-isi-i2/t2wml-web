@@ -100,6 +100,8 @@ const AnnotationMenu = ({
         role: selectedAnnotation.role,
         type: selectedAnnotation.type,
         property: selectedAnnotation.property,
+        precision: selectedAnnotation.precision,
+        format: selectedAnnotation.format,
       }
     })
   }, [selectedAnnotation])
