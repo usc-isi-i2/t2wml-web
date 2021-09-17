@@ -466,13 +466,6 @@ const AnnotationMenu = ({
             )
           }
 
-          if ( currentRole === 'dependentVar' ) {
-            return (
-              <Grid item xs={12}>
-              </Grid>
-            )
-          }
-
           if ( showAdditionalInputs ) {
             return (
               <Grid item xs={12} key={option.value}>
