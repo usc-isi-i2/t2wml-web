@@ -6,8 +6,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexGrow: '1',
     height: '50vh',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
     outlineWidth: '0.5em',
     outlineStyle: 'dashed',
     outlineColor: theme.palette.type === 'dark' ? (
@@ -22,6 +23,17 @@ const useStyles = makeStyles(theme => ({
       opacity: '0.25',
       fill: theme.palette.type === 'dark' ? '#fff' : '#000',
       transition: 'all 500ms ease',
+    },
+    '&> h5': {
+      display: 'flex',
+      alignSelf: 'stretch',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: theme.palette.type === 'dark' ? (
+        'rgba(255, 255, 255, 0.25)'
+      ) : (
+        'rgba(0, 0, 0, 0.25)'
+      ),
     },
     '&.active': {
       outlineColor: 'limegreen',
