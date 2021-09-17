@@ -32,7 +32,6 @@ const DEFAULT_FORMSTATE = {
   property: '',
   language: '',
   precision: '',
-  calendar: '',
   format: '',
 }
 
@@ -141,7 +140,6 @@ const AnnotationMenu = ({
     const property = getFormValue('property')
     const language = getFormValue('language')
     const precision = getFormValue('precision')
-    const calendar = getFormValue('calendar')
     const format = getFormValue('format')
     const id = annotation.id
 
@@ -153,7 +151,6 @@ const AnnotationMenu = ({
       property: property,
       language: language,
       precision: precision,
-      calendar: calendar,
       format: format,
       id: id,
     })
