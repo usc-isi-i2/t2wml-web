@@ -474,6 +474,7 @@ const AnnotationMenu = ({
                   </Grid>
                   <Grid item xs={11}>
                     <TextField
+                      select
                       fullWidth
                       variant="outlined"
                       autoCorrect="off"
@@ -484,7 +485,13 @@ const AnnotationMenu = ({
                       id={option.value}
                       name={option.value}
                       value={getFormValue(option.value)}
-                      onChange={handleOnChange} />
+                      onChange={handleOnChange}>
+                      {option.children.map(option => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                      </TextField>
                   </Grid>
                 </Grid>
               </Grid>
