@@ -500,7 +500,7 @@ const AnnotationMenu = ({
                     <Dropdown
                       label={option.label}
                       options={option.children}
-                      selected={getFormValue(option.value)}
+                      selected={selectedOption}
                       onSelect={newValue =>
                         handleOnSelectAdditionalInput(option, newValue)}
                     />
