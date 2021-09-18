@@ -14,6 +14,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import ListAltIcon from '@material-ui/icons/ListAlt'
 
+import Dropdown from './Dropdown'
 import PropertyTags from './PropertyTags'
 import PropertyInput from './PropertyInput'
 import { ROLES, TYPES } from '../content/annotation-options'
@@ -99,6 +100,8 @@ const AnnotationMenu = ({
         role: selectedAnnotation.role,
         type: selectedAnnotation.type,
         property: selectedAnnotation.property,
+        precision: selectedAnnotation.precision,
+        format: selectedAnnotation.format,
       }
     })
   }, [selectedAnnotation])
@@ -419,6 +422,22 @@ const AnnotationMenu = ({
     })
   }
 
+  const handleOnSelectAdditionalInput = (option, newValue) => {
+    if ( typeof newValue === 'string' ) {
+      setFormState(prevState => {
+        const formState = {...prevState}
+        formState[option.value] = newValue
+        return formState
+      })
+    } else if ( newValue && newValue.value ) {
+      setFormState(prevState => {
+        const formState = {...prevState}
+        formState[option.value] = newValue.value
+        return formState
+      })
+    }
+  }
+
   const renderAdditionalInputs = () => {
     const currentRole = getFormValue('role')
     const currentType = getFormValue('type')
@@ -467,24 +486,24 @@ const AnnotationMenu = ({
           }
 
           if ( showAdditionalInputs ) {
+
+            // find the selected option from the list
+            const value = getFormValue(option.value)
+            const selectedOption = option.children.find(option => option.value === value)
+
             return (
               <Grid item xs={12} key={option.value}>
                 <Grid container>
                   <Grid item xs={1}>
                   </Grid>
                   <Grid item xs={11}>
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      autoCorrect="off"
-                      autoComplete="off"
-                      autoCapitalize="off"
-                      spellCheck="false"
+                    <Dropdown
                       label={option.label}
-                      id={option.value}
-                      name={option.value}
-                      value={getFormValue(option.value)}
-                      onChange={handleOnChange} />
+                      options={option.children}
+                      selected={selectedOption}
+                      onSelect={newValue =>
+                        handleOnSelectAdditionalInput(option, newValue)}
+                    />
                   </Grid>
                 </Grid>
               </Grid>

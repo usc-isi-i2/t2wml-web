@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Alert from '@material-ui/lab/Alert'
+import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { useDropzone } from 'react-dropzone'
 
@@ -97,7 +98,14 @@ const FileDrop = ({
           {loading ? (
             <CircularProgress />
           ) : (
-            <UploadIcon width='256' height='256' />
+            <React.Fragment>
+              <UploadIcon width='256' height='256' />
+              <Typography variant="h5" align="center">
+                click here to upload files
+                <br />
+                (accepted formats: csv, xlsx, t2wmlz)
+              </Typography>
+            </React.Fragment>
           )}
         </div>
       </Grid>
