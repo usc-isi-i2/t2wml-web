@@ -19,14 +19,14 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const Tooltip = ({ label }) => {
+const Tooltip = ({ label, placement = 'right' }) => {
 
   const classes = useStyles()
 
   return (
     <MuiTooltip
       arrow
-      placement="right"
+      placement={placement}
       className={classes.tooltip}
       title={TOOLTIPS[label]}>
       <HelpOutlineIcon
