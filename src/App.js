@@ -227,14 +227,6 @@ const App = () => {
             backgroundColor: darkTheme ? '#fefefe' : '#4d4d4d',
           },
         },
-        inline: {
-          marginRight: defaultTheme.spacing(3),
-          position: 'absolute',
-          top: '50%',
-          cursor: 'pointer',
-          transform: 'translateY(-50%)',
-          right: defaultTheme.spacing(1),
-        },
       },
       MuiTab: {
         textColorPrimary: {
