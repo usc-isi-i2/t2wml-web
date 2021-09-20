@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles'
 
+import Tooltip from './Tooltip'
 import PropertyTags from './PropertyTags'
 import PropertyInput from './PropertyInput'
 import * as utils from '../utils/table'
@@ -100,6 +101,7 @@ const WikificationMenu = ({
           variant="contained"
           onClick={openPropertyTagsMenu}>
           Show Property Tags
+          <Tooltip label={'property_tags'} />
         </Button>
         {showPropertyTagsMenu && (
           <PropertyTags
