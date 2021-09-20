@@ -126,6 +126,10 @@ const Table = ({
 
           return tableData
         })
+
+        // update the layers
+        setLayers(data.layers)
+
         resolve()
       })
       .catch(error => {
