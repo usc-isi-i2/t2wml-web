@@ -4,22 +4,27 @@ import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { TOOLTIPS } from '../content/tooltips'
+import classNames from '../utils/classNames'
 
 
 const useStyles = makeStyles(theme => ({
   tooltip: {
-    position: 'absolute',
+    verticalAlign: 'middle',
+  },
+  inline: {
     top: '50%',
-    transform: 'translateY(-50%)',
     right: '1em',
+    position: 'absolute',
+    transform: 'translateY(-50%)',
   },
   icon: {
     cursor: 'pointer',
+    marginLeft: '0.5em',
   },
 }))
 
 
-const Tooltip = ({ label, placement = 'right' }) => {
+const Tooltip = ({ label, inline = 'false', placement = 'right' }) => {
 
   const classes = useStyles()
 
@@ -27,7 +32,10 @@ const Tooltip = ({ label, placement = 'right' }) => {
     <MuiTooltip
       arrow
       placement={placement}
-      className={classes.tooltip}
+      className={classNames(
+        classes.tooltip, {
+        inline,
+      })}
       title={TOOLTIPS[label]}>
       <HelpOutlineIcon
         className={classes.icon}
