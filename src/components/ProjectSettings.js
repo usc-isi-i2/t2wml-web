@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -11,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
 
+import Tooltip from './Tooltip'
 import DraggablePaper from './DraggablePaper'
 import uploadSettings from '../utils/uploadSettings'
 
@@ -117,6 +119,7 @@ const ProjectSettings = ({
     return (
       <React.Fragment>
         Project Settings
+        <Tooltip label={'project_settings'} />
         <IconButton onClick={hideProjectSettings}>
           <CloseIcon />
         </IconButton>
@@ -150,7 +153,15 @@ const ProjectSettings = ({
           inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
           onBlur={handleOnSubmit}
-          value={formState.projectTitle} />
+          value={formState.projectTitle}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Tooltip label={'project_settings_title'} />
+              </InputAdornment>
+            ),
+          }}
+        />
       </Grid>
     )
   }
@@ -173,7 +184,15 @@ const ProjectSettings = ({
           inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
           onBlur={handleOnSubmit}
-          value={formState.projectDescription} />
+          value={formState.projectDescription}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Tooltip label={'project_settings_description'} />
+              </InputAdornment>
+            ),
+          }}
+        />
       </Grid>
     )
   }
@@ -194,7 +213,15 @@ const ProjectSettings = ({
           inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
           onBlur={handleOnSubmit}
-          value={formState.projectDataSource} />
+          value={formState.projectDataSource}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Tooltip label={'project_settings_data_source_url'} />
+              </InputAdornment>
+            ),
+          }}
+        />
       </Grid>
     )
   }
