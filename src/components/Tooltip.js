@@ -9,6 +9,13 @@ import classNames from '../utils/classNames'
 
 
 const useStyles = makeStyles(theme => ({
+  wrapper: {
+    top: '50%',
+    right: '1em',
+    position: 'absolute',
+    transform: 'translateY(-50%)',
+    marginRight: theme.spacing(3),
+  },
   tooltip: {
     verticalAlign: 'middle',
   },
@@ -19,12 +26,11 @@ const useStyles = makeStyles(theme => ({
     transform: 'translateY(-50%)',
   },
   topRight: {
-    top: '1em',
-    right: '1em',
+    top: theme.spacing(1),
+    right: theme.spacing(1),
   },
   icon: {
     cursor: 'pointer',
-    marginLeft: '0.5em',
   },
 }))
 
@@ -60,7 +66,7 @@ const Tooltip = ({
   const renderWrapper = () => {
     if ( input ) {
       return (
-        <InputAdornment>
+        <InputAdornment className={classes.wrapper}>
           {renderTooltip()}
         </InputAdornment>
       )
