@@ -121,7 +121,7 @@ const ProjectMenu = ({
           <Tooltip label={'apply_annotations'} inline={true} />
         </MenuItem>
         {showDownloadOptions && (
-          <React.Fragment>
+          <div>
             <MenuItem onClick={uploadFidil}>
               <Typography>Upload FIDIL File</Typography>
               <Tooltip label={'upload_fidil'} inline={true} />
@@ -140,7 +140,7 @@ const ProjectMenu = ({
                 </MenuItem>
               ))}
             </Collapse>
-          </React.Fragment>
+          </div>
         )}
       </Menu>
     )
