@@ -13,14 +13,12 @@ import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import CheckIcon from '@material-ui/icons/Check'
 import CloseIcon from '@material-ui/icons/Close'
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Tooltip from './Tooltip'
 import DraggablePaper from './DraggablePaper'
 import uploadEntity from '../utils/uploadEntity'
 import { DEFAULT_TAGS } from '../content/tag-options'
-import { TOOLTIPS } from '../content/tooltips'
 
 
 const useStyles = makeStyles(theme => ({
