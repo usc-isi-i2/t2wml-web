@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import ListAltIcon from '@material-ui/icons/ListAlt'
 import { makeStyles } from '@material-ui/styles'
 
 import PropertyTags from './PropertyTags'
@@ -99,7 +98,6 @@ const WikificationMenu = ({
         <Button
           color="primary"
           variant="contained"
-          startIcon={<ListAltIcon />}
           onClick={openPropertyTagsMenu}>
           Show Property Tags
         </Button>
