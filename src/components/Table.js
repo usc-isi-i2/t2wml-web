@@ -216,6 +216,9 @@ const Table = ({
       const tableData = {...prevTableData}
       layers.qnode.entries.forEach(qnode => {
         qnode.indices.forEach(([rowIndex, colIndex]) => {
+          if ( !tableData[rowIndex] || !tableData[rowIndex][colIndex] ) {
+            return
+          }
           tableData[rowIndex][colIndex] = {
             ...tableData[rowIndex][colIndex],
             qnode: {
@@ -1111,8 +1114,14 @@ const Table = ({
         const bottomRow = Math.max(y1, y2)
         let rowIndex = topRow
         while ( rowIndex <= bottomRow ) {
+          if ( !tableData[rowIndex - 1] ) {
+            continue
+          }
           let colIndex = leftCol
           while ( colIndex <= rightCol ) {
+            if ( tableData[rowIndex - 1][colIndex - 1] ) {
+              continue
+            }
             tableData[rowIndex - 1][colIndex - 1] = {
               ...tableData[rowIndex - 1][colIndex - 1],
               ...DEFAULT_CELL_STATE,
