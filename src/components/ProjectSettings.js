@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import Grid from '@material-ui/core/Grid'
-import InputAdornment from '@material-ui/core/InputAdornment'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -156,9 +155,7 @@ const ProjectSettings = ({
           value={formState.projectTitle}
           InputProps={{
             endAdornment: (
-              <InputAdornment position="end">
-                <Tooltip label={'project_settings_title'} />
-              </InputAdornment>
+              <Tooltip label={'project_settings_title'} input={true} />
             ),
           }}
         />
@@ -187,9 +184,7 @@ const ProjectSettings = ({
           value={formState.projectDescription}
           InputProps={{
             endAdornment: (
-              <InputAdornment position="end">
-                <Tooltip label={'project_settings_description'} />
-              </InputAdornment>
+              <Tooltip label={'project_settings_description'} input={true} />
             ),
           }}
         />
@@ -216,9 +211,7 @@ const ProjectSettings = ({
           value={formState.projectDataSource}
           InputProps={{
             endAdornment: (
-              <InputAdornment position="end">
-                <Tooltip label={'project_settings_data_source_url'} />
-              </InputAdornment>
+              <Tooltip label={'project_settings_data_source_url'} input={true} />
             ),
           }}
         />
