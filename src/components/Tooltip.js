@@ -10,10 +10,9 @@ import classNames from '../utils/classNames'
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
-    top: '50%',
-    right: '1em',
     position: 'absolute',
-    transform: 'translateY(-50%)',
+    top: theme.spacing(3.5),
+    right: theme.spacing(1),
     marginRight: theme.spacing(3),
   },
   tooltip: {
@@ -31,15 +30,16 @@ const useStyles = makeStyles(theme => ({
   },
   icon: {
     cursor: 'pointer',
+    marginLeft: theme.spacing(1),
   },
 }))
 
 
 const Tooltip = ({
   label,
-  input = 'false',
-  inline = 'false',
-  topRight = 'false',
+  input = false,
+  inline = false,
+  topRight = false,
   placement = 'right',
 }) => {
 
