@@ -12,8 +12,9 @@ import ViewQuiltIcon from '@material-ui/icons/ViewQuilt'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import Brightness7Icon from '@material-ui/icons/Brightness7'
 
-import classNames from '../utils/classNames'
 import ProjectMenu from './ProjectMenu'
+import { TOOLTIPS } from '../content/tooltips'
+import classNames from '../utils/classNames'
 import useStyles from '../styles/header'
 
 
@@ -69,7 +70,7 @@ const Header = ({
   const renderSuggestButton = () => {
     if ( !project ) { return }
     return (
-      <Tooltip arrow title="guess annotations">
+      <Tooltip arrow title={TOOLTIPS['suggest_annotations']}>
         <Button
           color="secondary"
           startIcon={<ViewQuiltIcon />}
