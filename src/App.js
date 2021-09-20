@@ -220,7 +220,10 @@ const App = () => {
         tooltip: {
           fontSize: defaultTheme.spacing(2),
           color: darkTheme ? '#4D4D4D' : '#fefefe',
-            backgroundColor: darkTheme ? '#fefefe' : '#4d4d4d',
+          backgroundColor: darkTheme ? '#fefefe' : '#4d4d4d',
+          borderColor: darkTheme ? '#4D4D4D' : '#fefefe',
+          borderStyle: 'solid',
+          borderWidth: '1px',
         },
         arrow: {
           '&::before': {

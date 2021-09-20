@@ -7,9 +7,9 @@ const useStyles = makeStyles(theme => ({
   },
   menu: {
     '& ul.MuiMenu-list': {
-      width: '250px',
+      width: '300px',
       maxHeight: '325px',
-      '& > li p.MuiTypography-root': {
+      '& li p.MuiTypography-root': {
         flex: '1 1 auto',
       },
       '& > li svg.MuiSvgIcon-root': {

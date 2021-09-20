@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
 
+import Tooltip from './Tooltip'
 import DraggablePaper from './DraggablePaper'
 import uploadSettings from '../utils/uploadSettings'
 
@@ -150,7 +151,13 @@ const ProjectSettings = ({
           inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
           onBlur={handleOnSubmit}
-          value={formState.projectTitle} />
+          value={formState.projectTitle}
+          InputProps={{
+            endAdornment: (
+              <Tooltip label={'project_settings_title'} input={true} />
+            ),
+          }}
+        />
       </Grid>
     )
   }
@@ -173,7 +180,13 @@ const ProjectSettings = ({
           inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
           onBlur={handleOnSubmit}
-          value={formState.projectDescription} />
+          value={formState.projectDescription}
+          InputProps={{
+            endAdornment: (
+              <Tooltip label={'project_settings_description'} input={true} />
+            ),
+          }}
+        />
       </Grid>
     )
   }
@@ -194,7 +207,13 @@ const ProjectSettings = ({
           inputProps={{'data-lpignore': 'true'}}
           onChange={handleOnChange}
           onBlur={handleOnSubmit}
-          value={formState.projectDataSource} />
+          value={formState.projectDataSource}
+          InputProps={{
+            endAdornment: (
+              <Tooltip label={'project_settings_data_source_url'} input={true} />
+            ),
+          }}
+        />
       </Grid>
     )
   }

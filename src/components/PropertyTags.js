@@ -12,15 +12,13 @@ import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import CheckIcon from '@material-ui/icons/Check'
-import Tooltip from '@material-ui/core/Tooltip'
 import CloseIcon from '@material-ui/icons/Close'
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import { makeStyles } from '@material-ui/core/styles'
 
+import Tooltip from './Tooltip'
 import DraggablePaper from './DraggablePaper'
 import uploadEntity from '../utils/uploadEntity'
 import { DEFAULT_TAGS } from '../content/tag-options'
-import { TOOLTIPS } from '../content/tooltips'
 
 
 const useStyles = makeStyles(theme => ({
@@ -45,13 +43,6 @@ const useStyles = makeStyles(theme => ({
   menuItem: {
     position: 'relative',
     width: '100%',
-  },
-  tooltip: {
-    marginRight: theme.spacing(3),
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    right: theme.spacing(1),
   },
 }))
 
@@ -410,18 +401,15 @@ const PropertyTags = ({
         onChange={(event, option) => handleOnSelectTagValue(key, option)}
         noOptionsText={'No options available'}
         value={value || null}
-        renderOption={option => (
-          <div className={classes.menuItem}>
-            {option}
-            <Tooltip
-              arrow
-              placement="right"
-              className={classes.tooltip}
-              title={TOOLTIPS[`${key.toLowerCase()}_${option.toLowerCase()}`]}>
-              <HelpOutlineIcon fontSize="small" className={classes.help} />
-            </Tooltip>
-          </div>
-        )}
+        renderOption={option => {
+          const label = `${key.toLowerCase()}_${option.toLowerCase()}`
+          return (
+            <div className={classes.menuItem}>
+              {option}
+              <Tooltip label={label} inline={true} />
+            </div>
+          )
+        }}
         renderInput={params => (
           <TextField {...params}
             fullWidth
@@ -609,6 +597,9 @@ const PropertyTags = ({
                 inputProps={{'data-lpignore': 'true'}}
                 InputProps={{
                   readOnly: key in DEFAULT_TAGS,
+                  endAdornment: (
+                    <Tooltip label={key.toLowerCase()} />
+                  ),
                 }}
                 onChange={event => handleOnTagChange(event, key)}
                 onBlur={updateTags}

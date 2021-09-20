@@ -7,6 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogActions from '@material-ui/core/DialogActions'
 import IconButton from '@material-ui/core/IconButton'
+import Tooltip from '@material-ui/core/Tooltip'
 import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -14,6 +15,7 @@ import TabPanel from './TabPanel'
 import DraggablePaper from './DraggablePaper'
 import AnnotationMenu from './AnnotationMenu'
 import WikificationMenu from './WikificationMenu'
+import { TOOLTIPS } from '../content/tooltips'
 import * as utils from '../utils/table'
 
 
@@ -66,8 +68,20 @@ const OverlayMenu = ({
           onChange={handleTabChange}
           indicatorColor="primary"
           textColor="primary">
-          <Tab label={blockTabLabel} value={'block'} />
-          <Tab label={cellTabLabel} value={'cell'} />
+          <Tab
+            label={
+              <Tooltip arrow placement="top" title={TOOLTIPS['block_menu']}>
+                <span>{blockTabLabel}</span>
+              </Tooltip>
+            }
+            value={'block'} />
+          <Tab
+            label={
+              <Tooltip arrow placement="top" title={TOOLTIPS['cell_menu']}>
+                <span>{cellTabLabel}</span>
+              </Tooltip>
+            }
+            value={'cell'} />
         </Tabs>
         <IconButton onClick={hideOverlayMenu}>
           <CloseIcon />
