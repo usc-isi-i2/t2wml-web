@@ -118,7 +118,6 @@ const ProjectSettings = ({
     return (
       <React.Fragment>
         Project Settings
-        <Tooltip label={'project_settings'} />
         <IconButton onClick={hideProjectSettings}>
           <CloseIcon />
         </IconButton>

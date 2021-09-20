@@ -11,6 +11,7 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
+import Tooltip from './Tooltip'
 import ProjectSettings from './ProjectSettings'
 import { DOWNLOAD_OPTIONS } from '../content/download-options'
 import downloadFile from '../utils/downloadFile'
@@ -104,17 +105,27 @@ const ProjectMenu = ({
         className={classes.menu}
         anchorEl={anchorElement}
         onClose={hideProjectMenu}>
-        <MenuItem onClick={openProjectSettings}>Project Settings</MenuItem>
+        <MenuItem onClick={openProjectSettings}>
+          <Typography>Project Settings</Typography>
+          <Tooltip label={'project_settings'} inline={true} />
+        </MenuItem>
         <MenuItem onClick={suggestAnnotations} disabled={loadingAnnotations}>
           <Typography>Suggest Annotations</Typography>
+          <Tooltip label={'suggest_annotations'} inline={true} />
           {loadingAnnotations ? (
             <CircularProgress color="inherit" size={16} />
           ) : null}
         </MenuItem>
-        <MenuItem onClick={applyAnnotations}>Apply Annotations</MenuItem>
+        <MenuItem onClick={applyAnnotations}>
+          <Typography>Apply Annotations</Typography>
+          <Tooltip label={'apply_annotations'} inline={true} />
+        </MenuItem>
         {showDownloadOptions && (
-          <div>
-            <MenuItem onClick={uploadFidil}>Upload FIDIL File</MenuItem>
+          <React.Fragment>
+            <MenuItem onClick={uploadFidil}>
+              <Typography>Upload FIDIL File</Typography>
+              <Tooltip label={'upload_fidil'} inline={true} />
+            </MenuItem>
             <Divider />
             <MenuItem onClick={toggleExpandDownloadOptions}>
               <Typography>Download Options</Typography>
@@ -124,11 +135,12 @@ const ProjectMenu = ({
               {DOWNLOAD_OPTIONS.map(option => (
                 <MenuItem key={option.label}
                   onClick={() => handleOnDownload(option)}>
-                  {option.label}
+                  <Typography>{option.label}</Typography>
+                  <Tooltip label={`download_${option.value}`} inline={true} />
                 </MenuItem>
               ))}
             </Collapse>
-          </div>
+          </React.Fragment>
         )}
       </Menu>
     )
