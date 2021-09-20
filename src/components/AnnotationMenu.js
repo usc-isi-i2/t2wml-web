@@ -384,7 +384,12 @@ const AnnotationMenu = ({
           autoCapitalize="off"
           spellCheck="false"
           value={currentType}
-          onChange={handleOnChange}>
+          onChange={handleOnChange}
+          InputProps={{
+            endAdornment: (
+              <Tooltip label={'type'} input={true} />
+            ),
+          }}>
           {ROLE.children.map(option => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
