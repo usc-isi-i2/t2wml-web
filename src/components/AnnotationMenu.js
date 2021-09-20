@@ -347,11 +347,15 @@ const AnnotationMenu = ({
               <Tooltip label={'role'} input={true} />
             ),
           }}>
-          {ROLES.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
+          {ROLES.map(option => {
+            const label = `role_${option.label.toLowerCase().split(' ').join('_')}`
+            return (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+                <Tooltip label={label} inline={true} />
+              </MenuItem>
+            )
+          })}
         </TextField>
       </Grid>
     )
@@ -390,11 +394,15 @@ const AnnotationMenu = ({
               <Tooltip label={'type'} input={true} />
             ),
           }}>
-          {ROLE.children.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
+          {ROLE.children.map(option => {
+            const label = `type_${option.label.toLowerCase().split(' ').join('_')}`
+            return (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+                <Tooltip label={label} inline={true} />
+              </MenuItem>
+            )
+          })}
         </TextField>
       </Grid>
     )

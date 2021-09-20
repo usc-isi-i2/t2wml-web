@@ -19,9 +19,9 @@ const useStyles = makeStyles(theme => ({
     verticalAlign: 'middle',
   },
   inline: {
-    top: '50%',
-    right: '1em',
     position: 'absolute',
+    top: '50%',
+    right: theme.spacing(1),
     transform: 'translateY(-50%)',
   },
   topRight: {
