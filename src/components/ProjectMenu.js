@@ -131,7 +131,7 @@ const ProjectMenu = ({
               <Typography>Download Options</Typography>
               {expandDownloadOptions ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </MenuItem>
-            <Collapse in={showDownloadOptions} timeout="auto" unmountOnExit>
+            <Collapse in={expandDownloadOptions} timeout="auto" unmountOnExit>
               {DOWNLOAD_OPTIONS.map(option => (
                 <MenuItem key={option.label}
                   onClick={() => handleOnDownload(option)}>
