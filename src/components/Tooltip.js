@@ -17,6 +17,10 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     transform: 'translateY(-50%)',
   },
+  topRight: {
+    top: '1em',
+    right: '1em',
+  },
   icon: {
     cursor: 'pointer',
     marginLeft: '0.5em',
@@ -24,7 +28,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const Tooltip = ({ label, inline = 'false', placement = 'right' }) => {
+const Tooltip = ({
+  label,
+  inline = 'false',
+  topRight = 'false',
+  placement = 'right',
+}) => {
 
   const classes = useStyles()
 
@@ -35,6 +44,7 @@ const Tooltip = ({ label, inline = 'false', placement = 'right' }) => {
       className={classNames(
         classes.tooltip, {
         inline,
+        topRight,
       })}
       title={TOOLTIPS[label]}>
       <HelpOutlineIcon
