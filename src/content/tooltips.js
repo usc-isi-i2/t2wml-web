@@ -48,8 +48,6 @@ export const TOOLTIPS = {
       <br/><br/>
       A timeseries is associated with a country, and a property indicating the category of the data.
       <br/><br/>
-      A timeseries is associated with a country, and a property indicating the category of the data.
-      <br/><br/>
       A timeseries consists of one or more time points.
       <br/><br/>
       Each time point consists of a dependent variable (a numerical value) and at least one qualifier.
