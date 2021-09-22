@@ -127,6 +127,9 @@ const Table = ({
           return tableData
         })
 
+        // update annotations
+        updateAnnotationBlocks()
+
         // update the layers
         setLayers(data.layers)
 
