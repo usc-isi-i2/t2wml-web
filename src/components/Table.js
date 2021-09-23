@@ -8,7 +8,6 @@ import TableCell from './TableCell'
 import OverlayMenu from './OverlayMenu'
 import useStyles from '../styles/table'
 import * as utils from '../utils/table'
-import fetchEntity from '../utils/fetchEntity'
 import fetchSuggestions from '../utils/fetchSuggestions'
 import uploadAnnotations from '../utils/uploadAnnotations'
 import uploadWikinodes from '../utils/uploadWikinodes'
@@ -90,25 +89,7 @@ const Table = ({
     // update project layers
     const layers = projectData.layers
     if ( !!layers && 'qnode' in layers && 'entries' in layers.qnode ) {
-
-      // Check for property qnodes without tags and pre-fetch the tags
-      const entries = []
-      const fetchPromises = []
-      layers.qnode.entries.forEach(entry => {
-        if ( entry.id[0] === 'P' ) {
-          fetchPromises.push(
-            fetchEntity(entry, projectData.filepath, projectData.sheetName)
-            .then(entity => entries.push({...entry, tags: entity.tags}))
-          )
-        } else {
-          entries.push(entry)
-        }
-      })
-
-      // Update qnode layers with the augmented entries with tags
-      Promise.all(fetchPromises).then(() => {
-        setLayers({qnode: {entries}})
-      })
+      setLayers(layers)
     }
 
     setTableData(prev => {
@@ -274,25 +255,7 @@ const Table = ({
             'string',
           )
           .then(layers => {
-
-            // Check for property qnodes without tags and pre-fetch the tags
-            const entries = []
-            const fetchPromises = []
-            layers.qnode.entries.forEach(entry => {
-              if ( entry.id[0] === 'P' ) {
-                fetchPromises.push(
-                  fetchEntity(entry, projectData.filepath, projectData.sheetName)
-                  .then(entity => entries.push({...entry, tags: entity.tags}))
-                )
-              } else {
-                entries.push(entry)
-              }
-            })
-
-            // Update qnode layers with the augmented entries with tags
-            Promise.all(fetchPromises).then(() => {
-              setLayers({qnode: {entries}})
-            })
+            setLayers(layers)
 
             // Show a success message
             setMessage({
