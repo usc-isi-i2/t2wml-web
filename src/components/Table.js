@@ -1084,24 +1084,22 @@ const Table = ({
         const bottomRow = Math.max(y1, y2)
         let rowIndex = topRow
         while ( rowIndex <= bottomRow ) {
-          if ( !tableData[rowIndex - 1] ) {
-            continue
-          }
-          let colIndex = leftCol
-          while ( colIndex <= rightCol ) {
-            if ( tableData[rowIndex - 1][colIndex - 1] ) {
-              continue
+          if ( !!tableData[rowIndex - 1] ) {
+            let colIndex = leftCol
+            while ( colIndex <= rightCol ) {
+              if ( !!tableData[rowIndex - 1][colIndex - 1] ) {
+                tableData[rowIndex - 1][colIndex - 1] = {
+                  ...tableData[rowIndex - 1][colIndex - 1],
+                  ...DEFAULT_CELL_STATE,
+                  annotation: false,
+                  classNames: [],
+                  qnode: null,
+                }
+                colIndex += 1
+              }
             }
-            tableData[rowIndex - 1][colIndex - 1] = {
-              ...tableData[rowIndex - 1][colIndex - 1],
-              ...DEFAULT_CELL_STATE,
-              annotation: false,
-              classNames: [],
-              qnode: null,
-            }
-            colIndex += 1
+            rowIndex += 1
           }
-          rowIndex += 1
         }
       })
       return tableData
