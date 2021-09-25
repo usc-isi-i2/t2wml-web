@@ -749,8 +749,8 @@ const Table = ({
           } else {
             setSelectedAnnotationBlock(undefined)
             selection.current = nextSelection
-            resetSelections()
           }
+          resetSelections()
           updateSelections()
           return annotationBlocks
         })
