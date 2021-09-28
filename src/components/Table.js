@@ -141,14 +141,14 @@ const Table = ({
   }
 
   useEffect(() => {
-    // Don't bother if the table data was already initialized
-    if ( tableDataInitialized ) { return }
-
     // update project annotations
     const annotations = projectData.annotations
     if ( !!annotations ) {
       setAnnotationBlocks(annotations)
     }
+
+    // Don't bother if the table data was already initialized
+    if ( tableDataInitialized ) { return }
 
     // update project layers
     const layers = projectData.layers
