@@ -147,14 +147,14 @@ const Table = ({
       setAnnotationBlocks(annotations)
     }
 
-    // Don't bother if the table data was already initialized
-    if ( tableDataInitialized ) { return }
-
     // update project layers
     const layers = projectData.layers
     if ( !!layers && 'qnode' in layers && 'entries' in layers.qnode ) {
       setLayers(layers)
     }
+
+    // Don't bother if the table data was already initialized
+    if ( tableDataInitialized ) { return }
 
     setTableData(prev => {
       const tableData = {} // empty table data
