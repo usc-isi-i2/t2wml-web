@@ -1,7 +1,13 @@
-const wikifyRegion = (file, sheet, selection) => {
+const wikifyRegion = (file, sheet, selection, startIndex, stopIndex) => {
   let url = '/api/causx/wikify_region'
   url += `?data_file=${file}`
   url += `&sheet_name=${sheet}`
+
+  // add start and stop index params
+  url += `&data_start=${startIndex}`
+  url += `&map_start=${startIndex}`
+  url += `&data_end=${stopIndex}`
+  url += `&map_end=${stopIndex}`
 
   if ( process.env.REACT_APP_BACKEND_URL ) {
     url = `${process.env.REACT_APP_BACKEND_URL}${url}`
