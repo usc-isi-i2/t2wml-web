@@ -669,6 +669,11 @@ const Table = ({
       hideOverlayMenu()
     }
 
+    // Scroll to top with the `Home` key
+    if ( event.code === 'Home' ) {
+      setScrollToIndex(0)
+    }
+
     // Scroll to bottom with the `end` key
     if ( event.code === 'End' ) {
       scrollToBottom()
