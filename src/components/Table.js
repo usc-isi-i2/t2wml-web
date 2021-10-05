@@ -52,6 +52,7 @@ const Table = ({
 
   const [startIndex, setStartIndex] = useState(0)
   const [stopIndex, setStopIndex] = useState(99)
+  const [scrollToIndex, setScrollToIndex] = useState()
 
   const [tableData, setTableData] = useState(null)
   const [loadingMoreRows, setLoadingMoreRows] = useState(false)
@@ -1212,6 +1213,7 @@ const Table = ({
               onScroll={handleOnScroll}
               className={userSelecting ? 'active': ''}
               rowCount={Object.keys(tableData).length}
+              scrollToIndex={scrollToIndex}
               rowGetter={({ index }) => Object.entries(tableData[index])}>
               <Column
                 label=''
