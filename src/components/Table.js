@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import {
   Column,
   AutoSizer,
-  InfiniteLoader,
   Table as VirtualizedTable,
 } from 'react-virtualized'
 
@@ -1186,67 +1185,56 @@ const Table = ({
       <Paper className={classes.tableWrapper}
         onMouseDown={handleOnMouseDown}
         onMouseMove={handleOnMouseMove}>
-        <InfiniteLoader
-          isRowLoaded={({ index }) => !!tableData[index]}
-          loadMoreRows={loadMoreRows}
-          minimumBatchSize={100}
-          threshold={25}
-          rowCount={1000000}>
-          {({onRowsRendered, registerChild}) => (
-            <AutoSizer>
-              {({ height, width }) => (
-                <VirtualizedTable
-                  ref={registerChild}
-                  onRowsRendered={onRowsRendered}
-                  width={cols.current.length * 77.5}
-                  height={height}
-                  headerHeight={26}
-                  rowHeight={25}
-                  className={userSelecting ? 'active': ''}
-                  rowCount={Object.keys(tableData).length}
-                  rowGetter={({ index }) => Object.entries(tableData[index])}>
-                  <Column
-                    label=''
-                    dataKey=''
-                    headerRenderer={data => <div>&nbsp;</div>}
-                    width={50}
-                    cellDataGetter={data => {
-                      return data.rowData[data.dataKey]
-                    }}
-                    cellRenderer={data => {
-                      return <div>{data.rowIndex + 1}</div>
-                    }}
-                  />
-                  {Object.keys(tableData[0]).map((r, i) => (
-                    <Column key={`col-${i}`}
-                      label={utils.columnToLetter(i + 1)}
-                      dataKey={i}
-                      headerRenderer={data => {
-                        return (
-                          <div
-                            data-row-index={0}
-                            data-col-index={i+1}
-                            onDoubleClick={handleOnClickHeader}>
-                            {data.label}
-                          </div>
-                        )
-                      }}
-                      width={100}
-                      cellDataGetter={data => {
-                        return data.rowData[data.dataKey]
-                      }}
-                      cellRenderer={data => {
-                        return (
-                          <TableCell {...data} />
-                        )
-                      }}
-                    />
-                  ))}
-                </VirtualizedTable>
-              )}
-            </AutoSizer>
+        <AutoSizer>
+          {({ height, width }) => (
+            <VirtualizedTable
+              width={cols.current.length * 77.5}
+              height={height}
+              headerHeight={26}
+              rowHeight={25}
+              className={userSelecting ? 'active': ''}
+              rowCount={Object.keys(tableData).length}
+              rowGetter={({ index }) => Object.entries(tableData[index])}>
+              <Column
+                label=''
+                dataKey=''
+                headerRenderer={data => <div>&nbsp;</div>}
+                width={50}
+                cellDataGetter={data => {
+                  return data.rowData[data.dataKey]
+                }}
+                cellRenderer={data => {
+                  return <div>{data.rowIndex + 1}</div>
+                }}
+              />
+              {Object.keys(tableData[0]).map((r, i) => (
+                <Column key={`col-${i}`}
+                  label={utils.columnToLetter(i + 1)}
+                  dataKey={i}
+                  headerRenderer={data => {
+                    return (
+                      <div
+                        data-row-index={0}
+                        data-col-index={i+1}
+                        onDoubleClick={handleOnClickHeader}>
+                        {data.label}
+                      </div>
+                    )
+                  }}
+                  width={100}
+                  cellDataGetter={data => {
+                    return data.rowData[data.dataKey]
+                  }}
+                  cellRenderer={data => {
+                    return (
+                      <TableCell {...data} />
+                    )
+                  }}
+                />
+              ))}
+            </VirtualizedTable>
           )}
-        </InfiniteLoader>
+        </AutoSizer>
       </Paper>
     )
   }
