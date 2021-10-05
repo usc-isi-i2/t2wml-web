@@ -1280,7 +1280,9 @@ const Table = ({
         updateOutputPreview={updateOutputPreview}
         updateAnnotations={updateAnnotations}
         hideOverlayMenu={hideOverlayMenu}
-        setMessage={setMessage} />
+        setMessage={setMessage}
+        startIndex={startIndex}
+        stopIndex={stopIndex} />
     )
   }
 

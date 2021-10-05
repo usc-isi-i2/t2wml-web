@@ -49,6 +49,8 @@ const AnnotationMenu = ({
   updateOutputPreview,
   updateTableDataLayers,
   setMessage,
+  startIndex,
+  stopIndex,
 }) => {
 
   const classes = useStyles()
@@ -163,7 +165,7 @@ const AnnotationMenu = ({
 
       if ( utils.isWikifyable({role: getFormValue('role')}) ) {
         if ( getFormValue('role') === 'mainSubject' ) {
-          wikifyRegion(file, sheet, selection)
+          wikifyRegion(file, sheet, selection, startIndex, stopIndex)
           .then(layers => updateTableDataLayers(layers))
         } else {
           uploadWikinodes(file, sheet, selection, role === 'property', 'string')

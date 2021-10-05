@@ -50,6 +50,8 @@ const OverlayMenu = ({
   updateQnodeLayer,
   hideOverlayMenu,
   setMessage,
+  startIndex,
+  stopIndex,
 }) => {
 
   const classes = useStyles()
@@ -107,7 +109,9 @@ const OverlayMenu = ({
             onSelectionChange={onSelectionChange}
             updateAnnotations={updateAnnotations}
             hideOverlayMenu={hideOverlayMenu}
-            setMessage={setMessage} />
+            setMessage={setMessage}
+            startIndex={startIndex}
+            stopIndex={stopIndex} />
         </TabPanel>
         <TabPanel value={selectedTab} index={'cell'}>
           <WikificationMenu
