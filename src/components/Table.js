@@ -656,11 +656,22 @@ const Table = ({
     })
   }, [])
 
+  const scrollToBottom = () => {
+    const dims = projectData.table.dims
+    loadTableData(dims[0] - 100, dims[0] - 1)
+    .then(() => setScrollToIndex(dims[0] - 1))
+  }
+
   const handleOnKeyDown = useCallback(event => {
 
     // Close annotation menu with ESC key
     if ( event.code === 'Escape' ) {
       hideOverlayMenu()
+    }
+
+    // Scroll to bottom with the `end` key
+    if ( event.code === 'End' ) {
+      scrollToBottom()
     }
 
     const arrowKeyCodes = [
