@@ -54,6 +54,7 @@ const Table = ({
   const [stopIndex, setStopIndex] = useState(99)
 
   const [tableData, setTableData] = useState(null)
+  const [loadingMoreRows, setLoadingMoreRows] = useState(false)
   const [tableDataInitialized, setTableDataInitialized] = useState(false)
 
   const [userSelecting, setUserSelecting] = useState(false)
@@ -84,11 +85,21 @@ const Table = ({
     })
   }
 
-  const loadMoreRows = ({startIndex, stopIndex}) => {
-    return new Promise((resolve, reject) => {
-      setStartIndex(startIndex)
-      setStopIndex(stopIndex)
+  const handleOnScroll = event => {
+    const max = event.scrollHeight - event.clientHeight
+    const threshold = max * 0.1
 
+    // user is scrolling down, fetch next chunk of data
+    if ( max - event.scrollTop < threshold ) {
+      loadTableData(stopIndex + 1, stopIndex + 100)
+    }
+  }
+
+  const loadTableData = (startIndex, stopIndex) => {
+    if ( loadingMoreRows ) { return }
+    setLoadingMoreRows(true)
+
+    return new Promise((resolve, reject) => {
       fetchTableRows(
         projectData.filepath,
         projectData.sheetName,
@@ -138,6 +149,11 @@ const Table = ({
         // update the layers
         setLayers(data.layers)
 
+        // update start and stop indices
+        setStartIndex(startIndex)
+        setStopIndex(stopIndex)
+
+        setLoadingMoreRows(false)
         resolve()
       })
       .catch(error => {
@@ -1192,6 +1208,7 @@ const Table = ({
               height={height}
               headerHeight={26}
               rowHeight={25}
+              onScroll={handleOnScroll}
               className={userSelecting ? 'active': ''}
               rowCount={Object.keys(tableData).length}
               rowGetter={({ index }) => Object.entries(tableData[index])}>
