@@ -181,9 +181,10 @@ const Table = ({
     setTableData(prev => {
       const tableData = {} // empty table data
       const data = projectData.table.cells
+      const dims = projectData.table.dims
 
-      rows.current = [...Array(Math.max(data.length, 100))] // at least 100 rows
-      cols.current = [...Array(Math.max(data[1].length, 26))]  // at least 26 cols
+      rows.current = [...Array(Math.max(dims[0], 100))] // at least 100 rows
+      cols.current = [...Array(Math.max(dims[1], 26))]  // at least 26 cols
 
       Object.entries(rows.current).forEach((rowItem, rowIndex) => {
         tableData[rowIndex] = {}
