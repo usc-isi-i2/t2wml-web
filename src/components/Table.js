@@ -303,7 +303,13 @@ const Table = ({
       }
       if ( utils.isWikifyable({role: newAnnotation.role}) ) {
         if ( newAnnotation.role === 'mainSubject' ) {
-          wikifyRegion(projectData.filepath, projectData.sheetName, newAnnotation.selection)
+          wikifyRegion(
+            projectData.filepath,
+            projectData.sheetName,
+            newAnnotation.selection,
+            startIndex,
+            stopIndex,
+          )
           .then(layers => {
             setLayers(layers)
 
@@ -798,7 +804,13 @@ const Table = ({
     // submit main subject for automatic wikifiaction
     suggestedAnnotations.forEach(annotation => {
       if ( annotation.role === 'mainSubject' ) {
-        wikifyRegion(projectData.filepath, projectData.sheetName, annotation.selection)
+        wikifyRegion(
+          projectData.filepath,
+          projectData.sheetName,
+          annotation.selection,
+          startIndex,
+          stopIndex,
+        )
         .then(layers => {
           setLayers(layers)
 
@@ -822,7 +834,15 @@ const Table = ({
     if ( !!suggestedAnnotations.length ) {
       updateOutputPreview()
     }
-  }, [suggestedAnnotations, projectData.filepath, projectData.sheetName, updateOutputPreview, setMessage])
+  }, [
+    suggestedAnnotations,
+    projectData.filepath,
+    projectData.sheetName,
+    updateOutputPreview,
+    setMessage,
+    startIndex,
+    stopIndex,
+  ])
 
   useEffect(() => {
     setSelectedAnnotationBlock(selectedAnnotation => {
