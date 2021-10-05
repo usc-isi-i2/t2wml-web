@@ -50,6 +50,10 @@ const Table = ({
   const prevDirection = useRef(null)
 
   const [layers, setLayers] = useState({})
+
+  const [startIndex, setStartIndex] = useState(0)
+  const [stopIndex, setStopIndex] = useState(99)
+
   const [tableData, setTableData] = useState(null)
   const [tableDataInitialized, setTableDataInitialized] = useState(false)
 
@@ -83,6 +87,9 @@ const Table = ({
 
   const loadMoreRows = ({startIndex, stopIndex}) => {
     return new Promise((resolve, reject) => {
+      setStartIndex(startIndex)
+      setStopIndex(stopIndex)
+
       fetchTableRows(
         projectData.filepath,
         projectData.sheetName,
