@@ -661,10 +661,22 @@ const Table = ({
     })
   }, [])
 
+  const scrollToTop = () => {
+    setScrollToIndex(0)
+    setStartIndex(0)
+    setStopIndex(99)
+  }
+
   const scrollToBottom = () => {
     const dims = projectData.table.dims
-    loadTableData(dims[0] - 100, dims[0] - 1)
-    .then(() => setScrollToIndex(dims[0] - 1))
+    const startIndex = dims[0] - 100
+    const stopIndex = dims[0] - 1
+    loadTableData(startIndex, stopIndex)
+    .then(() => {
+      setScrollToIndex(dims[0] - 1)
+      setStartIndex(startIndex)
+      setStopIndex(stopIndex)
+    })
   }
 
   const handleOnKeyDown = useCallback(event => {
@@ -676,7 +688,7 @@ const Table = ({
 
     // Scroll to top with the `Home` key
     if ( event.code === 'Home' ) {
-      setScrollToIndex(0)
+      scrollToTop()
     }
 
     // Scroll to bottom with the `end` key
