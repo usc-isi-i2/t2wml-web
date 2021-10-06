@@ -97,7 +97,12 @@ const Table = ({
   }
 
   const rowGetter = index => {
-    return Object.entries(tableData[index])
+    const rowData = Object.entries(tableData[index])
+    if ( !rowData[0][1].loaded ) {
+      loadTableData(index - 50, index + 50)
+    }
+
+    return rowData
   }
 
   const loadTableData = (startIndex, stopIndex) => {
