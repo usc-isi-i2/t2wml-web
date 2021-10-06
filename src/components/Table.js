@@ -86,6 +86,102 @@ const Table = ({
     })
   }
 
+  const updateAnnotationBlocks = useCallback(() => {
+    setTableData(prevTableData => {
+      const tableData = {...prevTableData}
+
+      setAnnotationBlocks(annotationBlocks => {
+        for ( const block of annotationBlocks ) {
+          const { role, type } = block
+
+          const classNames = []
+          if ( role ) {
+            classNames.push(`role-${role}`)
+          }
+          if ( type ) {
+            classNames.push(`type-${type}`)
+          }
+
+          const { x1, y1, x2, y2 } = block.selection
+          const leftCol = Math.min(x1 - 1, x2 - 1)
+          const rightCol = Math.max(x1 - 1, x2 - 1)
+          const topRow = Math.min(y1 - 1, y2 - 1)
+          const bottomRow = Math.max(y1 - 1, y2 - 1)
+          let rowIndex = topRow
+          while ( rowIndex <= bottomRow && rowIndex >= 0 && rowIndex < rows.current.length ) {
+            let colIndex = leftCol
+            while ( colIndex <= rightCol && colIndex >= 0 && colIndex < cols.current.length ) {
+
+              const cellData = tableData[rowIndex][colIndex]
+              cellData.classNames = classNames
+              cellData.annotation = true
+              cellData.highlight = false
+              cellData.activeTop = false
+              cellData.activeLeft = false
+              cellData.activeRight = false
+              cellData.activeBottom = false
+              cellData.activeCorner = false
+
+              if ( !!selection.current &&
+                block.selection.x1 === selection.current.x1 &&
+                block.selection.x2 === selection.current.x2 &&
+                block.selection.y1 === selection.current.y1 &&
+                block.selection.y2 === selection.current.y2 ) {
+                cellData.active = true
+              } else {
+                cellData.active = false
+              }
+
+              // Add a top border to the cells at the top of the selection
+              if ( rowIndex === topRow ) {
+                cellData.activeTop = true
+              }
+
+              // Add a left border to the cells on the left of the selection
+              if ( colIndex === leftCol ) {
+                cellData.activeLeft = true
+              }
+
+              // Add a right border to the cells on the right of the selection
+              if ( colIndex === rightCol ) {
+                cellData.activeRight = true
+              }
+
+              // Add a bottom border to the cells at the bottom of the selection
+              if ( rowIndex === bottomRow ) {
+                cellData.activeBottom = true
+              }
+
+              // Add resize corner to the active selection areas
+              if (rowIndex === bottomRow && colIndex === rightCol) {
+                cellData.activeCorner = true
+              }
+              tableData[rowIndex][colIndex] = {...cellData}
+
+              colIndex += 1
+            }
+            rowIndex += 1
+          }
+        }
+        return annotationBlocks
+      })
+
+      setTargetSelection(targetSelection => {
+        // highlight the target selection when updating
+        if ( !!targetSelection ) {
+          tableData[targetSelection.y1 - 1][targetSelection.x1 - 1] = {
+            ...tableData[targetSelection.y1 - 1][targetSelection.x1 - 1],
+            highlight: true,
+          }
+        }
+        return targetSelection
+      })
+
+      return tableData
+    })
+  }, [])
+
+
   const rowGetter = index => {
     const rowData = Object.entries(tableData[index])
     if ( !rowData[0][1].loaded ) {
@@ -95,7 +191,7 @@ const Table = ({
     return rowData
   }
 
-  const loadTableData = (startIndex, stopIndex) => {
+  const loadTableData = useCallback((startIndex, stopIndex) => {
     if ( loadingMoreRows ) { return }
     setLoadingMoreRows(true)
 
@@ -163,7 +259,12 @@ const Table = ({
         reject(error)
       })
     })
-  }
+  }, [
+    loadingMoreRows,
+    projectData.filepath,
+    projectData.sheetName,
+    updateAnnotationBlocks,
+  ])
 
   useEffect(() => {
     // update project annotations
@@ -388,101 +489,6 @@ const Table = ({
     hideOverlayMenu()
   }
 
-  const updateAnnotationBlocks = useCallback(() => {
-    setTableData(prevTableData => {
-      const tableData = {...prevTableData}
-
-      setAnnotationBlocks(annotationBlocks => {
-        for ( const block of annotationBlocks ) {
-          const { role, type } = block
-
-          const classNames = []
-          if ( role ) {
-            classNames.push(`role-${role}`)
-          }
-          if ( type ) {
-            classNames.push(`type-${type}`)
-          }
-
-          const { x1, y1, x2, y2 } = block.selection
-          const leftCol = Math.min(x1 - 1, x2 - 1)
-          const rightCol = Math.max(x1 - 1, x2 - 1)
-          const topRow = Math.min(y1 - 1, y2 - 1)
-          const bottomRow = Math.max(y1 - 1, y2 - 1)
-          let rowIndex = topRow
-          while ( rowIndex <= bottomRow && rowIndex >= 0 && rowIndex < rows.current.length ) {
-            let colIndex = leftCol
-            while ( colIndex <= rightCol && colIndex >= 0 && colIndex < cols.current.length ) {
-
-              const cellData = tableData[rowIndex][colIndex]
-              cellData.classNames = classNames
-              cellData.annotation = true
-              cellData.highlight = false
-              cellData.activeTop = false
-              cellData.activeLeft = false
-              cellData.activeRight = false
-              cellData.activeBottom = false
-              cellData.activeCorner = false
-
-              if ( !!selection.current &&
-                block.selection.x1 === selection.current.x1 &&
-                block.selection.x2 === selection.current.x2 &&
-                block.selection.y1 === selection.current.y1 &&
-                block.selection.y2 === selection.current.y2 ) {
-                cellData.active = true
-              } else {
-                cellData.active = false
-              }
-
-              // Add a top border to the cells at the top of the selection
-              if ( rowIndex === topRow ) {
-                cellData.activeTop = true
-              }
-
-              // Add a left border to the cells on the left of the selection
-              if ( colIndex === leftCol ) {
-                cellData.activeLeft = true
-              }
-
-              // Add a right border to the cells on the right of the selection
-              if ( colIndex === rightCol ) {
-                cellData.activeRight = true
-              }
-
-              // Add a bottom border to the cells at the bottom of the selection
-              if ( rowIndex === bottomRow ) {
-                cellData.activeBottom = true
-              }
-
-              // Add resize corner to the active selection areas
-              if (rowIndex === bottomRow && colIndex === rightCol) {
-                cellData.activeCorner = true
-              }
-              tableData[rowIndex][colIndex] = {...cellData}
-
-              colIndex += 1
-            }
-            rowIndex += 1
-          }
-        }
-        return annotationBlocks
-      })
-
-      setTargetSelection(targetSelection => {
-        // highlight the target selection when updating
-        if ( !!targetSelection ) {
-          tableData[targetSelection.y1 - 1][targetSelection.x1 - 1] = {
-            ...tableData[targetSelection.y1 - 1][targetSelection.x1 - 1],
-            highlight: true,
-          }
-        }
-        return targetSelection
-      })
-
-      return tableData
-    })
-  }, [])
-
   const resetSelections = useCallback(() => {
     setTableData(prevTableData => {
       const tableData = {...prevTableData}
@@ -661,16 +667,16 @@ const Table = ({
     })
   }, [])
 
-  const scrollToTop = () => {
+  const scrollToTop = useCallback(() => {
     setScrollToIndex(0)
     setStartIndex(0)
     setStopIndex(99)
 
     // update annotations
     updateAnnotationBlocks()
-  }
+  }, [updateAnnotationBlocks])
 
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     const dims = projectData.table.dims
     const startIndex = dims[0] - 100
     const stopIndex = dims[0] - 1
@@ -683,7 +689,7 @@ const Table = ({
       // update annotations
       updateAnnotationBlocks()
     })
-  }
+  }, [loadTableData, projectData.table.dims, updateAnnotationBlocks])
 
   const handleOnKeyDown = useCallback(event => {
 
@@ -832,7 +838,15 @@ const Table = ({
         return nextSelection
       })
     }
-  }, [hideOverlayMenu, updateSelections, resetSelections, selectedAnnotationBlock, updateAnnotationBlocks])
+  }, [
+    hideOverlayMenu,
+    updateSelections,
+    resetSelections,
+    selectedAnnotationBlock,
+    updateAnnotationBlocks,
+    scrollToBottom,
+    scrollToTop,
+  ])
 
   const handleOnKeyUp = useCallback(() => {
     clearTimeout(timeoutID.current)
