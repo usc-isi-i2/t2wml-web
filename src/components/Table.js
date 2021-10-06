@@ -128,17 +128,20 @@ const Table = ({
                 if ( !!cellValue ) {
                   tableData[startIndex + rowIndex][colIndex] = {
                     value: cellValue,
+                    loaded: true,
                     classNames: [],
                   }
                 } else {
                   tableData[startIndex + rowIndex][colIndex] = {
                     value: '',
+                    loaded: true,
                     classNames: [],
                   }
                 }
               } else {
                 tableData[startIndex + rowIndex][colIndex] = {
                   value: '',
+                  loaded: false,
                   classNames: [],
                 }
               }
@@ -199,17 +202,20 @@ const Table = ({
             if ( !!cellValue ) {
               tableData[rowIndex][colIndex] = {
                 value: cellValue,
+                loaded: true,
                 classNames: [],
               }
             } else {
               tableData[rowIndex][colIndex] = {
                 value: '',
+                loaded: true,
                 classNames: [],
               }
             }
           } else {
             tableData[rowIndex][colIndex] = {
               value: '',
+              loaded: false,
               classNames: [],
             }
           }
