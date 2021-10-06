@@ -96,6 +96,10 @@ const Table = ({
     }
   }
 
+  const rowGetter = index => {
+    return Object.entries(tableData[index])
+  }
+
   const loadTableData = (startIndex, stopIndex) => {
     if ( loadingMoreRows ) { return }
     setLoadingMoreRows(true)
@@ -1230,7 +1234,7 @@ const Table = ({
               className={userSelecting ? 'active': ''}
               rowCount={Object.keys(tableData).length}
               scrollToIndex={scrollToIndex}
-              rowGetter={({ index }) => Object.entries(tableData[index])}>
+              rowGetter={({ index }) => rowGetter(index)}>
               <Column
                 label=''
                 dataKey=''
