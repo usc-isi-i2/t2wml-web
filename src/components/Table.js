@@ -665,6 +665,9 @@ const Table = ({
     setScrollToIndex(0)
     setStartIndex(0)
     setStopIndex(99)
+
+    // update annotations
+    updateAnnotationBlocks()
   }
 
   const scrollToBottom = () => {
@@ -676,6 +679,9 @@ const Table = ({
       setScrollToIndex(dims[0] - 1)
       setStartIndex(startIndex)
       setStopIndex(stopIndex)
+
+      // update annotations
+      updateAnnotationBlocks()
     })
   }
 
