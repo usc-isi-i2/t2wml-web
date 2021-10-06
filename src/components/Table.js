@@ -86,16 +86,6 @@ const Table = ({
     })
   }
 
-  const handleOnScroll = event => {
-    const max = event.scrollHeight - event.clientHeight
-    const threshold = max * 0.1
-
-    // user is scrolling down, fetch next chunk of data
-    if ( max - event.scrollTop < threshold ) {
-      loadTableData(stopIndex + 1, stopIndex + 100)
-    }
-  }
-
   const rowGetter = index => {
     const rowData = Object.entries(tableData[index])
     if ( !rowData[0][1].loaded ) {
@@ -1241,7 +1231,6 @@ const Table = ({
               height={height}
               headerHeight={26}
               rowHeight={25}
-              onScroll={handleOnScroll}
               className={userSelecting ? 'active': ''}
               rowCount={Object.keys(tableData).length}
               scrollToIndex={scrollToIndex}
